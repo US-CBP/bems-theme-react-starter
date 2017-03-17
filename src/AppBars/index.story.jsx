@@ -5,8 +5,7 @@ import { storiesOf } from '@kadira/storybook';
 import { setOptions } from '@kadira/storybook-addon-options';
 import { muiTheme } from 'storybook-addon-material-ui';
 
-import Components from './ComponentsExample';
-import Card from './CardExampleControlled';
+import Simple from './Simple';
 
 const reqThemes = require.context('../.themes/', true, /.json/);
 const themesList = [];
@@ -14,7 +13,7 @@ reqThemes.keys().forEach((filename) => {
     themesList.push(reqThemes(filename));
 });
 
-storiesOf('Material-UI', module)
+storiesOf('App Bars', module)
     .addDecorator((story) => {
         const storyKind = story();
         return (
@@ -25,15 +24,5 @@ storiesOf('Material-UI', module)
           </div>);
     })
     .addDecorator(muiTheme(themesList))
-    .add('CBP Components', () => {
-        setOptions({
-            name: 'storybook-addon material-ui',
-            url: 'https://github.com/sm-react/storybook-addon-material-ui',
-            goFullScreen: false,
-            downPanelInRight: false,
-        });
-        return <Components />;
-    })
-    .add('Card', () => (
-      <Card />
-    ));
+    .add('Simple', () => <Simple />
+    );
