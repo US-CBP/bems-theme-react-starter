@@ -30,7 +30,7 @@ storiesOf('React App', module)
     .addDecorator(muiTheme(themesList)) /* [lightTheme, darkTheme, greyTheme]*/
     .addDecorator(story => (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '50%', maxWidth: 500, minWidth: 200 }}>
+        <div style={{ width: '100%', maxWidth: 1200, minWidth: 600 }}>
           {story()}
           {/* SHOW_SUPPORT ? <SupportProject /> : null*/}
         </div>
