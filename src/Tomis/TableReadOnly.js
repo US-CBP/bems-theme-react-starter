@@ -1,6 +1,5 @@
 import React from 'react';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
-  from 'material-ui/Table';
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
@@ -8,48 +7,47 @@ const styles = {
   propContainer: {
     width: 200,
     overflow: 'hidden',
-    margin: '20px auto 0',
+    margin: '20px auto 0'
   },
   propToggleHeader: {
-    margin: '20px auto 10px',
-  },
+    margin: '20px auto 10px'
+  }
 };
 
 const tableData = [
   {
     name: 'John Smith',
     status: 'Employed',
-    selected: true,
+    selected: true
   },
   {
     name: 'Randal White',
-    status: 'Unemployed',
+    status: 'Unemployed'
   },
   {
     name: 'Stephanie Sanders',
     status: 'Employed',
-    selected: true,
+    selected: true
   },
   {
     name: 'Steve Brown',
-    status: 'Employed',
+    status: 'Employed'
   },
   {
     name: 'Joyce Whitten',
-    status: 'Employed',
+    status: 'Employed'
   },
   {
     name: 'Samuel Roberts',
-    status: 'Employed',
+    status: 'Employed'
   },
   {
     name: 'Adam Moore',
-    status: 'Employed',
-  },
+    status: 'Employed'
+  }
 ];
 
 export default class TableReadOnly extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -63,18 +61,18 @@ export default class TableReadOnly extends React.Component {
       enableSelectAll: false,
       deselectOnClickaway: true,
       showCheckboxes: false,
-      height: '500px',
+      height: '500px'
     };
   }
 
   handleToggle = (event, toggled) => {
     this.setState({
-      [event.target.name]: toggled,
+      [event.target.name]: toggled
     });
   };
 
-  handleChange = (event) => {
-    this.setState({height: event.target.value});
+  handleChange = event => {
+    this.setState({ height: event.target.value });
   };
 
   render() {
@@ -87,13 +85,9 @@ export default class TableReadOnly extends React.Component {
           selectable={this.state.selectable}
           multiSelectable={this.state.multiSelectable}
         >
-          <TableHeader
-            displaySelectAll={this.state.showCheckboxes}
-            adjustForCheckbox={this.state.showCheckboxes}
-            enableSelectAll={this.state.enableSelectAll}
-          >
+          <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes} enableSelectAll={this.state.enableSelectAll}>
             <TableRow>
-              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{ textAlign: 'center' }}>
                 Super Header
               </TableHeaderColumn>
             </TableRow>
@@ -109,24 +103,22 @@ export default class TableReadOnly extends React.Component {
             showRowHover={this.state.showRowHover}
             stripedRows={this.state.stripedRows}
           >
-            {tableData.map( (row, index) => (
+            {tableData.map((row, index) => (
               <TableRow key={index} selected={row.selected}>
                 <TableRowColumn>{index}</TableRowColumn>
                 <TableRowColumn>{row.name}</TableRowColumn>
                 <TableRowColumn>{row.status}</TableRowColumn>
               </TableRow>
-              ))}
+            ))}
           </TableBody>
-          <TableFooter
-            adjustForCheckbox={this.state.showCheckboxes}
-          >
+          <TableFooter adjustForCheckbox={this.state.showCheckboxes}>
             <TableRow>
               <TableRowColumn>ID</TableRowColumn>
               <TableRowColumn>Name</TableRowColumn>
               <TableRowColumn>Status</TableRowColumn>
             </TableRow>
             <TableRow>
-              <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
+              <TableRowColumn colSpan="3" style={{ textAlign: 'center' }}>
                 Super Footer
               </TableRowColumn>
             </TableRow>

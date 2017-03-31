@@ -1,11 +1,10 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from '../TomisMui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 
-
 const style = {
-  margin: 12,
+  margin: 12
 };
 
 const Buttons = () => (
@@ -21,9 +20,9 @@ const Buttons = () => (
     <br />
     <h4>Icon Buttons</h4>
     <div>
-        <IconButton>
-          <ActionHome />
-        </IconButton>
+      <IconButton>
+        <ActionHome />
+      </IconButton>
     </div>
 
   </div>
