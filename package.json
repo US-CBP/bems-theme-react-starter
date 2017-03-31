@@ -102,7 +102,7 @@
     "react-dom": "^15.4.1"
   },
   "dependencies": {
-    "material-ui": "^0.17.0",
+    "material-ui": "^0.17.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-material-icons": "^1.0.1",
