@@ -1,12 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import TextField from 'material-ui/TextField';
-import { orange500, blue500 } from 'material-ui/styles/colors';
-import { getFloatingLabelStyle } from '../app/helpers/styles';
+import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import AutoComplete from 'material-ui/AutoComplete';
+import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
+import AutoComplete from '../TomisMui/AutoComplete';
 
 const initState = {
   dataSource1: [],
