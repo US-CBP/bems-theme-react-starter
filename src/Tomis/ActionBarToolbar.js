@@ -18,16 +18,16 @@ import Logged from '../TomisInternal/Logged';
 import CalendarView from '../TomisInternal/CalendarView';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {
-  getStatusBarStyle,
-  getStatusBarTitleStyle,
-  getActionBarStyle,
-  getActionBarIconColor,
-  getStatusBarSubHeaderTitleStyle,
-  getAppBarIconColor,
-  getActionBarLabelStyle,
-  getToolbarTitleStyle,
-  getActionBarPopoverStyle,
-  getActionBarLovStyle
+    getStatusBarStyle,
+    getStatusBarTitleStyle,
+    getActionBarStyle,
+    getActionBarIconColor,
+    getStatusBarSubHeaderTitleStyle,
+    getAppBarIconColor,
+    getActionBarLabelStyle,
+    getToolbarTitleStyle,
+    getActionBarPopoverStyle,
+    getActionBarLovStyle
 } from '../app/helpers/styles';
 
 import TodayIcon from 'material-ui/svg-icons/action/today';
@@ -50,121 +50,116 @@ const anchorOrigin = { horizontal: 'left', vertical: 'bottom' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
 const setStatePopoverOpen = (keyVal, anchorEl, state, props) => {
-  state.isOpen[keyVal] = true;
-  state.anchorEl[keyVal] = anchorEl;
+    state.isOpen[keyVal] = true;
+    state.anchorEl[keyVal] = anchorEl;
 };
 const setStatePopoverClose = (keyVal, state, props) => {
-  state.isOpen[keyVal] = false;
+    state.isOpen[keyVal] = false;
 };
 
 const setStateIsNavigationDrawerOpen = (isOpen, state, props) => {
-  return { isNavigationDrawerOpen: isOpen };
+    return { isNavigationDrawerOpen: isOpen };
 };
 
 const statusBarStyle = {
-  height: '20px',
-  backgroundColor: 'red'
+    height: '20px',
+    backgroundColor: 'red'
 };
 class ActionBarToolbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 3,
-      open: false,
-      isNavigationDrawerOpen: false,
-      isOpen: {},
-      anchorEl: {}
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 3,
+            open: false,
+            isNavigationDrawerOpen: false,
+            isOpen: {},
+            anchorEl: {}
+        };
+    }
+
+    handleTouchTap = event => {
+        // This prevents ghost click.
+        event.preventDefault();
+        this.setState({
+            open: true,
+            anchorEl: event.currentTarget
+        });
     };
-  }
 
-  handleTouchTap = event => {
-    // This prevents ghost click.
-    event.preventDefault();
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget
-    });
-  };
+    handleRequestClose = () => {
+        this.setState({
+            open: false
+        });
+    };
 
-  handleRequestClose = () => {
-    this.setState({
-      open: false
-    });
-  };
+    handleClickToggleDrawer = event => this.setState(setStateIsNavigationDrawerOpen.bind(this, !this.state.isNavigationDrawerOpen));
+    handleTouchTapButton = (keyVal, event) => {
+        event.preventDefault();
+        this.setState(setStatePopoverOpen.bind(this, keyVal, event.currentTarget));
+    };
 
-  handleClickToggleDrawer = event => this.setState(setStateIsNavigationDrawerOpen.bind(this, !this.state.isNavigationDrawerOpen));
-  handleTouchTapButton = (keyVal, event) => {
-    event.preventDefault();
-    this.setState(setStatePopoverOpen.bind(this, keyVal, event.currentTarget));
-  };
+    handleRequestCloseButton = keyVal => {
+        this.setState(setStatePopoverClose.bind(this, keyVal));
+    };
 
-  handleRequestCloseButton = keyVal => {
-    this.setState(setStatePopoverClose.bind(this, keyVal));
-  };
-
-  render() {
-    const {
-      handleClickToggleDrawer,
-      handleTouchTapButton,
-      handleRequestCloseButton
-    } = this;
-    const { isNavigationDrawerOpen, isOpen, anchorEl } = this.state;
-    const { pageTitle = 'Safety Reports Status Page' } = this.props;
-    return (
-      <div>
-        <Toolbar style={getActionBarStyle(this.props)}>
-          <ToolbarGroup firstChild={true}>
-            <IconButton onTouchTap={handleClickToggleDrawer}>
-              <HamburgerMenu color={getAppBarIconColor(this.props)} />
-            </IconButton>
-            <ToolbarTitle text={pageTitle} style={getToolbarTitleStyle(this.props)} />
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <SocialPublicIcon color={getActionBarIconColor(this.props)} />
-            <span>&nbsp;&nbsp;</span>
-            <FlatButton
-              style={getActionBarPopoverStyle(this.props)}
-              onTouchTap={handleTouchTapButton.bind(this, BRANCH_UNIT)}
-              label="CBP Air and Marine Headq..."
-              labelStyle={getActionBarLovStyle(this.props)}
-              labelPosition="before"
-              icon={<SvgIconArrowDropDown color={getAppBarIconColor(this.props)} />}
-            />
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Today">
-              <TodayIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Weekly View">
-              <WeeklyCalendarIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Monthly View">
-              <MonthlyCalendarIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="KU NOC">
-              <KuNocIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Save">
-              <SaveIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Clone">
-              <ContentCopyIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Cancel">
-              <CancelIcon color={getActionBarIconColor(this.props)} />
-            </IconButton>
-          </ToolbarGroup>
-        </Toolbar>
-        <Drawer
-          open={isNavigationDrawerOpen}
-          docked={false}
-          width={350}
-          onRequestChange={open => this.setState(setStateIsNavigationDrawerOpen.bind(this, open))}
-        >
-          <NavigationDrawer {...this.props} />
-        </Drawer>
-      </div>
-    );
-  }
+    render() {
+        const {
+            handleClickToggleDrawer,
+            handleTouchTapButton,
+            handleRequestCloseButton
+        } = this;
+        const { isNavigationDrawerOpen, isOpen, anchorEl } = this.state;
+        const { pageTitle = 'Safety Reports Status Page' } = this.props;
+        return (
+            <div>
+                <Toolbar style={getActionBarStyle(this.props)}>
+                    <ToolbarGroup firstChild={true}>
+                        <IconButton onTouchTap={handleClickToggleDrawer}>
+                            <HamburgerMenu color={getAppBarIconColor(this.props)} />
+                        </IconButton>
+                        <ToolbarTitle text={pageTitle} style={getToolbarTitleStyle(this.props)} />
+                    </ToolbarGroup>
+                    <ToolbarGroup>
+                        <SocialPublicIcon color={getActionBarIconColor(this.props)} />
+                        <span>&nbsp;&nbsp;</span>
+                        <FlatButton
+                            style={getActionBarPopoverStyle(this.props)}
+                            onTouchTap={handleTouchTapButton.bind(this, BRANCH_UNIT)}
+                            label="CBP Air and Marine Headq..."
+                            labelStyle={getActionBarLovStyle(this.props)}
+                            labelPosition="before"
+                            icon={<SvgIconArrowDropDown color={getAppBarIconColor(this.props)} />}
+                        />
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Today">
+                            <TodayIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Weekly View">
+                            <WeeklyCalendarIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Monthly View">
+                            <MonthlyCalendarIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="KU NOC">
+                            <KuNocIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                    </ToolbarGroup>
+                    <ToolbarGroup>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Save">
+                            <SaveIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Clone">
+                            <ContentCopyIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                        <IconButton onTouchTap={this.handleTouchTap} tooltip="Cancel">
+                            <CancelIcon color={getActionBarIconColor(this.props)} />
+                        </IconButton>
+                    </ToolbarGroup>
+                </Toolbar>
+                <Drawer open={isNavigationDrawerOpen} docked={false} width={350} onRequestChange={open => this.setState(setStateIsNavigationDrawerOpen.bind(this, open))}>
+                    <NavigationDrawer {...this.props} />
+                </Drawer>
+            </div>
+        );
+    }
 }
 export default muiThemeable()(ActionBarToolbar);

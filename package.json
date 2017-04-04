@@ -14,7 +14,7 @@
     "test-watch": "node .scripts/run_tests --watch --watch-extensions jsx,json",
     "test-storybook": "storyshots",
     "status": "node .scripts/npm-status.js && node .scripts/lint.js -f json && node .scripts/run_tests -R min",
-    "storybook": "start-storybook -p 9010 && npm run test-watch",
+    "storybook": "start-storybook -p 9010 -s ./public && npm run test-watch",
     "start": "start-storybook -p 9001"
   },
   "repository": {

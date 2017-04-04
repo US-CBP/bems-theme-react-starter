@@ -1,20 +1,26 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import HeaderNavAction from '../TomisInternal/HeaderNavAction';
-import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
+import RaisedButton from '../TomisMui/RaisedButton';
+import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
 
 class RiskDecisionAcceptPage extends Component {
-  render() {
-    return (
-      <div>
-        <HeaderNavAction actionBarPageTitle="Flight Planning" />
-        <Card expanded={true}>
-          <CardHeader title="Card Title" actAsExpander={true} showExpandableButton={true} />
-          <CardText expandable={true} />
-        </Card>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div>
+                <RiskDecisionCore>
+                    <div className="flex-row row-spacer-24">
+                        <div>
+                            <RaisedButton label="Proceed to Execution" primary={true} />
+                        </div>
+                    </div>
+                </RiskDecisionCore>
+            </div>
+        );
+    }
 }
 
 export default muiThemeable()(RiskDecisionAcceptPage);
