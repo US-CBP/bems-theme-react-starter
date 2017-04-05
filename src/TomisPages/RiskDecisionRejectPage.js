@@ -97,7 +97,7 @@ class RiskDecisionRejectPage extends Component {
         const { dataSource1, dataSource2 } = this.state;
         return (
             <div>
-                <RiskDecisionCore isReject={true}>
+                <RiskDecisionCore riskDecisionVal="REJECT">
                     <div className="flex-row row-spacer-24">
                         <Card expanded={true}>
                             <CardHeader title="No Launch Reason(s)" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }} />

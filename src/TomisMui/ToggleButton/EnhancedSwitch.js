@@ -15,7 +15,7 @@ function getStyles(props, context) {
             cursor: props.disabled ? 'not-allowed' : 'pointer',
             position: 'relative',
             overflow: 'visible',
-            display: 'inline-block',
+            display: 'table',
             height: 'auto',
             width: '100%'
         },
@@ -58,10 +58,11 @@ function getStyles(props, context) {
         },
         ripple: {
             color: props.rippleColor || baseTheme.palette.primary1Color,
-            height: '200%',
-            width: '200%',
-            top: -12,
-            left: -12
+            height: '36px',
+            width: '120%',
+            top: 0,
+            left: -10,
+            zIndex: 1
         }
     };
 }
@@ -349,14 +350,17 @@ class EnhancedSwitch extends Component {
                   {switchOrThumbElement}
               </div>;
 
-        return { switchElement };
+        return (
+            <div ref="root" className={className} style={prepareStyles(Object.assign(styles.root, style))}>
+                <EventListener target="window" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp} />
+                {inputElement}
+                {elementsInOrder}
+            </div>
+        );
     }
 }
 
 export default EnhancedSwitch;
 
-/*<div ref="root" className={className} style={prepareStyles(Object.assign(styles.root, style))}>
-                <EventListener target="window" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp} />
-                {inputElement}
-                {elementsInOrder}
-            </div>*/
+//   {switchElement}
+//   {ripples}

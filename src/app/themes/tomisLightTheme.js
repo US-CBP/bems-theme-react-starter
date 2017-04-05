@@ -49,6 +49,13 @@ const tomisTheme = {
     tableHeaderColumn: {
         textColor: 'rgba(0,0,0,0.54)'
     },
+    toggleButton: {
+        size: '36px',
+        checkedBackgroundColor: 'rgba(0,0,0,0.27)',
+        uncheckedBackgroundColor: '#ffffff',
+        checkedLabelColor: 'rgba(0,0,0,0.87)',
+        uncheckedLabelColor: 'rgba(0,0,0,0.54)'
+    },
     toolbar: {
         backgroundColor: primary1Color
     },

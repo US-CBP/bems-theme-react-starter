@@ -9,6 +9,7 @@ import AutoComplete from '../../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../../TomisMui/IconButton';
+import { ToggleButton, ToggleButtonGroup } from '../../TomisMui/ToggleButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
@@ -57,29 +58,9 @@ class RiskDecisionCore extends Component {
         });
     };
 
-    getBackgroundColorAccept = () => {
-        const { isAccept } = this.props;
-        return isAccept ? selectedBackgroundColor : unselectedBackgroundColor;
-    };
-
-    getLabelColorAccept = () => {
-        const { isAccept } = this.props;
-        return isAccept ? selectedLabelColor : unselectedLabelColor;
-    };
-
-    getBackgroundColorReject = () => {
-        const { isReject } = this.props;
-        return isReject ? selectedBackgroundColor : unselectedBackgroundColor;
-    };
-
-    getLabelColorReject = () => {
-        const { isReject } = this.props;
-        return isReject ? selectedLabelColor : unselectedLabelColor;
-    };
-
     render() {
         const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject } = this;
-        const { isAccept, isReject } = this.props;
+        const { riskDecisionVal } = this.props;
         const { dataSource1, dataSource2 } = this.state;
         return (
             <div>
@@ -90,8 +71,10 @@ class RiskDecisionCore extends Component {
                         <div className="flex-row">
                             <div>
                                 <label className="labeled-item">Flight Status (RA)*</label>
-                                <RaisedButton label="Accept" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
-                                <RaisedButton label="Reject" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
+                                <ToggleButtonGroup defaultSelected={riskDecisionVal}>
+                                    <ToggleButton value="ACCEPT" label="Accept" />
+                                    <ToggleButton value="REJECT" label="Reject" />
+                                </ToggleButtonGroup>
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
                                 <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText="Title*" />

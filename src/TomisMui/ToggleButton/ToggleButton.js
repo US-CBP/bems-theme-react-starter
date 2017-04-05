@@ -1,33 +1,34 @@
 import React, { Component, PropTypes } from 'react';
 import transitions from 'material-ui/styles/transitions';
-import EnhancedSwitch from 'material-ui/internal/EnhancedSwitch';
+// import EnhancedSwitch from 'material-ui/internal/EnhancedSwitch';
+import EnhancedSwitch from './EnhancedSwitch';
 import RadioButtonOff from 'material-ui/svg-icons/toggle/radio-button-unchecked';
 import RadioButtonOn from 'material-ui/svg-icons/toggle/radio-button-checked';
+import RaisedButton from '../../TomisMui/RaisedButton';
 import keycode from 'keycode';
 import warning from 'warning';
 
 function getStyles(props, context) {
-    const { radioButton } = context.muiTheme;
+    const { toggleButton } = context.muiTheme;
 
     return {
         icon: {
-            height: radioButton.size,
-            width: 'auto'
+            height: toggleButton.size,
+            width: 'auto',
+            marginRight: 0
         },
         target: {
             transition: transitions.easeOut(),
             position: 'static',
             opacity: 1,
-            transform: 'scale(1)',
-            fill: radioButton.borderColor
+            transform: 'scale(1)'
         },
         fill: {
-            position: 'absolute',
+            position: 'static',
             opacity: 1,
             transform: 'scale(0)',
             transformOrigin: '50% 50%',
-            transition: transitions.easeOut(),
-            fill: radioButton.checkedColor
+            transition: transitions.easeOut()
         },
         targetWhenChecked: {
             opacity: 0,
@@ -38,17 +39,18 @@ function getStyles(props, context) {
             transform: 'scale(1)'
         },
         targetWhenDisabled: {
-            fill: radioButton.disabledColor
+            // fill: radioButton.disabledColor
         },
         fillWhenDisabled: {
-            fill: radioButton.disabledColor
+            // fill: radioButton.disabledColor
         },
         label: {
-            color: props.disabled ? radioButton.labelDisabledColor : radioButton.labelColor
+            // color: props.disabled ? radioButton.labelDisabledColor : radioButton.labelColor
         },
         ripple: {
-            color: props.checked ? radioButton.checkedColor : radioButton.borderColor
-        }
+            // color: props.checked ? toggleButton.checkedColor : radioButton.borderColor
+        },
+        toggleButton
     };
 }
 
@@ -153,6 +155,7 @@ class ToggleButton extends Component {
             onCheck, // eslint-disable-line no-unused-vars
             uncheckedIcon,
             disabled,
+            label,
             ...other
         } = this.props;
 
@@ -162,27 +165,29 @@ class ToggleButton extends Component {
 
         const checkedStyles = Object.assign(styles.fill, checked && styles.fillWhenChecked, iconStyle, disabled && styles.fillWhenDisabled);
 
-        const uncheckedElement = React.isValidElement(uncheckedIcon)
-            ? React.cloneElement(uncheckedIcon, {
-                  style: Object.assign(uncheckedStyles, uncheckedIcon.props.style)
-              })
-            : <RadioButtonOff style={uncheckedStyles} />;
+        // const uncheckedElement = React.isValidElement(uncheckedIcon)
+        //     ? React.cloneElement(uncheckedIcon, {
+        //           style: Object.assign(uncheckedStyles, uncheckedIcon.props.style)
+        //       })
+        //     : <RadioButtonOff style={uncheckedStyles} />;
 
-        const checkedElement = React.isValidElement(checkedIcon)
-            ? React.cloneElement(checkedIcon, {
-                  style: Object.assign(checkedStyles, checkedIcon.props.style)
-              })
-            : <RadioButtonOn style={checkedStyles} />;
+        // const checkedElement = React.isValidElement(checkedIcon)
+        //     ? React.cloneElement(checkedIcon, {
+        //           style: Object.assign(checkedStyles, checkedIcon.props.style)
+        //       })
+        //     : <RadioButtonOn style={checkedStyles} />;
+        const { toggleButton: { uncheckedBackgroundColor, uncheckedLabelColor, checkedBackgroundColor, checkedLabelColor } } = styles;
+        const uncheckedElement = (
+            <RaisedButton label={label} backgroundColor={uncheckedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={uncheckedStyles} />
+        );
+        const checkedElement = <RaisedButton label={label} backgroundColor={checkedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={checkedStyles} />;
 
         // const mergedIconStyle = Object.assign(styles.icon, iconStyle, { width: '72px' });
         const mergedIconStyle = Object.assign(styles.icon, iconStyle);
         const mergedLabelStyle = Object.assign(styles.label, labelStyle);
 
-        return <div>{checkedElement}{uncheckedElement}</div>;
-    }
-}
-
-/*<EnhancedSwitch
+        return (
+            <EnhancedSwitch
                 {...other}
                 ref="enhancedSwitch"
                 inputType="radio"
@@ -194,8 +199,11 @@ class ToggleButton extends Component {
                 labelStyle={mergedLabelStyle}
                 labelPosition={labelPosition}
                 onSwitch={this.handleSwitch}
-                switchElement={<div>{uncheckedElement}{checkedElement}</div>}
+                switchElement={<div>{!checked && uncheckedElement}{checked && checkedElement}</div>}
                 style={{ width: 'auto' }}
-            />*/
+            />
+        );
+    }
+}
 
 export default ToggleButton;
