@@ -6,14 +6,33 @@ body {
 
 .flex-row {
   display: flex;
+  position: relative;
 }
 
 .flex-1 {
   flex: 1;
 }
 
+.flex-9 {
+  flex: 9;
+}
+
 .flex-column-pad {
   padding-left: 24px;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.inline-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .row-spacer-24 {
@@ -25,9 +44,20 @@ body {
 }
 
 .labeled-item {
+  display: block;
   margin-top: 8px;
+  margin-bottom: 6px;
 }
 
 h3 {
   margin-bottom: 0;
+}
+
+.editable-cell {
+  cursor: pointer;
+}
+
+.editable-subcategory {
+  padding: 10px;
+  overflow: hidden;
 }

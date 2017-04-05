@@ -14,10 +14,10 @@ const styles = {
 
 const ToggleButtons = () => (
     <div>
-        <ToggleButtonGroup name="shipSpeed" defaultSelected="not_light" style={{ display: 'flex' }}>
-            <ToggleButton value="light" checkedIcon={<RaisedButton label="Btn1" primary={true} />} uncheckedIcon={<RaisedButton label="Btn1" />} style={styles.radioButton} />
-            <ToggleButton value="not_light" checkedIcon={<RaisedButton label="Btn2" primary={true} />} uncheckedIcon={<RaisedButton label="Btn2" />} style={styles.radioButton} />
-            <ToggleButton value="ludicrous" checkedIcon={<RaisedButton label="Btn3" primary={true} />} uncheckedIcon={<RaisedButton label="Btn3" />} style={styles.radioButton} />
+        <ToggleButtonGroup name="shipSpeed" defaultSelected="light">
+            <ToggleButton value="light" checkedIcon={<RaisedButton label="Btn1 Value 1" primary={true} />} uncheckedIcon={<RaisedButton label="Btn1 Value 1" />} />
+            <ToggleButton value="not_light" checkedIcon={<RaisedButton label="Btn2" primary={true} />} uncheckedIcon={<RaisedButton label="Btn2" />} />
+            <ToggleButton value="ludicrous" checkedIcon={<RaisedButton label="Btn3" primary={true} />} uncheckedIcon={<RaisedButton label="Btn3" />} />
         </ToggleButtonGroup>
         {/*<ToggleButtonGroup name="shipName" defaultSelected="community">
       <ToggleButton value="enterprise" label="Disabled unchecked" disabled={true} style={styles.radioButton} />

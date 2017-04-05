@@ -98,15 +98,17 @@
     "style-loader": "^0.13.1"
   },
   "peerDependencies": {
+    "keycode": "^2.1.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
   "dependencies": {
+    "keycode": "^2.1.1",
     "material-ui": "^0.17.1",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "react-event-listener": "^0.4.0",
     "react-material-icons": "^1.0.1",
     "react-theme-provider": "^0.1.2",
-    "styled-components": "^1.4.4"
+    "styled-components": "^1.4.4",
+    "warning": "^3.0.0"
   }
 }

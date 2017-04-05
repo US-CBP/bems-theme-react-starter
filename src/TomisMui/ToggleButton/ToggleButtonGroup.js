@@ -158,7 +158,7 @@ class ToggleButtonGroup extends Component {
         );
 
         return (
-            <div style={prepareStyles(Object.assign({}, this.props.style))} className={this.props.className}>
+            <div style={prepareStyles(Object.assign({}, this.props.style, { display: 'flex' }))} className={this.props.className}>
                 {options}
             </div>
         );

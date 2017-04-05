@@ -4,6 +4,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
 import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
@@ -11,6 +12,11 @@ import Checkbox from 'material-ui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
+import Popover from 'material-ui/Popover';
+import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+
+const anchorOrigin = { horizontal: 'left', vertical: 'top' };
+const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
 const tableData = [
     {
@@ -55,20 +61,44 @@ const initState = {
     enableSelectAll: false,
     deselectOnClickaway: true,
     showCheckboxes: false,
-    height: '500px'
+    height: '500px',
+    dataSource1: [],
+    open: false
 };
 
 class RiskDecisionRejectPage extends Component {
     constructor(props) {
         super(props);
         this.state = initState;
+        this.handleUpdateInput = this.handleUpdateInput.bind(this);
     }
+
+    handleUpdateInput(value) {
+        this.setState({
+            dataSource1: [value, value + value, value + value + value]
+        });
+    }
+
+    handleClickSubCategoryCell = evt => {
+        // This prevents ghost click.
+        evt.preventDefault();
+        this.setState({
+            open: true,
+            anchorEl: evt.currentTarget
+        });
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false
+        });
+    };
 
     render() {
         const { dataSource1, dataSource2 } = this.state;
         return (
             <div>
-                <RiskDecisionCore>
+                <RiskDecisionCore isReject={true}>
                     <div className="flex-row row-spacer-24">
                         <Card expanded={true}>
                             <CardHeader title="No Launch Reason(s)" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }} />
@@ -100,7 +130,11 @@ class RiskDecisionRejectPage extends Component {
                                                 <TableRow key={index} selected={row.selected}>
                                                     <TableRowColumn><Checkbox /></TableRowColumn>
                                                     <TableRowColumn>{index}</TableRowColumn>
-                                                    <TableRowColumn>{row.name}</TableRowColumn>
+                                                    <TableRowColumn>
+                                                        <div className="editable-cell" onClick={this.handleClickSubCategoryCell}>
+                                                            {row.name}
+                                                        </div>
+                                                    </TableRowColumn>
                                                     <TableRowColumn>{row.status}</TableRowColumn>
                                                     <TableRowColumn>
                                                         <IconButton tooltip="Delete Row">
@@ -111,9 +145,38 @@ class RiskDecisionRejectPage extends Component {
                                             ))}
                                         </TableBody>
                                     </Table>
+                                    <Popover
+                                        open={this.state.open}
+                                        anchorEl={this.state.anchorEl}
+                                        anchorOrigin={anchorOrigin}
+                                        targetOrigin={targetOrigin}
+                                        onRequestClose={this.handleRequestClose}
+                                    >
+                                        <div className="editable-subcategory">
+                                            <div className="flex-1 flex-column-pad flex-row">
+                                                <AutoComplete
+                                                    fullWidth={true}
+                                                    hintText="Choose Sub-Category"
+                                                    dataSource={dataSource1}
+                                                    onUpdateInput={this.handleUpdateInput}
+                                                    floatingLabelText="Sub-Category*"
+                                                />
+                                                {/* must use inline style for position on IconButton to override default */}
+                                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                                                    <SvgIconArrowDropDown />
+                                                </IconButton>
+                                            </div>
+
+                                            <div className="flex-row flex-justify-end">
+                                                <FlatButton label="Save" primary={true} onClick={this.handleRequestClose} />
+                                                <FlatButton label="Cancel" primary={true} onClick={this.handleRequestClose} />
+                                            </div>
+                                        </div>
+                                    </Popover>
                                 </div>
                             </CardText>
                         </Card>
+
                     </div>
                 </RiskDecisionCore>
             </div>

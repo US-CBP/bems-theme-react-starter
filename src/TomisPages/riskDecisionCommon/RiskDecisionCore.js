@@ -10,6 +10,9 @@ import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow
 import Checkbox from 'material-ui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
+import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
+import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import { indigo900 } from 'material-ui/styles/colors';
 
 const initState = {
     dataSource1: [],
@@ -20,7 +23,21 @@ const initState = {
     disableYearSelection: false
 };
 
-const textFieldStyle = { width: '100%' };
+const defaultProps = {
+    isAccept: false,
+    isReject: false
+};
+
+const propTypes = {
+    isAccept: PropTypes.bool,
+    isReject: PropTypes.bool
+};
+
+const selectedBackgroundColor = 'rgba(0,0,0,0.27)';
+const unselectedBackgroundColor = '#ffffff';
+
+const selectedLabelColor = 'rgba(0,0,0,0.87)';
+const unselectedLabelColor = 'rgba(0,0,0,0.54)';
 
 class RiskDecisionCore extends Component {
     constructor(props) {
@@ -42,7 +59,29 @@ class RiskDecisionCore extends Component {
         });
     };
 
+    getBackgroundColorAccept = () => {
+        const { isAccept } = this.props;
+        return isAccept ? selectedBackgroundColor : unselectedBackgroundColor;
+    };
+
+    getLabelColorAccept = () => {
+        const { isAccept } = this.props;
+        return isAccept ? selectedLabelColor : unselectedLabelColor;
+    };
+
+    getBackgroundColorReject = () => {
+        const { isReject } = this.props;
+        return isReject ? selectedBackgroundColor : unselectedBackgroundColor;
+    };
+
+    getLabelColorReject = () => {
+        const { isReject } = this.props;
+        return isReject ? selectedLabelColor : unselectedLabelColor;
+    };
+
     render() {
+        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject } = this;
+        const { isAccept, isReject } = this.props;
         const { dataSource1, dataSource2 } = this.state;
         return (
             <div>
@@ -51,46 +90,47 @@ class RiskDecisionCore extends Component {
                     <CardHeader title="Risk Decision" actAsExpander={true} showExpandableButton={true} />
                     <CardText expandable={true}>
                         <div className="flex-row">
-                            <div className="flex-1">
-                                <label>Flight Status (RA)*</label>
-                                <div className="flex-row labeled-item">
-                                    <RaisedButton label="Accept" />
-                                    <RaisedButton label="Reject" />
-                                </div>
+                            <div>
+                                <label className="labeled-item">Flight Status (RA)*</label>
+                                <RaisedButton label="Accept" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
+                                <RaisedButton label="Reject" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
                             </div>
-                            <div className="flex-1">
-                                <AutoComplete
-                                    className="text-field"
-                                    hintText="Choose Title"
-                                    dataSource={dataSource2}
-                                    onUpdateInput={this.handleUpdateInput}
-                                    floatingLabelText="Title*"
-                                />
+                            <div className="flex-1 flex-column-pad flex-row">
+                                <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText="Title*" />
+                                {/* must use inline style for position on IconButton to override default */}
+                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                                    <SvgIconArrowDropDown />
+                                </IconButton>
                             </div>
-                            <div className="flex-1 flex-column-pad">
-                                <AutoComplete
-                                    style={textFieldStyle}
-                                    hintText="Choose Name"
-                                    dataSource={dataSource1}
-                                    onUpdateInput={this.handleUpdateInput}
-                                    floatingLabelText="Name*"
-                                />
+                            <div className="flex-1 flex-column-pad flex-row">
+                                <AutoComplete fullWidth={true} hintText="Choose Name" dataSource={dataSource1} onUpdateInput={this.handleUpdateInput} floatingLabelText="Name*" />
+                                {/* must use inline style for position on IconButton to override default */}
+                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                                    <SvgIconArrowDropDown />
+                                </IconButton>
                             </div>
-                            <div className="flex-1 flex-column-pad">
+                            <div className="flex-1 flex-column-pad flex-row">
                                 <DatePicker
-                                    style={textFieldStyle}
-                                    hintText="Select Date"
+                                    className="flex-1"
+                                    container="inline"
+                                    fullWidth={true}
+                                    hintText={<span>Select Date </span>}
                                     floatingLabelText="Date*"
                                     defaultDate={this.state.demoDate}
                                     onChange={this.handleChangeDemoDate}
+                                    mode="landscape"
+                                    firstDayOfWeek={0}
+                                    formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
                                 />
+                                {/* must use inline style for position on IconButton to override default */}
+                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                                    <MonthlyCalendarIcon />
+                                </IconButton>
                             </div>
                         </div>
-                        <div className="flex-row row-spacer-24">
-                            <div>
-                                <h3>Attachments</h3>
-                                <img src="/images/fileUpload.png" />
-                            </div>
+                        <div className="row-spacer-24">
+                            <h3>Attachments</h3>
+                            <img src="/images/fileUpload.png" />
                         </div>
                         {this.props.children}
                     </CardText>
@@ -99,5 +139,8 @@ class RiskDecisionCore extends Component {
         );
     }
 }
+
+RiskDecisionCore.defaultProps = defaultProps;
+RiskDecisionCore.propTypes = propTypes;
 
 export default RiskDecisionCore;
