@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../TomisMui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';

@@ -1,18 +1,16 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import DatePicker from 'material-ui/DatePicker';
+import DatePicker from '../../TomisMui/DatePicker';
 import TextField from '../../TomisMui/TextField';
 import HeaderNavAction from '../../TomisInternal/HeaderNavAction';
 import RaisedButton from '../../TomisMui/RaisedButton';
 import { Card, CardActions, CardHeader, CardText } from '../../TomisMui/Card';
 import AutoComplete from '../../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import Checkbox from 'material-ui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../../TomisMui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import { indigo900 } from 'material-ui/styles/colors';
 
 const initState = {
     dataSource1: [],

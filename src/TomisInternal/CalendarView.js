@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getStatusBarStyle, getStatusBarTitleStyle, getActionBarStyle, getActionBarIconColor, getAppBarIconColor, getLoggedInSocialPersonStyle } from '../app/helpers/styles';
 import Popover from 'material-ui/Popover';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../TomisMui/IconButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz';

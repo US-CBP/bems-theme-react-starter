@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../TomisMui/IconButton';
 import Search from '../TomisInternal/Search';
 import SearchIcon from 'react-material-icons/icons/action/search';
 import muiThemeable from 'material-ui/styles/muiThemeable';

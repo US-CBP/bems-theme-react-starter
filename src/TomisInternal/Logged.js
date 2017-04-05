@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../TomisMui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { getStatusBarStyle, getStatusBarTitleStyle, getActionBarStyle, getActionBarIconColor, getAppBarIconColor, getLoggedInSocialPersonStyle } from '../app/helpers/styles';

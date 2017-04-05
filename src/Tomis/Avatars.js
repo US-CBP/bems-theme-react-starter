@@ -15,7 +15,7 @@ const style = { margin: 5 };
  */
 const Avatars = () => (
     <List>
-        <ListItem disabled={true} leftAvatar={<Avatar src="/public/images/uxceo-128.jpg" />}>
+        <ListItem disabled={true} leftAvatar={<Avatar src="./images/uxceo-128.jpg" />}>
             Image Avatar
         </ListItem>
         <ListItem disabled={true} leftAvatar={<Avatar src="./images/uxceo-128.jpg" size={30} style={style} />}>

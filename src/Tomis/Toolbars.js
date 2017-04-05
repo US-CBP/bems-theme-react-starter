@@ -1,6 +1,6 @@
 import React from 'react';
 import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '../TomisMui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import Menu from 'material-ui/Menu';
