@@ -14,8 +14,8 @@ import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
 const initState = {
-    dataSource1: [],
-    dataSource2: [],
+    dataSource1: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'],
+    dataSource2: ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'],
     isExpanded: true,
     demoDate: new Date(),
     autoOk: false,
@@ -46,10 +46,12 @@ class RiskDecisionCore extends Component {
     }
 
     handleUpdateInput(value) {
-        this.setState({
-            dataSource1: [value, value + value, value + value + value],
-            dataSource2: [value, value + value, value + value + value]
-        });
+        this.setState(
+            {
+                // dataSource1: [value, value + value, value + value + value],
+                // dataSource2: [value, value + value, value + value + value]
+            }
+        );
     }
 
     handleChangeDemoDate = (event, date) => {
@@ -59,7 +61,7 @@ class RiskDecisionCore extends Component {
     };
 
     render() {
-        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject } = this;
+        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject, handleClickNameLov } = this;
         const { riskDecisionVal } = this.props;
         const { dataSource1, dataSource2 } = this.state;
         return (
@@ -84,11 +86,15 @@ class RiskDecisionCore extends Component {
                                 </IconButton>
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
-                                <AutoComplete fullWidth={true} hintText="Choose Name" dataSource={dataSource1} onUpdateInput={this.handleUpdateInput} floatingLabelText="Name*" />
-                                {/* must use inline style for position on IconButton to override default */}
-                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                    <SvgIconArrowDropDown />
-                                </IconButton>
+                                <AutoComplete
+                                    fullWidth={true}
+                                    filter={AutoComplete.noFilter}
+                                    hintText="Choose Name"
+                                    openOnFocus={false}
+                                    dataSource={dataSource1}
+                                    onUpdateInput={this.handleUpdateInput}
+                                    floatingLabelText="Name*"
+                                />
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
                                 <DatePicker
