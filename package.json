@@ -107,6 +107,7 @@
     "material-ui": "^0.17.1",
     "react-event-listener": "^0.4.0",
     "react-material-icons": "^1.0.1",
+    "react-select": "^1.0.0-rc.3",
     "react-theme-provider": "^0.1.2",
     "styled-components": "^1.4.4",
     "warning": "^3.0.0"

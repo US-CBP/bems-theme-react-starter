@@ -10,6 +10,10 @@ import IconButton from './IconButton';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import propTypes from 'material-ui/utils/propTypes';
 
+const caseInsensitiveFilter = (searchText, key) => {
+    return key.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
+};
+
 function getStyles(props, context, state) {
     const { anchorEl } = state;
     const { fullWidth } = props;
@@ -50,6 +54,8 @@ class AutoComplete extends Component {
     constructor(props) {
         super(props);
         this.popoverEmitter = null;
+        this.searchTextField = null;
+        this.isIgnoreFilter = false;
     }
 
     static propTypes = {
@@ -200,10 +206,10 @@ class AutoComplete extends Component {
             value: 'value'
         },
         disableFocusRipple: true,
-        filter: (searchText, key) => searchText !== '' && key.indexOf(searchText) !== -1,
-        fullWidth: false,
+        filter: caseInsensitiveFilter,
+        fullWidth: true,
         open: false,
-        openOnFocus: false,
+        openOnFocus: true,
         onUpdateInput: () => {},
         onNewRequest: () => {},
         searchText: '',
@@ -286,7 +292,7 @@ class AutoComplete extends Component {
 
         this.setState(
             {
-                searchText: searchText
+                searchText
             },
             () => {
                 this.props.onUpdateInput(searchText, this.props.dataSource, {
@@ -319,6 +325,7 @@ class AutoComplete extends Component {
 
     handleKeyDown = event => {
         if (this.props.onKeyDown) this.props.onKeyDown(event);
+        this.isIgnoreFilter = false;
 
         switch (keycode(event)) {
             case 'enter':
@@ -335,10 +342,11 @@ class AutoComplete extends Component {
 
             case 'down':
                 event.preventDefault();
+                // this.isIgnoreFilter = true;
                 this.setState({
                     open: true,
                     focusTextField: false,
-                    anchorEl: ReactDOM.findDOMNode(this.refs.searchTextField)
+                    anchorEl: ReactDOM.findDOMNode(this.searchTextField)
                 });
                 break;
 
@@ -348,9 +356,10 @@ class AutoComplete extends Component {
     };
 
     handleChange = event => {
-        console.log('handleChange called');
         const searchText = event.target.value;
+        console.log('handleChange called with searchText=', searchText);
         this.popoverEmitter = null;
+        this.isIgnoreFilter = false;
         // Make sure that we have a new searchText.
         // Fix an issue with a Cordova Webview
         if (searchText === this.state.searchText) {
@@ -359,9 +368,9 @@ class AutoComplete extends Component {
 
         this.setState(
             {
-                searchText: searchText,
+                searchText,
                 open: true,
-                anchorEl: ReactDOM.findDOMNode(this.refs.searchTextField)
+                anchorEl: ReactDOM.findDOMNode(this.searchTextField)
             },
             () => {
                 this.props.onUpdateInput(searchText, this.props.dataSource, {
@@ -387,10 +396,11 @@ class AutoComplete extends Component {
     };
 
     handleFocus = event => {
+        this.isIgnoreFilter = true;
         if ((!this.state.open && this.props.openOnFocus) || this.popoverEmitter === 'ICON') {
             this.setState({
                 open: true,
-                anchorEl: ReactDOM.findDOMNode(this.refs.searchTextField)
+                anchorEl: ReactDOM.findDOMNode(this.searchTextField)
             });
         }
 
@@ -414,7 +424,7 @@ class AutoComplete extends Component {
             this.focus();
             // this.setState({
             //     open: true,
-            //     anchorEl: ReactDOM.findDOMNode(this.refs.searchTextField),
+            //     anchorEl: ReactDOM.findDOMNode(this.searchTextField),
             //     focusTextField: !this.state.open
             // });
         }
@@ -437,11 +447,11 @@ class AutoComplete extends Component {
     };
 
     blur() {
-        this.refs.searchTextField.blur();
+        this.searchTextField.blur();
     }
 
     focus() {
-        this.refs.searchTextField.focus();
+        this.searchTextField.focus();
     }
 
     handleClickIconButton = event => {
@@ -512,7 +522,10 @@ class AutoComplete extends Component {
                 case 'object':
                     if (item && typeof item[this.props.dataSourceConfig.text] === 'string') {
                         const itemText = item[this.props.dataSourceConfig.text];
-                        if (!this.props.filter(searchText, itemText, item)) break;
+
+                        if (!this.isIgnoreFilter) {
+                            if (!this.props.filter(searchText, itemText, item) && this.popoverEmitter === null) break;
+                        }
 
                         const itemValue = item[this.props.dataSourceConfig.value];
                         if (itemValue.type && (itemValue.type.muiName === MenuItem.muiName || itemValue.type.muiName === Divider.muiName)) {
@@ -544,7 +557,6 @@ class AutoComplete extends Component {
         const menu = open &&
             requestsList.length > 0 &&
             <Menu
-                ref="menu"
                 autoWidth={false}
                 disableAutoFocus={focusTextField}
                 onEscKeyDown={this.handleEscKeyDown}
@@ -561,7 +573,7 @@ class AutoComplete extends Component {
         return (
             <div style={prepareStyles(Object.assign(styles.root, style))}>
                 <TextField
-                    ref="searchTextField"
+                    ref={ref => this.searchTextField = ref}
                     autoComplete="off"
                     value={searchText}
                     onChange={this.handleChange}

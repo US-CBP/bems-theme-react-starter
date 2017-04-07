@@ -80,10 +80,6 @@ class RiskDecisionCore extends Component {
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
                                 <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText="Title*" />
-                                {/* must use inline style for position on IconButton to override default */}
-                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                    <SvgIconArrowDropDown />
-                                </IconButton>
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
                                 <AutoComplete
