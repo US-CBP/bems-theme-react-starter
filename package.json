@@ -110,6 +110,7 @@
     "react-material-icons": "^1.0.1",
     "react-select": "^1.0.0-rc.3",
     "react-theme-provider": "^0.1.2",
+    "react-virtualized-select": "^2.4.0",
     "styled-components": "^1.4.4",
     "warning": "^3.0.0"
   }

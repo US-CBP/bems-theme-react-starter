@@ -4,10 +4,12 @@ import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import 'react-select/dist/react-select.css';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 import Select from 'react-select';
-import Option from 'react-select';
 import Highlighter from 'react-highlight-words';
 import { amber400 } from 'material-ui/styles/colors';
+import VirtualizedSelect from 'react-virtualized-select'
 
 const options = [
         { code: '743', description: '00000001TEST', closeDate: '' },
@@ -1434,12 +1436,23 @@ export default class TableEditable extends React.Component {
       />
     );
   };
+  renderVirtualizedOption = ({option}) => {
+    return (
+      <div>
+      <Highlighter
+        highlightClassName="lov-highlight-text"
+        highlightStyle={{ backgroundColor: amber400 }}
+        searchWords={[this._inputValue]}
+        textToHighlight={option.description}
+      />
+      </div>
+    );
+  };
   renderValue = option => {
     return <strong style={{ color: option.color }}>{option.description}</strong>;
   };
 
   onFoundSelectRootNode = rootNode => {
-    console.log('rootNode=', rootNode);
     if (rootNode) {
       const bcr = rootNode.getBoundingClientRect();
       const { top, left, width, height } = bcr;
@@ -1495,11 +1508,11 @@ export default class TableEditable extends React.Component {
                 </TableRowColumn>
                 <TableRowColumn>
                   <div className="MaterialSelector">
-                    <Select
+                    <VirtualizedSelect
                       labelKey="description"
                       onInputChange={inputValue => this._inputValue = inputValue}
                       options={options}
-                      optionRenderer={this.renderOption}
+                      optionRenderer={this.renderVirtualizedOption}
                       onChange={this.setValue}
                       value={this.state.value}
                       valueKey="code"
