@@ -34,6 +34,7 @@ import Snackbars from './Snackbars';
 import Steppers from './Steppers';
 import Subheaders from './Subheaders';
 import TableReadOnly from './TableReadOnly';
+import TableEditable from './TableEditable';
 import Tabs from './Tabs';
 import TextFields from './TextFields';
 import TimePickers from './TimePickers';
@@ -157,6 +158,9 @@ storiesOf('TOMIS', module)
     })
     .add('Table, Read-Only', () => {
         return <TableReadOnly />;
+    })
+    .add('Table, Editable', () => {
+        return <TableEditable />;
     })
     .add('Toggle Buttons - Pending', () => {
         return <ToggleButtons />;
