@@ -55,51 +55,6 @@ reqThemes.keys().forEach(filename => {
   themesList.push(reqThemes(filename));
 });
 
-const tableState = {
-  fixedHeader: false,
-  fixedFooter: true,
-  stripedRows: true,
-  showRowHover: true,
-  selectable: false,
-  multiSelectable: false,
-  enableSelectAll: false,
-  deselectOnClickaway: true,
-  showCheckboxes: false,
-  height: '500px'
-};
-const tableData = [
-  {
-    name: 'John Smith',
-    status: 'Employed',
-    selected: true
-  },
-  {
-    name: 'Randal White',
-    status: 'Unemployed'
-  },
-  {
-    name: 'Stephanie Sanders',
-    status: 'Employed',
-    selected: true
-  },
-  {
-    name: 'Steve Brown',
-    status: 'Employed'
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Employed'
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Employed'
-  },
-  {
-    name: 'Adam Moore',
-    status: 'Employed'
-  }
-];
-
 storiesOf('MUI', module)
   .addDecorator(story => {
     const storyKind = story();
