@@ -1,55 +1,58 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/dialogs/SimpleExample';
+import ModalExample from './muiExamples/dialogs/ModalExample';
+import StyledExample from './muiExamples/dialogs/StyledExample';
+import NestedExample from './muiExamples/dialogs/NestedExample';
+import ScrollableExample from './muiExamples/dialogs/ScrollableExample';
+import AlertExample from './muiExamples/dialogs/AlertExample';
 
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
-export default class Dialogs extends React.Component {
-  state = {
-    open: false,
-  };
-
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
-  };
-
-  render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
-    ];
-
-    return (
-      <div>
-        <RaisedButton label="Dialog" onTouchTap={this.handleOpen} />
-        <Dialog
-          title="Dialog With Actions"
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
-          The actions in this window were passed in as an array of React objects.
-        </Dialog>
-      </div>
-    );
-  }
-}
+const Dialogs = () => {
+  return (
+    <div>
+      <h4>Dialog</h4>
+      <Card>
+        <CardHeader title="Simple dialog" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Modal dialog" />
+        <CardText>
+          <ModalExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Styled dialog" />
+        <CardText>
+          <StyledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Nested dialog" />
+        <CardText>
+          <NestedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Scrollable dialog" />
+        <CardText>
+          <ScrollableExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Alert dialog" />
+        <CardText>
+          <AlertExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
+export default Dialogs;
