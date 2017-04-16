@@ -1,23 +1,43 @@
 import React from 'react';
-import {blue500, red500, greenA200} from 'material-ui/styles/colors';
-import SvgIcon from 'material-ui/SvgIcon';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import FontIconCustomExample from './muiExamples/icons/fontIcon/CustomExample';
+import FontIconPublicExample from './muiExamples/icons/fontIcon/PublicExample';
+import SvgIconCustomExample from './muiExamples/icons/svgIcon/CustomExample';
+import SvgIconMaterialExample from './muiExamples/icons/svgIcon/MaterialExample';
 
-const iconStyles = {
-  marginRight: 24,
+const Icons = () => {
+  return (
+    <div>
+      <h4>SVG Icon</h4>
+      <Card>
+        <CardHeader title="Custom examples" />
+        <CardText>
+          <SvgIconCustomExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Material examples" />
+        <CardText>
+          <SvgIconMaterialExample />
+        </CardText>
+      </Card>
+      <br /><br />
+      <h4>Font Icon</h4>
+      <Card>
+        <CardHeader title="Custom example" />
+        <CardText>
+          <FontIconCustomExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Public example" />
+        <CardText>
+          <FontIconPublicExample />
+        </CardText>
+      </Card>
+    </div>
+  );
 };
-
-const HomeIcon = (props) => (
-  <SvgIcon {...props}>
-    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-  </SvgIcon>
-);
-
-const Icons = () => (
-  <div>
-    <HomeIcon style={iconStyles} />
-    <HomeIcon style={iconStyles} color={blue500} />
-    <HomeIcon style={iconStyles} color={red500} hoverColor={greenA200} />
-  </div>
-);
-
 export default Icons;
