@@ -1,16 +1,58 @@
 import React from 'react';
-import DatePicker from '../TomisMui/DatePicker';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/datePickers/SimpleExample';
+import InlineExample from './muiExamples/datePickers/InlineExample';
+import RangedExample from './muiExamples/datePickers/RangedExample';
+import ControlledExample from './muiExamples/datePickers/ControlledExample';
+import DisabledExample from './muiExamples/datePickers/DisabledExample';
+// import LocalisedExample from './muiExamples/datePickers/LocalisedExample';
 
-/**
- * The Date Picker defaults to a portrait dialog. The `mode` property can be set to `landscape`.
- * You can also disable the Dialog passing `true` to the `disabled` property.
- */
-const DatePickers = () => (
+const DatePickers = () => {
+  return (
     <div>
-        <DatePicker hintText="Portrait Dialog" />
-        <DatePicker hintText="Landscape Dialog" mode="landscape" />
-        <DatePicker hintText="Dialog Disabled" disabled={true} />
+      <h4>Date Picker</h4>
+      <Card>
+        <CardHeader title="Simple examples" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Inline examples" />
+        <CardText>
+          <InlineExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Ranged example" />
+        <CardText>
+          <RangedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Controlled example" />
+        <CardText>
+          <ControlledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Disabled dates example" />
+        <CardText>
+          <DisabledExample />
+        </CardText>
+      </Card>
+      {/*<br /><br /><br />
+      <Card>
+        <CardHeader title="Localised example" />
+        <CardText>
+          <LocalisedExample />
+        </CardText>
+      </Card>*/}
     </div>
-);
-
+  );
+};
 export default DatePickers;

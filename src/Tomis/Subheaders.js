@@ -1,53 +1,34 @@
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
-import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import ListExample from './muiExamples/subheaders/ListExample';
+import InsetExample from './muiExamples/subheaders/InsetExample';
+import GridListExample from './muiExamples/subheaders/GridListExample';
 
-const Subheaders = () => (
-  <div>
-    <List>
-      <Subheader>Recent chats</Subheader>
-      <ListItem
-        primaryText="Brendan Lim"
-        leftAvatar={<Avatar src="images/ok-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Eric Hoffman"
-        leftAvatar={<Avatar src="images/kolage-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Grace Ng"
-        leftAvatar={<Avatar src="images/uxceo-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Kerem Suer"
-        leftAvatar={<Avatar src="images/kerem-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-      <ListItem
-        primaryText="Raquel Parrado"
-        leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />}
-        rightIcon={<CommunicationChatBubble />}
-      />
-    </List>
-    <Divider />
-    <List>
-      <Subheader>Previous chats</Subheader>
-      <ListItem
-        primaryText="Chelsea Otakan"
-        leftAvatar={<Avatar src="images/chexee-128.jpg" />}
-      />
-      <ListItem
-        primaryText="James Anderson"
-        leftAvatar={<Avatar src="images/jsa-128.jpg" />}
-      />
-    </List>
-  </div>
-);
-
+const Subheaders = () => {
+  return (
+    <div>
+      <h4>Subheader</h4>
+      <Card>
+        <CardHeader title="Simple Usage with List" />
+        <CardText>
+          <ListExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Inset Example" />
+        <CardText>
+          <InsetExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Simple Usage with GridList" />
+        <CardText>
+          <GridListExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
 export default Subheaders;

@@ -1,29 +1,82 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-import Divider from 'material-ui/Divider';
-import ActionInfo from 'material-ui/svg-icons/action/info';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/lists/SimpleExample';
+import ChatExample from './muiExamples/lists/ChatExample';
+import ContactExample from './muiExamples/lists/ContactExample';
+import FolderExample from './muiExamples/lists/FolderExample';
+import NestedExample from './muiExamples/lists/NestedExample';
+import SettingsExample from './muiExamples/lists/SettingsExample';
+import PhoneExample from './muiExamples/lists/PhoneExample';
+import MessagesExample from './muiExamples/lists/MessagesExample';
+import SelectableExample from './muiExamples/lists/SelectableExample';
 
-const Lists = () => (
-  <div>
-    <List>
-      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
-      <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
-      <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-      <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
-    </List>
-    <Divider />
-    <List>
-      <ListItem primaryText="All mail" rightIcon={<ActionInfo />} />
-      <ListItem primaryText="Trash" rightIcon={<ActionInfo />} />
-      <ListItem primaryText="Spam" rightIcon={<ActionInfo />} />
-      <ListItem primaryText="Follow up" rightIcon={<ActionInfo />} />
-    </List>
-  </div>
-);
-
+const Lists = () => {
+  return (
+    <div>
+      <h4>List</h4>
+      <Card>
+        <CardHeader title="Simple list" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Chat list" />
+        <CardText>
+          <ChatExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Contact list" />
+        <CardText>
+          <ContactExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Folder list" />
+        <CardText>
+          <FolderExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Nested list" />
+        <CardText>
+          <NestedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Settings list" />
+        <CardText>
+          <SettingsExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Phone list" />
+        <CardText>
+          <PhoneExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Messages list" />
+        <CardText>
+          <MessagesExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Selectable list" />
+        <CardText>
+          <SelectableExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
 export default Lists;

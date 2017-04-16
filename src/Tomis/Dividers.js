@@ -1,23 +1,34 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import FormExample from './muiExamples/dividers/FormExample';
+import InsetExample from './muiExamples/dividers/InsetExample';
+import MenuExample from './muiExamples/dividers/MenuExample';
 
-const style = {
-  marginLeft: 20,
+const Dividers = () => {
+  return (
+    <div>
+      <h4>Divider</h4>
+      <Card>
+        <CardHeader title="Form divider" />
+        <CardText>
+          <FormExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Inset divider" />
+        <CardText>
+          <InsetExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Menu divider" />
+        <CardText>
+          <MenuExample />
+        </CardText>
+      </Card>
+    </div>
+  );
 };
-
-const Dividers = () => (
-  <Paper zDepth={2}>
-    <TextField hintText="First name" style={style} underlineShow={false} />
-    <Divider />
-    <TextField hintText="Middle name" style={style} underlineShow={false} />
-    <Divider />
-    <TextField hintText="Last name" style={style} underlineShow={false} />
-    <Divider />
-    <TextField hintText="Email address" style={style} underlineShow={false} />
-    <Divider />
-  </Paper>
-);
-
 export default Dividers;

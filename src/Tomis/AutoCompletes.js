@@ -1341,7 +1341,7 @@ class AutoCompletes extends Component {
     constructor(props) {
         super(props);
         this.state = initState;
-        this.handleUpdateInput = this.handleUpdateInput.bind(this);
+        // this.handleUpdateInput = this.handleUpdateInput.bind(this);
     }
 
     onChange = item => {

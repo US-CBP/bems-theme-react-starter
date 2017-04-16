@@ -1,29 +1,34 @@
 import React from 'react';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import DockedExample from './muiExamples/drawers/DockedExample';
+import UndockedExample from './muiExamples/drawers/UndockedExample';
+import OpenSecondaryExample from './muiExamples/drawers/OpenSecondaryExample';
 
-export default class Drawers extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {open: false};
-  }
-
-  handleToggle = () => this.setState({open: !this.state.open});
-
-  render() {
-    return (
-      <div>
-        <RaisedButton
-          label="Toggle Drawer"
-          onTouchTap={this.handleToggle}
-        />
-        <Drawer open={this.state.open}>
-          <MenuItem>Menu Item</MenuItem>
-          <MenuItem>Menu Item 2</MenuItem>
-        </Drawer>
-      </div>
-    );
-  }
-}
+const Drawers = () => {
+  return (
+    <div>
+      <h4>Drawer</h4>
+      <Card>
+        <CardHeader title="Docked example" />
+        <CardText>
+          <DockedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Undocked example" />
+        <CardText>
+          <UndockedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Open secondary example" />
+        <CardText>
+          <OpenSecondaryExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
+export default Drawers;

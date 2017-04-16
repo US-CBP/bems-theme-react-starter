@@ -1,57 +1,34 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/popovers/SimpleExample';
+import AnimationExample from './muiExamples/popovers/AnimationExample';
+import AnchorExample from './muiExamples/popovers/AnchorExample';
 
-export default class Popovers extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: false,
-    };
-  }
-
-  handleTouchTap = (event) => {
-    // This prevents ghost click.
-    event.preventDefault();
-
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget,
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <RaisedButton
-          onTouchTap={this.handleTouchTap}
-          label="Click me"
-        />
-        <Popover
-          open={this.state.open}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          onRequestClose={this.handleRequestClose}
-        >
-          <Menu>
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Help &amp; feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
-          </Menu>
-        </Popover>
-      </div>
-    );
-  }
-}
+const Popovers = () => {
+  return (
+    <div>
+      <h4>Popover</h4>
+      <Card>
+        <CardHeader title="Simple example" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Animation" />
+        <CardText>
+          <AnimationExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Anchor playground" />
+        <CardText>
+          <AnchorExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
+export default Popovers;

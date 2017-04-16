@@ -1,25 +1,34 @@
 import React from 'react';
-import TimePicker from 'material-ui/TimePicker';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/timePickers/SimpleExample';
+import ControlledExample from './muiExamples/timePickers/ControlledExample';
+import LocalisedExample from './muiExamples/timePickers/LocalisedExample';
 
-const TimePickers = () => (
-  <div>
-    <TimePicker
-      hintText="12hr Format"
-    />
-    <TimePicker
-      hintText="12hr Format with auto ok"
-      autoOk={true}
-    />
-    <TimePicker
-      format="24hr"
-      hintText="24hr Format"
-    />
-    <TimePicker
-      disabled={true}
-      format="24hr"
-      hintText="Disabled TimePicker"
-    />
-  </div>
-);
-
+const TimePickers = () => {
+  return (
+    <div>
+      <h4>Time Picker</h4>
+      <Card>
+        <CardHeader title="Simple examples" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Controlled examples" />
+        <CardText>
+          <ControlledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Localised example" />
+        <CardText>
+          <LocalisedExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
 export default TimePickers;

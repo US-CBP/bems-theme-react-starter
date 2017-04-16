@@ -1,25 +1,50 @@
-import React, { PropTypes, Component } from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import TextField from '../TomisMui/TextField';
+import React from 'react';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/textFields/SimpleExample';
+import ErrorExample from './muiExamples/textFields/ErrorExample';
+import StyledExample from './muiExamples/textFields/StyledExample';
+import DisabledExample from './muiExamples/textFields/DisabledExample';
+import ControlledExample from './muiExamples/textFields/ControlledExample';
 
-class TextFields extends Component {
-  render() {
-    return (
-      <div>
-        <TextField hintText="Where did you leave from?" floatingLabelText="Departure Location" />
-        <br />
-        <TextField defaultValue="Buffalo, NY" floatingLabelText="Departure Location" />
-        <br />
-        <TextField hintText="Where did you leave from?" errorText="This field is required" floatingLabelText="Departure Location" />
-        <br />
-        <TextField disabled={true} hintText="Where did you leave from?" defaultValue="Buffalo, NY" floatingLabelText="Departure Location" />
-        <br />
-        <TextField hintText="Departure - no floating label" />
-        <br />
-
-      </div>
-    );
-  }
-}
-
-export default muiThemeable()(TextFields);
+const TextFields = () => {
+  return (
+    <div>
+      <h4>Text Field</h4>
+      <Card>
+        <CardHeader title="Simple examples" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Error examples" />
+        <CardText>
+          <ErrorExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Styled examples" />
+        <CardText>
+          <StyledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Disabled examples" />
+        <CardText>
+          <DisabledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Controlled example" />
+        <CardText>
+          <ControlledExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
+export default TextFields;
