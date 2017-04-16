@@ -1,55 +1,50 @@
 import React from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/tabs/SimpleExample';
+import ControlledExample from './muiExamples/tabs/ControlledExample';
+import SwipeableExample from './muiExamples/tabs/SwipeableExample';
+import IconExample from './muiExamples/tabs/IconExample';
+import IconTextExample from './muiExamples/tabs/IconTextExample';
 
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
+const Tabs = () => {
+  return (
+    <div>
+      <h4>Tabs</h4>
+      <Card>
+        <CardHeader title="Simple example" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Controlled example" />
+        <CardText>
+          <ControlledExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Swipeable example" />
+        <CardText>
+          <SwipeableExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Icon example" />
+        <CardText>
+          <IconExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Icon and text example" />
+        <CardText>
+          <IconTextExample />
+        </CardText>
+      </Card>
+    </div>
+  );
 };
-
-function handleActive(tab) {
-  alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
-}
-
-const TabsComponent = () => (
-  <Tabs>
-    <Tab label="Item One" >
-      <div>
-        <h2 style={styles.headline}>Tab One</h2>
-        <p>
-          This is an example tab.
-        </p>
-        <p>
-          You can put any sort of HTML or react component in here. It even keeps the component state!
-        </p>
-        <Slider name="slider0" defaultValue={0.5} />
-      </div>
-    </Tab>
-    <Tab label="Item Two" >
-      <div>
-        <h2 style={styles.headline}>Tab Two</h2>
-        <p>
-          This is another example tab.
-        </p>
-      </div>
-    </Tab>
-    <Tab
-      label="onActive"
-      data-route="/home"
-      onActive={handleActive}
-    >
-      <div>
-        <h2 style={styles.headline}>Tab Three</h2>
-        <p>
-          This is a third example tab.
-        </p>
-      </div>
-    </Tab>
-  </Tabs>
-);
-
-export default TabsComponent;
+export default Tabs;

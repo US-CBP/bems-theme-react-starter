@@ -30,7 +30,7 @@ import Snackbars from './Snackbars';
 import Steppers from './Steppers';
 import Subheaders from './Subheaders';
 import TableEditable from './TableEditable';
-import TableReadOnly from './TableReadOnly';
+import Tables from './Tables';
 import Tabs from './Tabs';
 import TextFields from './TextFields';
 import TimePickers from './TimePickers';
@@ -199,44 +199,82 @@ storiesOf('MUI', module)
   .add('Toolbar', () => {
     return <Toolbars />;
   })
-  .add('Table, Read-Only', () => {
-    return <TableReadOnly />;
-  })
-  .add('Table, Editable', () => {
-    return <TableEditable />;
-  })
-  .add('Table Read-Only in Panel', () => {
-    return (
-      <div>
-        <Table
-          height={tableState.height}
-          fixedHeader={tableState.fixedHeader}
-          fixedFooter={tableState.fixedFooter}
-          selectable={tableState.selectable}
-          multiSelectable={tableState.multiSelectable}
-        >
-          <TableHeader displaySelectAll={tableState.showCheckboxes} adjustForCheckbox={tableState.showCheckboxes} enableSelectAll={tableState.enableSelectAll}>
-            <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody
-            displayRowCheckbox={tableState.showCheckboxes}
-            deselectOnClickaway={tableState.deselectOnClickaway}
-            showRowHover={tableState.showRowHover}
-            stripedRows={tableState.stripedRows}
-          >
-            {tableData.map((row, index) => (
-              <TableRow key={index} selected={row.selected}>
-                <TableRowColumn>{index}</TableRowColumn>
-                <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.status}</TableRowColumn>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    );
+  .add('Table', () => {
+    return <Tables />;
   });
+
+// .add('Table, Editable', () => {
+
+//   return <TableEditable />;
+
+// })
+
+// .add('Table Read-Only in Panel', () => {
+
+//   return (
+
+//     <div>
+
+//       <Table
+
+//         height={tableState.height}
+
+//         fixedHeader={tableState.fixedHeader}
+
+//         fixedFooter={tableState.fixedFooter}
+
+//         selectable={tableState.selectable}
+
+//         multiSelectable={tableState.multiSelectable}
+
+//       >
+
+//         <TableHeader displaySelectAll={tableState.showCheckboxes} adjustForCheckbox={tableState.showCheckboxes} enableSelectAll={tableState.enableSelectAll}>
+
+//           <TableRow>
+
+//             <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
+
+//             <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
+
+//             <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+
+//           </TableRow>
+
+//         </TableHeader>
+
+//         <TableBody
+
+//           displayRowCheckbox={tableState.showCheckboxes}
+
+//           deselectOnClickaway={tableState.deselectOnClickaway}
+
+//           showRowHover={tableState.showRowHover}
+
+//           stripedRows={tableState.stripedRows}
+
+//         >
+
+//           {tableData.map((row, index) => (
+
+//             <TableRow key={index} selected={row.selected}>
+
+//               <TableRowColumn>{index}</TableRowColumn>
+
+//               <TableRowColumn>{row.name}</TableRowColumn>
+
+//               <TableRowColumn>{row.status}</TableRowColumn>
+
+//             </TableRow>
+
+//           ))}
+
+//         </TableBody>
+
+//       </Table>
+
+//     </div>
+
+// );
+
+// });
