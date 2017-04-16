@@ -47,6 +47,8 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-
 import { Table, TableBody, TableHeader, TableFooter, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 // import tomisTheme from '../app/themes/tomisLightTheme.js';
 import tomisTheme from '../app/themes/muiLightTheme.js';
+/* custom font icons */
+import './css/font-icons/styles.css';
 
 const reqThemes = require.context('../.themes/', true, /.json/);
 const themesList = [];
