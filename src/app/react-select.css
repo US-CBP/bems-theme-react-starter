@@ -77,7 +77,7 @@
   cursor: pointer;
   text-decoration: none;
 }
-.MaterialSelector .has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .MaterialSelector .has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover, .MaterialSelector .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus, .MaterialSelector .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover {
+.MaterialSelector .has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .MaterialSelector .has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover, .MaterialSelector has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus, .MaterialSelector .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover {
   color: #3f51b5;
   text-decoration: underline;
 }

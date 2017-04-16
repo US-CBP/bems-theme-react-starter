@@ -1508,11 +1508,11 @@ export default class TableEditable extends React.Component {
                 </TableRowColumn>
                 <TableRowColumn>
                   <div className="MaterialSelector">
-                    <VirtualizedSelect
+                    <Select
                       labelKey="description"
                       onInputChange={inputValue => this._inputValue = inputValue}
                       options={options}
-                      optionRenderer={this.renderVirtualizedOption}
+                      optionRenderer={this.renderOption}
                       onChange={this.setValue}
                       value={this.state.value}
                       valueKey="code"
