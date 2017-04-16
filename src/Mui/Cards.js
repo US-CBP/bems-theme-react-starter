@@ -1,31 +1,34 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import ComponentsExample from './muiExamples/cards/ComponentsExample';
+import ExpandableExample from './muiExamples/cards/ExpandableExample';
+import ControlledExample from './muiExamples/cards/ControlledExample';
 
-const Cards = () => (
-  <Card>
-    <CardHeader
-      title="URL Avatar"
-      subtitle="Subtitle"
-      avatar="images/jsa-128.jpg"
-    />
-    <CardMedia
-      overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-    >
-      <img src="images/nature-600-337.jpg" />
-    </CardMedia>
-    <CardTitle title="Card title" subtitle="Card subtitle" />
-    <CardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-    </CardText>
-    <CardActions>
-      <FlatButton label="Action1" />
-      <FlatButton label="Action2" />
-    </CardActions>
-  </Card>
-);
-
+const Cards = () => {
+  return (
+    <div>
+      <h4>Card</h4>
+      <Card>
+        <CardHeader title="Card components example" />
+        <CardText>
+          <ComponentsExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Expandable example" />
+        <CardText>
+          <ExpandableExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Controlled example" />
+        <CardText>
+          <ControlledExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
 export default Cards;
