@@ -1,22 +1,34 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/papers/SimpleExample';
+import NonRoundedExample from './muiExamples/papers/NonRoundedExample';
+import CircularExample from './muiExamples/papers/CircularExample';
 
-const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
+const Papers = () => {
+  return (
+    <div>
+      <h4>Paper</h4>
+      <Card>
+        <CardHeader title="Simple example" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Non-rounded cornders" />
+        <CardText>
+          <NonRoundedExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Circular Paper" />
+        <CardText>
+          <CircularExample />
+        </CardText>
+      </Card>
+    </div>
+  );
 };
-
-const Papers = () => (
-  <div>
-    <Paper style={style} zDepth={1} />
-    <Paper style={style} zDepth={2} />
-    <Paper style={style} zDepth={3} />
-    <Paper style={style} zDepth={4} />
-    <Paper style={style} zDepth={5} />
-  </div>
-);
-
 export default Papers;

@@ -1,42 +1,34 @@
 import React from 'react';
-import Snackbar from 'material-ui/Snackbar';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import SimpleExample from './muiExamples/snackbars/SimpleExample';
+import ActionExample from './muiExamples/snackbars/ActionExample';
+import ConsecutiveExample from './muiExamples/snackbars/ConsecutiveExample';
 
-export default class Snackbars extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
-
-  handleTouchTap = () => {
-    this.setState({
-      open: true,
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <RaisedButton
-          onTouchTap={this.handleTouchTap}
-          label="Add to my calendar"
-        />
-        <Snackbar
-          open={this.state.open}
-          message="Event added to your calendar"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose}
-        />
-      </div>
-    );
-  }
-}
+const Snackbars = () => {
+  return (
+    <div>
+      <h4>Snackbar</h4>
+      <Card>
+        <CardHeader title="Simple example" />
+        <CardText>
+          <SimpleExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Example action" />
+        <CardText>
+          <ActionExample />
+        </CardText>
+      </Card>
+      <br /><br /><br />
+      <Card>
+        <CardHeader title="Consecutive Snackbars" />
+        <CardText>
+          <ConsecutiveExample />
+        </CardText>
+      </Card>
+    </div>
+  );
+};
+export default Snackbars;
