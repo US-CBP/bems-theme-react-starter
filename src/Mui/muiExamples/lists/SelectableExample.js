@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Subheader from 'material-ui/Subheader';
+import MobileTearSheet from '../MobileTearSheet';
 
 let SelectableList = makeSelectable(List);
 
@@ -37,7 +38,7 @@ function wrapState(ComposedComponent) {
 SelectableList = wrapState(SelectableList);
 
 const ListExampleSelectable = () => (
-  <div style={{ border: '1px solid #cccccc' }}>
+  <MobileTearSheet>
     <SelectableList defaultValue={3}>
       <Subheader>Selectable Contacts</Subheader>
       <ListItem
@@ -50,7 +51,7 @@ const ListExampleSelectable = () => (
       <ListItem value={4} primaryText="Eric Hoffman" leftAvatar={<Avatar src="images/kolage-128.jpg" />} />
       <ListItem value={5} primaryText="Raquel Parrado" leftAvatar={<Avatar src="images/raquelromanp-128.jpg" />} />
     </SelectableList>
-  </div>
+  </MobileTearSheet>
 );
 
 export default ListExampleSelectable;

@@ -4,9 +4,10 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import MobileTearSheet from '../MobileTearSheet';
 
 const ListExampleChat = () => (
-  <div style={{ border: '1px solid #cccccc' }}>
+  <MobileTearSheet>
     <List>
       <Subheader>Recent chats</Subheader>
       <ListItem primaryText="Brendan Lim" leftAvatar={<Avatar src="images/ok-128.jpg" />} rightIcon={<CommunicationChatBubble />} />
@@ -21,7 +22,7 @@ const ListExampleChat = () => (
       <ListItem primaryText="Chelsea Otakan" leftAvatar={<Avatar src="images/chexee-128.jpg" />} />
       <ListItem primaryText="James Anderson" leftAvatar={<Avatar src="images/jsa-128.jpg" />} />
     </List>
-  </div>
+  </MobileTearSheet>
 );
 
 export default ListExampleChat;

@@ -6,6 +6,7 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import Subheader from 'material-ui/Subheader';
 import Toggle from 'material-ui/Toggle';
+import MobileTearSheet from '../MobileTearSheet';
 
 export default class ListExampleNested extends React.Component {
   state = {
@@ -34,7 +35,7 @@ export default class ListExampleNested extends React.Component {
           label="This toggle controls the expanded state of the submenu item."
         />
         <br />
-        <div style={{ border: '1px solid #cccccc' }}>
+        <MobileTearSheet>
           <List>
             <Subheader>Nested List Items</Subheader>
             <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
@@ -64,7 +65,7 @@ export default class ListExampleNested extends React.Component {
               ]}
             />
           </List>
-        </div>
+        </MobileTearSheet>
       </div>
     );
   }

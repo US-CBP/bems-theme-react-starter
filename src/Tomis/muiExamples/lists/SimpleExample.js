@@ -6,9 +6,10 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import Divider from 'material-ui/Divider';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import MobileTearSheet from '../MobileTearSheet';
 
 const ListExampleSimple = () => (
-  <div style={{ border: '1px solid #cccccc' }}>
+  <MobileTearSheet>
     <List>
       <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
       <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
@@ -23,7 +24,7 @@ const ListExampleSimple = () => (
       <ListItem primaryText="Spam" rightIcon={<ActionInfo />} />
       <ListItem primaryText="Follow up" rightIcon={<ActionInfo />} />
     </List>
-  </div>
+  </MobileTearSheet>
 );
 
 export default ListExampleSimple;

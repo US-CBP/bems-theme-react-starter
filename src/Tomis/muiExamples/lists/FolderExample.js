@@ -8,9 +8,10 @@ import FileFolder from 'material-ui/svg-icons/file/folder';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import { blue500, yellow600 } from 'material-ui/styles/colors';
 import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
+import MobileTearSheet from '../MobileTearSheet';
 
 const ListExampleFolder = () => (
-  <div style={{ border: '1px solid #cccccc' }}>
+  <MobileTearSheet>
     <List>
       <Subheader inset={true}>Folders</Subheader>
       <ListItem leftAvatar={<Avatar icon={<FileFolder />} />} rightIcon={<ActionInfo />} primaryText="Photos" secondaryText="Jan 9, 2014" />
@@ -33,7 +34,7 @@ const ListExampleFolder = () => (
         secondaryText="Jan 10, 2014"
       />
     </List>
-  </div>
+  </MobileTearSheet>
 );
 
 export default ListExampleFolder;

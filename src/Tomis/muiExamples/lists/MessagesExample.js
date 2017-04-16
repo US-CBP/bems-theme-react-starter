@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import MobileTearSheet from '../MobileTearSheet';
 
 const iconButtonElement = (
   <IconButton touch={true} tooltip="more" tooltipPosition="bottom-left">
@@ -25,7 +26,7 @@ const rightIconMenu = (
 
 const ListExampleMessages = () => (
   <div>
-    <div style={{ border: '1px solid #cccccc' }}>
+    <MobileTearSheet>
       <List>
         <Subheader>Today</Subheader>
         <ListItem
@@ -88,8 +89,8 @@ const ListExampleMessages = () => (
           secondaryTextLines={2}
         />
       </List>
-    </div>
-    <div style={{ border: '1px solid #cccccc' }}>
+    </MobileTearSheet>
+    <MobileTearSheet>
       <List>
         <Subheader>Today</Subheader>
         <ListItem
@@ -157,7 +158,7 @@ const ListExampleMessages = () => (
           secondaryTextLines={2}
         />
       </List>
-    </div>
+    </MobileTearSheet>
   </div>
 );
 

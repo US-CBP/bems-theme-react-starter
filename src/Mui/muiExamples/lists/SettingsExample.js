@@ -4,6 +4,7 @@ import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Checkbox from 'material-ui/Checkbox';
 import Toggle from 'material-ui/Toggle';
+import MobileTearSheet from '../MobileTearSheet';
 
 const styles = {
   root: {
@@ -14,7 +15,7 @@ const styles = {
 
 const ListExampleSettings = () => (
   <div style={styles.root}>
-    <div style={{ border: '1px solid #cccccc' }}>
+    <MobileTearSheet>
       <List>
         <Subheader>General</Subheader>
         <ListItem primaryText="Profile photo" secondaryText="Change your Google+ profile photo" />
@@ -27,8 +28,8 @@ const ListExampleSettings = () => (
         <ListItem leftCheckbox={<Checkbox />} primaryText="Sounds" secondaryText="Hangouts message" />
         <ListItem leftCheckbox={<Checkbox />} primaryText="Video sounds" secondaryText="Hangouts video call" />
       </List>
-    </div>
-    <div style={{ border: '1px solid #cccccc' }}>
+    </MobileTearSheet>
+    <MobileTearSheet>
       <List>
         <ListItem primaryText="When calls and notifications arrive" secondaryText="Always interrupt" />
       </List>
@@ -46,7 +47,7 @@ const ListExampleSettings = () => (
         <ListItem primaryText="Sounds" leftCheckbox={<Checkbox />} />
         <ListItem primaryText="Video sounds" leftCheckbox={<Checkbox />} />
       </List>
-    </div>
+    </MobileTearSheet>
   </div>
 );
 

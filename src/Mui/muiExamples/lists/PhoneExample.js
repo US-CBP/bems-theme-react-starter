@@ -5,9 +5,10 @@ import CommunicationCall from 'material-ui/svg-icons/communication/call';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import { indigo500 } from 'material-ui/styles/colors';
 import CommunicationEmail from 'material-ui/svg-icons/communication/email';
+import MobileTearSheet from '../MobileTearSheet';
 
 const ListExamplePhone = () => (
-  <div style={{ border: '1px solid #cccccc' }}>
+  <MobileTearSheet>
     <List>
       <ListItem
         leftIcon={<CommunicationCall color={indigo500} />}
@@ -22,7 +23,7 @@ const ListExamplePhone = () => (
       <ListItem leftIcon={<CommunicationEmail color={indigo500} />} primaryText="aliconnors@example.com" secondaryText="Personal" />
       <ListItem insetChildren={true} primaryText="ali_connors@example.com" secondaryText="Work" />
     </List>
-  </div>
+  </MobileTearSheet>
 );
 
 export default ListExamplePhone;
