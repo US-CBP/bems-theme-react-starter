@@ -28,8 +28,7 @@ import Popovers from './Popovers';
 import Progresses from './Progresses';
 import SelectFields from './SelectFields';
 import Sliders from './Sliders';
-import SwitchesCheckbox from './SwitchesCheckbox';
-import SwitchesToggle from './SwitchesToggle';
+import Switches from './Switches';
 import Snackbars from './Snackbars';
 import Steppers from './Steppers';
 import Subheaders from './Subheaders';
@@ -133,11 +132,8 @@ storiesOf('TOMIS', module)
   .add('Slider', () => {
     return <Sliders />;
   })
-  .add('Switches - Checkbox', () => {
-    return <SwitchesCheckbox />;
-  })
-  .add('Switches - Toggle', () => {
-    return <SwitchesToggle />;
+  .add('Switches', () => {
+    return <Switches />;
   })
   .add('Snackbar', () => {
     return <Snackbars />;
