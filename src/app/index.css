@@ -17,7 +17,7 @@ body {
   flex: 9;
 }
 
-.flex-column-pad {
+.flex-row > .internal {
   padding-left: 24px;
 }
 
