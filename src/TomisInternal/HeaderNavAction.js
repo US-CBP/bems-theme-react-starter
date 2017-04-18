@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import CbpHeaderToolbar from '../Tomis/CbpHeaderToolbar';
-import ActionBarToolbar from '../Tomis/ActionBarToolbar';
+import ToolbarCbpHeader from '../Tomis/ToolbarCbpHeader';
+import ToolbarActionBar from '../Tomis/ToolbarActionBar';
 
 const propTypes = {
   actionBarPageTitle: PropTypes.string
@@ -11,8 +11,8 @@ class HeaderNavAction extends Component {
     const { actionBarPageTitle } = this.props;
     return (
       <div>
-        <CbpHeaderToolbar />
-        <ActionBarToolbar pageTitle={actionBarPageTitle} />
+        <ToolbarCbpHeader />
+        <ToolbarActionBar pageTitle={actionBarPageTitle} />
       </div>
     );
   }

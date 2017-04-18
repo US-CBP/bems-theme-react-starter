@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RiskDecisionPage from './RiskDecisionPage';
 import RiskDecisionAcceptPage from './RiskDecisionAcceptPage';
 import RiskDecisionRejectPage from './RiskDecisionRejectPage';
+import GroundRiskDecision from './GroundRiskDecision';
 import FormWithAllComponents from './FormWithAllComponents';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -37,4 +38,7 @@ storiesOf('TOMIS Pages', module)
     })
     .add('Risk Decision - Reject', () => {
         return <RiskDecisionRejectPage />;
+    })
+    .add('Ground Operation', () => {
+        return <GroundRiskDecision />;
     });

@@ -20,33 +20,33 @@ const targetOrigin = { horizontal: 'left', vertical: 'top' };
 const tableData = [
     {
         name: 'John Smith',
-        status: 'Employed',
+        status: 'Sample Justification 1',
         selected: true
     },
     {
         name: 'Randal White',
-        status: 'Unemployed'
+        status: 'Sample Justification 2'
     },
     {
         name: 'Stephanie Sanders',
-        status: 'Employed',
+        status: 'Sample Justification 3',
         selected: true
     },
     {
         name: 'Steve Brown',
-        status: 'Employed'
+        status: 'Sample Justification 4'
     },
     {
         name: 'Joyce Whitten',
-        status: 'Employed'
+        status: 'Sample Justification 5'
     },
     {
         name: 'Samuel Roberts',
-        status: 'Employed'
+        status: 'Sample Justification 6'
     },
     {
         name: 'Adam Moore',
-        status: 'Employed'
+        status: 'Sample Justification 7'
     }
 ];
 
@@ -114,7 +114,7 @@ class RiskDecisionRejectPage extends Component {
                                             <TableRow selectable={false}>
                                                 <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
                                                 <TableHeaderColumn tooltip="Category">Category*</TableHeaderColumn>
-                                                <TableHeaderColumn tooltip="Sub-Category">Sub-Category</TableHeaderColumn>
+                                                <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
                                                 <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
                                                 <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
                                             </TableRow>

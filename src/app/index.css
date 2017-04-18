@@ -13,11 +13,11 @@ body {
   flex: 1;
 }
 
-.flex-9 {
-  flex: 9;
+.flex-row > .internal {
+  padding-left: 24px;
 }
 
-.flex-row > .internal {
+.flex-column-pad  {
   padding-left: 24px;
 }
 
@@ -47,6 +47,11 @@ body {
   display: block;
   margin-top: 8px;
   margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.outer-card-margin {
+  margin: 16px;
 }
 
 h3 {

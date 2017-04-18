@@ -49,7 +49,7 @@ const setStatePopoverClose = (keyVal, state, props) => {
     state.isOpen[keyVal] = false;
 };
 
-class CbpHeaderToolbar extends Component {
+class ToolbarCbpHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -110,4 +110,4 @@ class CbpHeaderToolbar extends Component {
         );
     }
 }
-export default muiThemeable()(CbpHeaderToolbar);
+export default muiThemeable()(ToolbarCbpHeader);

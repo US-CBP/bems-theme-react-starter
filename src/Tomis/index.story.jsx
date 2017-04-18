@@ -3,43 +3,30 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBars from './AppBars';
-import ActionBarToolbar from './ActionBarToolbar';
+import ToolbarActionBar from './ToolbarActionBar';
 import AutoCompletes from './AutoCompletes';
-import Avatars from './Avatars';
-import Badges from './Badges';
-import BottomNavigations from './BottomNavigations';
 import Buttons from './Buttons';
 import Cards from './Cards';
-import CbpHeaderToolbar from './CbpHeaderToolbar';
-import Chips from './Chips';
+import ToolbarCbpHeader from './ToolbarCbpHeader';
 import DatePickers from './DatePickers';
 import Dialogs from './Dialogs';
 import Dividers from './Dividers';
 import Drawers from './Drawers';
-import GridLists from './GridLists';
 import Icons from './Icons';
 import Lists from './Lists';
 import ListsNested from './ListsNested';
 import Menus from './Menus';
 import NavigationDrawer from './NavigationDrawer';
-import Papers from './Papers';
 import Popovers from './Popovers';
 import Progresses from './Progresses';
-import SelectFields from './SelectFields';
-import Sliders from './Sliders';
 import Switches from './Switches';
 import Snackbars from './Snackbars';
-import Steppers from './Steppers';
-import Subheaders from './Subheaders';
 import TableReadOnly from './TableReadOnly';
 import Tables from './Tables';
 import TableEditable from './TableEditable';
-import Tabs from './Tabs';
 import TextFields from './TextFields';
 import TimePickers from './TimePickers';
 import ToggleButtons from './ToggleButtons';
-import Toolbars from './Toolbars';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from '../TomisMui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -63,29 +50,14 @@ storiesOf('TOMIS', module)
       </div>
     );
   })
-  .add('AppBar', () => {
-    return <AppBars />;
-  })
   .add('AutoComplete', () => {
     return <AutoCompletes />;
-  })
-  .add('Avatar', () => {
-    return <Avatars />;
-  })
-  .add('Badge', () => {
-    return <Badges />;
-  })
-  .add('Bottom Navigation', () => {
-    return <BottomNavigations />;
   })
   .add('Buttons', () => {
     return <Buttons />;
   })
   .add('Cards', () => {
     return <Cards />;
-  })
-  .add('Chip', () => {
-    return <Chips />;
   })
   .add('Date Picker', () => {
     return <DatePickers />;
@@ -102,9 +74,6 @@ storiesOf('TOMIS', module)
   .add('Drawer - Navigation - Pending', () => {
     return <NavigationDrawer />;
   })
-  .add('Grid List', () => {
-    return <GridLists />;
-  })
   .add('Icon', () => {
     return <Icons />;
   })
@@ -117,35 +86,17 @@ storiesOf('TOMIS', module)
   .add('Menus', () => {
     return <Menus />;
   })
-  .add('Paper', () => {
-    return <Papers />;
-  })
   .add('Popover', () => {
     return <Popovers />;
   })
   .add('Progress', () => {
     return <Progresses />;
   })
-  .add('Select Field', () => {
-    return <SelectFields />;
-  })
-  .add('Slider', () => {
-    return <Sliders />;
-  })
-  .add('Switches', () => {
+  .add('Switches / Checkbox', () => {
     return <Switches />;
   })
   .add('Snackbar', () => {
     return <Snackbars />;
-  })
-  .add('Stepper', () => {
-    return <Steppers />;
-  })
-  .add('Subheader', () => {
-    return <Subheaders />;
-  })
-  .add('Tabs', () => {
-    return <Tabs />;
   })
   .add('Text Field - Pending', () => {
     return <TextFields />;
@@ -162,14 +113,11 @@ storiesOf('TOMIS', module)
   .add('Toggle Buttons - Pending', () => {
     return <ToggleButtons />;
   })
-  .add('Toolbars', () => {
-    return <Toolbars />;
-  })
   .add('Toolbar, Action Bar - Pending', () => {
-    return <ActionBarToolbar />;
+    return <ToolbarActionBar />;
   })
   .add('Toolbar, CBP Header - Pending', () => {
-    return <CbpHeaderToolbar />;
+    return <ToolbarCbpHeader />;
   });
 
 function withNote(note, child) {

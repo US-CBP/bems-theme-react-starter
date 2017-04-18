@@ -65,7 +65,7 @@ const statusBarStyle = {
     height: '20px',
     backgroundColor: 'red'
 };
-class ActionBarToolbar extends Component {
+class ToolbarActionBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -162,4 +162,4 @@ class ActionBarToolbar extends Component {
         );
     }
 }
-export default muiThemeable()(ActionBarToolbar);
+export default muiThemeable()(ToolbarActionBar);
