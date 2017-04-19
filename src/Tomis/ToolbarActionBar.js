@@ -22,7 +22,6 @@ import {
   getStatusBarTitleStyle,
   getActionBarStyle,
   getActionBarIconColor,
-  getStatusBarSubHeaderTitleStyle,
   getAppBarIconColor,
   getActionBarLabelStyle,
   getToolbarTitleStyle,

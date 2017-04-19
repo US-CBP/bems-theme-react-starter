@@ -10,7 +10,6 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from '../TomisM
 import HamburgerMenu from 'material-ui/svg-icons/navigation/menu';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import CommunicationChatBubbleOpen from 'material-ui/svg-icons/communication/chat-bubble-outline';
-import Subheader from '../TomisMui/Subheader';
 import Logged from '../TomisInternal/Logged';
 import CalendarView from '../TomisInternal/CalendarView';
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -19,7 +18,6 @@ import {
   getStatusBarTitleStyle,
   getActionBarStyle,
   getActionBarIconColor,
-  getStatusBarSubHeaderTitleStyle,
   getAppBarIconColor,
   getActionBarLabelStyle,
   getToolbarTitleStyle,
@@ -76,7 +74,7 @@ class ToolbarCbpHeader extends Component {
             <div>
               <ToolbarTitle text={<span>U.S. Customs and Border Protection</span>} style={getStatusBarTitleStyle(this.props)} />
               <br />
-              <Subheader style={getStatusBarSubHeaderTitleStyle(this.props)}>Department of Homeland Security</Subheader>
+              <div className="header-sub-title">Department of Homeland Security</div>
             </div>
             <FlatButton
               onTouchTap={handleTouchTapButton.bind(this, APPLICATIONS)}

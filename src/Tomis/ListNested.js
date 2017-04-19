@@ -1,5 +1,6 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+import ExampleContainer from './helper/ExampleContainer';
+import { List, ListItem } from 'material-ui/List';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
@@ -8,26 +9,25 @@ import Subheader from 'material-ui/Subheader';
 import Toggle from 'material-ui/Toggle';
 
 export default class ListsNested extends React.Component {
-
   state = {
-    open: false,
+    open: false
   };
 
   handleToggle = () => {
     this.setState({
-      open: !this.state.open,
+      open: !this.state.open
     });
   };
 
-  handleNestedListToggle = (item) => {
+  handleNestedListToggle = item => {
     this.setState({
-      open: item.state.open,
+      open: item.state.open
     });
   };
 
   render() {
     return (
-      <div>
+      <ExampleContainer>
         <Toggle
           toggled={this.state.open}
           onToggle={this.handleToggle}
@@ -46,19 +46,13 @@ export default class ListsNested extends React.Component {
               initiallyOpen={true}
               primaryTogglesNestedList={true}
               nestedItems={[
-                <ListItem
-                  key={1}
-                  primaryText="Starred"
-                  leftIcon={<ActionGrade />}
-                />,
+                <ListItem key={1} primaryText="Starred" leftIcon={<ActionGrade />} />,
                 <ListItem
                   key={2}
                   primaryText="Sent Mail"
                   leftIcon={<ContentSend />}
                   disabled={true}
-                  nestedItems={[
-                    <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />,
-                  ]}
+                  nestedItems={[<ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />]}
                 />,
                 <ListItem
                   key={3}
@@ -66,15 +60,13 @@ export default class ListsNested extends React.Component {
                   leftIcon={<ContentInbox />}
                   open={this.state.open}
                   onNestedListToggle={this.handleNestedListToggle}
-                  nestedItems={[
-                    <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />,
-                  ]}
-                />,
+                  nestedItems={[<ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />]}
+                />
               ]}
             />
           </List>
         </div>
-      </div>
+      </ExampleContainer>
     );
   }
 }
