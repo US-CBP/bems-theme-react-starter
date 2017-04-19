@@ -13,6 +13,10 @@ body {
   flex: 1;
 }
 
+.flex-2 {
+  flex: 2;
+}
+
 .flex-row > .internal {
   padding-left: 24px;
 }
@@ -81,4 +85,9 @@ h3 {
     line-height: 14px;
     font-style: italic;
     padding-left: 16px;
+}
+
+.panel-link {
+  text-decoration: underline;
+  cursor: pointer;
 }
