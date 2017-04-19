@@ -22,9 +22,6 @@ const styles = {
 
 const ButtonRaisedComplex = () => (
   <ExampleContainer>
-    <RaisedButton label="Choose an Image" labelPosition="before" style={styles.button} containerElement="label">
-      <input type="file" style={styles.exampleImageInput} />
-    </RaisedButton>
     <RaisedButton label="Label before" labelPosition="before" primary={true} icon={<ActionAndroid />} style={styles.button} />
   </ExampleContainer>
 );
