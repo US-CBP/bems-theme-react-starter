@@ -21,9 +21,7 @@ import ProgressRefreshLoading from './ProgressRefreshLoading';
 import SwitchCheckbox from './SwitchCheckbox';
 import SnackbarSimple from './SnackbarSimple';
 import TableReadOnly from './TableReadOnly';
-import TableEditable from './TableEditable';
 import TextFieldSimple from './TextFieldSimple';
-import ToggleButtons from './ToggleButtons';
 import ToolbarActionBar from './ToolbarActionBar';
 import ToolbarCbpHeader from './ToolbarCbpHeader';
 import { WithNotes } from '@kadira/storybook-addon-notes';
@@ -101,12 +99,6 @@ storiesOf('TOMIS', module)
   })
   .add('Table - Read-Only', () => {
     return <TableReadOnly />;
-  })
-  .add('Table - Editable', () => {
-    return <TableEditable />;
-  })
-  .add('Toggle Buttons - Pending', () => {
-    return <ToggleButtons />;
   })
   .add('Toolbar, Action Bar - Pending', () => {
     return <ToolbarActionBar />;
