@@ -1,10 +1,17 @@
-import React, { PropTypes, Component } from 'react';
-import ExampleContainer from './helper/ExampleContainer'
-import '../app/react-select.css';
-import Select from 'react-select'; //https://github.com/JedWatson/react-select
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
+import 'react-select/dist/react-select.css';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
+import Select from 'react-select';
+import Highlighter from 'react-highlight-words';
+import { amber400 } from 'material-ui/styles/colors';
+import VirtualizedSelect from 'react-virtualized-select'
 
-const initState = {
-    dataSource: [
+const options = [
         { code: '743', description: '00000001TEST', closeDate: '' },
         { code: '741', description: '00001TEST', closeDate: '' },
         { code: '778', description: '111', closeDate: '' },
@@ -1323,64 +1330,203 @@ const initState = {
         { code: '815', description: 'TAIL1', closeDate: '' },
         { code: '835', description: 'TEST VV', closeDate: '' },
         { code: '838', description: 'TRES1', closeDate: '' }
-    ],
-    value: '838',
-    description: 'TRES1'
+    ];
+
+const styles = {
+  propContainer: {
+    width: 200,
+    overflow: 'hidden',
+    margin: '20px auto 0'
+  },
+  propToggleHeader: {
+    margin: '20px auto 10px'
+  }
 };
 
-const defaultProps = {
-    labelText: 'Branch/Unit',
-    errorText: null
+const getTomisSelectRootNode = (curNode, iter, callback) => {
+  const MAX_TREE_ITER = 5;
+  const { parentNode, parentNode: { className } } = curNode;
+  const nextIter = iter + 1;
+  if (className.indexOf('Select--single') >= 0) {
+    callback(curNode);
+  } else if (nextIter > MAX_TREE_ITER) {
+    //Prevent infinite recursion
+    return undefined;
+  } else {
+    getTomisSelectRootNode(parentNode, nextIter, callback);
+  }
 };
 
-const propTypes = {
-    labelText: PropTypes.string,
-    errorText: PropTypes.string
-};
+const tableData = [
+  {
+    name: 'John Smith',
+    status: 'Employed',
+    selected: true
+  },
+  {
+    name: 'Randal White',
+    status: 'Unemployed'
+  },
+  {
+    name: 'Stephanie Sanders',
+    status: 'Employed',
+    selected: true
+  }
+  // {
+  //   name: 'Steve Brown',
+  //   status: 'Employed'
+  // },
+  // {
+  //   name: 'Joyce Whitten',
+  //   status: 'Employed'
+  // },
+  // {
+  //   name: 'Samuel Roberts',
+  //   status: 'Employed'
+  // },
+  // {
+  //   name: 'Adam Moore',
+  //   status: 'Employed'
+  // }
+];
 
-class AutoCompletes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState;
-        // this.handleUpdateInput = this.handleUpdateInput.bind(this);
-    }
+export default class TableEditable extends React.Component {
+  constructor(props) {
+    super(props);
 
-    onChange = item => {
-        if (item) {
-            const value = item.code;
-            const baseOfOperationTypeCd = item.filter5;
-            this.setState({ value });
-            // this.reportToHoc(value, baseOfOperationTypeCd);
-        }
+    this.state = {
+      fixedHeader: true,
+      fixedFooter: false,
+      stripedRows: true,
+      showRowHover: true,
+      selectable: false,
+      multiSelectable: false,
+      enableSelectAll: false,
+      deselectOnClickaway: true,
+      showCheckboxes: false,
+      height: '500px',
+      value: null,
+      menuContainerStyle: { position: 'absolute', top: '0', left: '0', width: '100%' }
     };
+  }
 
-    render() {
-        const { value, description } = this.state;
-        return (
-            <ExampleContainer>
-                <div className="MaterialSelector" style={{ paddingLeft: '48px' }}>
-                    <Select
-                        searchingText="Retrieving..."
-                        matchProp="description"
-                        clearable={false}
-                        value={value}
-                        onChange={this.onChange}
-                        options={this.state.dataSource}
-                        valueKey="code"
-                        labelKey="description"
-                        placeholder=""
-                        disabled={false}
-                        autoload={false}
-                    />
-                    <div className={`bar ${this.props.errorText && 'errorState'}`} />
-                    <label className={this.props.errorText && 'errorState'}>{this.props.labelText}</label>
-                    <div className="errorText">{this.props.errorText}</div>
-                </div>
-            </ExampleContainer>
-        );
+  handleToggle = (event, toggled) => {
+    this.setState({
+      [event.target.name]: toggled
+    });
+  };
+
+  handleChange = event => {
+    this.setState({ height: event.target.value });
+  };
+
+  setValue = value => {
+    this.setState({ value });
+    if (value) {
+      console.log('Support level selected:', value.description);
     }
-}
+  };
+  renderOption = option => {
+    return (
+      <Highlighter
+        highlightClassName="lov-highlight-text"
+        highlightStyle={{ backgroundColor: amber400 }}
+        searchWords={[this._inputValue]}
+        textToHighlight={option.description}
+      />
+    );
+  };
+  renderVirtualizedOption = ({option}) => {
+    return (
+      <div>
+      <Highlighter
+        highlightClassName="lov-highlight-text"
+        highlightStyle={{ backgroundColor: amber400 }}
+        searchWords={[this._inputValue]}
+        textToHighlight={option.description}
+      />
+      </div>
+    );
+  };
+  renderValue = option => {
+    return <strong style={{ color: option.color }}>{option.description}</strong>;
+  };
 
-AutoCompletes.defaultProps = defaultProps;
-AutoCompletes.propTypes = propTypes;
-export default AutoCompletes;
+  onFoundSelectRootNode = rootNode => {
+    if (rootNode) {
+      const bcr = rootNode.getBoundingClientRect();
+      const { top, left, width, height } = bcr;
+      this.setState({ menuContainerStyle: { position: 'fixed', top: `${top + height}px`, left, width } });
+    }
+  };
+
+  onFocusSelect = evt => {
+    getTomisSelectRootNode(evt.target, 0, this.onFoundSelectRootNode);
+  };
+
+  render() {
+    return (
+      <div>
+        <Table
+          height={this.state.height}
+          fixedHeader={this.state.fixedHeader}
+          fixedFooter={this.state.fixedFooter}
+          selectable={this.state.selectable}
+          multiSelectable={this.state.multiSelectable}
+        >
+          <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes} enableSelectAll={this.state.enableSelectAll}>
+            <TableRow>
+              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
+              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
+              <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            displayRowCheckbox={this.state.showCheckboxes}
+            deselectOnClickaway={this.state.deselectOnClickaway}
+            showRowHover={this.state.showRowHover}
+            stripedRows={this.state.stripedRows}
+          >
+            {tableData.map((row, index) => (
+              <TableRow key={index} selected={row.selected}>
+                <TableRowColumn>{index}</TableRowColumn>
+                <TableRowColumn>
+                  <div className="MaterialSelector">
+                    <Select
+                      labelKey="description"
+                      onInputChange={inputValue => this._inputValue = inputValue}
+                      options={options}
+                      optionRenderer={this.renderOption}
+                      onChange={this.setValue}
+                      value={this.state.value}
+                      valueKey="code"
+                      valueRenderer={this.renderValue}
+                      onFocus={this.onFocusSelect}
+                      menuContainerStyle={this.state.menuContainerStyle}
+                    />
+                  </div>
+                </TableRowColumn>
+                <TableRowColumn>
+                  <div className="MaterialSelector">
+                    <Select
+                      labelKey="description"
+                      onInputChange={inputValue => this._inputValue = inputValue}
+                      options={options}
+                      optionRenderer={this.renderOption}
+                      onChange={this.setValue}
+                      value={this.state.value}
+                      valueKey="code"
+                      valueRenderer={this.renderValue}
+                      onFocus={this.onFocusSelect}
+                      menuContainerStyle={this.state.menuContainerStyle}
+                    />
+                  </div>
+                </TableRowColumn>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
+}

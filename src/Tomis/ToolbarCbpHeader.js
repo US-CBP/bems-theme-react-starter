@@ -7,7 +7,6 @@ import Popover from '../TomisMui/Popover';
 import FlatButton from '../TomisMui/FlatButton';
 import RaisedButton from '../TomisMui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from '../TomisMui/Toolbar';
-import NavigationDrawer from './NavigationDrawer';
 import HamburgerMenu from 'material-ui/svg-icons/navigation/menu';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import CommunicationChatBubbleOpen from 'material-ui/svg-icons/communication/chat-bubble-outline';
@@ -16,16 +15,16 @@ import Logged from '../TomisInternal/Logged';
 import CalendarView from '../TomisInternal/CalendarView';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {
-    getStatusBarStyle,
-    getStatusBarTitleStyle,
-    getActionBarStyle,
-    getActionBarIconColor,
-    getStatusBarSubHeaderTitleStyle,
-    getAppBarIconColor,
-    getActionBarLabelStyle,
-    getToolbarTitleStyle,
-    getActionBarPopoverStyle,
-    getActionBarLovStyle
+  getStatusBarStyle,
+  getStatusBarTitleStyle,
+  getActionBarStyle,
+  getActionBarIconColor,
+  getStatusBarSubHeaderTitleStyle,
+  getAppBarIconColor,
+  getActionBarLabelStyle,
+  getToolbarTitleStyle,
+  getActionBarPopoverStyle,
+  getActionBarLovStyle
 } from '../app/helpers/styles';
 import SaveIcon from 'material-ui/svg-icons/content/save';
 import CancelIcon from 'material-ui/svg-icons/navigation/cancel';
@@ -42,72 +41,69 @@ const anchorOrigin = { horizontal: 'left', vertical: 'bottom' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
 const setStatePopoverOpen = (keyVal, anchorEl, state, props) => {
-    state.isOpen[keyVal] = true;
-    state.anchorEl[keyVal] = anchorEl;
+  state.isOpen[keyVal] = true;
+  state.anchorEl[keyVal] = anchorEl;
 };
 const setStatePopoverClose = (keyVal, state, props) => {
-    state.isOpen[keyVal] = false;
+  state.isOpen[keyVal] = false;
 };
 
 class ToolbarCbpHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: {},
-            anchorEl: {}
-        };
-    }
-
-    handleTouchTapButton = (keyVal, event) => {
-        event.preventDefault();
-        this.setState(setStatePopoverOpen.bind(this, keyVal, event.currentTarget));
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: {},
+      anchorEl: {}
     };
+  }
 
-    handleRequestCloseButton = keyVal => {
-        this.setState(setStatePopoverClose.bind(this, keyVal));
-    };
+  handleTouchTapButton = (keyVal, event) => {
+    event.preventDefault();
+    this.setState(setStatePopoverOpen.bind(this, keyVal, event.currentTarget));
+  };
 
-    render() {
-        const {
-            handleTouchTapButton,
-            handleRequestCloseButton
-        } = this;
-        const { isOpen, anchorEl } = this.state;
-        return (
+  handleRequestCloseButton = keyVal => {
+    this.setState(setStatePopoverClose.bind(this, keyVal));
+  };
+
+  render() {
+    const { handleTouchTapButton, handleRequestCloseButton } = this;
+    const { isOpen, anchorEl } = this.state;
+    return (
+      <div>
+        <Toolbar>
+          <ToolbarGroup firstChild={true}>
             <div>
-                <Toolbar>
-                    <ToolbarGroup firstChild={true}>
-                        <div>
-                            <ToolbarTitle text={<span>U.S. Customs and Border Protection</span>} style={getStatusBarTitleStyle(this.props)} />
-                            <br />
-                            <Subheader style={getStatusBarSubHeaderTitleStyle(this.props)}>Department of Homeland Security</Subheader>
-                        </div>
-                        <FlatButton
-                            onTouchTap={handleTouchTapButton.bind(this, APPLICATIONS)}
-                            labelStyle={getStatusBarTitleStyle(this.props)}
-                            label="TOMIS"
-                            labelPosition="before"
-                            icon={<SvgIconArrowDropDown color={getAppBarIconColor(this.props)} />}
-                        />
-                        <Popover
-                            open={isOpen[APPLICATIONS]}
-                            anchorEl={anchorEl[APPLICATIONS]}
-                            anchorOrigin={anchorOrigin}
-                            targetOrigin={targetOrigin}
-                            onRequestClose={handleRequestCloseButton.bind(this, APPLICATIONS)}
-                        >
-                            <Menu>
-                                <MenuItem value={1} primaryText="SEACATS" />
-                                <MenuItem value={2} primaryText="FACTS" />
-                            </Menu>
-                        </Popover>
-                    </ToolbarGroup>
-                    <ToolbarGroup>
-                        <Logged {...this.props} />
-                    </ToolbarGroup>
-                </Toolbar>
+              <ToolbarTitle text={<span>U.S. Customs and Border Protection</span>} style={getStatusBarTitleStyle(this.props)} />
+              <br />
+              <Subheader style={getStatusBarSubHeaderTitleStyle(this.props)}>Department of Homeland Security</Subheader>
             </div>
-        );
-    }
+            <FlatButton
+              onTouchTap={handleTouchTapButton.bind(this, APPLICATIONS)}
+              labelStyle={getStatusBarTitleStyle(this.props)}
+              label="TOMIS"
+              labelPosition="before"
+              icon={<SvgIconArrowDropDown color={getAppBarIconColor(this.props)} />}
+            />
+            <Popover
+              open={isOpen[APPLICATIONS]}
+              anchorEl={anchorEl[APPLICATIONS]}
+              anchorOrigin={anchorOrigin}
+              targetOrigin={targetOrigin}
+              onRequestClose={handleRequestCloseButton.bind(this, APPLICATIONS)}
+            >
+              <Menu>
+                <MenuItem value={1} primaryText="SEACATS" />
+                <MenuItem value={2} primaryText="FACTS" />
+              </Menu>
+            </Popover>
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <Logged {...this.props} />
+          </ToolbarGroup>
+        </Toolbar>
+      </div>
+    );
+  }
 }
 export default muiThemeable()(ToolbarCbpHeader);

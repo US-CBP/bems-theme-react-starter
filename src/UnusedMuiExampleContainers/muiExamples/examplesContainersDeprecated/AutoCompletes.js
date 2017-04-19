@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-import ExampleContainer from './helper/ExampleContainer'
 import '../app/react-select.css';
 import Select from 'react-select'; //https://github.com/JedWatson/react-select
 
@@ -1357,26 +1356,24 @@ class AutoCompletes extends Component {
     render() {
         const { value, description } = this.state;
         return (
-            <ExampleContainer>
-                <div className="MaterialSelector" style={{ paddingLeft: '48px' }}>
-                    <Select
-                        searchingText="Retrieving..."
-                        matchProp="description"
-                        clearable={false}
-                        value={value}
-                        onChange={this.onChange}
-                        options={this.state.dataSource}
-                        valueKey="code"
-                        labelKey="description"
-                        placeholder=""
-                        disabled={false}
-                        autoload={false}
-                    />
-                    <div className={`bar ${this.props.errorText && 'errorState'}`} />
-                    <label className={this.props.errorText && 'errorState'}>{this.props.labelText}</label>
-                    <div className="errorText">{this.props.errorText}</div>
-                </div>
-            </ExampleContainer>
+            <div className="MaterialSelector" style={{ paddingLeft: '48px' }}>
+                <Select
+                    searchingText="Retrieving..."
+                    matchProp="description"
+                    clearable={false}
+                    value={value}
+                    onChange={this.onChange}
+                    options={this.state.dataSource}
+                    valueKey="code"
+                    labelKey="description"
+                    placeholder=""
+                    disabled={false}
+                    autoload={false}
+                />
+                <div className={`bar ${this.props.errorText && 'errorState'}`} />
+                <label className={this.props.errorText && 'errorState'}>{this.props.labelText}</label>
+                <div className="errorText">{this.props.errorText}</div>
+            </div>
         );
     }
 }
