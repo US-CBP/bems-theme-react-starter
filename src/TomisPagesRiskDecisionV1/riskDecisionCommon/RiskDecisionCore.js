@@ -11,6 +11,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../../TomisMui/IconButton';
 import { ToggleButton, ToggleButtonGroup } from '../../TomisMui/ToggleButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
+import InfoIcon from 'material-ui/svg-icons/action/info';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { indigo100 } from 'material-ui/styles/colors';
 
@@ -25,11 +26,14 @@ const initState = {
 };
 
 const defaultProps = {
+  isPending: true,
   isAccept: false,
-  isReject: false
+  isReject: false,
+  riskDecisionVal: 'PENDING'
 };
 
 const propTypes = {
+  isPending: PropTypes.bool,
   isAccept: PropTypes.bool,
   isReject: PropTypes.bool
 };
@@ -62,6 +66,16 @@ class RiskDecisionCore extends Component {
     });
   };
 
+    getBackgroundColorPending = () => {
+        const { isPending } = this.props;
+        return isPending ? selectedBackgroundColor : unselectedBackgroundColor;
+    };
+
+    getLabelColorPending = () => {
+        const { isPending } = this.props;
+        return isPending ? selectedLabelColor : unselectedLabelColor;
+    };
+
     getBackgroundColorAccept = () => {
         const { isAccept } = this.props;
         return isAccept ? selectedBackgroundColor : unselectedBackgroundColor;
@@ -82,28 +96,39 @@ class RiskDecisionCore extends Component {
         return isReject ? selectedLabelColor : unselectedLabelColor;
     };
 
+    handleClickInfo = (evt) => {
+      alert('(17 Total Risk Assessment Range Table)');
+    };
+
     render() {
-        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject } = this;
-        const { isAccept, isReject } = this.props;
+        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorPending, getLabelColorPending, getBackgroundColorPendign, getBackgroundColorReject, getLabelColorReject, handleClickInfo } = this;
+        const { isPending, isAccept, isReject, riskDecisionVal } = this.props;
         const { dataSource1, dataSource2 } = this.state;
         return (
           <div>
           <HeaderNavAction actionBarPageTitle="Flight Planning" />
             <div className="outer-card-margin">
                 <Card expanded={true}>
-                    <CardHeader title="Risk Decision"  actAsExpander={true} showExpandableButton={true}  style={{ backgroundColor: indigo100 }} />
+                    <CardHeader title={<span>Risk Decision&nbsp;<a style={{marginLeft: '200px'}} className="panel-link">Link to Sharepoint Site</a></span>}  actAsExpander={true} showExpandableButton={true}  style={{ backgroundColor: indigo100 }} />
                     <CardText expandable={true}>
                         <div className="flex-row">
                         <div className="flex-1">
                             <label className="labeled-item">Flight Status (RA)*</label>
+                            <RaisedButton label="Pending" backgroundColor={getBackgroundColorPending()} labelColor={getLabelColorPending()} />
                             <RaisedButton label="Accept" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
                             <RaisedButton label="Reject" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
                         </div>
                           <div className="flex-1 flex-column-pad flex-row">
-                            <TextField hintText="Risk Score" fullWidth={true} floatingLabelText="Risk Score" />
+                            <TextField hintText="Risk Score" fullWidth={true} floatingLabelText={<span>Risk Score{(isAccept?'*':false)}</span>} />
                           </div>
                           <div className="flex-1 flex-column-pad flex-row">
-                            <AutoComplete fullWidth={true} hintText="Select Risk Assessment" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText="Risk Assessment" />
+                          <IconButton onTouchTap={handleClickInfo}
+                          style={{position: 'absolute', bottom: 0, left: 0}}
+                          className="inline-icon">
+                            <InfoIcon />
+                          </IconButton>
+                            <AutoComplete fullWidth={true} hintText={<span style={{paddingLeft: '18px'}}>Select Risk Assessment</span>} dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span style={{paddingLeft: '18px'}}>
+                              Risk Assessment{(isAccept?'*':false)}</span>} />
                               {/* must use inline style for position on IconButton to override default */}
                               <IconButton className="inline-icon" style={{ position: 'absolute' }}>
                                   <SvgIconArrowDropDown />
@@ -113,14 +138,14 @@ class RiskDecisionCore extends Component {
                         <br />
                         <div className="flex-row">
                             <div className="flex-1 flex-row">
-                                <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText="Title*" />
+                                <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span>Title{(isPending?false:'*')}</span>} />
                                 {/* must use inline style for position on IconButton to override default */}
                                 <IconButton className="inline-icon" style={{ position: 'absolute' }}>
                                     <SvgIconArrowDropDown />
                                 </IconButton>
                             </div>
                             <div className="flex-1 flex-column-pad flex-row">
-                                <AutoComplete fullWidth={true} hintText="Choose Name" dataSource={dataSource1} onUpdateInput={this.handleUpdateInput} floatingLabelText="Name*" />
+                                <AutoComplete fullWidth={true} hintText="Choose Name" dataSource={dataSource1} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span>Name{(isPending?false:'*')}</span>} />
                                 {/* must use inline style for position on IconButton to override default */}
                                 <IconButton className="inline-icon" style={{ position: 'absolute' }}>
                                     <SvgIconArrowDropDown />
@@ -132,7 +157,7 @@ class RiskDecisionCore extends Component {
                                     container="inline"
                                     fullWidth={true}
                                     hintText={<span>Select Date </span>}
-                                    floatingLabelText="Date*"
+                                    floatingLabelText={<span>Date{(isPending?false:'*')}</span>}
                                     defaultDate={this.state.demoDate}
                                     onChange={this.handleChangeDemoDate}
                                     mode="landscape"

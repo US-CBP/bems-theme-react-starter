@@ -91,3 +91,7 @@ h3 {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.info-field-label-pad {
+  padding-left: 24px;
+}

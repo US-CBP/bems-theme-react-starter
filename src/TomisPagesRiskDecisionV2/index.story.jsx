@@ -7,11 +7,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
 /* Keep all lines END */
-import FormWithAllComponents from './FormWithAllComponents';
+import RiskDecisionPage from './RiskDecisionPage';
 
 const theme = getMuiTheme(tomisTheme);
 
-storiesOf('TOMIS Pages', module)
+/* Do not touch START */
+storiesOf('TOMIS Pages - Risk Decision V2', module)
   .addDecorator(story => {
     const storyKind = story();
     return (
@@ -24,6 +25,7 @@ storiesOf('TOMIS Pages', module)
       </div>
     );
   })
-  .add('Form with All Components', () => {
-    return <FormWithAllComponents />;
+// Do not touch END
+  .add('Risk Decision', () => {
+    return <RiskDecisionPage />;
   });

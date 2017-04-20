@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import RaisedButton from 'material-ui/RaisedButton';
-import TableReadOnly from '../Tomis/TableReadOnly';
 
-class FormWithAllComponents extends Component {
+class RiskDecisionPage extends Component {
     constructor(props) {
         super(props);
     }
@@ -11,10 +9,10 @@ class FormWithAllComponents extends Component {
     render() {
         return (
             <div>
-            <TableReadOnly />
+            RISK Decision
             </div>
         );
     }
 }
 
-export default muiThemeable()(FormWithAllComponents);
+export default muiThemeable()(RiskDecisionPage);
