@@ -3,7 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AutoCompletes from './AutoCompletes';
+import AutoComplete from './AutoComplete';
 import ButtonRaisedSimplePrimary from './ButtonRaisedSimplePrimary';
 import ButtonRaisedComplexPrimary from './ButtonRaisedComplexPrimary';
 import ButtonIconFurther from './ButtonIconFurther';
@@ -45,7 +45,7 @@ storiesOf('TOMIS', module)
     );
   })
   .add('AutoComplete', () => {
-    return <AutoCompletes />;
+    return <AutoComplete />;
   })
   .add('Button - Raised, Simple, Primary', () => {
     return <ButtonRaisedSimplePrimary />;

@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import DatePicker from 'material-ui/DatePicker';
+import IconButton from '../TomisMui/IconButton';
+import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 
 /**
  * Inline Date Pickers are displayed below the input, rather than as a modal dialog.
  */
-const DatePickerInlineLandscape = ({ ...props }) => <DatePicker hintText="Landscape Inline Dialog" {...props} container="inline" mode="landscape" />;
+class DatePickerInlineLandscape extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleChangeDemoDate = (event, date) => {
+    this.setState({
+      demoDate: date
+    });
+  };
+
+  render() {
+    const { fullWidth = true } = this.props;
+    return (
+      <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
+        <DatePicker
+          hintText="Landscape Inline Dialog"
+          fullWidth={fullWidth}
+          formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
+          firstDayOfWeek={0}
+          floatingLabelText="Date"
+          hintText={<span>Select Date </span>}
+          onChange={this.handleChangeDemoDate}
+          {...this.props}
+          container="inline"
+          mode="landscape"
+        />
+        {/* must use inline style for position on IconButton to override default */}
+        <IconButton className="inline-icon" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+          <MonthlyCalendarIcon />
+        </IconButton>
+
+      </div>
+    );
+  }
+}
 
 export default DatePickerInlineLandscape;

@@ -23,4 +23,5 @@ storybook.configure(() => {
   require('../src/TomisNew/index.story');
   require('../src/TomisPages/index.story');
   require('../src/TomisPagesRiskDecisionV1/index.story');
+  require('../src/TomisPagesRiskDecisionV4/index.story');
 }, module);
