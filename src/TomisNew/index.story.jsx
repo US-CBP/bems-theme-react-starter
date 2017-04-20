@@ -4,7 +4,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TableEditable from './TableEditable';
-import ToggleButton from './ToggleButton';
+import ToggleButtons from './ToggleButtons';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -27,8 +27,8 @@ storiesOf('TOMIS New', module)
   .add('Table - Editable', () => {
     return <TableEditable />;
   })
-  .add('Toggle Button - Pending', () => {
-    return <ToggleButton />;
+  .add('Toggle Buttons - Pending', () => {
+    return <ToggleButtons />;
   });
 
 function withNote(note, child) {

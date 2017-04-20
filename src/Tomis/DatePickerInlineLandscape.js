@@ -1,14 +1,9 @@
 import React from 'react';
-import ExampleContainer from './helper/ExampleContainer';
 import DatePicker from 'material-ui/DatePicker';
 
 /**
  * Inline Date Pickers are displayed below the input, rather than as a modal dialog.
  */
-const DatePickerInlineLandscape = () => (
-  <ExampleContainer>
-    <DatePicker hintText="Landscape Inline Dialog" container="inline" mode="landscape" />
-  </ExampleContainer>
-);
+const DatePickerInlineLandscape = ({ ...props }) => <DatePicker hintText="Landscape Inline Dialog" {...props} container="inline" mode="landscape" />;
 
 export default DatePickerInlineLandscape;

@@ -4,8 +4,8 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AutoCompletes from './AutoCompletes';
-import ButtonRaisedSimple from './ButtonRaisedSimple';
-import ButtonRaisedComplex from './ButtonRaisedComplex';
+import ButtonRaisedSimplePrimary from './ButtonRaisedSimplePrimary';
+import ButtonRaisedComplexPrimary from './ButtonRaisedComplexPrimary';
 import ButtonIconFurther from './ButtonIconFurther';
 import CardExpandable from './CardExpandable';
 import DatePickerInlineLandscape from './DatePickerInlineLandscape';
@@ -22,6 +22,7 @@ import SwitchCheckbox from './SwitchCheckbox';
 import SnackbarSimple from './SnackbarSimple';
 import TableReadOnly from './TableReadOnly';
 import TextFieldSimple from './TextFieldSimple';
+import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 import ToolbarActionBar from './ToolbarActionBar';
 import ToolbarCbpHeader from './ToolbarCbpHeader';
 import { WithNotes } from '@kadira/storybook-addon-notes';
@@ -46,11 +47,11 @@ storiesOf('TOMIS', module)
   .add('AutoComplete', () => {
     return <AutoCompletes />;
   })
-  .add('Button - Raised, Simple', () => {
-    return <ButtonRaisedSimple />;
+  .add('Button - Raised, Simple, Primary', () => {
+    return <ButtonRaisedSimplePrimary />;
   })
-  .add('Button - Raised, Complex (Icon)', () => {
-    return <ButtonRaisedComplex />;
+  .add('Button - Raised, Complex (Icon), Primary', () => {
+    return <ButtonRaisedComplexPrimary />;
   })
   .add('Button - Icon, Further (Tooltip)', () => {
     return <ButtonIconFurther />;
@@ -96,6 +97,9 @@ storiesOf('TOMIS', module)
   })
   .add('Text Field - Pending', () => {
     return <TextFieldSimple />;
+  })
+  .add('Text Field, Default Value - Pending', () => {
+    return <TextFieldSimpleDefaultValue />;
   })
   .add('Table - Read-Only', () => {
     return <TableReadOnly />;
