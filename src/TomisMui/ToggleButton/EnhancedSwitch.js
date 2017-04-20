@@ -59,9 +59,9 @@ function getStyles(props, context) {
         ripple: {
             color: props.rippleColor || baseTheme.palette.primary1Color,
             height: '36px',
-            width: '120%',
+            width: '100%',
             top: 0,
-            left: -10,
+            left: 0,
             zIndex: 1
         }
     };

@@ -161,6 +161,8 @@ class ToggleButton extends Component {
 
         const styles = getStyles(this.props, this.context);
 
+		const buttonStyles = (this.props.buttonStyles) ? this.props.buttonStyles : {};
+
         const uncheckedStyles = Object.assign(styles.target, checked && styles.targetWhenChecked, iconStyle, disabled && styles.targetWhenDisabled);
 
         const checkedStyles = Object.assign(styles.fill, checked && styles.fillWhenChecked, iconStyle, disabled && styles.fillWhenDisabled);
@@ -178,9 +180,9 @@ class ToggleButton extends Component {
         //     : <RadioButtonOn style={checkedStyles} />;
         const { toggleButton: { uncheckedBackgroundColor, uncheckedLabelColor, checkedBackgroundColor, checkedLabelColor } } = styles;
         const uncheckedElement = (
-            <RaisedButton label={label} backgroundColor={uncheckedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={uncheckedStyles} />
+            <RaisedButton label={label} buttonStyle={buttonStyles} backgroundColor={uncheckedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={uncheckedStyles} />
         );
-        const checkedElement = <RaisedButton label={label} backgroundColor={checkedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={checkedStyles} />;
+        const checkedElement = <RaisedButton label={label} buttonStyle={buttonStyles} backgroundColor={checkedBackgroundColor} labelColor={uncheckedLabelColor} disabled={disabled} style={checkedStyles} />;
 
         // const mergedIconStyle = Object.assign(styles.icon, iconStyle, { width: '72px' });
         const mergedIconStyle = Object.assign(styles.icon, iconStyle);
