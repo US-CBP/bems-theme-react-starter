@@ -15,7 +15,6 @@ import InfoIcon from 'material-ui/svg-icons/action/info';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { indigo100 } from 'material-ui/styles/colors';
 
-
 const initState = {
   dataSource1: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'],
   dataSource2: ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'],
@@ -66,118 +65,152 @@ class RiskDecisionCore extends Component {
     });
   };
 
-    getBackgroundColorPending = () => {
-        const { isPending } = this.props;
-        return isPending ? selectedBackgroundColor : unselectedBackgroundColor;
-    };
+  getBackgroundColorPending = () => {
+    const { isPending } = this.props;
+    return isPending ? selectedBackgroundColor : unselectedBackgroundColor;
+  };
 
-    getLabelColorPending = () => {
-        const { isPending } = this.props;
-        return isPending ? selectedLabelColor : unselectedLabelColor;
-    };
+  getLabelColorPending = () => {
+    const { isPending } = this.props;
+    return isPending ? selectedLabelColor : unselectedLabelColor;
+  };
 
-    getBackgroundColorAccept = () => {
-        const { isAccept } = this.props;
-        return isAccept ? selectedBackgroundColor : unselectedBackgroundColor;
-    };
+  getBackgroundColorAccept = () => {
+    const { isAccept } = this.props;
+    return isAccept ? selectedBackgroundColor : unselectedBackgroundColor;
+  };
 
-    getLabelColorAccept = () => {
-        const { isAccept } = this.props;
-        return isAccept ? selectedLabelColor : unselectedLabelColor;
-    };
+  getLabelColorAccept = () => {
+    const { isAccept } = this.props;
+    return isAccept ? selectedLabelColor : unselectedLabelColor;
+  };
 
-    getBackgroundColorReject = () => {
-        const { isReject } = this.props;
-        return isReject ? selectedBackgroundColor : unselectedBackgroundColor;
-    };
+  getBackgroundColorReject = () => {
+    const { isReject } = this.props;
+    return isReject ? selectedBackgroundColor : unselectedBackgroundColor;
+  };
 
-    getLabelColorReject = () => {
-        const { isReject } = this.props;
-        return isReject ? selectedLabelColor : unselectedLabelColor;
-    };
+  getLabelColorReject = () => {
+    const { isReject } = this.props;
+    return isReject ? selectedLabelColor : unselectedLabelColor;
+  };
 
-    handleClickInfo = (evt) => {
-      alert('(17 Total Risk Assessment Range Table)');
-    };
+  handleClickInfo = evt => {
+    alert('(17 Total Risk Assessment Range Table)');
+  };
 
-    render() {
-        const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorPending, getLabelColorPending, getBackgroundColorPendign, getBackgroundColorReject, getLabelColorReject, handleClickInfo } = this;
-        const { isPending, isAccept, isReject, riskDecisionVal } = this.props;
-        const { dataSource1, dataSource2 } = this.state;
-        return (
-          <div>
-          <HeaderNavAction actionBarPageTitle="Flight Planning" />
-            <div className="outer-card-margin">
-                <Card expanded={true}>
-                    <CardHeader title={<span>Risk Decision&nbsp;<a style={{marginLeft: '200px'}} className="panel-link">Link to Sharepoint Site</a></span>}  actAsExpander={true} showExpandableButton={true}  style={{ backgroundColor: indigo100 }} />
-                    <CardText expandable={true}>
-                        <div className="flex-row">
-                        <div className="flex-1">
-                            <label className="labeled-item">Flight Status (RA)*</label>
-                            <RaisedButton label="Pending" backgroundColor={getBackgroundColorPending()} labelColor={getLabelColorPending()} />
-                            <RaisedButton label="Accept" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
-                            <RaisedButton label="Reject" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
-                        </div>
-                          <div className="flex-1 flex-column-pad flex-row">
-                            <TextField hintText="Risk Score" fullWidth={true} floatingLabelText={<span>Risk Score{(isAccept?'*':false)}</span>} />
-                          </div>
-                          <div className="flex-1 flex-column-pad flex-row">
-                          <IconButton onTouchTap={handleClickInfo}
-                          style={{position: 'absolute', bottom: 0, left: 0}}
-                          className="inline-icon">
-                            <InfoIcon />
-                          </IconButton>
-                            <AutoComplete fullWidth={true} hintText={<span style={{paddingLeft: '18px'}}>Select Risk Assessment</span>} dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span style={{paddingLeft: '18px'}}>
-                              Risk Assessment{(isAccept?'*':false)}</span>} />
-                              {/* must use inline style for position on IconButton to override default */}
-                              <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                  <SvgIconArrowDropDown />
-                              </IconButton>
-                          </div>
-                        </div>
-                        <br />
-                        <div className="flex-row">
-                            <div className="flex-1 flex-row">
-                                <AutoComplete fullWidth={true} hintText="Choose Title" dataSource={dataSource2} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span>Title{(isPending?false:'*')}</span>} />
-                                {/* must use inline style for position on IconButton to override default */}
-                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                    <SvgIconArrowDropDown />
-                                </IconButton>
-                            </div>
-                            <div className="flex-1 flex-column-pad flex-row">
-                                <AutoComplete fullWidth={true} hintText="Choose Name" dataSource={dataSource1} onUpdateInput={this.handleUpdateInput} floatingLabelText={<span>Name{(isPending?false:'*')}</span>} />
-                                {/* must use inline style for position on IconButton to override default */}
-                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                    <SvgIconArrowDropDown />
-                                </IconButton>
-                            </div>
-                            <div className="flex-1 flex-column-pad flex-row">
-                                <DatePicker
-                                    className="flex-1"
-                                    container="inline"
-                                    fullWidth={true}
-                                    hintText={<span>Select Date </span>}
-                                    floatingLabelText={<span>Date{(isPending?false:'*')}</span>}
-                                    defaultDate={this.state.demoDate}
-                                    onChange={this.handleChangeDemoDate}
-                                    mode="landscape"
-                                    firstDayOfWeek={0}
-                                    formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
-                                />
-                                {/* must use inline style for position on IconButton to override default */}
-                                <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                                    <MonthlyCalendarIcon />
-                                </IconButton>
-                            </div>
-                        </div>
-                        <div className="row-spacer-24">
-                            <h3>Attachments</h3>
-                            <img src="/images/fileUpload.png" />
-                        </div>
-                        {this.props.children}
-                    </CardText>
-                </Card>
-            </div>
+  render() {
+    const {
+      getBackgroundColorAccept,
+      getLabelColorAccept,
+      getBackgroundColorPending,
+      getLabelColorPending,
+      getBackgroundColorPendign,
+      getBackgroundColorReject,
+      getLabelColorReject,
+      handleClickInfo
+    } = this;
+    const { isPending, isAccept, isReject, riskDecisionVal } = this.props;
+    const { dataSource1, dataSource2 } = this.state;
+    return (
+      <div>
+        <HeaderNavAction actionBarPageTitle="Flight Planning" />
+        <div className="outer-card-margin">
+          <Card expanded={true}>
+            <CardHeader
+              title={<span>Risk Decision&nbsp;<a style={{ marginLeft: '200px' }} className="panel-link">Link to Sharepoint Site</a></span>}
+              actAsExpander={true}
+              showExpandableButton={true}
+              style={{ backgroundColor: indigo100 }}
+            />
+            <CardText expandable={true}>
+              <div className="flex-row">
+                <div className="flex-1">
+                  <label className="labeled-item">Flight Status (RA)*</label>
+                  <RaisedButton label="Pending" backgroundColor={getBackgroundColorPending()} labelColor={getLabelColorPending()} />
+                  <RaisedButton label="Accept" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
+                  <RaisedButton label="Reject" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
+                </div>
+                <div className="flex-1 flex-column-pad flex-row">
+                  <TextField hintText="Risk Score" fullWidth={true} floatingLabelText={<span>Risk Score{isAccept ? '*' : false}</span>} />
+                </div>
+                <div className="flex-1 flex-column-pad flex-row">
+                  <IconButton onTouchTap={handleClickInfo} style={{ position: 'absolute', bottom: 0, left: 0 }} className="inline-icon">
+                    <InfoIcon />
+                  </IconButton>
+                  <AutoComplete
+                    inputStyle={{ paddingLeft: '18px' }}
+                    fullWidth={true}
+                    hintText={<span style={{ paddingLeft: '18px' }}>Select Risk Assessment</span>}
+                    dataSource={dataSource2}
+                    onUpdateInput={this.handleUpdateInput}
+                    floatingLabelText={
+                      <span style={{ paddingLeft: '18px' }}>
+                        Risk Assessment{isAccept ? '*' : false}
+                      </span>
+                    }
+                  />
+                  {/* must use inline style for position on IconButton to override default */}
+                  <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                    <SvgIconArrowDropDown />
+                  </IconButton>
+                </div>
+              </div>
+              <br />
+              <div className="flex-row">
+                <div className="flex-1 flex-row">
+                  <AutoComplete
+                    fullWidth={true}
+                    hintText="Choose Title"
+                    dataSource={dataSource2}
+                    onUpdateInput={this.handleUpdateInput}
+                    floatingLabelText={<span>Title{isPending ? false : '*'}</span>}
+                  />
+                  {/* must use inline style for position on IconButton to override default */}
+                  <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                    <SvgIconArrowDropDown />
+                  </IconButton>
+                </div>
+                <div className="flex-1 flex-column-pad flex-row">
+                  <AutoComplete
+                    fullWidth={true}
+                    hintText="Choose Name"
+                    dataSource={dataSource1}
+                    onUpdateInput={this.handleUpdateInput}
+                    floatingLabelText={<span>Name{isPending ? false : '*'}</span>}
+                  />
+                  {/* must use inline style for position on IconButton to override default */}
+                  <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                    <SvgIconArrowDropDown />
+                  </IconButton>
+                </div>
+                <div className="flex-1 flex-column-pad flex-row">
+                  <DatePicker
+                    className="flex-1"
+                    container="inline"
+                    fullWidth={true}
+                    hintText={<span>Select Date </span>}
+                    floatingLabelText={<span>Date{isPending ? false : '*'}</span>}
+                    defaultDate={this.state.demoDate}
+                    onChange={this.handleChangeDemoDate}
+                    mode="landscape"
+                    firstDayOfWeek={0}
+                    formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
+                  />
+                  {/* must use inline style for position on IconButton to override default */}
+                  <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                    <MonthlyCalendarIcon />
+                  </IconButton>
+                </div>
+              </div>
+              <div className="row-spacer-24">
+                <h3>Attachments</h3>
+                <img src="/images/fileUpload.png" />
+              </div>
+              {this.props.children}
+            </CardText>
+          </Card>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import AutoCompleteMui from '../TomisMui/AutoComplete';
 import IconButton from '../TomisMui/IconButton';
+import InfoIcon from 'material-ui/svg-icons/action/info';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
 const defaultProps = {};
@@ -10,7 +11,7 @@ const initState = {
   dataSource: ['d1', 'd2', 'd3', 'd4', 'd5', 'd6']
 };
 
-class AutoComplete extends Component {
+class AutoCompleteInfo extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
@@ -25,12 +26,16 @@ class AutoComplete extends Component {
     const { dataSource } = this.state;
     return (
       <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
+        <IconButton style={{ position: 'absolute', bottom: 0, left: 0, paddingLeft: 0 }} className="inline-icon">
+          <InfoIcon />
+        </IconButton>
         <AutoCompleteMui
+          inputStyle={{ paddingLeft: '36px' }}
           fullWidth={fullWidth}
           hintText="Select Value"
           dataSource={dataSource}
           onUpdateInput={this.handleUpdateInput}
-          floatingLabelText="LOV Value No Info"
+          floatingLabelText="LOV Value With Info"
           {...this.props}
         />
         {/* must use inline style for position on IconButton to override default */}
@@ -42,6 +47,6 @@ class AutoComplete extends Component {
   }
 }
 
-AutoComplete.defaultProps = defaultProps;
-AutoComplete.propTypes = propTypes;
-export default AutoComplete;
+AutoCompleteInfo.defaultProps = defaultProps;
+AutoCompleteInfo.propTypes = propTypes;
+export default AutoCompleteInfo;
