@@ -9,7 +9,7 @@ const defaultProps = {
 const propTypes = {
   options: PropTypes.array.isRequired,
   labelText: PropTypes.string,
-  defaultSelected: PropTypes.string.isRequired
+  valueSelected: PropTypes.string.isRequired
 };
 
 const ToggleButtons = ({ ...props }) => {
