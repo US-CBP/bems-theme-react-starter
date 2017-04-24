@@ -77,6 +77,7 @@ class EnhancedSwitch extends Component {
         disabled: PropTypes.bool,
         iconStyle: PropTypes.object,
         inputStyle: PropTypes.object,
+		buttonStyles: PropTypes.object,
         inputType: PropTypes.string.isRequired,
         label: PropTypes.node,
         labelPosition: PropTypes.oneOf(['left', 'right']),
@@ -251,6 +252,7 @@ class EnhancedSwitch extends Component {
         const {
             name,
             value,
+			buttonStyles,
             iconStyle,
             inputStyle,
             inputType,
