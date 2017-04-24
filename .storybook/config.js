@@ -25,5 +25,4 @@ storybook.configure(() => {
   require('../src/TomisPagesRiskDecisionV1/index.story');
   require('../src/TomisPagesRiskDecisionV2/index.story');
   require('../src/TomisPagesRiskDecisionV3/index.story');
-  require('../src/TomisPagesRiskDecisionV4/index.story');
 }, module);

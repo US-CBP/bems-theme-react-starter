@@ -3,10 +3,6 @@ import DatePicker from 'material-ui/DatePicker';
 import IconButton from '../TomisMui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 
-const setStateDemoDate = (date, state, props) => {
-  return { demoDate: date };
-};
-
 /**
  * Inline Date Pickers are displayed below the input, rather than as a modal dialog.
  */
@@ -15,28 +11,24 @@ class DatePickerInlineLandscape extends Component {
     super(props);
   }
 
-  state = {
-    demoDate: new Date()
-  };
-
   handleChangeDemoDate = (event, date) => {
-    this.setState(setStateDemoDate.bind(this, date));
+    this.setState({
+      demoDate: date
+    });
   };
 
   render() {
-    const { handleChangeDemoDate } = this;
     const { fullWidth = true } = this.props;
     return (
       <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
         <DatePicker
-          autoOk={true}
           hintText="Landscape Inline Dialog"
           fullWidth={fullWidth}
           formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
           firstDayOfWeek={0}
           floatingLabelText="Date"
           hintText={<span>Select Date </span>}
-          onChange={handleChangeDemoDate}
+          onChange={this.handleChangeDemoDate}
           {...this.props}
           container="inline"
           mode="landscape"

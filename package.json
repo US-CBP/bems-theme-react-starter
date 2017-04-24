@@ -104,7 +104,6 @@
   },
   "dependencies": {
     "keycode": "^2.1.1",
-    "lodash": "^4.17.4",
     "material-ui": "^0.17.1",
     "prop-types": "^15.5.8",
     "react-event-listener": "^0.4.0",
