@@ -7,17 +7,20 @@ const defaultProps = {
 };
 
 const propTypes = {
-  labels: PropTypes.array.isRequired,
-  defaultSelected: PropTypes.number.isRequired
+  options: PropTypes.array.isRequired,
+  labelText: PropTypes.string,
+  defaultSelected: PropTypes.string.isRequired
 };
 
 const ToggleButtons = ({ ...props }) => {
-  const { labels, defaultSelected } = props;
+  const { options, labelText = 'Default Label', valueSelected } = props;
   return (
     <div>
-      <ToggleButtonGroup name="genericName" defaultSelected={`TV${defaultSelected}`}>
-        {labels.map((label, idx) => {
-          return <ToggleButton key={`TB${idx}`} value={`TV${idx + 1}`} label={label} />;
+      <label className="labeled-item">{labelText}</label>
+      <ToggleButtonGroup name="genericName" valueSelected={valueSelected} {...props}>
+        {options.map((option, idx) => {
+          const { label, value } = option;
+          return <ToggleButton key={`TB${idx}`} label={label} value={value} />;
         })}
       </ToggleButtonGroup>
     </div>
