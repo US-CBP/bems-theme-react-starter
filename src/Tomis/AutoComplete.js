@@ -21,16 +21,17 @@ class AutoComplete extends Component {
   };
 
   render() {
-    const { fullWidth = true } = this.props;
+    const { handleUpdateInput } = this;
+    const { fullWidth = true, hintText = 'Select Value', floatingLabelText = 'LOV Value' } = this.props;
     const { dataSource } = this.state;
     return (
       <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
         <AutoCompleteMui
           fullWidth={fullWidth}
-          hintText="Select Value"
+          hintText={hintText}
           dataSource={dataSource}
-          onUpdateInput={this.handleUpdateInput}
-          floatingLabelText="LOV Value No Info"
+          onUpdateInput={handleUpdateInput}
+          floatingLabelText={floatingLabelText}
           {...this.props}
         />
         {/* must use inline style for position on IconButton to override default */}
