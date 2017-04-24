@@ -24,3 +24,7 @@ export const setStateFlightStatus = (flightStatus, state, props) => {
 
   return newState;
 };
+
+export const setStateIsInfoVisible = (isInfoVisible, state, props) => {
+  return { isInfoVisible };
+};

@@ -9,7 +9,8 @@ import AutoComplete from '../../Tomis/AutoComplete';
 import AutoCompleteInfo from '../../Tomis/AutoCompleteInfo';
 import FileAttachment from '../../TomisNew/FileAttachment';
 import DatePickerInlineLandscape from '../../Tomis/DatePickerInlineLandscape';
-import { setStateFlightStatus, toggleButtonsOptions } from './helper';
+import DialogModal from '../../Tomis/DialogModal';
+import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible } from './helper';
 
 const defaultProps = {
   flightStatus: ''
@@ -29,7 +30,8 @@ class RiskDecisionCore extends Component {
     isPending: true,
     isAccept: false,
     isReject: false,
-    flightStatus: ''
+    flightStatus: '',
+    isInfoVisible: false
   };
 
   componentDidMount() {
@@ -38,7 +40,11 @@ class RiskDecisionCore extends Component {
   }
 
   handleTouchTapInfo = () => {
-    window.alert('inside of my own core');
+    this.setState(setStateIsInfoVisible.bind(this, true));
+  };
+
+  handleCloseInfo = () => {
+    this.setState(setStateIsInfoVisible.bind(this, false));
   };
 
   handleChangeFlightStatus = (event, value) => {
@@ -47,12 +53,21 @@ class RiskDecisionCore extends Component {
   };
 
   render() {
-    const { getBackgroundColorAccept, getLabelColorAccept, getBackgroundColorReject, getLabelColorReject, handleTouchTapInfo, handleChangeFlightStatus } = this;
-    const { isPending, isAccept, isReject } = this.state;
+    const {
+      getBackgroundColorAccept,
+      getLabelColorAccept,
+      getBackgroundColorReject,
+      getLabelColorReject,
+      handleTouchTapInfo,
+      handleCloseInfo,
+      handleChangeFlightStatus
+    } = this;
+    const { isPending, isAccept, isReject, isInfoVisible } = this.state;
     const { flightStatus } = this.state;
     return (
       <div>
         <HeaderNavAction actionBarPageTitle="Flight Planning" />
+        {isInfoVisible && <DialogModal onRequestClose={handleCloseInfo} initOpen={isInfoVisible}><div><ul><li>Risk Decision Table</li></ul></div></DialogModal>}
         <div className="outer-card-margin">
           <Card expanded={true}>
             <CardHeader title="Risk Decision" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: indigo100 }} />

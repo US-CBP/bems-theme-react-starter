@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { ToggleButton, ToggleButtonGroup } from '../TomisMui/ToggleButton';
 
 const defaultProps = {
-  labels: ['Btn 1 Value 1', 'Btn2', 'Btn4'],
+  options: [{ label: 'Btn 1 Value 1', value: 'V1' }, { label: 'Btn2', value: 'V2' }, { label: 'Btn4', value: 'V3' }],
   defaultSelected: -1
 };
 

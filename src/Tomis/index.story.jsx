@@ -63,7 +63,11 @@ storiesOf('TOMIS', module)
     return <DatePickerInlineLandscape />;
   })
   .add('Dialog - Modal', () => {
-    return <DialogModal />;
+    return (
+      <DialogModal initOpen={true}>
+        Only actions can close this dialog.
+      </DialogModal>
+    );
   })
   .add('Divider - Menu', () => {
     return <DividerMenu />;

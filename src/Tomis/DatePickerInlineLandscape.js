@@ -29,7 +29,7 @@ class DatePickerInlineLandscape extends Component {
     return (
       <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
         <DatePicker
-          autoOk={true}
+          autoOk={false}
           hintText="Landscape Inline Dialog"
           fullWidth={fullWidth}
           formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
