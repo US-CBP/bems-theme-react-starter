@@ -126,7 +126,7 @@ class RiskDecisionRejectPage extends Component {
                       stripedRows={this.state.stripedRows}
                     >
                       {tableData.map((row, index) => (
-                        <TableRow key={index} selected={row.selected}>
+                        <TableRow key={index} selected={row.selected} className="red-table-row-TESTING">
                           <TableRowColumn><Checkbox /></TableRowColumn>
                           <TableRowColumn>{index}</TableRowColumn>
                           <TableRowColumn>
