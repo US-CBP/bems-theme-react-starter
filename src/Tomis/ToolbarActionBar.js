@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {PropTypes, Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from '../TomisMui/IconButton';
@@ -41,6 +41,7 @@ import FlightIcon from 'material-ui/svg-icons/maps/flight';
 import FloatIcon from 'material-ui/svg-icons/maps/directions-boat';
 import UASIcon from 'material-ui/svg-icons/action/three-d-rotation';
 import KuNocIcon from 'material-ui/svg-icons/editor/multiline-chart';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
 const APPLICATIONS = 'APPLICATIONS';
 const BRANCH_UNIT = 'BRANCH_UNIT';
@@ -64,6 +65,17 @@ const statusBarStyle = {
   height: '20px',
   backgroundColor: 'red'
 };
+
+const defaultProps = {
+  pageTitle: 'Sample Page Title',
+  isHideDeleteIcon: false
+}
+
+const propTypes = {
+  pageTitle: PropTypes.string.isRequired,
+  isHideDeleteIcon: PropTypes.bool.isRequired
+}
+
 class ToolbarActionBar extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +116,7 @@ class ToolbarActionBar extends Component {
   render() {
     const { handleClickToggleDrawer, handleTouchTapButton, handleRequestCloseButton } = this;
     const { isDrawerNavigationOpen, isOpen, anchorEl } = this.state;
-    const { pageTitle = 'Safety Reports Status Page' } = this.props;
+    const { pageTitle, isHideDeleteIcon } = this.props;
     return (
       <div>
         <Toolbar style={getActionBarStyle(this.props)}>
@@ -148,6 +160,9 @@ class ToolbarActionBar extends Component {
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Cancel">
               <CancelIcon color={getActionBarIconColor(this.props)} />
             </IconButton>
+            {!isHideDeleteIcon && <IconButton onTouchTap={this.handleTouchTap} tooltip="Delete">
+              <DeleteIcon color={getActionBarIconColor(this.props)} />
+            </IconButton>}
           </ToolbarGroup>
         </Toolbar>
         <Drawer
@@ -162,4 +177,8 @@ class ToolbarActionBar extends Component {
     );
   }
 }
+
+ToolbarActionBar.defaultProps = defaultProps;
+ToolbarActionBar.propTypes = propTypes;
+
 export default muiThemeable()(ToolbarActionBar);
