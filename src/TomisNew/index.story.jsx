@@ -5,6 +5,8 @@ import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TableEditable from './TableEditable';
 import ToggleButtons from './ToggleButtons';
+import FileAttachment from './FileAttachment';
+import TimeSpinner from './TimeSpinner';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -24,11 +26,17 @@ storiesOf('TOMIS New', module)
       </div>
     );
   })
-  .add('Table - Editable', () => {
+  .add('Table Editable - Pending', () => {
     return <TableEditable />;
   })
   .add('Toggle Buttons - Pending', () => {
     return <ToggleButtons />;
+  })
+  .add('File Attachment - Pending', () => {
+    return <FileAttachment />;
+  })
+  .add('Time Spinner - Pending', () => {
+    return <TimeSpinner />;
   });
 
 function withNote(note, child) {
