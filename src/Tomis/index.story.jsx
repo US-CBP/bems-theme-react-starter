@@ -12,7 +12,10 @@ import DatePickerInlineLandscape from './DatePickerInlineLandscape';
 import DialogModal from './DialogModal';
 import DividerMenu from './DividerMenu';
 import DrawerNavigation from './DrawerNavigation';
+import MenuItem from 'material-ui/MenuItem';
+import DrawerUndocked from './DrawerUndocked';
 import IconSvgMaterial from './IconSvgMaterial';
+import { ListItem } from 'material-ui/List';
 import ListSimple from './ListSimple';
 import ListNested from './ListNested';
 import MenuSimple from './MenuSimple';
@@ -28,6 +31,12 @@ import ToolbarCbpHeader from './ToolbarCbpHeader';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import Divider from 'material-ui/Divider';
+import ActionInfo from 'material-ui/svg-icons/action/info';
 
 const theme = getMuiTheme(tomisTheme);
 
@@ -72,6 +81,13 @@ storiesOf('TOMIS', module)
   .add('Divider - Menu', () => {
     return <DividerMenu />;
   })
+  .add('Drawer - Undocked', () => {
+    return (
+      <DrawerUndocked initOpen={true}>
+        <MenuItem>Menu Item</MenuItem><MenuItem>Menu Item 2</MenuItem>
+      </DrawerUndocked>
+    );
+  })
   .add('Drawer - Navigation - Pending', () => {
     return <DrawerNavigation />;
   })
@@ -79,25 +95,40 @@ storiesOf('TOMIS', module)
     return <IconSvgMaterial />;
   })
   .add('List - Simple', () => {
-    return <ListSimple />;
+    return (
+      <ListSimple>
+        <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
+        <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
+        <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
+        <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
+        <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
+      </ListSimple>
+    );
   })
   .add('List - Nested', () => {
     return <ListNested />;
   })
   .add('Menu - Simple', () => {
-    return <MenuSimple />;
+    return (
+      <MenuSimple>
+        <MenuItem primaryText="Maps" />
+        <MenuItem primaryText="Books" />
+        <MenuItem primaryText="Flights" />
+        <MenuItem primaryText="Apps" />
+      </MenuSimple>
+    );
   })
   .add('Popover - Simple', () => {
-    return <PopoverSimple />;
+    return <PopoverSimple label="Toggle Popover" />;
   })
-  .add('Progress - Refresh, Loading', () => {
+  .add('Progress Refresh - Loading', () => {
     return <ProgressRefreshLoading />;
   })
   .add('Switch - Checkbox', () => {
     return <SwitchCheckbox />;
   })
   .add('Snackbar - Simple', () => {
-    return <SnackbarSimple />;
+    return <SnackbarSimple initOpen={true} message="Message from outer space" />;
   })
   .add('Text Field - Pending', () => {
     return <TextFieldSimple />;

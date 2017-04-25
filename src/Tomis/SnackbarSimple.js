@@ -1,20 +1,31 @@
-import React from 'react';
-import ExampleContainer from './helper/ExampleContainer';
+import React, { PropTypes, Component } from 'react';
 import Snackbar from 'material-ui/Snackbar';
-import RaisedButton from 'material-ui/RaisedButton';
 
-export default class SnackbarExampleSimple extends React.Component {
+const setStateIsOpen = (open, state, props) => {
+  return { open };
+};
+
+const defaultProps = {};
+
+const propTypes = {};
+
+class SnackbarSimple extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    };
   }
 
-  handleTouchTap = () => {
-    this.setState({
-      open: true
-    });
+  componentDidMount() {
+    const { initOpen = false } = this.props;
+    this.setState(setStateIsOpen.bind(this, initOpen));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { initOpen = false } = nextProps;
+    this.setState(setStateIsOpen.bind(this, initOpen));
+  }
+
+  state = {
+    open: false
   };
 
   handleRequestClose = () => {
@@ -25,10 +36,15 @@ export default class SnackbarExampleSimple extends React.Component {
 
   render() {
     return (
-      <ExampleContainer>
-        <RaisedButton onTouchTap={this.handleTouchTap} label="Add to my calendar" />
-        <Snackbar open={this.state.open} message="Event added to your calendar" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
-      </ExampleContainer>
+      <Snackbar
+        open={this.state.open}
+        message="Operation Saved Successfully"
+        autoHideDuration={4000}
+        onRequestClose={this.handleRequestClose}
+        {...this.props}
+      />
     );
   }
 }
+
+export default SnackbarSimple;
