@@ -12,6 +12,8 @@ import DatePickerInlineLandscape from '../../Tomis/DatePickerInlineLandscape';
 import DialogSimple from '../../Tomis/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible } from './helper';
+import RiskDecisionAcceptPage from '../RiskDecisionAcceptPage';
+import RiskDecisionRejectPage from '../RiskDecisionRejectPage';
 
 const tableData = [
   {
@@ -184,7 +186,8 @@ class RiskDecisionCore extends Component {
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
-              {this.props.children}
+              {isAccept && <RiskDecisionAcceptPage />}
+              {isReject && <RiskDecisionRejectPage />}
             </CardText>
           </Card>
         </div>

@@ -33,10 +33,10 @@ storiesOf('TOMIS Pages - Risk Decision V1', module)
   .add('Risk Decision - Accept - Save Needed', () => {
     return <RiskDecisionAcceptSavePage />;
   })
-  .add('Risk Decision - Accept', () => {
+  .add('Risk Decision - Accept Additional Items', () => {
     return <RiskDecisionAcceptPage />;
   })
-  .add('Risk Decision - Reject', () => {
+  .add('Risk Decision - Reject Additional Items', () => {
     return <RiskDecisionRejectPage />;
   })
   .add('Ground Operation', () => {

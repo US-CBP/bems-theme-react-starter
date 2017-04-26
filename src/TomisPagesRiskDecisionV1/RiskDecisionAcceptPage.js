@@ -11,13 +11,11 @@ class RiskDecisionAcceptPage extends Component {
   render() {
     return (
       <div>
-        <RiskDecisionCore flightStatus="ACCEPT">
-          <div className="flex-row row-spacer-24">
-            <div>
-              <RaisedButton label="Proceed to Execution" primary={true} />
-            </div>
+        <div className="flex-row row-spacer-24">
+          <div>
+            <RaisedButton label="Proceed to Execution" primary={true} />
           </div>
-        </RiskDecisionCore>
+        </div>
       </div>
     );
   }

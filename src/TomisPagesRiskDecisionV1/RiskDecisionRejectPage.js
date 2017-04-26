@@ -97,87 +97,85 @@ class RiskDecisionRejectPage extends Component {
     const { dataSource1, dataSource2 } = this.state;
     return (
       <div>
-        <RiskDecisionCore flightStatus="REJECT">
-          <div className="flex-row row-spacer-24">
-            <Card expanded={true}>
-              <CardHeader title="No Launch Reason(s)" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }} />
-              <CardText expandable={true}>
-                <div>
-                  <Table
-                    height={this.state.height}
-                    fixedHeader={this.state.fixedHeader}
-                    fixedFooter={this.state.fixedFooter}
-                    selectable={this.state.selectable}
-                    multiSelectable={this.state.multiSelectable}
+        <div className="flex-row row-spacer-24">
+          <Card expanded={true}>
+            <CardHeader title="No Launch Reason(s)" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }} />
+            <CardText expandable={true}>
+              <div>
+                <Table
+                  height={this.state.height}
+                  fixedHeader={this.state.fixedHeader}
+                  fixedFooter={this.state.fixedFooter}
+                  selectable={this.state.selectable}
+                  multiSelectable={this.state.multiSelectable}
+                >
+                  <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
+                    <TableRow selectable={false}>
+                      <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
+                      <TableHeaderColumn tooltip="Category">Category*</TableHeaderColumn>
+                      <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
+                      <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
+                      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody
+                    displayRowCheckbox={this.state.showCheckboxes}
+                    deselectOnClickaway={this.state.deselectOnClickaway}
+                    showRowHover={this.state.showRowHover}
+                    stripedRows={this.state.stripedRows}
                   >
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
-                      <TableRow selectable={false}>
-                        <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Category">Category*</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
-                        <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
+                    {tableData.map((row, index) => (
+                      <TableRow key={index} selected={row.selected} className="red-table-row-TESTING">
+                        <TableRowColumn><Checkbox /></TableRowColumn>
+                        <TableRowColumn>{index}</TableRowColumn>
+                        <TableRowColumn>
+                          <div className="editable-cell" onClick={this.handleClickSubCategoryCell}>
+                            {row.name}
+                          </div>
+                        </TableRowColumn>
+                        <TableRowColumn>{row.status}</TableRowColumn>
+                        <TableRowColumn>
+                          <IconButton tooltip="Delete Row">
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableRowColumn>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody
-                      displayRowCheckbox={this.state.showCheckboxes}
-                      deselectOnClickaway={this.state.deselectOnClickaway}
-                      showRowHover={this.state.showRowHover}
-                      stripedRows={this.state.stripedRows}
-                    >
-                      {tableData.map((row, index) => (
-                        <TableRow key={index} selected={row.selected} className="red-table-row-TESTING">
-                          <TableRowColumn><Checkbox /></TableRowColumn>
-                          <TableRowColumn>{index}</TableRowColumn>
-                          <TableRowColumn>
-                            <div className="editable-cell" onClick={this.handleClickSubCategoryCell}>
-                              {row.name}
-                            </div>
-                          </TableRowColumn>
-                          <TableRowColumn>{row.status}</TableRowColumn>
-                          <TableRowColumn>
-                            <IconButton tooltip="Delete Row">
-                              <DeleteIcon />
-                            </IconButton>
-                          </TableRowColumn>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                  <Popover
-                    open={this.state.open}
-                    anchorEl={this.state.anchorEl}
-                    anchorOrigin={anchorOrigin}
-                    targetOrigin={targetOrigin}
-                    onRequestClose={this.handleRequestClose}
-                  >
-                    <div className="editable-subcategory">
-                      <div className="flex-1 flex-row">
-                        <AutoComplete
-                          fullWidth={true}
-                          hintText="Choose Sub-Category"
-                          dataSource={dataSource1}
-                          onUpdateInput={this.handleUpdateInput}
-                          floatingLabelText="Sub-Category*"
-                        />
-                        {/* must use inline style for position on IconButton to override default */}
-                        <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                          <SvgIconArrowDropDown />
-                        </IconButton>
-                      </div>
-
-                      <div className="flex-row flex-justify-end">
-                        <FlatButton label="Save" primary={true} onClick={this.handleRequestClose} />
-                        <FlatButton label="Cancel" primary={true} onClick={this.handleRequestClose} />
-                      </div>
+                    ))}
+                  </TableBody>
+                </Table>
+                <Popover
+                  open={this.state.open}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={anchorOrigin}
+                  targetOrigin={targetOrigin}
+                  onRequestClose={this.handleRequestClose}
+                >
+                  <div className="editable-subcategory">
+                    <div className="flex-1 flex-row">
+                      <AutoComplete
+                        fullWidth={true}
+                        hintText="Choose Sub-Category"
+                        dataSource={dataSource1}
+                        onUpdateInput={this.handleUpdateInput}
+                        floatingLabelText="Sub-Category*"
+                      />
+                      {/* must use inline style for position on IconButton to override default */}
+                      <IconButton className="inline-icon" style={{ position: 'absolute' }}>
+                        <SvgIconArrowDropDown />
+                      </IconButton>
                     </div>
-                  </Popover>
-                </div>
-              </CardText>
-            </Card>
 
-          </div>
-        </RiskDecisionCore>
+                    <div className="flex-row flex-justify-end">
+                      <FlatButton label="Save" primary={true} onClick={this.handleRequestClose} />
+                      <FlatButton label="Cancel" primary={true} onClick={this.handleRequestClose} />
+                    </div>
+                  </div>
+                </Popover>
+              </div>
+            </CardText>
+          </Card>
+
+        </div>
       </div>
     );
   }
