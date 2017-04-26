@@ -82,14 +82,16 @@ const propTypes = {
 class ToolbarActionBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: 3,
-      open: false,
-      isDrawerNavigationOpen: false,
-      isOpen: {},
-      anchorEl: {}
-    };
+    this.iconColor = getActionBarIconColor(props);
   }
+
+  state = {
+    value: 3,
+    open: false,
+    isDrawerNavigationOpen: false,
+    isOpen: {},
+    anchorEl: {}
+  };
 
   handleTouchTap = event => {
     // This prevents ghost click.
@@ -117,7 +119,7 @@ class ToolbarActionBar extends Component {
   };
 
   render() {
-    const { handleClickToggleDrawer, handleTouchTapButton, handleRequestCloseButton } = this;
+    const { iconColor, handleClickToggleDrawer, handleTouchTapButton, handleRequestCloseButton } = this;
     const { isDrawerNavigationOpen, isOpen, anchorEl } = this.state;
     const { pageTitle, isHideDeleteIcon, isHideKuFrequencyIcon } = this.props;
     return (
@@ -130,7 +132,7 @@ class ToolbarActionBar extends Component {
             <ToolbarTitle text={pageTitle} style={getToolbarTitleStyle(this.props)} />
           </ToolbarGroup>
           <ToolbarGroup>
-            <SocialPublicIcon color={getActionBarIconColor(this.props)} />
+            <SocialPublicIcon color={iconColor} />
             <span>&nbsp;&nbsp;</span>
             <FlatButton
               style={getActionBarPopoverStyle(this.props)}
@@ -141,35 +143,35 @@ class ToolbarActionBar extends Component {
               icon={<SvgIconArrowDropDown color={getAppBarIconColor(this.props)} />}
             />
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Today">
-              <TodayIcon color={getActionBarIconColor(this.props)} />
+              <TodayIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Weekly View">
-              <WeeklyCalendarIcon color={getActionBarIconColor(this.props)} />
+              <WeeklyCalendarIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Monthly View">
-              <MonthlyCalendarIcon color={getActionBarIconColor(this.props)} />
+              <MonthlyCalendarIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="KU NOC">
-              <KuNocIcon color={getActionBarIconColor(this.props)} />
+              <KuNocIcon color={iconColor} />
             </IconButton>
           </ToolbarGroup>
           <ToolbarGroup>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Save">
-              <SaveIcon color={getActionBarIconColor(this.props)} />
+              <SaveIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Clone">
-              <ContentCopyIcon color={getActionBarIconColor(this.props)} />
+              <ContentCopyIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Cancel">
-              <CancelIcon color={getActionBarIconColor(this.props)} />
+              <CancelIcon color={iconColor} />
             </IconButton>
             {!isHideKuFrequencyIcon &&
               <IconButton onTouchTap={this.handleTouchTap} tooltip="KU Frequency">
-                <KuFrequencyIcon color={getActionBarIconColor(this.props)} />
+                <KuFrequencyIcon color={iconColor} />
               </IconButton>}
             {!isHideDeleteIcon &&
               <IconButton onTouchTap={this.handleTouchTap} tooltip="Delete">
-                <DeleteIcon color={getActionBarIconColor(this.props)} />
+                <DeleteIcon color={iconColor} />
               </IconButton>}
           </ToolbarGroup>
         </Toolbar>

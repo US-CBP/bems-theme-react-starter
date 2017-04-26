@@ -152,7 +152,7 @@ class RiskDecisionRejectPage extends Component {
                     onRequestClose={this.handleRequestClose}
                   >
                     <div className="editable-subcategory">
-                      <div className="flex-1 flex-column-pad flex-row">
+                      <div className="flex-1 flex-row">
                         <AutoComplete
                           fullWidth={true}
                           hintText="Choose Sub-Category"

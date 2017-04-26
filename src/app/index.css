@@ -17,12 +17,14 @@ body {
   flex: 2;
 }
 
-.flex-row > .internal {
-  padding-left: 24px;
+/* Apply spacing to any flex- items inside a flex row */
+.flex-row > div[class *=flex-] {
+  margin-right: 24px;
 }
 
-.flex-column-pad  {
-  padding-left: 24px;
+/* No spacing after last flex- item inside a flex row */
+.flex-row > div[class *=flex-]:last-child {
+  margin-right: 0;
 }
 
 .flex-align-center {

@@ -16,12 +16,12 @@ class FormWithAllComponents extends Component {
         <ToolbarCbpHeader />
         <ToolbarActionBar pageTitle="Form with All Components" isHideDeleteIcon={false} />
         <div className="flex-row">
-        <div className="flex-1">
-          <TextFieldSimple floatingLabelText="All Components TF" />
-        </div>
-        <div className="flex-1 flex-column-pad">
-          <AutoComplete floatingLabelText="All Components LOV" />
-        </div>
+          <div className="flex-1">
+            <TextFieldSimple floatingLabelText="All Components TF" />
+          </div>
+          <div className="flex-1">
+            <AutoComplete floatingLabelText="All Components LOV" />
+          </div>
         </div>
 
       </div>
