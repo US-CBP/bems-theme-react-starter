@@ -151,9 +151,10 @@ class ToolbarActionBar extends Component {
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Monthly View">
               <MonthlyCalendarIcon color={iconColor} />
             </IconButton>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="KU NOC">
-              <KuNocIcon color={iconColor} />
-            </IconButton>
+            {!isHideKuFrequencyIcon &&
+              <IconButton onTouchTap={this.handleTouchTap} tooltip="KU NOC Coverage">
+                <KuFrequencyIcon color={iconColor} />
+              </IconButton>}
           </ToolbarGroup>
           <ToolbarGroup>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Save">
@@ -165,10 +166,6 @@ class ToolbarActionBar extends Component {
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Cancel">
               <CancelIcon color={iconColor} />
             </IconButton>
-            {!isHideKuFrequencyIcon &&
-              <IconButton onTouchTap={this.handleTouchTap} tooltip="KU Frequency">
-                <KuFrequencyIcon color={iconColor} />
-              </IconButton>}
             {!isHideDeleteIcon &&
               <IconButton onTouchTap={this.handleTouchTap} tooltip="Delete">
                 <DeleteIcon color={iconColor} />

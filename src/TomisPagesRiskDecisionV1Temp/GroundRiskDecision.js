@@ -89,20 +89,20 @@ class GroundRiskDecision extends Component {
         <div className="outer-card-margin">
         <Card expanded={true}>
         <CardHeader
-          title={<span>Executed/Canceled&nbsp;</span>}
+          title={<span>Executed/Canceled&nbsp;<a href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D" style={{ marginLeft: '650px' }} className="panel-link">Link to Sharepoint Site</a></span>}
           actAsExpander={true}
           showExpandableButton={true}
           style={{ backgroundColor: indigo100 }}
         />
+
           <CardText expandable={true}>
             <div className="flex-row">
-              <div className="flex-column-pad">
-                <label className="labeled-item">Ground Operation Status*</label>
+              <div>
+                <label className="labeled-item">Ground Operation Status (RA)*</label>
                 <RaisedButton label="Executed" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
                 <RaisedButton label="Canceled" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
               </div>
-              <div>Start Execution 
-              </div>
+
             </div>
           </CardText>
         </Card>

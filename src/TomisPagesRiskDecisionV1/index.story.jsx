@@ -40,9 +40,9 @@ storiesOf('TOMIS Pages - Risk Decision V1', module)
   .add('Risk Decision - Reject', () => {
     return <RiskDecisionRejectPage />;
   })
-  .add('Ground Operation - Executed', () => {
+  .add('Ground Operation', () => {
     return <GroundRiskDecision />;
   })
-  .add('Ground Operation - Canceled', () => {
+  .add('Ground Operation - Cancel', () => {
     return <GroundRiskDecisionCancelPage />;
   });

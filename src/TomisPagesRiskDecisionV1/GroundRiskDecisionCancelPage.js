@@ -39,7 +39,7 @@ const unselectedBackgroundColor = '#ffffff';
 const selectedLabelColor = 'rgba(0,0,0,0.87)';
 const unselectedLabelColor = 'rgba(0,0,0,0.54)';
 
-class GroundRiskDecision extends Component {
+class GroundRiskDecisionCancelPage extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
@@ -101,7 +101,7 @@ class GroundRiskDecision extends Component {
                 <RaisedButton label="Executed" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
                 <RaisedButton label="Canceled" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
               </div>
-              <div>Start Execution 
+              <div><TextField hintText="Hint Text" floatingLabelText="Reason*" />
               </div>
             </div>
           </CardText>
@@ -112,7 +112,7 @@ class GroundRiskDecision extends Component {
   }
 }
 
-GroundRiskDecision.defaultProps = defaultProps;
-GroundRiskDecision.propTypes = propTypes;
+GroundRiskDecisionCancelPage.defaultProps = defaultProps;
+GroundRiskDecisionCancelPage.propTypes = propTypes;
 
-export default GroundRiskDecision;
+export default GroundRiskDecisionCancelPage;

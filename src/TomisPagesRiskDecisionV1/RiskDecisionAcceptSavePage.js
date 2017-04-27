@@ -3,7 +3,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
 import RaisedButton from '../TomisMui/RaisedButton';
 
-class RiskDecisionAcceptPage extends Component {
+class RiskDecisionAcceptSavePage extends Component {
   constructor(props) {
     super(props);
   }
@@ -13,9 +13,7 @@ class RiskDecisionAcceptPage extends Component {
       <div>
         <RiskDecisionCore flightStatus="ACCEPT">
           <div className="flex-row row-spacer-24">
-            <div>
-              <RaisedButton label="Proceed to Execution" primary={true} />
-            </div>
+          
           </div>
         </RiskDecisionCore>
       </div>
@@ -23,4 +21,4 @@ class RiskDecisionAcceptPage extends Component {
   }
 }
 
-export default muiThemeable()(RiskDecisionAcceptPage);
+export default muiThemeable()(RiskDecisionAcceptSavePage);

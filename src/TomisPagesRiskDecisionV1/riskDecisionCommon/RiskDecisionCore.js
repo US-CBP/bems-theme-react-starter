@@ -11,7 +11,7 @@ import FileAttachment from '../../TomisNew/FileAttachment';
 import DatePickerInlineLandscape from '../../Tomis/DatePickerInlineLandscape';
 import DialogSimple from '../../Tomis/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible } from './helper';
+import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
 const tableData = [
   {
@@ -46,6 +46,8 @@ const tableData = [
   }
 ];
 
+const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];
+
 const defaultProps = {
   flightStatus: ''
 };
@@ -57,6 +59,9 @@ const propTypes = {
 class RiskDecisionCore extends Component {
   constructor(props) {
     super(props);
+    this.handleCloseConfirm = this.handleCloseConfirm.bind(this);
+    this.handleChangeFlightStatus = this.handleChangeFlightStatus.bind(this);
+    this.prevFlightStatus = 'PENDING';
   }
 
   state = {
@@ -65,7 +70,8 @@ class RiskDecisionCore extends Component {
     isAccept: false,
     isReject: false,
     flightStatus: '',
-    isInfoVisible: false
+    isInfoVisible: false,
+    isConfirmVisible: false
   };
 
   componentDidMount() {
@@ -81,10 +87,25 @@ class RiskDecisionCore extends Component {
     this.setState(setStateIsInfoVisible.bind(this, false));
   };
 
-  handleChangeFlightStatus = (event, value) => {
+  handleChangeFlightStatus(event, value) {
     event.stopPropagation();
-    this.setState(setStateFlightStatus.bind(this, value));
+    event.preventDefault();
+    const { prevFlightStatus } = this;
+    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', value=', value);
+    if (prevFlightStatus != 'PENDING' && value === 'PENDING') {
+      this.setState(setStateIsConfirmVisible.bind(this, true));
+    }
+    this.prevFlightStatus = value;
   };
+
+
+  handleCloseConfirm(buttonLabel, buttonIdx) {
+    console.log('handleCloseConfirm, buttonLabel=', buttonLabel, ', buttonIdx=', buttonIdx);
+    this.setState(setStateIsConfirmVisible.bind(this, false));
+    if (buttonLabel === 'No') {
+      this.setState(setStateFlightStatus.bind(this, this.prevFlightStatus));
+    }
+}
 
   render() {
     const {
@@ -94,10 +115,10 @@ class RiskDecisionCore extends Component {
       getLabelColorReject,
       handleTouchTapInfo,
       handleCloseInfo,
-      handleChangeFlightStatus
+      handleChangeFlightStatus,
+      handleCloseConfirm
     } = this;
-    const { isPending, isAccept, isReject, isInfoVisible } = this.state;
-    const { flightStatus } = this.state;
+    const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible } = this.state;
     return (
       <div>
         <HeaderNavAction actionBarPageTitle="Flight Planning" />
@@ -135,6 +156,10 @@ class RiskDecisionCore extends Component {
           </TableBody>
         </Table>
         </DialogSimple>}
+        <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
+          <div>You will lose all of your changes.  Is this ok?</div>
+        </DialogSimple>
+
         <div className="outer-card-margin">
           <Card expanded={true}>
             <CardHeader title={<span>Risk Decision&nbsp;<a href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D" style={{ marginLeft: '650px' }} className="panel-link">Link to Sharepoint Site</a></span>} actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: indigo100 }} />
@@ -152,7 +177,8 @@ class RiskDecisionCore extends Component {
                   <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
                 </div>
                 <div className="flex-1 flex-column-pad flex-row">
-                  <AutoCompleteInfo
+                  <AutoComplete
+                  dataSource={riskAssessmentLovValues}
                     onTouchTapInfo={handleTouchTapInfo}
                     hintText="Select Risk Assessment"
                     floatingLabelText={`Risk Assessment${isAccept ? '*' : ''}`}
