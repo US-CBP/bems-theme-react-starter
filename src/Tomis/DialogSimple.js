@@ -37,12 +37,14 @@ class DialogSimple extends Component {
     open: false
   };
 
-  handleOpen = () => {
-    this.setState(setStateIsOpen.bind(this, true));
-  };
-
-  handleClose = () => {
-    this.setState(setStateIsOpen.bind(this, false));
+  handleClose = (buttonLabel, buttonIdx, evt) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    const { onRequestClose } = this.props;
+    if (onRequestClose) {
+      onRequestClose(buttonLabel, buttonIdx);
+    }
+    // this.setState(setStateIsOpen.bind(this, false));
   };
 
   getButtonActions = () => {
@@ -52,7 +54,7 @@ class DialogSimple extends Component {
       if (idx > 0) {
         c = 'dialog-btn-margin-left';
       }
-      return <RaisedButton className={c} label={buttonLabel} primary={true} onTouchTap={this.handleClose} />;
+      return <RaisedButton className={c} label={buttonLabel} primary={true} onTouchTap={this.handleClose.bind(this, buttonLabel, idx)} />;
     });
     return actions;
   };
@@ -62,7 +64,7 @@ class DialogSimple extends Component {
     const { open } = this.state;
     const { title, initOpen, onRequestClose } = this.props;
     return (
-      <Dialog title={title} actions={getButtonActions()} modal={false} open={open} onRequestClose={onRequestClose}>
+      <Dialog title={title} actions={getButtonActions()} modal={false} open={open} onRequestClose={onRequestClose} {...this.props}>
         {this.props.children}
       </Dialog>
     );
