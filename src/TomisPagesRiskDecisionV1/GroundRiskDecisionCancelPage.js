@@ -12,7 +12,10 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import ToggleButtons from '../TomisNew/ToggleButtons';
 import { indigo100 } from 'material-ui/styles/colors';
+
+export const toggleButtonsOptions = [{ label: 'Executed', value: 'EXECUTED' }, { label: 'Canceled', value: 'CANCELED' }];
 
 const initState = {
   dataSource1: [],
@@ -97,9 +100,11 @@ class GroundRiskDecisionCancelPage extends Component {
           <CardText expandable={true}>
             <div className="flex-row">
               <div className="flex-column-pad">
-                <label className="labeled-item">Ground Operation Status*</label>
-                <RaisedButton label="Executed" backgroundColor={getBackgroundColorAccept()} labelColor={getLabelColorAccept()} />
-                <RaisedButton label="Canceled" backgroundColor={getBackgroundColorReject()} labelColor={getLabelColorReject()} />
+                <ToggleButtons
+                  labelText="Ground Operation Status*"
+                  valueSelected={'CANCELED'}
+                  options={toggleButtonsOptions}
+                />
               </div>
               <div><TextField hintText="Hint Text" floatingLabelText="Reason*" />
               </div>

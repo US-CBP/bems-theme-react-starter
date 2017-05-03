@@ -14,6 +14,8 @@ import DialogSimple from '../../Tomis/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
+const numberOfMissionsLovValues = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+
 const tableData = [
   {
     name: '< 25',
@@ -165,7 +167,7 @@ class RiskDecisionCore extends Component {
                 style={{ marginLeft: '0px' }}
                 className="panel-link"
               >
-                Link to Sharepoint Site
+                Risk Assessment Form
               </a>
               {/*<ButtonRaisedSimplePrimary label="Do Something" />*/}
             </PanelHeader>
@@ -179,14 +181,23 @@ class RiskDecisionCore extends Component {
                     onChange={handleChangeFlightStatus}
                   />
                 </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                </div>
+                <div className="flex-row">
+                <div className="flex-1">
+                  <AutoComplete
+                    dataSource={numberOfMissionsLovValues}
+                    hintText="Number of Missions"
+                    floatingLabelText={`Number of Missions${isAccept || isReject ? '*' : ''}`}
+                  />
+                </div>
+                <div className="flex-1">
                   <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
                 </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                <div className="flex-1">
                   <AutoComplete
                     dataSource={riskAssessmentLovValues}
-                    hintText="Select Risk Assessment"
-                    floatingLabelText={`Risk Assessment${isAccept ? '*' : ''}`}
+                    hintText="Total Risk Assessment Range"
+                    floatingLabelText={`Total Risk Assessment Range${isAccept ? '*' : ''}`}
                   />
                 </div>
               </div>
