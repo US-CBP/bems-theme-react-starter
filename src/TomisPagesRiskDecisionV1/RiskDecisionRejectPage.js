@@ -104,13 +104,12 @@ class RiskDecisionRejectPage extends Component {
 
   handleSaveJustification(evt) {
     evt.stopPropagation();
-    console.log('justificationEditIdx=', justificationEditIdx);
     tableData[justificationEditIdx].status = justificationEditValue;
     this.handleRequestClose();
   }
 
   handleClickSubCategoryCell = (idx, evt) => {
-    // This prevents ghost click.
+    // This prevents ghost click from onTouchTap
     evt.preventDefault();
     subCategoryEditIdx = idx;
     this.setState({
@@ -120,7 +119,7 @@ class RiskDecisionRejectPage extends Component {
   };
 
   handleClickJustificationCell = (idx, evt) => {
-    // This prevents ghost click.
+    // This prevents ghost click from onTouchTap
     evt.preventDefault();
     justificationEditIdx = idx;
     this.setState({
@@ -203,16 +202,56 @@ class RiskDecisionRejectPage extends Component {
                       {tableData.map((row, idx) => (
                         <TableRow key={idx} selected={row.selected} className="red-table-row-TESTING">
                           <TableRowColumn><Checkbox /></TableRowColumn>
-                          <TableRowColumn>{idx}</TableRowColumn>
+                          <TableRowColumn>{idx + 1}</TableRowColumn>
                           <TableRowColumn>
                             <div className="editable-cell" onClick={handleClickSubCategoryCell.bind(this, idx)}>
                               {row.name}
                             </div>
+                            <Popover
+                              open={this.state.open}
+                              anchorEl={this.state.anchorEl}
+                              anchorOrigin={anchorOrigin}
+                              targetOrigin={targetOrigin}
+                              onRequestClose={handleRequestClose}
+                            >
+                              <div className="editable-popover">
+                                <AutoComplete
+                                  dataSource={subcategoryLovValues}
+                                  onUpdateInput={handleUpdateSubCategory}
+                                  hintText="Select Sub-Category"
+                                  floatingLabelText="Sub-Category*"
+                                />
+                                <div className="flex-row flex-justify-end">
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
+                                  <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                </div>
+                              </div>
+                            </Popover>
                           </TableRowColumn>
                           <TableRowColumn>
                             <div className="editable-cell" onClick={handleClickJustificationCell.bind(this, idx)}>
                               {row.status}
                             </div>
+                            <Popover
+                              open={openJustification}
+                              anchorEl={anchorElJustification}
+                              anchorOrigin={anchorOrigin}
+                              targetOrigin={targetOrigin}
+                              onRequestClose={handleRequestClose}
+                            >
+                              <div className="editable-popover">
+                                <TextFieldSimple
+                                  onChange={handleUpdateJustification}
+                                  hintText="Justification"
+                                  fullWidth={true}
+                                  floatingLabelText="Justification*"
+                                />
+                                <div className="flex-row">
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
+                                  <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                </div>
+                              </div>
+                            </Popover>
                           </TableRowColumn>
                           <TableRowColumn>
                             <IconButton tooltip="Delete Row" onTouchTap={delNoLaunchReasonRow.bind(this, idx)}>
@@ -223,41 +262,6 @@ class RiskDecisionRejectPage extends Component {
                       ))}
                     </TableBody>
                   </Table>
-                  <Popover
-                    open={this.state.open}
-                    anchorEl={this.state.anchorEl}
-                    anchorOrigin={anchorOrigin}
-                    targetOrigin={targetOrigin}
-                    onRequestClose={handleRequestClose}
-                  >
-                    <div className="editable-popover">
-                      <AutoComplete
-                        dataSource={subcategoryLovValues}
-                        onUpdateInput={handleUpdateSubCategory}
-                        hintText="Select Sub-Category"
-                        floatingLabelText="Sub-Category*"
-                      />
-                      <div className="flex-row flex-justify-end">
-                        <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
-                        <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
-                      </div>
-                    </div>
-                  </Popover>
-                  <Popover
-                    open={openJustification}
-                    anchorEl={anchorElJustification}
-                    anchorOrigin={anchorOrigin}
-                    targetOrigin={targetOrigin}
-                    onRequestClose={handleRequestClose}
-                  >
-                    <div className="editable-popover">
-                      <TextFieldSimple onChange={handleUpdateJustification} hintText="Justification" fullWidth={true} floatingLabelText="Justification*" />
-                      <div className="flex-row">
-                        <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
-                        <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
-                      </div>
-                    </div>
-                  </Popover>
                 </div>
               </PanelText>
             </Panel>
