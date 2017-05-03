@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import TextField from '../TomisMui/TextField';
+import TextFieldSimple from '../Tomis/TextFieldSimple';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import FlatButton from '../TomisMui/FlatButton';
@@ -54,6 +54,8 @@ const tableData = [
 const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
 let subCategoryEditValue = '';
 let subCategoryEditIdx = 0;
+let justificationEditValue = '';
+let justificationEditIdx = 0;
 
 const initState = {
   fixedHeader: true,
@@ -68,6 +70,7 @@ const initState = {
   height: '500px',
   dataSource1: [],
   open: false,
+  openJustification: false,
   isPanelExpanded: true,
   tableRowCnt: tableData.length
 };
@@ -78,19 +81,31 @@ class RiskDecisionRejectPage extends Component {
     this.state = initState;
     this.handleUpdateSubCategory = this.handleUpdateSubCategory.bind(this);
     this.handleSaveSubCategory = this.handleSaveSubCategory.bind(this);
+    this.handleUpdateJustification = this.handleUpdateJustification.bind(this);
+    this.handleSaveJustification = this.handleSaveJustification.bind(this);
     this.addNoLaunchReasonRow = this.addNoLaunchReasonRow.bind(this);
     this.handleExpandChange = this.handleExpandChange.bind(this);
+    this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
   }
 
   handleUpdateSubCategory(value) {
-    console.log('handleUpdateSubCategory value=', value);
     subCategoryEditValue = value;
   }
 
   handleSaveSubCategory(evt) {
     evt.stopPropagation();
-    console.log('subCategoryEditIdx=', subCategoryEditIdx);
     tableData[subCategoryEditIdx].name = subCategoryEditValue;
+    this.handleRequestClose();
+  }
+
+  handleUpdateJustification(evt, value) {
+    justificationEditValue = value;
+  }
+
+  handleSaveJustification(evt) {
+    evt.stopPropagation();
+    console.log('justificationEditIdx=', justificationEditIdx);
+    tableData[justificationEditIdx].status = justificationEditValue;
     this.handleRequestClose();
   }
 
@@ -104,16 +119,35 @@ class RiskDecisionRejectPage extends Component {
     });
   };
 
+  handleClickJustificationCell = (idx, evt) => {
+    // This prevents ghost click.
+    evt.preventDefault();
+    justificationEditIdx = idx;
+    this.setState({
+      openJustification: true,
+      anchorElJustification: evt.currentTarget
+    });
+  };
+
   handleRequestClose = () => {
     this.setState({
-      open: false
+      open: false,
+      openJustification: false
     });
   };
 
   addNoLaunchReasonRow(evt) {
     evt.stopPropagation();
     tableData.push({ name: '', status: '' });
-    this.setState({ tableRowCnt: this.tableRowCnt + 1 });
+    //force table refresh
+    this.setState({ tableRowCnt: tableData.length });
+  }
+
+  delNoLaunchReasonRow(idx, evt) {
+    evt.stopPropagation();
+    tableData.splice(idx, 1);
+    //force table refresh
+    this.setState({ tableRowCnt: tableData.length });
   }
 
   handleExpandChange(newExpandedState) {
@@ -121,8 +155,19 @@ class RiskDecisionRejectPage extends Component {
   }
 
   render() {
-    const { handleClickSubCategoryCell, addNoLaunchReasonRow, handleExpandChange, handleUpdateSubCategory, handleSaveSubCategory, handleRequestClose } = this;
-    const { dataSource1, dataSource2, isPanelExpanded } = this.state;
+    const {
+      handleClickSubCategoryCell,
+      handleClickJustificationCell,
+      addNoLaunchReasonRow,
+      handleExpandChange,
+      handleUpdateSubCategory,
+      handleSaveSubCategory,
+      handleUpdateJustification,
+      handleSaveJustification,
+      handleRequestClose,
+      delNoLaunchReasonRow
+    } = this;
+    const { dataSource1, dataSource2, isPanelExpanded, openJustification, anchorElJustification } = this.state;
     return (
       <div>
         <RiskDecisionCore flightStatus="REJECT">
@@ -160,13 +205,17 @@ class RiskDecisionRejectPage extends Component {
                           <TableRowColumn><Checkbox /></TableRowColumn>
                           <TableRowColumn>{idx}</TableRowColumn>
                           <TableRowColumn>
-                            <div className="editable-cell" style={{ minHeight: '14px' }} onClick={handleClickSubCategoryCell.bind(this, idx)}>
+                            <div className="editable-cell" onClick={handleClickSubCategoryCell.bind(this, idx)}>
                               {row.name}
                             </div>
                           </TableRowColumn>
-                          <TableRowColumn>{row.status}</TableRowColumn>
                           <TableRowColumn>
-                            <IconButton tooltip="Delete Row">
+                            <div className="editable-cell" onClick={handleClickJustificationCell.bind(this, idx)}>
+                              {row.status}
+                            </div>
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <IconButton tooltip="Delete Row" onTouchTap={delNoLaunchReasonRow.bind(this, idx)}>
                               <DeleteIcon />
                             </IconButton>
                           </TableRowColumn>
@@ -179,9 +228,9 @@ class RiskDecisionRejectPage extends Component {
                     anchorEl={this.state.anchorEl}
                     anchorOrigin={anchorOrigin}
                     targetOrigin={targetOrigin}
-                    onRequestClose={this.handleRequestClose}
+                    onRequestClose={handleRequestClose}
                   >
-                    <div className="editable-subcategory">
+                    <div className="editable-popover">
                       <AutoComplete
                         dataSource={subcategoryLovValues}
                         onUpdateInput={handleUpdateSubCategory}
@@ -190,6 +239,21 @@ class RiskDecisionRejectPage extends Component {
                       />
                       <div className="flex-row flex-justify-end">
                         <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
+                        <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                      </div>
+                    </div>
+                  </Popover>
+                  <Popover
+                    open={openJustification}
+                    anchorEl={anchorElJustification}
+                    anchorOrigin={anchorOrigin}
+                    targetOrigin={targetOrigin}
+                    onRequestClose={handleRequestClose}
+                  >
+                    <div className="editable-popover">
+                      <TextFieldSimple onChange={handleUpdateJustification} hintText="Justification" fullWidth={true} floatingLabelText="Justification*" />
+                      <div className="flex-row">
+                        <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                         <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
                       </div>
                     </div>

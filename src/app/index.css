@@ -66,9 +66,10 @@ h3 {
 
 .editable-cell {
   cursor: pointer;
+  min-height: 14px;
 }
 
-.editable-subcategory {
+.editable-popover {
   padding: 10px;
   overflow: hidden;
 }
