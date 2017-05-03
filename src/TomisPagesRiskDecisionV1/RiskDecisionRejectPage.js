@@ -4,8 +4,8 @@ import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import FlatButton from '../TomisMui/FlatButton';
-import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
-import AutoComplete from '../TomisMui/AutoComplete';
+import { Panel, PanelHeader, PanelText } from '../TomisMui/Panel';
+import AutoComplete from '../Tomis/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -13,6 +13,7 @@ import IconButton from '../TomisMui/IconButton';
 import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
 import Popover from 'material-ui/Popover';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import ButtonRaisedSimplePrimary from '../Tomis/ButtonRaisedSimplePrimary';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -50,6 +51,10 @@ const tableData = [
   }
 ];
 
+const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
+let subCategoryEditValue = '';
+let subCategoryEditIdx = 0;
+
 const initState = {
   fixedHeader: true,
   fixedFooter: false,
@@ -62,25 +67,37 @@ const initState = {
   showCheckboxes: false,
   height: '500px',
   dataSource1: [],
-  open: false
+  open: false,
+  isPanelExpanded: true,
+  tableRowCnt: tableData.length
 };
 
 class RiskDecisionRejectPage extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
-    this.handleUpdateInput = this.handleUpdateInput.bind(this);
+    this.handleUpdateSubCategory = this.handleUpdateSubCategory.bind(this);
+    this.handleSaveSubCategory = this.handleSaveSubCategory.bind(this);
+    this.addNoLaunchReasonRow = this.addNoLaunchReasonRow.bind(this);
+    this.handleExpandChange = this.handleExpandChange.bind(this);
   }
 
-  handleUpdateInput(value) {
-    this.setState({
-      dataSource1: [value, value + value, value + value + value]
-    });
+  handleUpdateSubCategory(value) {
+    console.log('handleUpdateSubCategory value=', value);
+    subCategoryEditValue = value;
   }
 
-  handleClickSubCategoryCell = evt => {
+  handleSaveSubCategory(evt) {
+    evt.stopPropagation();
+    console.log('subCategoryEditIdx=', subCategoryEditIdx);
+    tableData[subCategoryEditIdx].name = subCategoryEditValue;
+    this.handleRequestClose();
+  }
+
+  handleClickSubCategoryCell = (idx, evt) => {
     // This prevents ghost click.
     evt.preventDefault();
+    subCategoryEditIdx = idx;
     this.setState({
       open: true,
       anchorEl: evt.currentTarget
@@ -93,15 +110,28 @@ class RiskDecisionRejectPage extends Component {
     });
   };
 
+  addNoLaunchReasonRow(evt) {
+    evt.stopPropagation();
+    tableData.push({ name: '', status: '' });
+    this.setState({ tableRowCnt: this.tableRowCnt + 1 });
+  }
+
+  handleExpandChange(newExpandedState) {
+    this.setState({ isPanelExpanded: newExpandedState });
+  }
+
   render() {
-    const { dataSource1, dataSource2 } = this.state;
+    const { handleClickSubCategoryCell, addNoLaunchReasonRow, handleExpandChange, handleUpdateSubCategory, handleSaveSubCategory, handleRequestClose } = this;
+    const { dataSource1, dataSource2, isPanelExpanded } = this.state;
     return (
       <div>
         <RiskDecisionCore flightStatus="REJECT">
           <div className="flex-row row-spacer-24">
-            <Card expanded={true}>
-              <CardHeader title="No Launch Reason(s)" actAsExpander={true} showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }} />
-              <CardText expandable={true}>
+            <Panel expanded={isPanelExpanded} onExpandChange={handleExpandChange}>
+              <PanelHeader title="No Launch Reason(s)" showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }}>
+                <ButtonRaisedSimplePrimary label="Add No Launch Reason" onTouchTap={addNoLaunchReasonRow} />
+              </PanelHeader>
+              <PanelText expandable={true}>
                 <div>
                   <Table
                     height={this.state.height}
@@ -125,12 +155,12 @@ class RiskDecisionRejectPage extends Component {
                       showRowHover={this.state.showRowHover}
                       stripedRows={this.state.stripedRows}
                     >
-                      {tableData.map((row, index) => (
-                        <TableRow key={index} selected={row.selected} className="red-table-row-TESTING">
+                      {tableData.map((row, idx) => (
+                        <TableRow key={idx} selected={row.selected} className="red-table-row-TESTING">
                           <TableRowColumn><Checkbox /></TableRowColumn>
-                          <TableRowColumn>{index}</TableRowColumn>
+                          <TableRowColumn>{idx}</TableRowColumn>
                           <TableRowColumn>
-                            <div className="editable-cell" onClick={this.handleClickSubCategoryCell}>
+                            <div className="editable-cell" style={{ minHeight: '14px' }} onClick={handleClickSubCategoryCell.bind(this, idx)}>
                               {row.name}
                             </div>
                           </TableRowColumn>
@@ -152,30 +182,21 @@ class RiskDecisionRejectPage extends Component {
                     onRequestClose={this.handleRequestClose}
                   >
                     <div className="editable-subcategory">
-                      <div className="flex-1 flex-column-pad flex-row">
-                        <AutoComplete
-                          fullWidth={true}
-                          hintText="Choose Sub-Category"
-                          dataSource={dataSource1}
-                          onUpdateInput={this.handleUpdateInput}
-                          floatingLabelText="Sub-Category*"
-                        />
-                        {/* must use inline style for position on IconButton to override default */}
-                        <IconButton className="inline-icon" style={{ position: 'absolute' }}>
-                          <SvgIconArrowDropDown />
-                        </IconButton>
-                      </div>
-
+                      <AutoComplete
+                        dataSource={subcategoryLovValues}
+                        onUpdateInput={handleUpdateSubCategory}
+                        hintText="Select Sub-Category"
+                        floatingLabelText="Sub-Category*"
+                      />
                       <div className="flex-row flex-justify-end">
-                        <FlatButton label="Save" primary={true} onClick={this.handleRequestClose} />
-                        <FlatButton label="Cancel" primary={true} onClick={this.handleRequestClose} />
+                        <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
+                        <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
                       </div>
                     </div>
                   </Popover>
                 </div>
-              </CardText>
-            </Card>
-
+              </PanelText>
+            </Panel>
           </div>
         </RiskDecisionCore>
       </div>
