@@ -159,23 +159,15 @@ class RiskDecisionCore extends Component {
 
         <div className="outer-card-margin">
           <Panel expanded={isPanelExpanded} onExpandChange={handleExpandChange}>
-            <PanelHeader
-              title={
-                <span>
-                  Risk Decision&nbsp;
-                </span>
-              }
-              showExpandableButton={true}
-              style={{ backgroundColor: indigo100 }}
-            >
+            <PanelHeader title="Risk Decision" showExpandableButton={true} style={{ backgroundColor: indigo100 }}>
               <a
                 href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D"
                 style={{ marginLeft: '0px' }}
-                className="flex-1 panel-link"
+                className="panel-link"
               >
                 Link to Sharepoint Site
               </a>
-              <ButtonRaisedSimplePrimary label="Do Something" />
+              {/*<ButtonRaisedSimplePrimary label="Do Something" />*/}
             </PanelHeader>
             <PanelText expandable={true}>
               <div className="flex-row">
