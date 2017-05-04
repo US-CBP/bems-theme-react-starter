@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _omit from 'lodash/omit';
+
+const defaultProps = {
+  registerCollapseRef: () => {}
+};
+
+const propTypes = {
+  registerCollapseRef: PropTypes.func.isRequired
+};
 
 function getStyles(props, context) {
   const { cardText } = context.muiTheme;
@@ -13,8 +22,15 @@ function getStyles(props, context) {
   };
 }
 
-class PanelText extends Component {
-  static muiName = 'PanelText';
+class PanelBody extends Component {
+  componentDidMount() {
+    const { registerCollapseRef } = this.props;
+    registerCollapseRef(this.collapseRef);
+  }
+  static keepProps = {};
+  static collapseRef = null;
+
+  static muiName = 'PanelBody';
 
   static propTypes = {
     /**
@@ -26,7 +42,7 @@ class PanelText extends Component {
      */
     children: PropTypes.node,
     /**
-     * Override the PanelText color.
+     * Override the PanelBody color.
      */
     color: PropTypes.string,
     /**
@@ -57,12 +73,14 @@ class PanelText extends Component {
     const styles = getStyles(this.props, this.context);
     const rootStyle = Object.assign(styles.root, style);
 
+    this.keepProps = _omit(other, 'registerCollapseRef');
+    const { keepProps } = this;
     return (
-      <div {...other} style={prepareStyles(rootStyle)}>
+      <div ref={ref => (this.collapseRef = ref)} {...keepProps} style={prepareStyles(rootStyle)}>
         {children}
       </div>
     );
   }
 }
 
-export default PanelText;
+export default PanelBody;

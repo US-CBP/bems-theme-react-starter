@@ -4,7 +4,7 @@ import TextFieldSimple from '../Tomis/TextFieldSimple';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import FlatButton from '../TomisMui/FlatButton';
-import { Panel, PanelHeader, PanelText } from '../TomisMui/Panel';
+import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../Tomis/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
@@ -84,7 +84,6 @@ class RiskDecisionRejectPage extends Component {
     this.handleUpdateJustification = this.handleUpdateJustification.bind(this);
     this.handleSaveJustification = this.handleSaveJustification.bind(this);
     this.addNoLaunchReasonRow = this.addNoLaunchReasonRow.bind(this);
-    this.handleExpandChange = this.handleExpandChange.bind(this);
     this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
   }
 
@@ -149,16 +148,11 @@ class RiskDecisionRejectPage extends Component {
     this.setState({ tableRowCnt: tableData.length });
   }
 
-  handleExpandChange(newExpandedState) {
-    this.setState({ isPanelExpanded: newExpandedState });
-  }
-
   render() {
     const {
       handleClickSubCategoryCell,
       handleClickJustificationCell,
       addNoLaunchReasonRow,
-      handleExpandChange,
       handleUpdateSubCategory,
       handleSaveSubCategory,
       handleUpdateJustification,
@@ -171,11 +165,11 @@ class RiskDecisionRejectPage extends Component {
       <div>
         <RiskDecisionCore flightStatus="REJECT">
           <div className="flex-row row-spacer-24">
-            <Panel style={{ width: '100%' }}>
-              <PanelHeader title="No Launch Reason(s)" showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }}>
+            <Panel>
+              <PanelHeaderTable title="No Launch Reason(s)">
                 <ButtonRaisedSimplePrimary label="Add No Launch Reason" onTouchTap={addNoLaunchReasonRow} />
-              </PanelHeader>
-              <PanelText id="noLaunchReasonPanel">
+              </PanelHeaderTable>
+              <PanelBody>
                 <div>
                   <Table
                     height={this.state.height}
@@ -263,7 +257,7 @@ class RiskDecisionRejectPage extends Component {
                     </TableBody>
                   </Table>
                 </div>
-              </PanelText>
+              </PanelBody>
             </Panel>
           </div>
         </RiskDecisionCore>

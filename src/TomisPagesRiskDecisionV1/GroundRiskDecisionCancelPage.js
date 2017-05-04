@@ -4,7 +4,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
-import { Panel, PanelHeader, PanelText } from '../TomisMui/Panel';
+import { Panel, PanelHeaderSection, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from 'material-ui/Checkbox';
@@ -13,7 +13,6 @@ import IconButton from 'material-ui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import ToggleButtons from '../TomisNew/ToggleButtons';
-import { indigo100 } from 'material-ui/styles/colors';
 
 export const toggleButtonsOptions = [{ label: 'Executed', value: 'EXECUTED' }, { label: 'Canceled', value: 'CANCELED' }];
 
@@ -91,8 +90,8 @@ class GroundRiskDecisionCancelPage extends Component {
         <HeaderNavAction actionBarPageTitle="Ground Operation" />
         <div className="outer-card-margin">
           <Panel>
-            <PanelHeader title={<span>Executed/Canceled&nbsp;</span>} showExpandableButton={true} style={{ backgroundColor: indigo100 }} />
-            <PanelText id="groundCancelPanel">
+            <PanelHeaderSection title="Executed/Canceled" />
+            <PanelBody>
               <div className="flex-row">
                 <div className="flex-column-pad">
                   <ToggleButtons labelText="Ground Operation Status*" valueSelected={'CANCELED'} options={toggleButtonsOptions} />
@@ -101,7 +100,7 @@ class GroundRiskDecisionCancelPage extends Component {
                   <TextField hintText="Hint Text" floatingLabelText="Reason*" />
                 </div>
               </div>
-            </PanelText>
+            </PanelBody>
           </Panel>
         </div>
       </div>

@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import PanelExpandable from './PanelExpandable';
 import velocity from 'velocity-animate';
-
-const complete = () => {
-  console.log('velocity animate complete');
-};
+import _omit from 'lodash/omit';
 
 class Panel extends Component {
   constructor(props) {
     super(props);
-    this.cardRefId = null;
-    this.cardRef = null;
+    this.panelBody = null;
+    this.keepProps = {};
   }
 
   static propTypes = {
@@ -73,13 +70,6 @@ class Panel extends Component {
     expanded: null
   };
 
-  componentDidMount() {
-    console.log('this.cardRefId=', this.cardRefId);
-    if (this.cardRefId) {
-      this.cardRef = document.getElementById(this.cardRefId);
-    }
-  }
-
   componentWillMount() {
     this.setState({
       expanded: this.props.expanded === null ? this.props.initiallyExpanded === true : this.props.expanded
@@ -105,13 +95,15 @@ class Panel extends Component {
     const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
     const self = this;
     this.setState({ expanded: newExpandedState }, () => {
-      velocity(this.cardRef, animVal, {
+      velocity(this.panelBody, animVal, {
         duration: expansionDuration,
-        complete: () => {
-          console.log('complete with newExpandedState=', newExpandedState);
-        }
+        complete: () => {}
       });
     });
+  };
+
+  registerCollapseRef = childRef => {
+    this.panelBody = childRef;
   };
 
   render() {
@@ -155,8 +147,8 @@ class Panel extends Component {
             />
           );
         }
-        if (currentChild.type.muiName === 'PanelText') {
-          this.cardRefId = currentChild.props.id;
+        if (currentChild.type.muiName === 'PanelBody') {
+          newProps.registerCollapseRef = this.registerCollapseRef;
           doClone = true;
         }
         if (doClone) {
@@ -170,23 +162,19 @@ class Panel extends Component {
 
     // If the last element is text or a title we should add
     // 8px padding to the bottom of the card
-    const addBottomPadding = lastElement && (lastElement.type.muiName === 'PanelText' || lastElement.type.muiName === 'PanelTitle');
-
     const mergedStyles = Object.assign(
       {
-        zIndex: 1
+        zIndex: 1,
+        width: '100%'
       },
       style
     );
-    const containerMergedStyles = Object.assign(
-      {
-        paddingBottom: addBottomPadding ? 8 : 0
-      },
-      containerStyle
-    );
+    const containerMergedStyles = Object.assign({}, containerStyle);
 
+    this.keepProps = _omit(other, 'expansionDuration');
+    const { keepProps } = this;
     return (
-      <Paper {...other} style={mergedStyles}>
+      <Paper {...keepProps} style={mergedStyles}>
         <div style={containerMergedStyles}>
           {newChildren}
         </div>

@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { indigo100 } from 'material-ui/styles/colors';
 import HeaderNavAction from '../../TomisInternal/HeaderNavAction';
-import { Panel, PanelHeader, PanelText } from '../../TomisMui/Panel';
+import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisNew/ToggleButtons';
 import TextFieldSimple from '../../Tomis/TextFieldSimple';
 import AutoComplete from '../../Tomis/AutoComplete';
@@ -95,7 +94,6 @@ class RiskDecisionCore extends Component {
     super(props);
     this.handleCloseConfirm = this.handleCloseConfirm.bind(this);
     this.handleChangeFlightStatus = this.handleChangeFlightStatus.bind(this);
-    this.handleExpandChange = this.handleExpandChange.bind(this);
     this.prevFlightStatus = 'PENDING';
   }
 
@@ -141,10 +139,6 @@ class RiskDecisionCore extends Component {
     }
   }
 
-  handleExpandChange(newExpandedState) {
-    this.setState({ isPanelExpanded: newExpandedState });
-  }
-
   render() {
     const {
       getBackgroundColorAccept,
@@ -154,8 +148,7 @@ class RiskDecisionCore extends Component {
       handleTouchTapInfo,
       handleCloseInfo,
       handleChangeFlightStatus,
-      handleCloseConfirm,
-      handleExpandChange
+      handleCloseConfirm
     } = this;
     const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
     return (
@@ -192,7 +185,7 @@ class RiskDecisionCore extends Component {
 
         <div className="outer-card-margin">
           <Panel>
-            <PanelHeader title="Risk Decision" style={{ backgroundColor: indigo100, width: '100%' }}>
+            <PanelHeaderSection title="Risk Decision">
               <a
                 href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D"
                 style={{ marginLeft: '0px' }}
@@ -200,9 +193,8 @@ class RiskDecisionCore extends Component {
               >
                 Risk Assessment Form
               </a>
-              {/*<ButtonRaisedSimplePrimary label="Do Something" />*/}
-            </PanelHeader>
-            <PanelText id="sectionPanel1">
+            </PanelHeaderSection>
+            <PanelBody>
               <div className="flex-row">
                 <div className="flex-1">
                   <ToggleButtons
@@ -248,7 +240,7 @@ class RiskDecisionCore extends Component {
                 <FileAttachment />
               </div>
               {this.props.children}
-            </PanelText>
+            </PanelBody>
           </Panel>
         </div>
       </div>
