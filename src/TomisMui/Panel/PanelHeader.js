@@ -1,6 +1,10 @@
 import React, { Component, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 
+const defaultProps = {
+  showExpandableButton: true
+};
+
 function getStyles(props, context) {
   const { card } = context.muiTheme;
 
@@ -34,7 +38,7 @@ function getStyles(props, context) {
 }
 
 class PanelHeader extends Component {
-  static muiName = 'CardHeader';
+  static muiName = 'PanelHeader';
 
   static propTypes = {
     /**
@@ -136,4 +140,5 @@ class PanelHeader extends Component {
   }
 }
 
+PanelHeader.defaultProps = defaultProps;
 export default PanelHeader;

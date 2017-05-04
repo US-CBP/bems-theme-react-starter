@@ -4,7 +4,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
-import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
+import { Panel, PanelHeader, PanelText } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from 'material-ui/Checkbox';
@@ -90,32 +90,22 @@ class GroundRiskDecision extends Component {
       <div>
         <HeaderNavAction actionBarPageTitle="Ground Operation" />
         <div className="outer-card-margin">
-        <Card expanded={true}>
-        <CardHeader
-          title={<span>Executed/Canceled</span>}
-          actAsExpander={true}
-          showExpandableButton={true}
-          style={{ backgroundColor: indigo100 }}
-        />
-
-          <CardText expandable={true}>
-            <div className="flex-row">
-              <div>
-                <ToggleButtons
-                  labelText="Ground Operation Status*"
-                  valueSelected={'EXECUTED'}
-                  options={toggleButtonsOptions}
-                />
+          <Panel>
+            <PanelHeader title={<span>Executed/Canceled</span>} showExpandableButton={true} style={{ backgroundColor: indigo100 }} />
+            <PanelText id="groundPanel">
+              <div className="flex-row">
+                <div>
+                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'EXECUTED'} options={toggleButtonsOptions} />
+                </div>
               </div>
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <div>
-            Execution May Begin
-            </div>
-          </CardText>
-        </Card>
+              <br />
+              <br />
+              <br />
+              <div>
+                Execution May Begin
+              </div>
+            </PanelText>
+          </Panel>
         </div>
       </div>
     );

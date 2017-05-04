@@ -24,7 +24,7 @@ function getStyles(props, context) {
 }
 
 class PanelTitle extends Component {
-  static muiName = 'CardTitle';
+  static muiName = 'PanelTitle';
 
   static propTypes = {
     /**

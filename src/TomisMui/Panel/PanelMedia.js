@@ -113,12 +113,12 @@ class PanelMedia extends Component {
     });
 
     const overlayChildren = React.Children.map(overlay, child => {
-      if (child.type.muiName === 'CardHeader' || child.type.muiName === 'CardTitle') {
+      if (child.type.muiName === 'PanelHeader' || child.type.muiName === 'PanelTitle') {
         return React.cloneElement(child, {
           titleColor: titleColor,
           subtitleColor: subtitleColor
         });
-      } else if (child.type.muiName === 'CardText') {
+      } else if (child.type.muiName === 'PanelText') {
         return React.cloneElement(child, {
           color: color
         });

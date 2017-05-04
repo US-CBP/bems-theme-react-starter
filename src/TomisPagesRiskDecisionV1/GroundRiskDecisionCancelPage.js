@@ -4,7 +4,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
-import { Card, CardActions, CardHeader, CardText } from '../TomisMui/Card';
+import { Panel, PanelHeader, PanelText } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from 'material-ui/Checkbox';
@@ -90,27 +90,19 @@ class GroundRiskDecisionCancelPage extends Component {
       <div>
         <HeaderNavAction actionBarPageTitle="Ground Operation" />
         <div className="outer-card-margin">
-        <Card expanded={true}>
-        <CardHeader
-          title={<span>Executed/Canceled&nbsp;</span>}
-          actAsExpander={true}
-          showExpandableButton={true}
-          style={{ backgroundColor: indigo100 }}
-        />
-          <CardText expandable={true}>
-            <div className="flex-row">
-              <div className="flex-column-pad">
-                <ToggleButtons
-                  labelText="Ground Operation Status*"
-                  valueSelected={'CANCELED'}
-                  options={toggleButtonsOptions}
-                />
+          <Panel>
+            <PanelHeader title={<span>Executed/Canceled&nbsp;</span>} showExpandableButton={true} style={{ backgroundColor: indigo100 }} />
+            <PanelText id="groundCancelPanel">
+              <div className="flex-row">
+                <div className="flex-column-pad">
+                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'CANCELED'} options={toggleButtonsOptions} />
+                </div>
+                <div>
+                  <TextField hintText="Hint Text" floatingLabelText="Reason*" />
+                </div>
               </div>
-              <div><TextField hintText="Hint Text" floatingLabelText="Reason*" />
-              </div>
-            </div>
-          </CardText>
-        </Card>
+            </PanelText>
+          </Panel>
         </div>
       </div>
     );

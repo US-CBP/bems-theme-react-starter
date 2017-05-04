@@ -171,11 +171,11 @@ class RiskDecisionRejectPage extends Component {
       <div>
         <RiskDecisionCore flightStatus="REJECT">
           <div className="flex-row row-spacer-24">
-            <Panel expanded={isPanelExpanded} onExpandChange={handleExpandChange}>
+            <Panel style={{ width: '100%' }}>
               <PanelHeader title="No Launch Reason(s)" showExpandableButton={true} style={{ backgroundColor: '#e9e9e9' }}>
                 <ButtonRaisedSimplePrimary label="Add No Launch Reason" onTouchTap={addNoLaunchReasonRow} />
               </PanelHeader>
-              <PanelText expandable={true}>
+              <PanelText id="noLaunchReasonPanel">
                 <div>
                   <Table
                     height={this.state.height}

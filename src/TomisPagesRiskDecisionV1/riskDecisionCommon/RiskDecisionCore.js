@@ -14,7 +14,38 @@ import DialogSimple from '../../Tomis/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
-const numberOfMissionsLovValues = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+const numberOfMissionsLovValues = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20',
+  '21',
+  '22',
+  '23',
+  '24',
+  '25',
+  '26',
+  '27',
+  '28',
+  '29',
+  '30'
+];
 
 const tableData = [
   {
@@ -160,8 +191,8 @@ class RiskDecisionCore extends Component {
         </DialogSimple>
 
         <div className="outer-card-margin">
-          <Panel expanded={isPanelExpanded} onExpandChange={handleExpandChange}>
-            <PanelHeader title="Risk Decision" showExpandableButton={true} style={{ backgroundColor: indigo100 }}>
+          <Panel>
+            <PanelHeader title="Risk Decision" style={{ backgroundColor: indigo100, width: '100%' }}>
               <a
                 href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D"
                 style={{ marginLeft: '0px' }}
@@ -171,7 +202,7 @@ class RiskDecisionCore extends Component {
               </a>
               {/*<ButtonRaisedSimplePrimary label="Do Something" />*/}
             </PanelHeader>
-            <PanelText expandable={true}>
+            <PanelText id="sectionPanel1">
               <div className="flex-row">
                 <div className="flex-1">
                   <ToggleButtons
@@ -181,8 +212,8 @@ class RiskDecisionCore extends Component {
                     onChange={handleChangeFlightStatus}
                   />
                 </div>
-                </div>
-                <div className="flex-row">
+              </div>
+              <div className="flex-row">
                 <div className="flex-1">
                   <AutoComplete
                     dataSource={numberOfMissionsLovValues}

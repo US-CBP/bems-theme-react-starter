@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import PanelExpandable from './PanelExpandable';
+import velocity from 'velocity-animate';
+
+const complete = () => {
+  console.log('velocity animate complete');
+};
 
 class Panel extends Component {
+  constructor(props) {
+    super(props);
+    this.cardRefId = null;
+    this.cardRef = null;
+  }
+
   static propTypes = {
     /**
      * Can be used to render elements inside the Card.
@@ -43,18 +55,30 @@ class Panel extends Component {
     /**
      * Override the inline-styles of the root element.
      */
-    style: PropTypes.object
+    style: PropTypes.object,
+    /**
+     * Override the default animation expansionDuration.  Set this to 0 if you do not want any animation on open/close
+     */
+    expansionDuration: PropTypes.number
   };
 
   static defaultProps = {
     expandable: false,
     expanded: null,
-    initiallyExpanded: false
+    initiallyExpanded: true,
+    expansionDuration: 500
   };
 
   state = {
     expanded: null
   };
+
+  componentDidMount() {
+    console.log('this.cardRefId=', this.cardRefId);
+    if (this.cardRefId) {
+      this.cardRef = document.getElementById(this.cardRefId);
+    }
+  }
 
   componentWillMount() {
     this.setState({
@@ -71,12 +95,23 @@ class Panel extends Component {
     event.preventDefault();
     const newExpandedState = !this.state.expanded;
     // no automatic state update when the component is controlled
-    if (this.props.expanded === null) {
-      this.setState({ expanded: newExpandedState });
-    }
+    // if (this.props.expanded === null) {
+    //   this.setState({ expanded: newExpandedState });
+    // }
     if (this.props.onExpandChange) {
       this.props.onExpandChange(newExpandedState);
     }
+    const { expansionDuration } = this.props;
+    const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
+    const self = this;
+    this.setState({ expanded: newExpandedState }, () => {
+      velocity(this.cardRef, animVal, {
+        duration: expansionDuration,
+        complete: () => {
+          console.log('complete with newExpandedState=', newExpandedState);
+        }
+      });
+    });
   };
 
   render() {
@@ -120,6 +155,10 @@ class Panel extends Component {
             />
           );
         }
+        if (currentChild.type.muiName === 'PanelText') {
+          this.cardRefId = currentChild.props.id;
+          doClone = true;
+        }
         if (doClone) {
           element = React.cloneElement(currentChild, newProps, currentChild.props.children, newChild);
         }
@@ -131,7 +170,7 @@ class Panel extends Component {
 
     // If the last element is text or a title we should add
     // 8px padding to the bottom of the card
-    const addBottomPadding = lastElement && (lastElement.type.muiName === 'CardText' || lastElement.type.muiName === 'CardTitle');
+    const addBottomPadding = lastElement && (lastElement.type.muiName === 'PanelText' || lastElement.type.muiName === 'PanelTitle');
 
     const mergedStyles = Object.assign(
       {

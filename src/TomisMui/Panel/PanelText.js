@@ -14,7 +14,7 @@ function getStyles(props, context) {
 }
 
 class PanelText extends Component {
-  static muiName = 'CardText';
+  static muiName = 'PanelText';
 
   static propTypes = {
     /**
@@ -26,7 +26,7 @@ class PanelText extends Component {
      */
     children: PropTypes.node,
     /**
-     * Override the CardText color.
+     * Override the PanelText color.
      */
     color: PropTypes.string,
     /**
