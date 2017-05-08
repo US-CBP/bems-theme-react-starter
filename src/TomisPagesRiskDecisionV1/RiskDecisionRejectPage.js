@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import TextFieldSimple from '../Tomis/TextFieldSimple';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
-import RaisedButton from '../TomisMui/RaisedButton';
 import FlatButton from '../TomisMui/FlatButton';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../Tomis/AutoComplete';
@@ -161,6 +160,19 @@ class RiskDecisionRejectPage extends Component {
       delNoLaunchReasonRow
     } = this;
     const { dataSource1, dataSource2, isPanelExpanded, openJustification, anchorElJustification } = this.state;
+    const {
+      height,
+      fixedHeader,
+      fixedFooter,
+      selectable,
+      multiSelectable,
+      showCheckboxes,
+      deselectOnClickaway,
+      showRowHover,
+      stripedRows,
+      open,
+      anchorEl
+    } = this.state;
     return (
       <div>
         <RiskDecisionCore flightStatus="REJECT">
@@ -171,13 +183,7 @@ class RiskDecisionRejectPage extends Component {
               </PanelHeaderTable>
               <PanelBody>
                 <div>
-                  <Table
-                    height={this.state.height}
-                    fixedHeader={this.state.fixedHeader}
-                    fixedFooter={this.state.fixedFooter}
-                    selectable={this.state.selectable}
-                    multiSelectable={this.state.multiSelectable}
-                  >
+                  <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
                       <TableRow selectable={false}>
                         <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
@@ -188,13 +194,13 @@ class RiskDecisionRejectPage extends Component {
                       </TableRow>
                     </TableHeader>
                     <TableBody
-                      displayRowCheckbox={this.state.showCheckboxes}
-                      deselectOnClickaway={this.state.deselectOnClickaway}
-                      showRowHover={this.state.showRowHover}
-                      stripedRows={this.state.stripedRows}
+                      displayRowCheckbox={showCheckboxes}
+                      deselectOnClickaway={deselectOnClickaway}
+                      showRowHover={showRowHover}
+                      stripedRows={stripedRows}
                     >
                       {tableData.map((row, idx) => (
-                        <TableRow key={idx} selected={row.selected} className="red-table-row-TESTING">
+                        <TableRow key={idx} selected={row.selected}>
                           <TableRowColumn><Checkbox /></TableRowColumn>
                           <TableRowColumn>{idx + 1}</TableRowColumn>
                           <TableRowColumn>
@@ -202,8 +208,8 @@ class RiskDecisionRejectPage extends Component {
                               {row.name}
                             </div>
                             <Popover
-                              open={this.state.open}
-                              anchorEl={this.state.anchorEl}
+                              open={open}
+                              anchorEl={anchorEl}
                               anchorOrigin={anchorOrigin}
                               targetOrigin={targetOrigin}
                               onRequestClose={handleRequestClose}

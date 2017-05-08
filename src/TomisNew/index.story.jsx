@@ -7,6 +7,7 @@ import TableEditable from './TableEditable';
 import ToggleButtons from './ToggleButtons';
 import FileAttachment from './FileAttachment';
 import TimeSpinner from './TimeSpinner';
+import PanelExample from './PanelExample';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -37,6 +38,9 @@ storiesOf('TOMIS New', module)
   })
   .add('Time Spinner - Pending', () => {
     return <TimeSpinner />;
+  })
+  .add('Panel Example - Pending', () => {
+    return <PanelExample />;
   });
 
 function withNote(note, child) {
