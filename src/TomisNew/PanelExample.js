@@ -75,7 +75,7 @@ const PanelExample = ({ ...props }) => {
               </PanelHeaderTable>
               <PanelBody>
                 <div>
-                  <Table height={400} fixedHeader={false} fixedFooter={false} selectable={false} multiSelectable={false}>
+                  <Table height="400px" fixedHeader={false} fixedFooter={false} selectable={false} multiSelectable={false}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
                       <TableRow selectable={false}>
                         <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>

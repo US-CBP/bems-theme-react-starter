@@ -57,13 +57,17 @@ class Panel extends Component {
      * Override the default animation expansionDuration.  Set this to 0 if you do not want any animation on open/close
      */
     expansionDuration: PropTypes.number
+    /**
+     * Override the default animation flag.  Default is yes, animate open/close.  If you don't want that, set isAnimate to false, then open/close is immediate.
+     */
   };
 
   static defaultProps = {
     expandable: false,
     expanded: null,
     initiallyExpanded: true,
-    expansionDuration: 500
+    expansionDuration: 500,
+    isAnimate: true
   };
 
   state = {
@@ -91,12 +95,13 @@ class Panel extends Component {
     if (this.props.onExpandChange) {
       this.props.onExpandChange(newExpandedState);
     }
-    const { expansionDuration } = this.props;
+    const { expansionDuration, isAnimate } = this.props;
+    const duration = isAnimate ? expansionDuration : 0;
     const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
     const self = this;
     this.setState({ expanded: newExpandedState }, () => {
       velocity(this.panelBody, animVal, {
-        duration: expansionDuration,
+        duration,
         complete: () => {}
       });
     });
@@ -171,7 +176,7 @@ class Panel extends Component {
     );
     const containerMergedStyles = Object.assign({}, containerStyle);
 
-    this.keepProps = _omit(other, 'expansionDuration');
+    this.keepProps = _omit(other, ['expansionDuration', 'isAnimate']);
     const { keepProps } = this;
     return (
       <Paper {...keepProps} style={mergedStyles}>
