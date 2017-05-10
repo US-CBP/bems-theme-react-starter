@@ -15,7 +15,7 @@ import '../app/index.css';
 
 const theme = getMuiTheme(tomisTheme);
 
-storiesOf('TOMIS Pages - Risk Decision V1', module)
+storiesOf('Risk Decision - Flight/Float/Ground', module)
   .addDecorator(story => {
     const storyKind = story();
     return (
