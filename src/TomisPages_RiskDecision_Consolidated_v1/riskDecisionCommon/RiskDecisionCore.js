@@ -169,8 +169,7 @@ class RiskDecisionCore extends Component {
               <a
                 href="https://uconnect.cbpnet.cbp.dhs.gov/sites/OIT/bems/BEI/tomis/OAM/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOIT%2Fbems%2FBEI%2Ftomis%2FOAM%2FTest%20for%20PRD&FolderCTID=0x012000E16EFDC3EAB388448214D711CE710140&View=%7BE25102CE%2DEA12%2D4305%2D90B1%2DD0037623B83F%7D"
                 style={{ marginLeft: '0px' }}
-                className="panel-link"
-              >
+                className="panel-link" >
                 Risk Assessment Form
               </a>
             </PanelHeaderSection>
