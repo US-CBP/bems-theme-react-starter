@@ -3,7 +3,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TableEditable from '../TomisMui/TableEditable';
 import ToggleButtons from '../TomisMui/ToggleButtons';
 // import ToggleButtonsTwo from '../TomisMui/ToggleButtonsTwo';
 import FileAttachment from '../TomisMui/FileAttachment';
@@ -27,9 +26,6 @@ storiesOf('TOMIS New', module)
         </div>
       </div>
     );
-  })
-  .add('Table Editable - Pending', () => {
-    return <TableEditable />;
   })
   .add('Toggle Buttons - Pending', () => {
     return <ToggleButtons />;

@@ -25,6 +25,7 @@ import ProgressRefreshLoading from './ProgressRefreshLoading';
 import SwitchCheckbox from './SwitchCheckbox';
 import SnackbarSimple from './SnackbarSimple';
 import TableReadOnly from './TableReadOnly';
+import TableEditable from './TableEditable';
 import TextFieldSimple from './TextFieldSimple';
 import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 import ToolbarActionBar from './ToolbarActionBar';
@@ -142,6 +143,9 @@ storiesOf('TOMIS', module)
   })
   .add('Table - Read-Only', () => {
     return <TableReadOnly />;
+  })
+  .add('Table - Editable', () => {
+    return <TableEditable />;
   })
   .add('Toolbar, Action Bar - Pending', () => {
     return <ToolbarActionBar />;

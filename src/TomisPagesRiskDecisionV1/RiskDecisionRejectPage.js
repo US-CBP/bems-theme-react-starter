@@ -10,7 +10,7 @@ import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../TomisMui/IconButton';
 import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
-import Popover from 'material-ui/Popover';
+import Popover from '../TomisMui/Popover';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 
@@ -222,8 +222,8 @@ class RiskDecisionRejectPage extends Component {
                                   floatingLabelText="Sub-Category*"
                                 />
                                 <div className="flex-row flex-justify-end">
-                                  <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
                                   <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
                                 </div>
                               </div>
                             </Popover>
@@ -247,8 +247,8 @@ class RiskDecisionRejectPage extends Component {
                                   floatingLabelText="Justification*"
                                 />
                                 <div className="flex-row">
-                                  <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                                   <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                                 </div>
                               </div>
                             </Popover>
