@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import TextFieldSimple from '../Tomis/TextFieldSimple';
+import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import IconButton from '../TomisMui/IconButton';
 import InfoIcon from 'material-ui/svg-icons/action/info';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';

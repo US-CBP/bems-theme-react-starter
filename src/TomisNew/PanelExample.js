@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Panel, PanelHeaderSection, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
-import ButtonRaisedSimplePrimary from '../Tomis/ButtonRaisedSimplePrimary';
+import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import Checkbox from '../TomisMui/Checkbox';
 import IconButton from '../TomisMui/IconButton';

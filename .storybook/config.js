@@ -18,7 +18,7 @@ storybook.configure(() => {
   // require('../src/stories');
   // require('../src/ThemeSwitcher.story');
   require('../src/Mui/index.story');
-  require('../src/Tomis/index.story');
+  require('../src/TomisMui/index.story');
   require('../src/TomisInternal/index.story');
   require('../src/TomisNew/index.story');
   require('../src/TomisPages/index.story');

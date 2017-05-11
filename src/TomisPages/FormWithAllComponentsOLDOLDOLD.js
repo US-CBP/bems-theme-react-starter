@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import RaisedButton from 'material-ui/RaisedButton';
-import TableReadOnly from '../Tomis/TableReadOnly';
-import DividerMenu from '../Tomis/DividerMenu';
+import TableReadOnly from '../TomisMui/TableReadOnly';
+import DividerMenu from '../TomisMui/DividerMenu';
 
 class FormWithAllComponents extends Component {
   constructor(props) {

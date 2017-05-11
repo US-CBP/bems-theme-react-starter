@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import TextFieldSimple from '../Tomis/TextFieldSimple';
+import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import HeaderNavAction from '../TomisInternal/HeaderNavAction';
 import FlatButton from '../TomisMui/FlatButton';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
-import AutoComplete from '../Tomis/AutoComplete';
+import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -13,7 +13,7 @@ import RiskDecisionCore from './riskDecisionCommon/RiskDecisionCore';
 import NewRejectDat from './riskDecisionCommon/NewRejectData';
 import Popover from 'material-ui/Popover';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import ButtonRaisedSimplePrimary from '../Tomis/ButtonRaisedSimplePrimary';
+import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };

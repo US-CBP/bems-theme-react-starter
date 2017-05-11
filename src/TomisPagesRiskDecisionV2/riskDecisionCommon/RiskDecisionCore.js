@@ -4,12 +4,12 @@ import { indigo100 } from 'material-ui/styles/colors';
 import HeaderNavAction from '../../TomisInternal/HeaderNavAction';
 import { Card, CardActions, CardHeader, CardText } from '../../TomisMui/Card';
 import ToggleButtons from '../../TomisNew/ToggleButtons';
-import TextFieldSimple from '../../Tomis/TextFieldSimple';
-import AutoComplete from '../../Tomis/AutoComplete';
-import AutoCompleteInfo from '../../Tomis/AutoCompleteInfo';
+import TextFieldSimple from '../../TomisMui/TextFieldSimple';
+import AutoComplete from '../../TomisMui/AutoComplete';
+import AutoCompleteInfo from '../../TomisMui/AutoCompleteInfo';
 import FileAttachment from '../../TomisNew/FileAttachment';
-import DatePickerInlineLandscape from '../../Tomis/DatePickerInlineLandscape';
-import DialogSimple from '../../Tomis/DialogSimple';
+import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
+import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible } from './helper';
 

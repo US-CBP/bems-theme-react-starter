@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import ToolbarCbpHeader from '../Tomis/ToolbarCbpHeader';
-import ToolbarActionBar from '../Tomis/ToolbarActionBar';
+import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
+import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
 
 const propTypes = {
   actionBarPageTitle: PropTypes.string
