@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import TextFieldSimple from '../TomisMui/TextFieldSimple';
-import HeaderNavAction from '../TomisInternal/HeaderNavAction';
+import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import FlatButton from '../TomisMui/FlatButton';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';

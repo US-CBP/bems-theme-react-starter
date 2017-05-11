@@ -3,7 +3,7 @@ import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
-import Search from '../TomisInternal/Search';
+import Search from '../TomisMui/Search';
 import SearchIcon from 'react-material-icons/icons/action/search';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import AppBar from 'material-ui/AppBar';

@@ -4,7 +4,7 @@ import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
 import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
 import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import AutoComplete from '../TomisMui/AutoComplete';
-import ToggleButtons from '../TomisNew/ToggleButtons';
+import ToggleButtons from '../TomisMui/ToggleButtons';
 import FormRow from '../TomisMui/helper/FormRow';
 import { FormCol } from '../TomisMui/helper/StyledComponents';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsConfirmVisible } from './helper';

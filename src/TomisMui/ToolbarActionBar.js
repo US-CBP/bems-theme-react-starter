@@ -14,8 +14,8 @@ import HamburgerMenu from 'material-ui/svg-icons/navigation/menu';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import CommunicationChatBubbleOpen from 'material-ui/svg-icons/communication/chat-bubble-outline';
 import Subheader from 'material-ui/Subheader';
-import Logged from '../TomisInternal/Logged';
-import CalendarView from '../TomisInternal/CalendarView';
+import Logged from '../TomisMui/Logged';
+import CalendarView from '../TomisMui/CalendarView';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {
   getStatusBarStyle,

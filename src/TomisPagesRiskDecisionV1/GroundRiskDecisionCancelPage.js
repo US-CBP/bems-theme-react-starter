@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from '../TomisMui/TextField';
-import HeaderNavAction from '../TomisInternal/HeaderNavAction';
+import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import { Panel, PanelHeaderSection, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';
@@ -12,7 +12,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import ToggleButtons from '../TomisNew/ToggleButtons';
+import ToggleButtons from '../TomisMui/ToggleButtons';
 
 export const toggleButtonsOptions = [{ label: 'Executed', value: 'EXECUTED' }, { label: 'Canceled', value: 'CANCELED' }];
 

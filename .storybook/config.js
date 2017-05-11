@@ -19,7 +19,6 @@ storybook.configure(() => {
   // require('../src/ThemeSwitcher.story');
   require('../src/Mui/index.story');
   require('../src/TomisMui/index.story');
-  require('../src/TomisInternal/index.story');
   require('../src/TomisNew/index.story');
   require('../src/TomisPages/index.story');
   require('../src/TomisPagesRiskDecisionV1/index.story');

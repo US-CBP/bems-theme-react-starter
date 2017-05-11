@@ -1,13 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import HeaderNavAction from '../../TomisInternal/HeaderNavAction';
+import HeaderNavAction from '../../TomisMui/HeaderNavAction';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
-import ToggleButtons from '../../TomisNew/ToggleButtons';
+import ToggleButtons from '../../TomisMui/ToggleButtons';
 import TextFieldSimple from '../../TomisMui/TextFieldSimple';
 import AutoComplete from '../../TomisMui/AutoComplete';
 import AutoCompleteInfo from '../../TomisMui/AutoCompleteInfo';
 import ButtonRaisedSimplePrimary from '../../TomisMui/ButtonRaisedSimplePrimary';
-import FileAttachment from '../../TomisNew/FileAttachment';
+import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
