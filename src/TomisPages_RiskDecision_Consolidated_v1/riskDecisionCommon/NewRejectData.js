@@ -14,53 +14,25 @@ import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsYesNoOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
-const setStateInitAmo = (initAmo, state, props) => {
-  return { initAmo };
-};
-
-const setStateInitUsbp = (initUsbp, state, props) => {
-  return { initUsbp };
-};
-
-const setStateOtherAgency = (otherAgency, state, props) => {
-  return { otherAgency };
-};
-
 class NewRejectData extends Component {
   constructor(props) {
     super(props);
     this.handleChangeInitAmo = this.handleChangeInitAmo.bind(this);
-    this.handleChangeInitUsbp = this.handleChangeInitUsbp.bind(this);
-    this.handleChangeOtherAgency = this.handleChangeOtherAgency.bind(this);
 
     this.state = {
-      initAmo: '',
       initUsbp: '',
       otherAgency: ''
     };
   }
 
-  handleChangeInitAmo(event, value) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.setState(setStateInitAmo.bind(this, value));
-  }
-
-  handleChangeInitUsbp(event, value) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.setState(setStateInitUsbp.bind(this, value));
-  }
-
-  handleChangeOtherAgency(event, value) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.setState(setStateOtherAgency.bind(this, value));
+  handleChangeInitAmo(evt, value) {
+    evt.stopPropagation();
+    console.log('value=', value);
   }
 
   render() {
-    const { handleChangeInitAmo, handleChangeInitUsbp, handleChangeOtherAgency } = this.state;
-    const { initAmo, initUsbp, otherAgency } = this.state;
+    const { handleChangeInitAmo } = this;
+    const { initUsbp, otherAgency } = this.state;
     return (
       <div>
         <div className="flex-row flex-1">
@@ -82,23 +54,13 @@ class NewRejectData extends Component {
         </div>
         <div className="flex-row">
           <div className="flex-1">
-            <ToggleButtons labelText="Mission Initiated By AMO?*" valueSelected={initAmo} options={toggleButtonsYesNoOptions} onChange={handleChangeInitAmo} />
+            <ToggleButtons labelText="Mission Initiated By AMO?*" valueSelected="" options={toggleButtonsYesNoOptions} onChange={handleChangeInitAmo} />
           </div>
           <div className="flex-1 flex-column-pad">
-            <ToggleButtons
-              labelText="Mission Initiated by USBP?*"
-              valueSelected={initUsbp}
-              options={toggleButtonsYesNoOptions}
-              onChange={handleChangeInitUsbp}
-            />
+            <ToggleButtons labelText="Mission Initiated by USBP?*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
           <div className="flex-1 flex-column-pad">
-            <ToggleButtons
-              labelText="Coordinated with Other Agency*"
-              valueSelected={otherAgency}
-              options={toggleButtonsYesNoOptions}
-              onChange={handleChangeOtherAgency}
-            />
+            <ToggleButtons labelText="Coordinated with Other Agency*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
         </div>
         <div className="flex-row">

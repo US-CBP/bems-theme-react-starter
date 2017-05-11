@@ -5,6 +5,7 @@ import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TableEditable from '../TomisMui/TableEditable';
 import ToggleButtons from '../TomisMui/ToggleButtons';
+// import ToggleButtonsTwo from '../TomisMui/ToggleButtonsTwo';
 import FileAttachment from '../TomisMui/FileAttachment';
 import TimeSpinner from '../TomisMui/TimeSpinner';
 import PanelExample from '../TomisMui/PanelExample';
@@ -33,6 +34,9 @@ storiesOf('TOMIS New', module)
   .add('Toggle Buttons - Pending', () => {
     return <ToggleButtons />;
   })
+  // .add('Toggle Buttons Two - Pending', () => {
+  //   return <ToggleButtonsTwo />;
+  // })
   .add('File Attachment - Pending', () => {
     return <FileAttachment />;
   })
