@@ -3,16 +3,14 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ToggleButtons from '../TomisMui/ToggleButtons';
-import FileAttachment from '../TomisMui/FileAttachment';
-import TimeSpinner from '../TomisMui/TimeSpinner';
+import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 
 const theme = getMuiTheme(tomisTheme);
 
-storiesOf('TOMIS New', module)
+storiesOf('TOMIS Internal', module)
   .addDecorator(story => {
     const storyKind = story();
     return (
@@ -25,17 +23,8 @@ storiesOf('TOMIS New', module)
       </div>
     );
   })
-  .add('Toggle Buttons - Pending', () => {
-    return <ToggleButtons />;
-  })
-  // .add('Toggle Buttons Two - Pending', () => {
-  //   return <ToggleButtonsTwo />;
-  // })
-  .add('File Attachment - Pending', () => {
-    return <FileAttachment />;
-  })
-  .add('Time Spinner - Pending', () => {
-    return <TimeSpinner />;
+  .add('Header, Nav, Action', () => {
+    return <HeaderNavAction />;
   });
 
 function withNote(note, child) {

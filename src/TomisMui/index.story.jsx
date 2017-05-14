@@ -20,6 +20,7 @@ import { ListItem } from 'material-ui/List';
 import ListSimple from './ListSimple';
 import ListNested from './ListNested';
 import MenuSimple from './MenuSimple';
+import PanelExample from '../TomisMui/PanelExample';
 import PopoverSimple from './PopoverSimple';
 import ProgressRefreshLoading from './ProgressRefreshLoading';
 import SwitchCheckbox from './SwitchCheckbox';
@@ -123,6 +124,9 @@ storiesOf('TOMIS', module)
       </MenuSimple>
     );
   })
+  .add('Panel Example', () => {
+    return <PanelExample />;
+  })
   .add('Popover - Simple', () => {
     return <PopoverSimple label="Toggle Popover" />;
   })
@@ -147,10 +151,10 @@ storiesOf('TOMIS', module)
   .add('Table - Editable', () => {
     return <TableEditable />;
   })
-  .add('Toolbar, Action Bar - Pending', () => {
+  .add('Toolbar, Action Bar', () => {
     return <ToolbarActionBar />;
   })
-  .add('Toolbar, CBP Header - Pending', () => {
+  .add('Toolbar, CBP Header', () => {
     return <ToolbarCbpHeader />;
   });
 
