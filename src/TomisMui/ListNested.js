@@ -1,5 +1,5 @@
 import React from 'react';
-import ExampleContainer from './helper/ExampleContainer';
+import ExampleContainer from './helpers/ExampleContainer';
 import { List, ListItem } from 'material-ui/List';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';

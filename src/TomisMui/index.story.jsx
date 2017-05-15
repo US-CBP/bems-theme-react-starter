@@ -21,6 +21,7 @@ import ListSimple from './ListSimple';
 import ListNested from './ListNested';
 import MenuSimple from './MenuSimple';
 import PanelExample from '../TomisMui/PanelExample';
+import Paper from '../TomisMui/Paper';
 import PopoverSimple from './PopoverSimple';
 import ProgressRefreshLoading from './ProgressRefreshLoading';
 import SwitchCheckbox from './SwitchCheckbox';
@@ -100,7 +101,7 @@ storiesOf('TOMIS', module)
   .add('Icon - SVG, Material', () => {
     return <IconSvgMaterial />;
   })
-  .add('List - Simple', () => {
+  .add('List - Simple Example', () => {
     return (
       <ListSimple>
         <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
@@ -114,7 +115,7 @@ storiesOf('TOMIS', module)
   .add('List - Nested', () => {
     return <ListNested />;
   })
-  .add('Menu - Simple', () => {
+  .add('Menu - Simple Example', () => {
     return (
       <MenuSimple>
         <MenuItem primaryText="Maps" />
@@ -126,6 +127,9 @@ storiesOf('TOMIS', module)
   })
   .add('Panel Example', () => {
     return <PanelExample />;
+  })
+  .add('Paper Example', () => {
+    return <Paper style={{ width: '100px', height: '300px' }} zDepth={1} />;
   })
   .add('Popover - Simple', () => {
     return <PopoverSimple label="Toggle Popover" />;
@@ -145,10 +149,10 @@ storiesOf('TOMIS', module)
   .add('Text Field, Default Value - Pending', () => {
     return <TextFieldSimpleDefaultValue />;
   })
-  .add('Table - Read-Only', () => {
+  .add('Table - Read-Only Example', () => {
     return <TableReadOnly />;
   })
-  .add('Table - Editable', () => {
+  .add('Table - Editable Example', () => {
     return <TableEditable />;
   })
   .add('Toolbar, Action Bar', () => {

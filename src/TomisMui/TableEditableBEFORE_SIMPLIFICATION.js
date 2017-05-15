@@ -12,7 +12,6 @@ import IconButton from '../TomisMui/IconButton';
 import Popover from '../TomisMui/Popover';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
-import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -118,7 +117,6 @@ class TableEditable extends Component {
 
   handleClickJustificationCell = (idx, evt) => {
     // This prevents ghost click from onTouchTap
-    evt.stopPropagation();
     evt.preventDefault();
     justificationEditIdx = idx;
     this.setState({
@@ -217,19 +215,15 @@ class TableEditable extends Component {
                         </Popover>
                       </TableRowColumn>
                       <TableRowColumn>
-                        <div className="editable-cell">
+                        <div className="editable-cell" onClick={handleClickJustificationCell.bind(this, idx)}>
                           {row.status}
                         </div>
-                        <TextFieldTableRowColumn idx={idx} editIdx={justificationEditIdx} isOpen={openJustification}>
-                          <TextFieldSimple onChange={handleUpdateJustification} hintText="Justification" fullWidth={true} floatingLabelText="Justification*" />
-                        </TextFieldTableRowColumn>
-                        {/*<Popover
+                        <Popover
                           open={openJustification}
                           anchorEl={anchorElJustification}
                           anchorOrigin={anchorOrigin}
                           targetOrigin={targetOrigin}
                           onRequestClose={handleRequestClose}
-                          animated={false}
                         >
                           <div className="editable-popover">
                             <TextFieldSimple
@@ -243,7 +237,7 @@ class TableEditable extends Component {
                               <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                             </div>
                           </div>
-                        </Popover>*/}
+                        </Popover>
                       </TableRowColumn>
                       <TableRowColumn>
                         <IconButton tooltip="Delete Row" onTouchTap={delNoLaunchReasonRow.bind(this, idx)}>

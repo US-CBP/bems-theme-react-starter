@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import ExampleContainer from './helper/ExampleContainer'
+import ExampleContainer from './helpers/ExampleContainer'
 import '../app/react-select.css';
 import Select from 'react-select'; //https://github.com/JedWatson/react-select
 

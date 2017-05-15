@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ExampleContainer from './helper/ExampleContainer';
+import ExampleContainer from './helpers/ExampleContainer';
 import RaisedButton from 'material-ui/RaisedButton';
 import RadioButton from 'material-ui/RadioButton';
 import Popover from 'material-ui/Popover/Popover';
