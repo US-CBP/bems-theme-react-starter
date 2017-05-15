@@ -148,6 +148,10 @@ class RiskDecisionRejectPage extends Component {
     this.setState({ tableRowCnt: tableData.length });
   }
 
+  handleCellClick(row, col, evt) {
+    console.log('RiskDecision_Consolidated_Reject handleCellClick, row, col=', row, col);
+  }
+
   render() {
     const {
       handleClickSubCategoryCell,
@@ -158,7 +162,8 @@ class RiskDecisionRejectPage extends Component {
       handleUpdateJustification,
       handleSaveJustification,
       handleRequestClose,
-      delNoLaunchReasonRow
+      delNoLaunchReasonRow,
+      handleCellClick
     } = this;
     const { dataSource1, dataSource2, isPanelExpanded, openJustification, anchorElJustification } = this.state;
     const {
@@ -184,7 +189,14 @@ class RiskDecisionRejectPage extends Component {
               </PanelHeaderTable>
               <PanelBody>
                 <div>
-                  <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
+                  <Table
+                    height={height}
+                    onCellClick={handleCellClick}
+                    fixedHeader={fixedHeader}
+                    fixedFooter={fixedFooter}
+                    selectable={selectable}
+                    multiSelectable={multiSelectable}
+                  >
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
                       <TableRow selectable={false}>
                         <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
@@ -223,8 +235,8 @@ class RiskDecisionRejectPage extends Component {
                                   floatingLabelText="Sub-Category*"
                                 />
                                 <div className="flex-row flex-justify-end">
-                                  <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
                                   <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
                                 </div>
                               </div>
                             </Popover>
@@ -248,8 +260,8 @@ class RiskDecisionRejectPage extends Component {
                                   floatingLabelText="Justification*"
                                 />
                                 <div className="flex-row">
-                                  <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                                   <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
+                                  <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
                                 </div>
                               </div>
                             </Popover>

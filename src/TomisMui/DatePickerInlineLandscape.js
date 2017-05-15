@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import DatePicker from 'material-ui/DatePicker';
+import DatePicker from '../TomisMui/DatePicker';
 import IconButton from '../TomisMui/IconButton';
 import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
+import moment from 'moment';
 
 const setStateDemoDate = (date, state, props) => {
   return { demoDate: date };
@@ -16,37 +17,30 @@ class DatePickerInlineLandscape extends Component {
   }
 
   state = {
-    demoDate: new Date()
+    demoDate: moment()
   };
 
   handleChangeDemoDate = (event, date) => {
-    this.setState(setStateDemoDate.bind(this, date));
+    const formattedDate = moment(date, 'MM/DD/YYYY');
+    console.log('formattedDate=', formattedDate.toString());
+    this.setState(setStateDemoDate.bind(this, formattedDate));
   };
 
   render() {
     const { handleChangeDemoDate } = this;
+    const { demoDate } = this.state;
     const { fullWidth = true } = this.props;
     return (
-      <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
-        <DatePicker
-          autoOk={false}
-          hintText="Landscape Inline Dialog"
-          fullWidth={fullWidth}
-          formatDate={date => date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()}
-          firstDayOfWeek={0}
-          floatingLabelText="Date"
-          hintText={<span>Select Date </span>}
-          onChange={handleChangeDemoDate}
-          {...this.props}
-          container="inline"
-          mode="landscape"
-        />
-        {/* must use inline style for position on IconButton to override default */}
-        <IconButton className="inline-icon" style={{ position: 'absolute', right: 0, bottom: 0 }}>
-          <MonthlyCalendarIcon />
-        </IconButton>
-
-      </div>
+      <DatePicker
+        autoOk={true}
+        fullWidth={fullWidth}
+        firstDayOfWeek={0}
+        floatingLabelText="Date"
+        hintText="Type or Select Date"
+        {...this.props}
+        container="inline"
+        mode="landscape"
+      />
     );
   }
 }
