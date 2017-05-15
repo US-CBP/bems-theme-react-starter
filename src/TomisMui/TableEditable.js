@@ -8,6 +8,7 @@ import IconButton from '../TomisMui/IconButton';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
 import DatePickerTableRowColumn from './helpers/DatePickerTableRowColumn';
+import TimeSpinnerTableRowColumn from './helpers/TimeSpinnerTableRowColumn';
 import AutoCompleteTableRowColumn from './helpers/AutoCompleteTableRowColumn';
 import moment from 'moment';
 
@@ -16,42 +17,49 @@ const tableData = [
     name: 'John Smith',
     status: 'Sample Justification 1',
     departureDt: undefined,
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Randal White',
     status: 'Sample Justification 2',
     departureDt: moment().toDate(),
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Stephanie Sanders',
     status: 'Sample Justification 3',
     departureDt: undefined,
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Steve Brown',
     status: 'Sample Justification 4',
     departureDt: moment().toDate(),
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Joyce Whitten',
     status: 'Sample Justification 5',
     departureDt: moment().subtract(2, 'months').toDate(),
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Samuel Roberts',
     status: 'Sample Justification 6',
     departureDt: undefined,
+    departureTime: 0,
     selected: true
   },
   {
     name: 'Adam Moore',
     status: 'Sample Justification 7',
     departureDt: moment().subtract(3, 'years').toDate(),
+    departureTime: 0,
     selected: true
   }
 ];
@@ -128,6 +136,7 @@ class TableEditable extends Component {
                   <TableRow selectable={false}>
                     <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Departure Date">Departure Date*</TableHeaderColumn>
+                    <TableHeaderColumn tooltip="Departure Time">Departure Date*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
@@ -143,6 +152,16 @@ class TableEditable extends Component {
                           floatingLabelText="Date*"
                           rowPropertyName="departureDt"
                           onSave={handleSaveTableRowColumnDate}
+                          rowData={row}
+                          rowIdx={idx}
+                        />
+                      </TableRowColumn>
+                      <TableRowColumn>
+                        <TimeSpinnerTableRowColumn
+                          hintText="Type Time"
+                          floatingLabelText="Time*"
+                          rowPropertyName="departureTime"
+                          onSave={handleSaveTableRowColumnValue}
                           rowData={row}
                           rowIdx={idx}
                         />

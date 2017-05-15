@@ -27,7 +27,7 @@ const propTypes = {
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
-class TextFieldTableRowColumn extends Component {
+class AutoCompleteTableRowColumn extends Component {
   constructor(props) {
     super(props);
     const { rowIdx } = props;
@@ -99,6 +99,6 @@ class TextFieldTableRowColumn extends Component {
   }
 }
 
-TextFieldTableRowColumn.defaultProps = defaultProps;
-TextFieldTableRowColumn.propTypes = propTypes;
-export default TextFieldTableRowColumn;
+AutoCompleteTableRowColumn.defaultProps = defaultProps;
+AutoCompleteTableRowColumn.propTypes = propTypes;
+export default AutoCompleteTableRowColumn;

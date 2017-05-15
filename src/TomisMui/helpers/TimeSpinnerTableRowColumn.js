@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from '../../TomisMui/FlatButton';
 import Popover from '../../TomisMui/Popover';
-import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
-import moment from 'moment';
+import TimeSpinner from '../../TomisMui/TimeSpinner';
 
-const MOMENT_FORMAT = 'MM/DD/YYYY';
 const setStateIsOpen = (isOpen, props, state) => {
   return { isOpen };
 };
@@ -29,7 +27,7 @@ const propTypes = {
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
-class DatePickerTableRowColumn extends Component {
+class TimeSpinnerTableRowColumn extends Component {
   constructor(props) {
     super(props);
     const { rowIdx } = props;
@@ -39,7 +37,6 @@ class DatePickerTableRowColumn extends Component {
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleOnChangeValue = this.handleOnChangeValue.bind(this);
     this.handleRequestSave = this.handleRequestSave.bind(this);
-    this.renderDateValue = this.renderDateValue.bind(this);
   }
 
   componentDidMount() {
@@ -72,22 +69,14 @@ class DatePickerTableRowColumn extends Component {
     this.setState(setStateValue.bind(this, newValue));
   }
 
-  renderDateValue(dt) {
-    if (dt === undefined) {
-      return undefined;
-    } else {
-      return moment(dt).format(MOMENT_FORMAT);
-    }
-  }
-
   render() {
-    const { popoverAnchor, handleClickToOpen, handleRequestClose, handleRequestSave, handleOnChangeValue, renderDateValue } = this;
+    const { popoverAnchor, handleClickToOpen, handleRequestClose, handleRequestSave, handleOnChangeValue } = this;
     const { isOpen, value } = this.state;
     const { rowIdx, rowData, rowPropertyName, hintText, floatingLabelText } = this.props;
     return (
       <div ref={ref => (this.popoverAnchor = ref)} className="editable-cell" onClick={handleClickToOpen}>
         <span>
-          {renderDateValue(rowData[rowPropertyName])}
+          {rowData[rowPropertyName]}
         </span>
         <Popover
           open={isOpen}
@@ -98,13 +87,7 @@ class DatePickerTableRowColumn extends Component {
           animated={false}
         >
           <div className="editable-popover">
-            <DatePickerInlineLandscape
-              value={value}
-              onChange={handleOnChangeValue}
-              hintText={hintText}
-              fullWidth={true}
-              floatingLabelText={floatingLabelText}
-            />
+            <TimeSpinner value={value} onChange={handleOnChangeValue} hintText={hintText} fullWidth={true} floatingLabelText={floatingLabelText} />
             <div className="flex-row">
               <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
               <FlatButton label="Save" primary={true} onClick={handleRequestSave} />
@@ -116,6 +99,6 @@ class DatePickerTableRowColumn extends Component {
   }
 }
 
-DatePickerTableRowColumn.defaultProps = defaultProps;
-DatePickerTableRowColumn.propTypes = propTypes;
-export default DatePickerTableRowColumn;
+TimeSpinnerTableRowColumn.defaultProps = defaultProps;
+TimeSpinnerTableRowColumn.propTypes = propTypes;
+export default TimeSpinnerTableRowColumn;
