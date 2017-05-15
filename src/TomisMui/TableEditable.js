@@ -7,37 +7,52 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../TomisMui/IconButton';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
+import DatePickerTableRowColumn from './helpers/DatePickerTableRowColumn';
+import AutoCompleteTableRowColumn from './helpers/AutoCompleteTableRowColumn';
+import moment from 'moment';
 
 const tableData = [
   {
     name: 'John Smith',
     status: 'Sample Justification 1',
+    departureDt: undefined,
     selected: true
   },
   {
     name: 'Randal White',
-    status: 'Sample Justification 2'
+    status: 'Sample Justification 2',
+    departureDt: moment().toDate(),
+    selected: true
   },
   {
     name: 'Stephanie Sanders',
     status: 'Sample Justification 3',
+    departureDt: undefined,
     selected: true
   },
   {
     name: 'Steve Brown',
-    status: 'Sample Justification 4'
+    status: 'Sample Justification 4',
+    departureDt: moment().toDate(),
+    selected: true
   },
   {
     name: 'Joyce Whitten',
-    status: 'Sample Justification 5'
+    status: 'Sample Justification 5',
+    departureDt: moment().subtract(2, 'months').toDate(),
+    selected: true
   },
   {
     name: 'Samuel Roberts',
-    status: 'Sample Justification 6'
+    status: 'Sample Justification 6',
+    departureDt: undefined,
+    selected: true
   },
   {
     name: 'Adam Moore',
-    status: 'Sample Justification 7'
+    status: 'Sample Justification 7',
+    departureDt: moment().subtract(3, 'years').toDate(),
+    selected: true
   }
 ];
 
@@ -68,6 +83,7 @@ class TableEditable extends Component {
     this.addRow = this.addRow.bind(this);
     this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
     this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
+    this.handleSaveTableRowColumnDate = this.handleSaveTableRowColumnDate.bind(this);
   }
 
   addRow(evt) {
@@ -90,8 +106,14 @@ class TableEditable extends Component {
     this.setState({ tableRowCnt: tableData.length });
   }
 
+  handleSaveTableRowColumnDate(rowIdx, propertyName, newValue) {
+    tableData[rowIdx][propertyName] = newValue;
+    //force table refresh
+    this.setState({ tableRowCnt: tableData.length });
+  }
+
   render() {
-    const { addRow, delNoLaunchReasonRow, handleSaveTableRowColumnValue } = this;
+    const { addRow, delNoLaunchReasonRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate } = this;
     const { height, fixedHeader, fixedFooter, selectable, multiSelectable, showCheckboxes, deselectOnClickaway, showRowHover, stripedRows } = this.state;
     return (
       <div className="flex-row row-spacer-24">
@@ -105,7 +127,7 @@ class TableEditable extends Component {
                 <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
                   <TableRow selectable={false}>
                     <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Category">Category*</TableHeaderColumn>
+                    <TableHeaderColumn tooltip="Departure Date">Departure Date*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
@@ -115,9 +137,18 @@ class TableEditable extends Component {
                   {tableData.map((row, idx) => (
                     <TableRow key={idx} selected={row.selected}>
                       <TableRowColumn><Checkbox /></TableRowColumn>
-                      <TableRowColumn>{idx + 1}</TableRowColumn>
                       <TableRowColumn>
-                        <TextFieldTableRowColumn
+                        <DatePickerTableRowColumn
+                          hintText="Type Date"
+                          floatingLabelText="Date*"
+                          rowPropertyName="departureDt"
+                          onSave={handleSaveTableRowColumnDate}
+                          rowData={row}
+                          rowIdx={idx}
+                        />
+                      </TableRowColumn>
+                      <TableRowColumn>
+                        <AutoCompleteTableRowColumn
                           hintText="Type Name"
                           floatingLabelText="Name*"
                           rowPropertyName="name"
