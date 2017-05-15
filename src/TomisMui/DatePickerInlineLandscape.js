@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import DatePicker from '../TomisMui/DatePicker';
-import IconButton from '../TomisMui/IconButton';
-import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import moment from 'moment';
 
 const setStateDemoDate = (date, state, props) => {

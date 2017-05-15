@@ -178,7 +178,7 @@ class DatePicker extends Component {
   componentWillMount() {
     this.setState({
       date: this.isControlled() ? this.getControlledDate() : this.props.defaultDate,
-      formattedDate: moment(this.getControlledDate()).format(MOMENT_FORMAT)
+      formattedDate: this.getControlledDate() ? moment(this.getControlledDate()).format(MOMENT_FORMAT) : ''
     });
   }
 
@@ -188,7 +188,7 @@ class DatePicker extends Component {
       if (!isEqualDate(this.state.date, newDate)) {
         this.setState({
           date: newDate,
-          formattedDate: moment(newDate).format(MOMENT_FORMAT)
+          formattedDate: newDate ? moment(newDate).format(MOMENT_FORMAT) : ''
         });
       }
     }
