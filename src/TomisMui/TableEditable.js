@@ -1,21 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import TextFieldSimple from '../TomisMui/TextFieldSimple';
-import HeaderNavAction from '../TomisMui/HeaderNavAction';
-import FlatButton from '../TomisMui/FlatButton';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
-import AutoComplete from '../TomisMui/AutoComplete';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../TomisMui/IconButton';
-import Popover from '../TomisMui/Popover';
-import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
-
-const anchorOrigin = { horizontal: 'left', vertical: 'top' };
-const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
 const tableData = [
   {
@@ -67,10 +58,6 @@ const initState = {
   deselectOnClickaway: true,
   showCheckboxes: false,
   height: '500px',
-  dataSource1: [],
-  open: false,
-  openJustification: false,
-  isPanelExpanded: true,
   tableRowCnt: tableData.length
 };
 
@@ -78,61 +65,10 @@ class TableEditable extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
-    this.handleUpdateSubCategory = this.handleUpdateSubCategory.bind(this);
-    this.handleSaveSubCategory = this.handleSaveSubCategory.bind(this);
-    this.handleUpdateJustification = this.handleUpdateJustification.bind(this);
-    this.handleSaveJustification = this.handleSaveJustification.bind(this);
     this.addRow = this.addRow.bind(this);
     this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
+    this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
   }
-
-  handleUpdateSubCategory(value) {
-    subCategoryEditValue = value;
-  }
-
-  handleSaveSubCategory(evt) {
-    evt.stopPropagation();
-    tableData[subCategoryEditIdx].name = subCategoryEditValue;
-    this.handleRequestClose();
-  }
-
-  handleUpdateJustification(evt, value) {
-    justificationEditValue = value;
-  }
-
-  handleSaveJustification(evt) {
-    evt.stopPropagation();
-    tableData[justificationEditIdx].status = justificationEditValue;
-    this.handleRequestClose();
-  }
-
-  handleClickSubCategoryCell = (idx, evt) => {
-    // This prevents ghost click from onTouchTap
-    evt.preventDefault();
-    subCategoryEditIdx = idx;
-    this.setState({
-      open: true,
-      anchorEl: evt.currentTarget
-    });
-  };
-
-  handleClickJustificationCell = (idx, evt) => {
-    // This prevents ghost click from onTouchTap
-    evt.stopPropagation();
-    evt.preventDefault();
-    justificationEditIdx = idx;
-    this.setState({
-      openJustification: true,
-      anchorElJustification: evt.currentTarget
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-      openJustification: false
-    });
-  };
 
   addRow(evt) {
     evt.stopPropagation();
@@ -148,32 +84,15 @@ class TableEditable extends Component {
     this.setState({ tableRowCnt: tableData.length });
   }
 
+  handleSaveTableRowColumnValue(rowIdx, propertyName, newValue) {
+    tableData[rowIdx][propertyName] = newValue;
+    //force table refresh
+    this.setState({ tableRowCnt: tableData.length });
+  }
+
   render() {
-    const {
-      handleClickSubCategoryCell,
-      handleClickJustificationCell,
-      addRow,
-      handleUpdateSubCategory,
-      handleSaveSubCategory,
-      handleUpdateJustification,
-      handleSaveJustification,
-      handleRequestClose,
-      delNoLaunchReasonRow
-    } = this;
-    const { dataSource1, dataSource2, isPanelExpanded, openJustification, anchorElJustification } = this.state;
-    const {
-      height,
-      fixedHeader,
-      fixedFooter,
-      selectable,
-      multiSelectable,
-      showCheckboxes,
-      deselectOnClickaway,
-      showRowHover,
-      stripedRows,
-      open,
-      anchorEl
-    } = this.state;
+    const { addRow, delNoLaunchReasonRow, handleSaveTableRowColumnValue } = this;
+    const { height, fixedHeader, fixedFooter, selectable, multiSelectable, showCheckboxes, deselectOnClickaway, showRowHover, stripedRows } = this.state;
     return (
       <div className="flex-row row-spacer-24">
         <Panel>
@@ -198,52 +117,24 @@ class TableEditable extends Component {
                       <TableRowColumn><Checkbox /></TableRowColumn>
                       <TableRowColumn>{idx + 1}</TableRowColumn>
                       <TableRowColumn>
-                        <div className="editable-cell" onClick={handleClickSubCategoryCell.bind(this, idx)}>
-                          {row.name}
-                        </div>
-                        <Popover open={open} anchorEl={anchorEl} anchorOrigin={anchorOrigin} targetOrigin={targetOrigin} onRequestClose={handleRequestClose}>
-                          <div className="editable-popover">
-                            <AutoComplete
-                              dataSource={subcategoryLovValues}
-                              onUpdateInput={handleUpdateSubCategory}
-                              hintText="Select Sub-Category"
-                              floatingLabelText="Sub-Category*"
-                            />
-                            <div className="flex-row flex-justify-end">
-                              <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
-                              <FlatButton label="Save" primary={true} onClick={handleSaveSubCategory} />
-                            </div>
-                          </div>
-                        </Popover>
+                        <TextFieldTableRowColumn
+                          hintText="Type Name"
+                          floatingLabelText="Name*"
+                          rowPropertyName="name"
+                          onSave={handleSaveTableRowColumnValue}
+                          rowData={row}
+                          rowIdx={idx}
+                        />
                       </TableRowColumn>
                       <TableRowColumn>
-                        <div className="editable-cell">
-                          {row.status}
-                        </div>
-                        <TextFieldTableRowColumn idx={idx} editIdx={justificationEditIdx} isOpen={openJustification}>
-                          <TextFieldSimple onChange={handleUpdateJustification} hintText="Justification" fullWidth={true} floatingLabelText="Justification*" />
-                        </TextFieldTableRowColumn>
-                        {/*<Popover
-                          open={openJustification}
-                          anchorEl={anchorElJustification}
-                          anchorOrigin={anchorOrigin}
-                          targetOrigin={targetOrigin}
-                          onRequestClose={handleRequestClose}
-                          animated={false}
-                        >
-                          <div className="editable-popover">
-                            <TextFieldSimple
-                              onChange={handleUpdateJustification}
-                              hintText="Justification"
-                              fullWidth={true}
-                              floatingLabelText="Justification*"
-                            />
-                            <div className="flex-row">
-                              <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
-                              <FlatButton label="Save" primary={true} onClick={handleSaveJustification} />
-                            </div>
-                          </div>
-                        </Popover>*/}
+                        <TextFieldTableRowColumn
+                          hintText="Type Justification"
+                          floatingLabelText="Justification*"
+                          rowPropertyName="status"
+                          onSave={handleSaveTableRowColumnValue}
+                          rowData={row}
+                          rowIdx={idx}
+                        />
                       </TableRowColumn>
                       <TableRowColumn>
                         <IconButton tooltip="Delete Row" onTouchTap={delNoLaunchReasonRow.bind(this, idx)}>
