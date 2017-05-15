@@ -1,6 +1,6 @@
 {
   "name": "cbp-theme-react-starter",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Themable React App based on Storybook",
   "main": "dist/App.js",
   "scripts": {
