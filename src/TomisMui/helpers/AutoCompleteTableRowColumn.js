@@ -84,7 +84,7 @@ class AutoCompleteTableRowColumn extends Component {
   render() {
     const { popoverAnchor, handleClickToOpen, handleRequestClose, handleRequestSave, handleOnChangeValue, renderCellValue } = this;
     const { isOpen, value } = this.state;
-    const { rowIdx, rowData, rowPropertyName, hintText, floatingLabelText } = this.props;
+    const { rowIdx, rowData, rowPropertyName, hintText, floatingLabelText, dataSource } = this.props;
     return (
       <div ref={ref => (this.popoverAnchor = ref)} className="editable-cell" onClick={handleClickToOpen}>
         <span>
@@ -99,7 +99,14 @@ class AutoCompleteTableRowColumn extends Component {
           animated={false}
         >
           <div className="editable-popover">
-            <AutoComplete value={value} onUpdateInput={handleOnChangeValue} hintText={hintText} fullWidth={true} floatingLabelText={floatingLabelText} />
+            <AutoComplete
+              value={value}
+              dataSource={dataSource}
+              onUpdateInput={handleOnChangeValue}
+              hintText={hintText}
+              fullWidth={true}
+              floatingLabelText={floatingLabelText}
+            />
             <div className="flex-row">
               <FlatButton label="Cancel" primary={true} onClick={handleRequestClose} />
               <FlatButton label="Save" primary={true} onClick={handleRequestSave} />

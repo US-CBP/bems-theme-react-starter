@@ -8,7 +8,6 @@ import IconButton from '../TomisMui/IconButton';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
 import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
 import DatePickerTableRowColumn from './helpers/DatePickerTableRowColumn';
-import TimeSpinnerTableRowColumn from './helpers/TimeSpinnerTableRowColumn';
 import AutoCompleteTableRowColumn from './helpers/AutoCompleteTableRowColumn';
 import moment from 'moment';
 
@@ -163,6 +162,7 @@ class TableEditable extends Component {
                           onSave={handleSaveTableRowColumnValue}
                           rowData={row}
                           rowIdx={idx}
+                          dataSource={subcategoryLovValues}
                         />
                       </TableRowColumn>
                       <TableRowColumn>
