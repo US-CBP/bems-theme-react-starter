@@ -37,6 +37,7 @@ class TextFieldTableRowColumn extends Component {
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleOnChangeValue = this.handleOnChangeValue.bind(this);
     this.handleRequestSave = this.handleRequestSave.bind(this);
+    this.renderCellValue = this.renderCellValue.bind(this);
   }
 
   componentDidMount() {
@@ -69,15 +70,23 @@ class TextFieldTableRowColumn extends Component {
     this.setState(setStateValue.bind(this, newValue));
   }
 
+  renderCellValue() {
+    const { rowData, rowPropertyName, hintText } = this.props;
+    const displayVal = rowData[rowPropertyName];
+    if (displayVal.length > 0) {
+      return <span>{displayVal}</span>;
+    } else {
+      return <span style={{ color: 'rgba(0, 0, 0, 0.54)' }}>{hintText}</span>;
+    }
+  }
+
   render() {
-    const { popoverAnchor, handleClickToOpen, handleRequestClose, handleRequestSave, handleOnChangeValue } = this;
+    const { popoverAnchor, handleClickToOpen, handleRequestClose, handleRequestSave, handleOnChangeValue, renderCellValue } = this;
     const { isOpen, value } = this.state;
     const { rowIdx, rowData, rowPropertyName, hintText, floatingLabelText } = this.props;
     return (
       <div ref={ref => (this.popoverAnchor = ref)} className="editable-cell" onClick={handleClickToOpen}>
-        <span>
-          {rowData[rowPropertyName]}
-        </span>
+        {renderCellValue()}
         <Popover
           open={isOpen}
           anchorEl={popoverAnchor}

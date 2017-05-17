@@ -136,7 +136,6 @@ class TableEditable extends Component {
                   <TableRow selectable={false}>
                     <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Departure Date">Departure Date*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Departure Time">Departure Date*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
                     <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
@@ -148,7 +147,7 @@ class TableEditable extends Component {
                       <TableRowColumn><Checkbox /></TableRowColumn>
                       <TableRowColumn>
                         <DatePickerTableRowColumn
-                          hintText="Type Date"
+                          hintText="Select Date"
                           floatingLabelText="Date*"
                           rowPropertyName="departureDt"
                           onSave={handleSaveTableRowColumnDate}
@@ -157,18 +156,8 @@ class TableEditable extends Component {
                         />
                       </TableRowColumn>
                       <TableRowColumn>
-                        <TimeSpinnerTableRowColumn
-                          hintText="Type Time"
-                          floatingLabelText="Time*"
-                          rowPropertyName="departureTime"
-                          onSave={handleSaveTableRowColumnValue}
-                          rowData={row}
-                          rowIdx={idx}
-                        />
-                      </TableRowColumn>
-                      <TableRowColumn>
                         <AutoCompleteTableRowColumn
-                          hintText="Type Name"
+                          hintText="Select Name"
                           floatingLabelText="Name*"
                           rowPropertyName="name"
                           onSave={handleSaveTableRowColumnValue}

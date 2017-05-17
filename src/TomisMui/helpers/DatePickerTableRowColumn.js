@@ -73,8 +73,9 @@ class DatePickerTableRowColumn extends Component {
   }
 
   renderDateValue(dt) {
+    const { hintText } = this.props;
     if (dt === undefined) {
-      return undefined;
+      return hintText;
     } else {
       return moment(dt).format(MOMENT_FORMAT);
     }
