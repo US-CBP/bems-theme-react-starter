@@ -1,14 +1,22 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
-import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../TomisMui/Table';
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+  TextFieldTableRowColumn,
+  DatePickerTableRowColumn,
+  AutoCompleteTableRowColumn
+} from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../TomisMui/IconButton';
 import ButtonRaisedSimplePrimary from '../TomisMui/ButtonRaisedSimplePrimary';
-import TextFieldTableRowColumn from './helpers/TextFieldTableRowColumn';
-import DatePickerTableRowColumn from './helpers/DatePickerTableRowColumn';
-import AutoCompleteTableRowColumn from './helpers/AutoCompleteTableRowColumn';
 import moment from 'moment';
 
 const tableData = [
