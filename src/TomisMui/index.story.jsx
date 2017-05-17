@@ -149,10 +149,10 @@ storiesOf('TOMIS', module)
   .add('Text Field, Default Value - Pending', () => {
     return <TextFieldSimpleDefaultValue />;
   })
-  .add('Table - Read-Only Example', () => {
+  .add('Table Example - Read-Only', () => {
     return <TableReadOnly />;
   })
-  .add('Table - Editable Example', () => {
+  .add('Table Example - Editable', () => {
     return <TableEditable />;
   })
   .add('Toolbar, Action Bar', () => {

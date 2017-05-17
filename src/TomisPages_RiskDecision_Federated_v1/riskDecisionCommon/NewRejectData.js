@@ -50,6 +50,12 @@ class NewRejectData extends Component {
           </div>
         </div>
         <div className="flex-row">
+          <div className="flex-1">
+            <AutoComplete hintText="Choose Named Operation" floatingLabelText="Named Operation" />
+          </div>
+        </div>
+        <br/>
+        <div className="flex-row">
           <h3>Coordinated Operation With</h3>
         </div>
         <div className="flex-row">

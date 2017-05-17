@@ -157,7 +157,7 @@ class RiskDecisionCore extends Component {
     const { isDisplayNewRejectData } = this.props;
     return (
       <div>
-        <HeaderNavAction actionBarPageTitle="Flight Planning" />
+        <HeaderNavAction actionBarPageTitle="UAS Consolidated" />
 
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
           <div>You will lose all of your changes.  Is this ok?</div>
@@ -204,7 +204,7 @@ class RiskDecisionCore extends Component {
                   />
                 </div>
               </div>
-              <br />
+            
               <div className="flex-row">
                 <div className="flex-1 flex-row">
                   <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />

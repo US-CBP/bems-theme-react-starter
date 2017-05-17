@@ -11,7 +11,7 @@ import FormWithAllComponents from './FormWithAllComponents';
 
 const theme = getMuiTheme(tomisTheme);
 
-storiesOf('TOMIS Pages', module)
+storiesOf('TOMIS Internal', module)
   .addDecorator(story => {
     const storyKind = story();
     return (

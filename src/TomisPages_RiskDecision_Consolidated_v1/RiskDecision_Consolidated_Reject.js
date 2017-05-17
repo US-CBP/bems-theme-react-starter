@@ -53,6 +53,51 @@ const tableData = [
   }
 ];
 
+const caseInformationTableData = [
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  },
+  {
+    caseNumber: 'Case# 3389473289',
+    agentFullName: 'John Smith',
+    agentNumber: '#BestAgent',
+    caseDescription: 'Case Desc'
+  }
+];
+
 const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
 
 const initState = {
@@ -66,16 +111,27 @@ const initState = {
   deselectOnClickaway: true,
   showCheckboxes: false,
   height: '500px',
-  tableRowCnt: tableData.length
+  tableRowCnt: tableData.length,
+  caseInforomationTableRowCnt: caseInformationTableData.length
 };
 
-class RiskDecisionRejectPage extends Component {
+class RiskDecision_Consolidated_Reject extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
+    this.addCaseInformationRow = this.addCaseInformationRow.bind(this);
+    this.delCaseInformationRow = this.delCaseInformationRow.bind(this);
     this.addNoLaunchReasonRow = this.addNoLaunchReasonRow.bind(this);
     this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
     this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
+    this.handleSaveCaseInformationTableRowColumnValue = this.handleSaveCaseInformationTableRowColumnValue.bind(this);
+  }
+
+  addCaseInformationRow(evt) {
+    evt.stopPropagation();
+    caseInformationTableData.push({ name: '', status: '' });
+    //force table refresh
+    this.setState({ caseInforomationTableRowCnt: caseInformationTableData.length });
   }
 
   addNoLaunchReasonRow(evt) {
@@ -85,11 +141,24 @@ class RiskDecisionRejectPage extends Component {
     this.setState({ tableRowCnt: tableData.length });
   }
 
+  delCaseInformationRow(idx, evt) {
+    evt.stopPropagation();
+    caseInformationTableData.splice(idx, 1);
+    //force table refresh
+    this.setState({ caseInforomationTableRowCnt: caseInformationTableData.length });
+  }
+
   delNoLaunchReasonRow(idx, evt) {
     evt.stopPropagation();
     tableData.splice(idx, 1);
     //force table refresh
     this.setState({ tableRowCnt: tableData.length });
+  }
+
+  handleSaveCaseInformationTableRowColumnValue(rowIdx, propertyName, newValue) {
+    caseInformationTableData[rowIdx][propertyName] = newValue;
+    //force table refresh
+    this.setState({ tableRowCnt: caseInformationTableData.length });
   }
 
   handleSaveTableRowColumnValue(rowIdx, propertyName, newValue) {
@@ -99,11 +168,90 @@ class RiskDecisionRejectPage extends Component {
   }
 
   render() {
-    const { addNoLaunchReasonRow, delNoLaunchReasonRow, handleSaveTableRowColumnValue } = this;
+    const { addCaseInformationRow, addNoLaunchReasonRow, delCaseInformationRow, delNoLaunchReasonRow, handleSaveCaseInformationTableRowColumnValue, handleSaveTableRowColumnValue } = this;
     const { height, fixedHeader, fixedFooter, selectable, multiSelectable, showCheckboxes, deselectOnClickaway, showRowHover, stripedRows } = this.state;
     return (
       <div>
         <RiskDecisionCore flightStatus="REJECT" isDisplayNewRejectData={true}>
+          <div className="flex-row row-spacer-24">
+            <Panel>
+              <PanelHeaderTable title="Case Information">
+                <ButtonRaisedSimplePrimary label="Add Case Number" onTouchTap={addCaseInformationRow} />
+              </PanelHeaderTable>
+              <PanelBody>
+                <div>
+                  <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
+                      <TableRow selectable={false}>
+                        <TableHeaderColumn tooltip="Case Number">Case Number*</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Agent Full Name">Agent Full Name</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Agent Number">Agent Number</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Case Description">Case Description</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody
+                      displayRowCheckbox={showCheckboxes}
+                      deselectOnClickaway={deselectOnClickaway}
+                      showRowHover={showRowHover}
+                      stripedRows={stripedRows}
+                    >
+                      {caseInformationTableData.map((row, idx) => (
+                        <TableRow key={idx} selected={row.selected}>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Case Number"
+                              floatingLabelText="Case Number*"
+                              rowPropertyName="caseNumber"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Agent Full Name"
+                              floatingLabelText="Agent Full Name"
+                              rowPropertyName="agentFullName"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Agent Number"
+                              floatingLabelText="Agent Number"
+                              rowPropertyName="agentNumber"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Case Description"
+                              floatingLabelText="Case Description"
+                              rowPropertyName="caseDescription"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <IconButton tooltip="Delete Row" onTouchTap={delCaseInformationRow.bind(this, idx)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </TableRowColumn>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </PanelBody>
+            </Panel>
+          </div>
+          <br/>
           <div className="flex-row row-spacer-24">
             <Panel>
               <PanelHeaderTable title="No Launch Reason(s)">
@@ -171,4 +319,4 @@ class RiskDecisionRejectPage extends Component {
   }
 }
 
-export default muiThemeable()(RiskDecisionRejectPage);
+export default muiThemeable()(RiskDecision_Consolidated_Reject);
