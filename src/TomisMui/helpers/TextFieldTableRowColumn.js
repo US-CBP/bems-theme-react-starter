@@ -73,7 +73,7 @@ class TextFieldTableRowColumn extends Component {
   renderCellValue() {
     const { rowData, rowPropertyName, hintText } = this.props;
     const displayVal = rowData[rowPropertyName];
-    if (displayVal.length > 0) {
+    if (displayVal && displayVal.length > 0) {
       return <span>{displayVal}</span>;
     } else {
       return <span style={{ color: 'rgba(0, 0, 0, 0.54)' }}>{hintText}</span>;

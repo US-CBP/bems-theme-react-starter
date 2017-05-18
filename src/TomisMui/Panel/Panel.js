@@ -169,7 +169,7 @@ class Panel extends Component {
     // 8px padding to the bottom of the card
     const mergedStyles = Object.assign(
       {
-        zIndex: 1,
+        padding: '8px',
         width: '100%'
       },
       style
