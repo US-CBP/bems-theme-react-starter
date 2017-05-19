@@ -18,10 +18,12 @@ class NewRejectData extends Component {
   constructor(props) {
     super(props);
     this.handleChangeInitAmo = this.handleChangeInitAmo.bind(this);
+    this.handleChangeIntelType = this.handleChangeIntelType.bind(this);
 
     this.state = {
       initUsbp: '',
-      otherAgency: ''
+      otherAgency: '',
+      intelType: ''
     };
   }
 
@@ -30,9 +32,14 @@ class NewRejectData extends Component {
     console.log('value=', value);
   }
 
+  handleChangeIntelType(value, arr, parms) {
+    console.log('value, arr, parms=', value, arr, parms);
+    this.setState({ intelType: value });
+  }
+
   render() {
-    const { handleChangeInitAmo } = this;
-    const { initUsbp, otherAgency } = this.state;
+    const { handleChangeInitAmo, handleChangeIntelType } = this;
+    const { initUsbp, otherAgency, intelType } = this.state;
     return (
       <div>
         <div className="flex-row flex-1">
@@ -105,13 +112,20 @@ class NewRejectData extends Component {
         </div>
         <div className="flex-row">
           <div className="flex-1">
-            <AutoComplete hintText="Choose Intel Type" floatingLabelText="Intel Type*" />
+            <AutoComplete hintText="Choose Intel Type" floatingLabelText="Intel Type*" onUpdateInput={handleChangeIntelType} />
           </div>
-          <div className="flex-1">
-            <TextFieldSimple floatingLabelText="Other*" />
-          </div>
+          {!intelType.length &&
+            <div className="flex-1">
+              <TextFieldSimple floatingLabelText="Other*" />
+            </div>}
           <div className="flex-1" />
         </div>
+        {intelType &&
+          <div className="flex-row">
+            <div className="flex-1">
+              <TextFieldSimple floatingLabelText="Other*" />
+            </div>
+          </div>}
         <br />
         <div className="flex-row">
           <div className="flex-1">

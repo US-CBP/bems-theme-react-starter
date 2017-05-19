@@ -5,7 +5,17 @@ import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import FlatButton from '../TomisMui/FlatButton';
 import { Panel, PanelHeaderTable, PanelBody } from '../TomisMui/Panel';
 import AutoComplete from '../TomisMui/AutoComplete';
-import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, TextFieldTableRowColumn, AutoCompleteTableRowColumn } from '../TomisMui/Table';
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+  TextFieldTableRowColumn,
+  AutoCompleteTableRowColumn
+} from '../TomisMui/Table';
 import Checkbox from '../TomisMui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from '../TomisMui/IconButton';
@@ -95,7 +105,6 @@ const caseInformationTableData = [
     caseDescription: 'Case Desc'
   }
 ];
-
 
 const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
 let subCategoryEditValue = '';
@@ -218,7 +227,7 @@ class RiskDecision_Federated_Reject extends Component {
   }
 
   render() {
-    const { addCaseInformationRow, delCaseInformationRow,  handleSaveCaseInformationTableRowColumnValue } = this;
+    const { addCaseInformationRow, delCaseInformationRow, handleSaveCaseInformationTableRowColumnValue } = this;
     const {
       handleClickSubCategoryCell,
       handleClickJustificationCell,
@@ -247,85 +256,85 @@ class RiskDecision_Federated_Reject extends Component {
     return (
       <div>
         <RiskDecisionCore flightStatus="REJECT" isDisplayNewRejectData={true}>
-        <div className="flex-row row-spacer-24">
-          <Panel>
-            <PanelHeaderTable title="Case Information">
-              <ButtonRaisedSimplePrimary label="Add Case Number" onTouchTap={addCaseInformationRow} />
-            </PanelHeaderTable>
-            <PanelBody>
-              <div>
-                <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
-                  <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
-                    <TableRow selectable={false}>
-                      <TableHeaderColumn tooltip="Case Number">Case Number*</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Agent Full Name">Agent Full Name</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Agent Number">Agent Number</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Case Description">Case Description</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody
-                    displayRowCheckbox={showCheckboxes}
-                    deselectOnClickaway={deselectOnClickaway}
-                    showRowHover={showRowHover}
-                    stripedRows={stripedRows}
-                  >
-                    {caseInformationTableData.map((row, idx) => (
-                      <TableRow key={idx} selected={row.selected}>
-                        <TableRowColumn>
-                          <TextFieldTableRowColumn
-                            hintText="Type Case Number"
-                            floatingLabelText="Case Number*"
-                            rowPropertyName="caseNumber"
-                            onSave={handleSaveCaseInformationTableRowColumnValue}
-                            rowData={row}
-                            rowIdx={idx}
-                          />
-                        </TableRowColumn>
-                        <TableRowColumn>
-                          <TextFieldTableRowColumn
-                            hintText="Type Agent Full Name"
-                            floatingLabelText="Agent Full Name"
-                            rowPropertyName="agentFullName"
-                            onSave={handleSaveCaseInformationTableRowColumnValue}
-                            rowData={row}
-                            rowIdx={idx}
-                          />
-                        </TableRowColumn>
-                        <TableRowColumn>
-                          <TextFieldTableRowColumn
-                            hintText="Type Agent Number"
-                            floatingLabelText="Agent Number"
-                            rowPropertyName="agentNumber"
-                            onSave={handleSaveCaseInformationTableRowColumnValue}
-                            rowData={row}
-                            rowIdx={idx}
-                          />
-                        </TableRowColumn>
-                        <TableRowColumn>
-                          <TextFieldTableRowColumn
-                            hintText="Type Case Description"
-                            floatingLabelText="Case Description"
-                            rowPropertyName="caseDescription"
-                            onSave={handleSaveCaseInformationTableRowColumnValue}
-                            rowData={row}
-                            rowIdx={idx}
-                          />
-                        </TableRowColumn>
-                        <TableRowColumn>
-                          <IconButton tooltip="Delete Row" onTouchTap={delCaseInformationRow.bind(this, idx)}>
-                            <DeleteIcon />
-                          </IconButton>
-                        </TableRowColumn>
+          <div className="flex-row row-spacer-24">
+            <Panel>
+              <PanelHeaderTable title="Case Information">
+                <ButtonRaisedSimplePrimary label="Add Case Number" onTouchTap={addCaseInformationRow} />
+              </PanelHeaderTable>
+              <PanelBody>
+                <div>
+                  <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
+                      <TableRow selectable={false}>
+                        <TableHeaderColumn tooltip="Case Number">Case Number*</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Agent Full Name">Agent Full Name</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Agent Number">Agent Number</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Case Description">Case Description</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </PanelBody>
-          </Panel>
-        </div>
-        <br/>
+                    </TableHeader>
+                    <TableBody
+                      displayRowCheckbox={showCheckboxes}
+                      deselectOnClickaway={deselectOnClickaway}
+                      showRowHover={showRowHover}
+                      stripedRows={stripedRows}
+                    >
+                      {caseInformationTableData.map((row, idx) => (
+                        <TableRow key={idx} selected={row.selected}>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Case Number"
+                              floatingLabelText="Case Number*"
+                              rowPropertyName="caseNumber"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Agent Full Name"
+                              floatingLabelText="Agent Full Name"
+                              rowPropertyName="agentFullName"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Agent Number"
+                              floatingLabelText="Agent Number"
+                              rowPropertyName="agentNumber"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <TextFieldTableRowColumn
+                              hintText="Type Case Description"
+                              floatingLabelText="Case Description"
+                              rowPropertyName="caseDescription"
+                              onSave={handleSaveCaseInformationTableRowColumnValue}
+                              rowData={row}
+                              rowIdx={idx}
+                            />
+                          </TableRowColumn>
+                          <TableRowColumn>
+                            <IconButton tooltip="Delete Row" onTouchTap={delCaseInformationRow.bind(this, idx)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </TableRowColumn>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </PanelBody>
+            </Panel>
+          </div>
+          <br />
           <div className="flex-row row-spacer-24">
             <Panel>
               <PanelHeaderTable title="No Launch Reason(s)">

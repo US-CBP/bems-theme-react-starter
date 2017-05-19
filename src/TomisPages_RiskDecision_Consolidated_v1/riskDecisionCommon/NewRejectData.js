@@ -42,10 +42,10 @@ class NewRejectData extends Component {
           <div className="flex-1">
             <AutoComplete hintText="Choose Category" floatingLabelText="Category*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <AutoComplete hintText="Choose Type" floatingLabelText="Type*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <AutoComplete hintText="Choose Sub-Type" floatingLabelText="Sub-Type*" />
           </div>
         </div>
@@ -56,10 +56,10 @@ class NewRejectData extends Component {
           <div className="flex-1">
             <ToggleButtons labelText="Mission Initiated By AMO?*" valueSelected="" options={toggleButtonsYesNoOptions} onChange={handleChangeInitAmo} />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <ToggleButtons labelText="Mission Initiated by USBP?*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <ToggleButtons labelText="Coordinated with Other Agency*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
         </div>
@@ -67,10 +67,10 @@ class NewRejectData extends Component {
           <div className="flex-1">
             <AutoComplete hintText="Choose Agency Group" floatingLabelText="Agency Group*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <AutoComplete hintText="Choose Agency Name" floatingLabelText="Agency Name*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <TextFieldSimple floatingLabelText="Other Agency Name*" />
           </div>
         </div>
@@ -78,17 +78,17 @@ class NewRejectData extends Component {
           <div className="flex-1">
             <TextFieldSimple floatingLabelText="Other/Agency Description*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <AutoComplete hintText="Choose SAC Name" floatingLabelText="SAC Name*" />
           </div>
-          <div className="flex-1 flex-column-pad">
+          <div className="flex-1">
             <AutoComplete hintText="Choose Office Name" floatingLabelText="Office Name*" />
           </div>
         </div>
         <br />
         <div className="flex-row">
           <div className="flex-1">
-              <ToggleButtons labelText="Is this mission based on Actionable Intelligence?*" valueSelected="" options={toggleButtonsYesNoOptions} />
+            <ToggleButtons labelText="Is this mission based on Actionable Intelligence?*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
           <div className="flex-1">
             <AutoComplete hintText="Choose Intelligence Source" floatingLabelText="Intelligence Source*" />
@@ -104,13 +104,12 @@ class NewRejectData extends Component {
           <div className="flex-1">
             <TextFieldSimple floatingLabelText="Other*" />
           </div>
-          <div className="flex-1">
-          </div>
+          <div className="flex-1" />
         </div>
         <br />
         <div className="flex-row">
           <div className="flex-1">
-              <ToggleButtons labelText="Is this an Investigation Mission?*" valueSelected="" options={toggleButtonsYesNoOptions} />
+            <ToggleButtons labelText="Is this an Investigation Mission?*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
         </div>
       </div>
