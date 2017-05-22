@@ -170,7 +170,8 @@ class Panel extends Component {
     const mergedStyles = Object.assign(
       {
         padding: '8px',
-        width: '100%'
+        width: '100%',
+        zIndex: 'auto'
       },
       style
     );
