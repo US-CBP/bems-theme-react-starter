@@ -10,19 +10,31 @@ import ButtonRaisedSimplePrimary from '../../TomisMui/ButtonRaisedSimplePrimary'
 import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
-
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { toggleButtonsYesNoOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
-class NewRejectData extends Component {
+const setStateIntelSource = (intelSource, state, props) => {
+  return { intelSource };
+};
+
+const setStateIntelType = (intelType, state, props) => {
+  return { intelType };
+};
+
+class NewRejectDataHandleOther extends Component {
   constructor(props) {
     super(props);
     this.handleChangeInitAmo = this.handleChangeInitAmo.bind(this);
+    this.handleChangeIntelSource = this.handleChangeIntelSource.bind(this);
     this.handleChangeIntelType = this.handleChangeIntelType.bind(this);
+    this.renderField = this.renderField.bind(this);
+    this.renderFieldInCurrentRow = this.renderFieldInCurrentRow.bind(this);
+    this.renderFieldInNewRow = this.renderFieldInNewRow.bind(this);
 
     this.state = {
       initUsbp: '',
       otherAgency: '',
+      intelSource: '',
       intelType: ''
     };
   }
@@ -32,14 +44,47 @@ class NewRejectData extends Component {
     console.log('value=', value);
   }
 
+  handleChangeIntelSource(value, arr, parms) {
+    this.setState(setStateIntelSource.bind(this, value));
+  }
+
   handleChangeIntelType(value, arr, parms) {
-    console.log('value, arr, parms=', value, arr, parms);
-    this.setState({ intelType: value });
+    this.setState(setStateIntelType.bind(this, value));
+  }
+
+  renderField() {
+    return (
+      <div className="flex-1">
+        <TextFieldSimple floatingLabelText="Other*" />
+      </div>
+    );
+  }
+
+  renderFieldInCurrentRow() {
+    const { intelSource } = this.state;
+    if (intelSource.length === 0) {
+      return this.renderField();
+    } else {
+      return false;
+    }
+  }
+
+  renderFieldInNewRow() {
+    const { intelSource } = this.state;
+    if (intelSource.length > 0) {
+      return (
+        <div className="flex-row">
+          {this.renderField()}
+        </div>
+      );
+    } else {
+      return false;
+    }
   }
 
   render() {
-    const { handleChangeInitAmo, handleChangeIntelType } = this;
-    const { initUsbp, otherAgency, intelType } = this.state;
+    const { handleChangeInitAmo, handleChangeIntelType, handleChangeIntelSource, renderFieldInCurrentRow, renderFieldInNewRow } = this;
+    const { initUsbp, otherAgency } = this.state;
     return (
       <div>
         <div className="flex-row flex-1">
@@ -104,28 +149,22 @@ class NewRejectData extends Component {
             <ToggleButtons labelText="Is this mission based on Actionable Intelligence?*" valueSelected="" options={toggleButtonsYesNoOptions} />
           </div>
           <div className="flex-1">
-            <AutoComplete hintText="Choose Intelligence Source" floatingLabelText="Intelligence Source*" />
+            <AutoComplete hintText="Choose Intelligence Source" floatingLabelText="Intelligence Source*" onUpdateInput={handleChangeIntelSource} />
           </div>
           <div className="flex-1">
-            <TextFieldSimple floatingLabelText="Other*" />
+            {renderFieldInCurrentRow()}
           </div>
         </div>
+        {renderFieldInNewRow()}
         <div className="flex-row">
           <div className="flex-1">
             <AutoComplete hintText="Choose Intel Type" floatingLabelText="Intel Type*" onUpdateInput={handleChangeIntelType} />
           </div>
-          {!intelType.length &&
-            <div className="flex-1">
-              <TextFieldSimple floatingLabelText="Other*" />
-            </div>}
+          <div className="flex-1">
+            <TextFieldSimple floatingLabelText="Other*" />
+          </div>
           <div className="flex-1" />
         </div>
-        {intelType &&
-          <div className="flex-row">
-            <div className="flex-1">
-              <TextFieldSimple floatingLabelText="Other*" />
-            </div>
-          </div>}
         <br />
         <div className="flex-row">
           <div className="flex-1">
@@ -137,4 +176,4 @@ class NewRejectData extends Component {
   }
 }
 
-export default NewRejectData;
+export default NewRejectDataHandleOther;
