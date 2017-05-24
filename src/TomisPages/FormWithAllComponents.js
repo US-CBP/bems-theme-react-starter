@@ -3,6 +3,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
 import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
 import TextFieldSimple from '../TomisMui/TextFieldSimple';
+import TextArea from '../TomisMui/TextArea';
 import AutoComplete from '../TomisMui/AutoComplete';
 import ToggleButtons from '../TomisMui/ToggleButtons';
 import FormRow from '../TomisMui/helpers/FormRow';

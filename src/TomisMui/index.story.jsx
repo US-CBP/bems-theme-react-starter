@@ -28,6 +28,7 @@ import SwitchCheckbox from './SwitchCheckbox';
 import SnackbarSimple from './SnackbarSimple';
 import TableReadOnly from './TableReadOnly';
 import TableEditable from './TableEditable';
+import TextArea from './TextArea';
 import TextFieldSimple from './TextFieldSimple';
 import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 import ToolbarActionBar from './ToolbarActionBar';
@@ -143,7 +144,11 @@ storiesOf('TOMIS', module)
   .add('Snackbar - Simple', () => {
     return <SnackbarSimple initOpen={true} message="Message from outer space" />;
   })
+  .add('Text Area - Pending', () => {
+    return <TextArea floatingLabelText="Enter Info in Text Area" charCountMax={40} />;
+  })
   .add('Text Field - Pending', () => {
+    // return <TextFieldSimple charCountMax={40} />;
     return <TextFieldSimple />;
   })
   .add('Text Field, Default Value - Pending', () => {

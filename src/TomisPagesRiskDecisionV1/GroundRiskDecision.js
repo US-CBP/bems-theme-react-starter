@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DatePicker from 'material-ui/DatePicker';
-import TextField from '../TomisMui/TextField';
 import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import { Panel, PanelHeaderSection, PanelBody } from '../TomisMui/Panel';

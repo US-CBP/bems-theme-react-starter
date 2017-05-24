@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DatePicker from 'material-ui/DatePicker';
-import TextField from '../TomisMui/TextField';
+import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import { Panel, PanelHeaderSection, PanelBody } from '../TomisMui/Panel';
@@ -97,7 +97,7 @@ class GroundRiskDecisionCancelPage extends Component {
                   <ToggleButtons labelText="Ground Operation Status*" valueSelected={'CANCELED'} options={toggleButtonsOptions} />
                 </div>
                 <div>
-                  <TextField hintText="Hint Text" floatingLabelText="Reason*" />
+                  <TextFieldSimple hintText="Hint Text" floatingLabelText="Reason*" />
                 </div>
               </div>
             </PanelBody>
