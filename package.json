@@ -109,6 +109,7 @@
     "moment": "^2.18.1",
     "prop-types": "^15.5.8",
     "react-addons-create-fragment": "^15.5.3",
+    "react-dropzone": "^3.13.2",
     "react-event-listener": "^0.4.0",
     "react-highlight-words": "^0.6.0",
     "react-material-icons": "^1.0.1",

@@ -102,3 +102,17 @@ h3 {
 .dialog-btn-margin-left  {
   margin-left: 16px;
 }
+
+.dropzone-tomis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 150px;
+  min-height: 150px;
+  cursor: pointer;
+  margin-right: 20px;
+  border-style: dashed;
+  border-color: rgba(0,0,0,0.24);
+  padding: 16px;
+}
