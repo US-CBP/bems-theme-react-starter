@@ -13,7 +13,7 @@ import MonthlyCalendarIcon from 'material-ui/svg-icons/notification/event-note';
 import SvgIconArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import ToggleButtons from '../TomisMui/ToggleButtons';
 
-export const toggleButtonsOptions = [{ label: 'Executed', value: 'EXECUTED' }, { label: 'Canceled', value: 'CANCELED' }];
+export const toggleButtonsOptions = [{ label: 'Pending', value: 'PENDING' },{ label: 'Executed', value: 'EXECUTED' }, { label: 'Canceled', value: 'CANCELED' }];
 
 const initState = {
   dataSource1: [],
@@ -93,15 +93,11 @@ class GroundRiskDecision extends Component {
             <PanelBody>
               <div className="flex-row">
                 <div>
-                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'EXECUTED'} options={toggleButtonsOptions} />
+                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'PENDING'} options={toggleButtonsOptions} />
                 </div>
               </div>
               <br />
-              <br />
-              <br />
-              <div>
-                Execution May Begin
-              </div>
+              
             </PanelBody>
           </Panel>
         </div>

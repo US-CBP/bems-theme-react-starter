@@ -186,12 +186,9 @@ class RiskDecisionCore extends Component {
                 </div>
               </div>
               <div className="flex-row">
-                <div className="flex-1">
-                  <AutoComplete
-                    dataSource={numberOfMissionsLovValues}
-                    hintText="Number of Missions"
-                    floatingLabelText={`Number of Missions${isAccept || isReject ? '*' : ''}`}
-                  />
+                <div className="flex-1" style={{paddingTop: '28px'}}>
+                  <label style={{fontSize: '12px', marginBottom: '4px'}}>Number of Missions</label>
+                  <div>5</div>
                 </div>
                 <div className="flex-1">
                   <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />

@@ -35,8 +35,13 @@ class NewRejectData extends Component {
     const { initUsbp, otherAgency } = this.state;
     return (
       <div>
-        <div className="flex-row flex-1">
-          <TextFieldSimple floatingLabelText="Mission Description" />
+        <div className="flex-row">
+          <div className="flex-2">
+            <TextFieldSimple floatingLabelText="Mission Description" />
+          </div>
+          <div className="flex-1">
+            <AutoComplete hintText="Choose Named Operation" floatingLabelText="Named Operation" />
+          </div>
         </div>
         <div className="flex-row">
           <div className="flex-1">

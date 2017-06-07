@@ -207,33 +207,28 @@ class RiskDecisionCore extends Component {
               </div>
               <div className="flex-row">
                 <div className="flex-1">
-                  <AutoComplete
-                    dataSource={numberOfMissionsLovValues}
-                    hintText="Number of Missions"
-                    floatingLabelText={`Number of Missions${isAccept || isReject ? '*' : ''}`}
+                  <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`}
                   />
-                </div>
-                <div className="flex-1">
-                  <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
-                </div>
+                  </div>
                 <div className="flex-1">
                   <AutoComplete
                     dataSource={riskAssessmentLovValues}
                     hintText="Total Risk Assessment Range"
                     floatingLabelText={`Total Risk Assessment Range${isAccept ? '*' : ''}`}
                   />
-                </div>
+                  </div>
+                  <div className="flex-1">
+                    <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
+                  </div>
               </div>
-              
               <div className="flex-row">
-                <div className="flex-1 flex-row">
-                  <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
-                </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                <div className="flex-1 flex-column-pad">
                   <AutoComplete hintText="Choose Name" floatingLabelText={`Name${isAccept || isReject ? '*' : ''}`} />
                 </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                <div className="flex-1 flex-column-pad">
                   <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
+                </div>
+                <div className="flex-1">
                 </div>
               </div>
               <div className="row-spacer-24">

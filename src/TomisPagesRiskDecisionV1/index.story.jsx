@@ -8,6 +8,7 @@ import RiskDecisionAcceptSavePage from './RiskDecisionAcceptSavePage';
 import RiskDecisionAcceptPage from './RiskDecisionAcceptPage';
 import RiskDecisionRejectPage from './RiskDecisionRejectPage';
 import GroundRiskDecision from './GroundRiskDecision';
+import GroundRiskDecisionExecuted from './GroundRiskDecisionExecuted';
 import GroundRiskDecisionCancelPage from './GroundRiskDecisionCancelPage';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -42,6 +43,9 @@ storiesOf('Risk Decision - Flight/Float/Ground', module)
   })
   .add('Ground Operation', () => {
     return <GroundRiskDecision />;
+  })
+  .add('Ground Operation - Executed', () => {
+    return <GroundRiskDecisionExecuted />;
   })
   .add('Ground Operation - Cancel', () => {
     return <GroundRiskDecisionCancelPage />;

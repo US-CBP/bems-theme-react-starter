@@ -204,7 +204,6 @@ class RiskDecisionCore extends Component {
                   />
                 </div>
               </div>
-            
               <div className="flex-row">
                 <div className="flex-1 flex-row">
                   <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
@@ -220,6 +219,7 @@ class RiskDecisionCore extends Component {
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
+              
               {this.props.children}
             </PanelBody>
           </Panel>

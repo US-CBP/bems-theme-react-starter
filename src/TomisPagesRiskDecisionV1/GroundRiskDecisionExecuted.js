@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DatePicker from 'material-ui/DatePicker';
-import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import RaisedButton from '../TomisMui/RaisedButton';
 import { Panel, PanelHeaderSection, PanelBody } from '../TomisMui/Panel';
@@ -41,7 +40,7 @@ const unselectedBackgroundColor = '#ffffff';
 const selectedLabelColor = 'rgba(0,0,0,0.87)';
 const unselectedLabelColor = 'rgba(0,0,0,0.54)';
 
-class GroundRiskDecisionCancelPage extends Component {
+class GroundRiskDecisionExecuted extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
@@ -93,12 +92,15 @@ class GroundRiskDecisionCancelPage extends Component {
             <PanelHeaderSection title="Executed/Canceled" />
             <PanelBody>
               <div className="flex-row">
-                <div className="flex-column-pad">
-                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'CANCELED'} options={toggleButtonsOptions} />
+                <div>
+                  <ToggleButtons labelText="Ground Operation Status*" valueSelected={'EXECUTED'} options={toggleButtonsOptions} />
                 </div>
-                <div className="flex-1">
-                  <TextFieldSimple hintText="Hint Text" floatingLabelText="Reason*" />
-                </div>
+              </div>
+              <br />
+              <br />
+              <br />
+              <div>
+                Execution May Begin
               </div>
             </PanelBody>
           </Panel>
@@ -108,7 +110,7 @@ class GroundRiskDecisionCancelPage extends Component {
   }
 }
 
-GroundRiskDecisionCancelPage.defaultProps = defaultProps;
-GroundRiskDecisionCancelPage.propTypes = propTypes;
+GroundRiskDecisionExecuted.defaultProps = defaultProps;
+GroundRiskDecisionExecuted.propTypes = propTypes;
 
-export default GroundRiskDecisionCancelPage;
+export default GroundRiskDecisionExecuted;
