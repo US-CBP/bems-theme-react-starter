@@ -10,6 +10,7 @@ import RiskDecisionRejectPage from './RiskDecisionRejectPage';
 import GroundRiskDecision from './GroundRiskDecision';
 import GroundRiskDecisionExecuted from './GroundRiskDecisionExecuted';
 import GroundRiskDecisionCancelPage from './GroundRiskDecisionCancelPage';
+import GroundRiskDecisionSection from './GroundRiskDecisionSection';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
@@ -49,4 +50,7 @@ storiesOf('Risk Decision - Flight/Float/Ground', module)
   })
   .add('Ground Operation - Cancel', () => {
     return <GroundRiskDecisionCancelPage />;
+  })
+  .add('Ground Operation Section', () => {
+    return <GroundRiskDecisionSection />;
   });

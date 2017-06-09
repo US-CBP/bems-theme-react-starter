@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
 import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
@@ -87,7 +88,7 @@ class FormWithAllComponents extends Component {
         <ToggleButtons labelText="Flight Status (RA)*" valueSelected={flightStatus} options={toggleButtonsOptions} onChange={handleChangeFlightStatus} />
         <div><span>FlightStatus={flightStatus}</span></div>
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
-          <div>You will lose all of your changes.  Is this ok?</div>
+          <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
       </div>
     );
