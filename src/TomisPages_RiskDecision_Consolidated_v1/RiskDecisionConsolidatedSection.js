@@ -9,7 +9,7 @@ class RiskDecisionConsolidatedSection extends Component {
   render() {
     return (
       <div>
-        <RiskDecisionCore flightStatus="PENDING" />
+        <RiskDecisionCore />
       </div>
     );
   }

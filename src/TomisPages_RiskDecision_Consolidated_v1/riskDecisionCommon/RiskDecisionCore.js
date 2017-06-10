@@ -12,6 +12,7 @@ import DialogSimple from '../../TomisMui/DialogSimple';
 import NewRejectData from '../riskDecisionCommon/NewRejectData';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
+import ConsolidatedReject from '../render/ConsolidatedReject';
 
 const numberOfMissionsLovValues = [
   '1',
@@ -215,8 +216,7 @@ class RiskDecisionCore extends Component {
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
-
-              {this.props.children}
+              {isReject && <ConsolidatedReject />}
             </PanelBody>
           </Panel>
         </div>

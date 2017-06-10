@@ -10,7 +10,8 @@ import ButtonRaisedSimplePrimary from '../../TomisMui/ButtonRaisedSimplePrimary'
 import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
-import NewRejectData from '../riskDecisionCommon/NewRejectData';
+import NewRejectData from './NewRejectData';
+import FederatedReject from '../render/FederatedReject';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
@@ -145,7 +146,6 @@ class RiskDecisionCore extends Component {
       handleCloseConfirm
     } = this;
     const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
-    const { isDisplayNewRejectData } = this.props;
     return (
       <div>
         <HeaderNavAction actionBarPageTitle="UAS Federated" />
@@ -204,11 +204,11 @@ class RiskDecisionCore extends Component {
                   <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
                 </div>
               </div>
-              {isDisplayNewRejectData && <NewRejectData />}
+              {isReject && <NewRejectData />}
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
-              {this.props.children}
+              {isReject && <FederatedReject />}
             </PanelBody>
           </Panel>
         </div>
