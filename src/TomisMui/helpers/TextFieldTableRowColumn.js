@@ -66,7 +66,8 @@ class TextFieldTableRowColumn extends Component {
     this.handleRequestClose();
   }
 
-  handleOnChangeValue(event, newValue) {
+  handleOnChangeValue(evt) {
+    const newValue = evt.target.value;
     this.setState(setStateValue.bind(this, newValue));
   }
 

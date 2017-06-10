@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import GroundRiskDecisionSectionRender from './render/GroundRiskDecisionSectionRender';
 import { setStateOperationStatus } from './riskDecisionCommon/helper';
 
-const initState = () => {
-  return {
-    operationStatusVal: 'PENDING'
-  };
+const initState = {
+  operationStatusVal: 'PENDING'
 };
 
 class GroundRiskDecisionSection extends Component {
   constructor(props) {
     super(props);
-    this.state = initState();
+    this.state = initState;
     this.handleOperationStatusOnChange = this.handleOperationStatusOnChange.bind(this);
     this.getIsRenderExecuted = this.getIsRenderExecuted.bind(this);
     this.getIsRenderCanceled = this.getIsRenderCanceled.bind(this);

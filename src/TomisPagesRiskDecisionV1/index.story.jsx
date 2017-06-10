@@ -4,10 +4,10 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import HeaderNavAction from '../TomisMui/HeaderNavAction';
-import RiskDecisionPage from './RiskDecisionPage';
+import RiskDecisionSection from './RiskDecisionSection';
 import RiskDecisionAcceptSavePage from './RiskDecisionAcceptSavePage';
-import RiskDecisionAcceptPage from './RiskDecisionAcceptPage';
-import RiskDecisionRejectPage from './RiskDecisionRejectPage';
+// import RiskDecisionAcceptPage from './RiskDecisionAcceptPage';
+// import RiskDecisionRejectPage from './RiskDecisionRejectPage';
 // import GroundRiskDecision from './GroundRiskDecision';
 // import GroundRiskDecisionExecuted from './GroundRiskDecisionExecuted';
 // import GroundRiskDecisionCancelPage from './GroundRiskDecisionCancelPage';
@@ -31,33 +31,33 @@ storiesOf('Risk Decision - Flight/Float/Ground', module)
       </div>
     );
   })
-  .add('Risk Decision - Flight', () => {
+  .add('Flight Section', () => {
     const title = 'Flight Planning';
     return (
       <div>
         <HeaderNavAction actionBarPageTitle={title} />
-        <RiskDecisionPage />
+        <RiskDecisionSection />
       </div>
     );
   })
-  .add('Risk Decision - Float', () => {
+  .add('Float Section', () => {
     const title = 'Float Planning';
     return (
       <div>
         <HeaderNavAction actionBarPageTitle={title} />
-        <RiskDecisionPage />
+        <RiskDecisionSection />
       </div>
     );
   })
   .add('Risk Decision - Accept - Save Needed', () => {
     return <RiskDecisionAcceptSavePage />;
   })
-  .add('Risk Decision - Accept', () => {
-    return <RiskDecisionAcceptPage />;
-  })
-  .add('Risk Decision - Reject', () => {
-    return <RiskDecisionRejectPage />;
-  })
+  // .add('Risk Decision - Accept', () => {
+  //   return <RiskDecisionAcceptPage />;
+  // })
+  // .add('Risk Decision - Reject', () => {
+  //   return <RiskDecisionRejectPage />;
+  // })
   // .add('Ground Operation', () => {
   //   return <GroundRiskDecision />;
   // })

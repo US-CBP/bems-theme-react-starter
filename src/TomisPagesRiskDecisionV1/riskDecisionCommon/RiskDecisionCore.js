@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
@@ -11,6 +11,7 @@ import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape'
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusFlightFloatToggleButtonOptions, setStateFlightFloatStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
+import FlightFloatReject from '../render/FlightFloatReject';
 
 const numberOfMissionsLovValues = [
   '1',
@@ -80,35 +81,24 @@ const tableData = [
 
 const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];
 
-const defaultProps = {
-  flightStatus: ''
-};
-
-const propTypes = {
-  flightStatus: PropTypes.string.isRequired
+const initState = {
+  isPanelExpanded: true,
+  isPending: true,
+  isAccept: false,
+  isReject: false,
+  flightStatus: 'PENDING',
+  isInfoVisible: false,
+  isConfirmVisible: false
 };
 
 class RiskDecisionCore extends Component {
   constructor(props) {
     super(props);
+    this.state = initState;
     this.handleCloseConfirm = this.handleCloseConfirm.bind(this);
     this.handleChangeFlightStatus = this.handleChangeFlightStatus.bind(this);
-    this.prevFlightStatus = 'PENDING';
-  }
-
-  state = {
-    isPanelExpanded: true,
-    isPending: true,
-    isAccept: false,
-    isReject: false,
-    flightStatus: '',
-    isInfoVisible: false,
-    isConfirmVisible: false
-  };
-
-  componentDidMount() {
-    const { flightStatus } = this.props;
-    this.setState(setStateFlightFloatStatus.bind(this, flightStatus));
+    const { flightStatus } = initState;
+    this.prevFlightStatus = flightStatus;
   }
 
   handleTouchTapInfo = () => {
@@ -234,7 +224,7 @@ class RiskDecisionCore extends Component {
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
-              {this.props.children}
+              {isReject && <FlightFloatReject />}
             </PanelBody>
           </Panel>
         </div>
@@ -242,8 +232,5 @@ class RiskDecisionCore extends Component {
     );
   }
 }
-
-RiskDecisionCore.defaultProps = defaultProps;
-RiskDecisionCore.propTypes = propTypes;
 
 export default RiskDecisionCore;
