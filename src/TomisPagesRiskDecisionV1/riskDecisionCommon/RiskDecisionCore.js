@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import HeaderNavAction from '../../TomisMui/HeaderNavAction';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
 import TextFieldSimple from '../../TomisMui/TextFieldSimple';
@@ -11,7 +10,7 @@ import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
+import { operationStatusFlightFloatToggleButtonOptions, setStateFlightFloatStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
 const numberOfMissionsLovValues = [
   '1',
@@ -109,7 +108,7 @@ class RiskDecisionCore extends Component {
 
   componentDidMount() {
     const { flightStatus } = this.props;
-    this.setState(setStateFlightStatus.bind(this, flightStatus));
+    this.setState(setStateFlightFloatStatus.bind(this, flightStatus));
   }
 
   handleTouchTapInfo = () => {
@@ -120,22 +119,26 @@ class RiskDecisionCore extends Component {
     this.setState(setStateIsInfoVisible.bind(this, false));
   };
 
-  handleChangeFlightStatus(event, value) {
-    event.stopPropagation();
-    event.preventDefault();
+  handleChangeFlightStatus(evt, val) {
+    evt.stopPropagation();
+    evt.preventDefault();
     const { prevFlightStatus } = this;
-    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', value=', value);
-    if (prevFlightStatus != 'PENDING' && value === 'PENDING') {
+    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', val=', val);
+    if (prevFlightStatus != 'PENDING' && val === 'PENDING') {
       this.setState(setStateIsConfirmVisible.bind(this, true));
+    } else {
+      this.prevFlightStatus = val;
+      this.setState(setStateFlightFloatStatus.bind(this, this.prevFlightStatus));
     }
-    this.prevFlightStatus = value;
   }
 
   handleCloseConfirm(buttonLabel, buttonIdx) {
     console.log('handleCloseConfirm, buttonLabel=', buttonLabel, ', buttonIdx=', buttonIdx);
     this.setState(setStateIsConfirmVisible.bind(this, false));
     if (buttonLabel === 'No') {
-      this.setState(setStateFlightStatus.bind(this, this.prevFlightStatus));
+    } else {
+      this.prevFlightStatus = 'PENDING';
+      this.setState(setStateFlightFloatStatus.bind(this, this.prevFlightStatus));
     }
   }
 
@@ -153,7 +156,6 @@ class RiskDecisionCore extends Component {
     const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
     return (
       <div>
-        <HeaderNavAction actionBarPageTitle="Flight Planning" />
         {isInfoVisible &&
           <DialogSimple title="(17 Total Risk Assessment Range)" onRequestClose={handleCloseInfo} initOpen={isInfoVisible} buttonLabels={['Ok']}>
             <Table height={300} fixedHeader={true} selectable={false} multiSelectable={false}>
@@ -166,7 +168,7 @@ class RiskDecisionCore extends Component {
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} deselectOnClickaway={false} showRowHover={false} stripedRows={false}>
-                {tableData.map((row, index) => (
+                {tableData.map((row, index) =>
                   <TableRow key={index} selected={row.selected}>
                     <TableRowColumn>{index + 1}</TableRowColumn>
                     <TableRowColumn>
@@ -175,12 +177,12 @@ class RiskDecisionCore extends Component {
                     <TableRowColumn>{row.status}</TableRowColumn>
                     <TableRowColumn>{row.selected}</TableRowColumn>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </DialogSimple>}
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
-          <div>You will lose all of your changes.  Is this ok?</div>
+          <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
 
         <div className="outer-card-margin">
@@ -200,26 +202,25 @@ class RiskDecisionCore extends Component {
                   <ToggleButtons
                     labelText="Flight Status (RA)*"
                     valueSelected={flightStatus}
-                    options={toggleButtonsOptions}
+                    options={operationStatusFlightFloatToggleButtonOptions}
                     onChange={handleChangeFlightStatus}
                   />
                 </div>
               </div>
               <div className="flex-row">
                 <div className="flex-1">
-                  <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`}
-                  />
-                  </div>
+                  <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
+                </div>
                 <div className="flex-1">
                   <AutoComplete
                     dataSource={riskAssessmentLovValues}
                     hintText="Total Risk Assessment Range"
                     floatingLabelText={`Total Risk Assessment Range${isAccept ? '*' : ''}`}
                   />
-                  </div>
-                  <div className="flex-1">
-                    <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
-                  </div>
+                </div>
+                <div className="flex-1">
+                  <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
+                </div>
               </div>
               <div className="flex-row">
                 <div className="flex-1 flex-column-pad">
@@ -228,8 +229,7 @@ class RiskDecisionCore extends Component {
                 <div className="flex-1 flex-column-pad">
                   <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
                 </div>
-                <div className="flex-1">
-                </div>
+                <div className="flex-1" />
               </div>
               <div className="row-spacer-24">
                 <FileAttachment />

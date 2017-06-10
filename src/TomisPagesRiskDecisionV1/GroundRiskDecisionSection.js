@@ -1,74 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import GroundRiskDecisionSectionRender from './render/GroundRiskDecisionSection';
+import GroundRiskDecisionSectionRender from './render/GroundRiskDecisionSectionRender';
 import { setStateOperationStatus } from './riskDecisionCommon/helper';
 
-const initState = props => {
-    const { operationStatusVal } = props;
-    return {
-        operationStatusVal
-    };
-};
-
-const defaultProps = {
+const initState = () => {
+  return {
     operationStatusVal: 'PENDING'
-};
-
-const propTypes = {
-    operationStatusVal: PropTypes.oneOf[('PENDING', 'EXECUTED', 'CANCELED')]
+  };
 };
 
 class GroundRiskDecisionSection extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState(props);
-        this.handleOperationStatusOnChange = this.handleOperationStatusOnChange.bind(this);
-        // this.renderExecuted = this.renderExecuted.bind(this);
-        // this.renderCanceled = this.renderCanceled.bind(this);
-        this.getComponentInfo = this.getComponentInfo.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = initState();
+    this.handleOperationStatusOnChange = this.handleOperationStatusOnChange.bind(this);
+    this.getIsRenderExecuted = this.getIsRenderExecuted.bind(this);
+    this.getIsRenderCanceled = this.getIsRenderCanceled.bind(this);
+  }
 
-    handleOperationStatusOnChange(evt, val) {
-        this.setState(setStateOperationStatus.bind(this, val));
-    }
+  handleOperationStatusOnChange(evt, val) {
+    this.setState(setStateOperationStatus.bind(this, val));
+  }
 
-    /*renderExecuted() {
-        const { operationStatusVal } = this.getComponentInfo();
-        if (operationStatusVal === 'EXECUTED') {
-            return (
-                <div className="row-spacer-24">
-                    Execution May Begin
-                </div>
-            );
-        } else {
-            return false;
-        }
-    }
+  getIsRenderExecuted() {
+    const { operationStatusVal } = this.state;
+    return operationStatusVal === 'EXECUTED';
+  }
 
-    renderCanceled() {
-        const { operationStatusVal } = this.getComponentInfo();
-        if (operationStatusVal === 'CANCELED') {
-            return (
-                <div className="flex-1">
-                    <TextFieldSimple hintText="Hint Text" floatingLabelText="Reason*" />
-                </div>
-            );
-        } else {
-            return false;
-        }
-    }*/
+  getIsRenderCanceled() {
+    const { operationStatusVal } = this.state;
+    return operationStatusVal === 'CANCELED';
+  }
 
-    getComponentInfo() {
-        return this.state;
-    }
-
-    render() {
-        const { getComponentInfo, handleOperationStatusOnChange } = this;
-        const { operationStatusVal } = getComponentInfo();
-        return <GroundRiskDecisionSectionRender handleOperationStatusOnChange={handleOperationStatusOnChange} operationStatusVal={operationStatusVal} />;
-    }
+  render() {
+    const { getIsRenderExecuted, getIsRenderCanceled, handleOperationStatusOnChange } = this;
+    const { operationStatusVal } = this.state;
+    return (
+      <GroundRiskDecisionSectionRender
+        isRenderExecuted={getIsRenderExecuted()}
+        isRenderCanceled={getIsRenderCanceled()}
+        handleOperationStatusOnChange={handleOperationStatusOnChange}
+        operationStatusVal={operationStatusVal}
+      />
+    );
+  }
 }
 
-GroundRiskDecisionSection.defaultProps = defaultProps;
-GroundRiskDecisionSection.propTypes = propTypes;
 export default GroundRiskDecisionSection;

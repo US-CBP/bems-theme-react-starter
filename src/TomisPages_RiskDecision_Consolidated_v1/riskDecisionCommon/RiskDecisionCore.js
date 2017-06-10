@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import HeaderNavAction from '../../TomisMui/HeaderNavAction';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
 import TextFieldSimple from '../../TomisMui/TextFieldSimple';
@@ -157,10 +156,8 @@ class RiskDecisionCore extends Component {
     const { isDisplayNewRejectData } = this.props;
     return (
       <div>
-        <HeaderNavAction actionBarPageTitle="UAS Consolidated" />
-
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
-          <div>You will lose all of your changes.  Is this ok?</div>
+          <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
 
         <div className="outer-card-margin">
@@ -219,7 +216,7 @@ class RiskDecisionCore extends Component {
               <div className="row-spacer-24">
                 <FileAttachment />
               </div>
-              
+
               {this.props.children}
             </PanelBody>
           </Panel>
