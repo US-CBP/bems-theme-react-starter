@@ -12,7 +12,7 @@ import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape'
 import DialogSimple from '../../TomisMui/DialogSimple';
 import NewRejectData from '../riskDecisionCommon/NewRejectData';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import { toggleButtonsOptions, setStateFlightStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
+import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
 const numberOfMissionsLovValues = [
   '1',
@@ -82,37 +82,24 @@ const tableData = [
 
 const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];
 
-const defaultProps = {
-  flightStatus: '',
-  isDisplayNewRejectData: false
-};
-
-const propTypes = {
-  flightStatus: PropTypes.string.isRequired,
-  isDisplayNewRejectData: PropTypes.bool.isRequired
+const initState = {
+  isPanelExpanded: true,
+  isPending: true,
+  isAccept: false,
+  isReject: false,
+  flightStatus: 'PENDING',
+  isInfoVisible: false,
+  isConfirmVisible: false
 };
 
 class RiskDecisionCore extends Component {
   constructor(props) {
     super(props);
+    this.state = initState;
     this.handleCloseConfirm = this.handleCloseConfirm.bind(this);
     this.handleChangeFlightStatus = this.handleChangeFlightStatus.bind(this);
-    this.prevFlightStatus = 'PENDING';
-  }
-
-  state = {
-    isPanelExpanded: true,
-    isPending: true,
-    isAccept: false,
-    isReject: false,
-    flightStatus: '',
-    isInfoVisible: false,
-    isConfirmVisible: false
-  };
-
-  componentDidMount() {
-    const { flightStatus } = this.props;
-    this.setState(setStateFlightStatus.bind(this, flightStatus));
+    const { flightStatus } = initState;
+    this.prevFlightStatus = flightStatus;
   }
 
   handleTouchTapInfo = () => {
@@ -123,22 +110,26 @@ class RiskDecisionCore extends Component {
     this.setState(setStateIsInfoVisible.bind(this, false));
   };
 
-  handleChangeFlightStatus(event, value) {
-    event.stopPropagation();
-    event.preventDefault();
+  handleChangeFlightStatus(evt, val) {
+    evt.stopPropagation();
+    evt.preventDefault();
     const { prevFlightStatus } = this;
-    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', value=', value);
-    if (prevFlightStatus != 'PENDING' && value === 'PENDING') {
+    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', val=', val);
+    if (prevFlightStatus != 'PENDING' && val === 'PENDING') {
       this.setState(setStateIsConfirmVisible.bind(this, true));
+    } else {
+      this.prevFlightStatus = val;
+      this.setState(setStateUasStatus.bind(this, this.prevFlightStatus));
     }
-    this.prevFlightStatus = value;
   }
 
   handleCloseConfirm(buttonLabel, buttonIdx) {
     console.log('handleCloseConfirm, buttonLabel=', buttonLabel, ', buttonIdx=', buttonIdx);
     this.setState(setStateIsConfirmVisible.bind(this, false));
     if (buttonLabel === 'No') {
-      this.setState(setStateFlightStatus.bind(this, this.prevFlightStatus));
+    } else {
+      this.prevFlightStatus = 'PENDING';
+      this.setState(setStateUasStatus.bind(this, this.prevFlightStatus));
     }
   }
 
@@ -160,7 +151,7 @@ class RiskDecisionCore extends Component {
         <HeaderNavAction actionBarPageTitle="UAS Federated" />
 
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
-          <div>You will lose all of your changes.  Is this ok?</div>
+          <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
 
         <div className="outer-card-margin">
@@ -180,14 +171,14 @@ class RiskDecisionCore extends Component {
                   <ToggleButtons
                     labelText="Flight Status (RA)*"
                     valueSelected={flightStatus}
-                    options={toggleButtonsOptions}
+                    options={operationStatusUasToggleButtonOptions}
                     onChange={handleChangeFlightStatus}
                   />
                 </div>
               </div>
               <div className="flex-row">
-                <div className="flex-1" style={{paddingTop: '28px'}}>
-                  <label style={{fontSize: '12px', marginBottom: '4px'}}>Number of Missions</label>
+                <div className="flex-1" style={{ paddingTop: '28px' }}>
+                  <label style={{ fontSize: '12px', marginBottom: '4px' }}>Number of Missions</label>
                   <div>5</div>
                 </div>
                 <div className="flex-1">
@@ -225,8 +216,5 @@ class RiskDecisionCore extends Component {
     );
   }
 }
-
-RiskDecisionCore.defaultProps = defaultProps;
-RiskDecisionCore.propTypes = propTypes;
 
 export default RiskDecisionCore;

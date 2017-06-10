@@ -1,8 +1,12 @@
-export const toggleButtonsOptions = [{ label: 'Pending', value: 'PENDING' }, { label: 'Accept', value: 'ACCEPT' }, { label: 'Reject', value: 'REJECT' }];
+export const operationStatusUasToggleButtonOptions = [
+  { label: 'Pending', value: 'PENDING' },
+  { label: 'Accept', value: 'ACCEPT' },
+  { label: 'Reject', value: 'REJECT' }
+];
 
 export const toggleButtonsYesNoOptions = [{ label: 'Yes', value: 'YES' }, { label: 'No', value: 'NO' }];
 
-export const setStateFlightStatus = (flightStatus, state, props) => {
+export const setStateUasStatus = (flightStatus, state, props) => {
   const newState = {
     flightStatus,
     isPending: false,
