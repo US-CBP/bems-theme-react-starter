@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
-import AttachFileIcon from 'material-ui/svg-icons/editor/attach-file';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from '../TomisMui/IconButton';
-import FileAttachmentTable from './helpers/FileAttachmentTable';
+import FileAttachmentDisplay from './helpers/FileAttachmentDisplay';
 
 const setStateAddFiles = (newFiles, state, props) => {
   const { files } = state;
@@ -39,22 +35,14 @@ class FileAttachment extends Component {
   }
 
   render() {
-    const { renderFileList, onDelete } = this;
+    const { renderFileList, onDelete, onDrop } = this;
     const { files } = this.state;
     const { label } = this.props;
     return (
       <div>
-        <h3>{label}</h3>
-        <div style={{ fontSize: '12px' }}>Upload TSS Risk Assessment</div>
-        <div style={{ display: 'flex' }}>
-          <div className="dropzone">
-            <Dropzone onDrop={this.onDrop.bind(this)} className="dropzone-tomis">
-              <AttachFileIcon />
-              <p>Click to select files to upload.</p>
-            </Dropzone>
-          </div>
-          <FileAttachmentTable onDelete={onDelete} tableData={files} />
-        </div>
+        <div className="file-attachment-label">{label}</div>
+        <FileAttachmentDisplay onDrop={onDrop} onDelete={onDelete} files={files} />
+        <div style={{ clear: 'both' }} />
       </div>
     );
   }
