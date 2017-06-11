@@ -222,7 +222,8 @@ class RiskDecisionCore extends Component {
                 <div className="flex-1" />
               </div>
               <div className="row-spacer-24">
-                <FileAttachment />
+                <h3>Attachments</h3>
+                <FileAttachment label="Upload TSS Risk Assessment" />
               </div>
               {isReject && <FlightFloatReject />}
             </PanelBody>

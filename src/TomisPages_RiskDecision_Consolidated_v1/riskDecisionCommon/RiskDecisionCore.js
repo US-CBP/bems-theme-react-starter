@@ -214,7 +214,8 @@ class RiskDecisionCore extends Component {
               </div>
               {isDisplayNewRejectData && <NewRejectData />}
               <div className="row-spacer-24">
-                <FileAttachment />
+                <h3>Attachments</h3>
+                <FileAttachment label="Upload TSS Risk Assessment" />
               </div>
               {isReject && <ConsolidatedReject />}
             </PanelBody>
