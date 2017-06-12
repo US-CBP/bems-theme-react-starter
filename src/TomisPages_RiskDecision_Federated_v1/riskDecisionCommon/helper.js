@@ -42,3 +42,5 @@ export const setStateIsConfirmVisible = (isConfirmVisible, state, props) => {
 export const setStateIsSaved = (isSaved, state, props) => {
   return { isSaved };
 };
+
+export const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];

@@ -13,78 +13,9 @@ import DialogSimple from '../../TomisMui/DialogSimple';
 import NewRejectData from './NewRejectData';
 import FederatedReject from '../riskDecisionCommon/FederatedReject';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
-
-const numberOfMissionsLovValues = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20',
-  '21',
-  '22',
-  '23',
-  '24',
-  '25',
-  '26',
-  '27',
-  '28',
-  '29',
-  '30'
-];
-
-const tableData = [
-  {
-    name: '< 25',
-    status: '25 - 45',
-    selected: '> 45'
-  },
-  {
-    name: '< 35',
-    status: '35 - 55',
-    selected: '> 55'
-  },
-  {
-    name: '< 45',
-    status: '35 - 55',
-    selected: '> 55'
-  },
-  {
-    name: '< 55',
-    status: '55 - 75',
-    selected: '> 75'
-  },
-  {
-    name: '< 65',
-    status: '65 - 85',
-    selected: '> 85'
-  },
-  {
-    name: '< 75',
-    status: '75 - 95',
-    selected: '> 95'
-  }
-];
-
-const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];
+import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible, riskAssessmentLovValues } from './helper';
 
 const initState = {
-  isPanelExpanded: true,
   isPending: true,
   isAccept: false,
   isReject: false,
@@ -144,7 +75,7 @@ class RiskDecisionCore extends Component {
       handleChangeFlightStatus,
       handleCloseConfirm
     } = this;
-    const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
+    const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible } = this.state;
     const { isSaved } = this.props;
     return (
       <div>

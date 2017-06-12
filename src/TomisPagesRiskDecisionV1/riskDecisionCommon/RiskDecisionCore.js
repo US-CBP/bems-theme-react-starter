@@ -10,79 +10,16 @@ import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
-import { operationStatusFlightFloatToggleButtonOptions, setStateFlightFloatStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
+import {
+  operationStatusFlightFloatToggleButtonOptions,
+  setStateFlightFloatStatus,
+  setStateIsInfoVisible,
+  setStateIsConfirmVisible,
+  riskAssessmentLovValues
+} from './helper';
 import FlightFloatReject from '../riskDecisionCommon/FlightFloatReject';
 
-const numberOfMissionsLovValues = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20',
-  '21',
-  '22',
-  '23',
-  '24',
-  '25',
-  '26',
-  '27',
-  '28',
-  '29',
-  '30'
-];
-
-const tableData = [
-  {
-    name: '< 25',
-    status: '25 - 45',
-    selected: '> 45'
-  },
-  {
-    name: '< 35',
-    status: '35 - 55',
-    selected: '> 55'
-  },
-  {
-    name: '< 45',
-    status: '35 - 55',
-    selected: '> 55'
-  },
-  {
-    name: '< 55',
-    status: '55 - 75',
-    selected: '> 75'
-  },
-  {
-    name: '< 65',
-    status: '65 - 85',
-    selected: '> 85'
-  },
-  {
-    name: '< 75',
-    status: '75 - 95',
-    selected: '> 95'
-  }
-];
-
-const riskAssessmentLovValues = ['LOW', 'MEDIUM', 'HIGH'];
-
 const initState = {
-  isPanelExpanded: true,
   isPending: true,
   isAccept: false,
   isReject: false,
@@ -142,39 +79,13 @@ class RiskDecisionCore extends Component {
       handleChangeFlightStatus,
       handleCloseConfirm
     } = this;
-    const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
+    const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible } = this.state;
     const { isSaved } = this.props;
     return (
       <div>
-        {isInfoVisible &&
-          <DialogSimple title="(17 Total Risk Assessment Range)" onRequestClose={handleCloseInfo} initOpen={isInfoVisible} buttonLabels={['Ok']}>
-            <Table height={300} fixedHeader={true} selectable={false} multiSelectable={false}>
-              <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
-                <TableRow selectable={false}>
-                  <TableHeaderColumn tooltip="# Crew Members"># CREW MEMBERS</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Low">LOW</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Medium">MEDIUM</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="High">HIGH</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody displayRowCheckbox={false} deselectOnClickaway={false} showRowHover={false} stripedRows={false}>
-                {tableData.map((row, index) =>
-                  <TableRow key={index} selected={row.selected}>
-                    <TableRowColumn>{index + 1}</TableRowColumn>
-                    <TableRowColumn>
-                      {row.name}
-                    </TableRowColumn>
-                    <TableRowColumn>{row.status}</TableRowColumn>
-                    <TableRowColumn>{row.selected}</TableRowColumn>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </DialogSimple>}
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
           <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
-
         <div className="outer-card-margin">
           <Panel>
             <PanelHeaderSection title="Risk Decision">
