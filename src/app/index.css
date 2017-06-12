@@ -153,7 +153,7 @@ h3 {
 }
 
 .file-attachment-block > .delete-icon {
-  margin-left: auto;
+  align-self: flex-end;
 }
 
 .file-attachment-block > img {
