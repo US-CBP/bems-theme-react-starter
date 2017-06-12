@@ -12,7 +12,7 @@ import DialogSimple from '../../TomisMui/DialogSimple';
 import NewRejectData from '../riskDecisionCommon/NewRejectData';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
-import ConsolidatedReject from '../render/ConsolidatedReject';
+import ConsolidatedReject from '../riskDecisionCommon/ConsolidatedReject';
 
 const numberOfMissionsLovValues = [
   '1',

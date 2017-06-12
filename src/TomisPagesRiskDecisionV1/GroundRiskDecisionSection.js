@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import GroundRiskDecisionSectionRender from './render/GroundRiskDecisionSectionRender';
+import GroundRiskDecisionSectionRender from './riskDecisionCommon/GroundRiskDecisionSectionRender';
 import { setStateOperationStatus } from './riskDecisionCommon/helper';
 
 const initState = {

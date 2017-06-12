@@ -11,7 +11,7 @@ import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape'
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusFlightFloatToggleButtonOptions, setStateFlightFloatStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
-import FlightFloatReject from '../render/FlightFloatReject';
+import FlightFloatReject from '../riskDecisionCommon/FlightFloatReject';
 
 const numberOfMissionsLovValues = [
   '1',

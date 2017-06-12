@@ -11,7 +11,7 @@ import FileAttachment from '../../TomisMui/FileAttachment';
 import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
 import DialogSimple from '../../TomisMui/DialogSimple';
 import NewRejectData from './NewRejectData';
-import FederatedReject from '../render/FederatedReject';
+import FederatedReject from '../riskDecisionCommon/FederatedReject';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import { operationStatusUasToggleButtonOptions, setStateUasStatus, setStateIsInfoVisible, setStateIsConfirmVisible } from './helper';
 
