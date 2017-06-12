@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ToggleButtons from '../TomisMui/ToggleButtons';
 import FileAttachment from '../TomisMui/FileAttachment';
 import TimeSpinner from '../TomisMui/TimeSpinner';
+import TextFieldSimple from '../TomisMui/TextFieldSimple';
+import TextFieldReadOnly from '../TomisMui/TextFieldReadOnly';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -36,6 +38,9 @@ storiesOf('TOMIS New', module)
   })
   .add('Time Spinner - Pending', () => {
     return <TimeSpinner />;
+  })
+  .add('TextFieldReadOnly - Pending', () => {
+    return <TextFieldReadOnly floatingLabelText="My Read-only Label" value="TEST VALUE" />;
   });
 
 function withNote(note, child) {

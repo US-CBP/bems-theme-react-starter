@@ -4,6 +4,7 @@ import HeaderNavAction from '../../TomisMui/HeaderNavAction';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
 import TextFieldSimple from '../../TomisMui/TextFieldSimple';
+import TextFieldReadOnly from '../../TomisMui/TextFieldReadOnly';
 import AutoComplete from '../../TomisMui/AutoComplete';
 import AutoCompleteInfo from '../../TomisMui/AutoCompleteInfo';
 import ButtonRaisedSimplePrimary from '../../TomisMui/ButtonRaisedSimplePrimary';
@@ -177,9 +178,10 @@ class RiskDecisionCore extends Component {
                 </div>
               </div>
               <div className="flex-row">
-                <div className="flex-1" style={{ paddingTop: '28px' }}>
-                  <label style={{ fontSize: '12px', marginBottom: '4px' }}>Number of Missions</label>
-                  <div>5</div>
+                <div className="flex-1">
+                  <TextFieldReadOnly floatingLabelText="Number of Missions" value="5" />
+                  {/*<label style={{ fontSize: '12px', marginBottom: '4px' }}>Number of Missions</label>
+                  <div>5</div>*/}
                 </div>
                 <div className="flex-1">
                   <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
