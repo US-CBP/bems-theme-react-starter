@@ -1,9 +1,9 @@
 import React from 'react';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
-import TextFieldSimple from '../../TomisMui/TextFieldSimple';
 import GroundExecuted from './GroundExecuted';
-import GroundCanceled from './GroundCanceled';
+import TomisInput from 'TomisApp/TomisInput';
+import TomisToggle from 'TomisApp/TomisToggle';
 import { operationStatusGroundToggleButtonOptions } from '../riskDecisionCommon/helper';
 
 const GroundRiskDecisionSectionRender = ({ handleOperationStatusOnChange, isRenderExecuted, isRenderCanceled, operationStatusVal }) => {
@@ -14,14 +14,16 @@ const GroundRiskDecisionSectionRender = ({ handleOperationStatusOnChange, isRend
         <PanelBody>
           <div className="flex-row">
             <div className="flex-column-spacer">
-              <ToggleButtons
-                labelText="Ground Operation Status*"
-                valueSelected={operationStatusVal}
-                options={operationStatusGroundToggleButtonOptions}
-                onChange={handleOperationStatusOnChange}
-              />
+              <div className="flex-1">
+                <TomisToggle
+                  labelText="Ground Operation Status*"
+                  valueSelected={operationStatusVal}
+                  options={operationStatusGroundToggleButtonOptions}
+                  onChange={handleOperationStatusOnChange}
+                />
+              </div>
             </div>
-            {isRenderCanceled && <GroundCanceled />}
+            {isRenderCanceled && <TomisInput hintText="Canceled Reason" floatingLabelText="Reason*" />}
           </div>
           {isRenderExecuted && <GroundExecuted />}
         </PanelBody>

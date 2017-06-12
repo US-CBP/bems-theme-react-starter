@@ -7,7 +7,7 @@ import AutoComplete from '../../TomisMui/AutoComplete';
 import AutoCompleteInfo from '../../TomisMui/AutoCompleteInfo';
 import ButtonRaisedSimplePrimary from '../../TomisMui/ButtonRaisedSimplePrimary';
 import FileAttachment from '../../TomisMui/FileAttachment';
-import DatePickerInlineLandscape from '../../TomisMui/DatePickerInlineLandscape';
+import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import DialogSimple from '../../TomisMui/DialogSimple';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../TomisMui/Table';
 import {
@@ -128,7 +128,7 @@ class RiskDecisionCore extends Component {
                   <AutoComplete hintText="Choose Name" floatingLabelText={`Name${isAccept || isReject ? '*' : ''}`} />
                 </div>
                 <div className="flex-1">
-                  <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
+                  <TomisDatePicker floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
                 </div>
                 <div className="flex-1" />
               </div>
