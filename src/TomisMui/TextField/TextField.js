@@ -446,6 +446,7 @@ class TextField extends Component {
       errorStyle,
       errorText,
       floatingLabelText,
+      floatingLabelFixed,
       fullWidth,
       hintText,
       hintStyle,
