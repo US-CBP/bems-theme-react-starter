@@ -53,3 +53,7 @@ export const setStateIsInfoVisible = (isInfoVisible, state, props) => {
 export const setStateIsConfirmVisible = (isConfirmVisible, state, props) => {
   return { isConfirmVisible };
 };
+
+export const setStateIsSaved = (isSaved, state, props) => {
+  return { isSaved };
+};

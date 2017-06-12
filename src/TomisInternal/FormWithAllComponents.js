@@ -37,7 +37,6 @@ class FormWithAllComponents extends Component {
     event.stopPropagation();
     event.preventDefault();
     const { prevFlightStatus } = this;
-    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', value=', value);
     if (prevFlightStatus != 'PENDING' && value === 'PENDING') {
       this.setState(setStateIsConfirmVisible.bind(this, true));
     }
@@ -86,7 +85,7 @@ class FormWithAllComponents extends Component {
         <ToggleButtons labelText="Flight Status (RA)*" valueSelected={flightStatus} options={toggleButtonsOptions} onChange={handleChangeFlightStatus} />
         <div><span>FlightStatus={flightStatus}</span></div>
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
-          <div>You will lose all of your changes.  Is this ok?</div>
+          <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
       </div>
     );

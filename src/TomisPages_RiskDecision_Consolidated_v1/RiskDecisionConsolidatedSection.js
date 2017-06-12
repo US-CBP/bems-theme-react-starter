@@ -7,9 +7,10 @@ class RiskDecisionConsolidatedSection extends Component {
   }
 
   render() {
+    const { isSaved } = this.props;
     return (
       <div>
-        <RiskDecisionCore />
+        <RiskDecisionCore isSaved={isSaved} />
       </div>
     );
   }

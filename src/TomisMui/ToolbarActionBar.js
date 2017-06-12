@@ -102,6 +102,11 @@ class ToolbarActionBar extends Component {
     });
   };
 
+  handleSave = event => {
+    // This prevents ghost click.
+    event.preventDefault();
+  };
+
   handleRequestClose = () => {
     this.setState({
       open: false
@@ -157,7 +162,7 @@ class ToolbarActionBar extends Component {
               </IconButton>}
           </ToolbarGroup>
           <ToolbarGroup>
-            <IconButton onTouchTap={this.handleTouchTap} tooltip="Save">
+            <IconButton onTouchTap={this.handleSave} tooltip="Save">
               <SaveIcon color={iconColor} />
             </IconButton>
             <IconButton onTouchTap={this.handleTouchTap} tooltip="Clone">

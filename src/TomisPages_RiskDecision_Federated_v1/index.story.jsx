@@ -8,11 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
 /* Keep all lines END */
-import RiskDecisionFederatedSection from './RiskDecisionFederatedSection.js';
-// import RiskDecision_Federated_Pending from './RiskDecision_Federated_Pending.js';
-import RiskDecision_Federated_Accept from './RiskDecision_Federated_Accept.js';
-// import RiskDecision_Federated_AcceptSave from './RiskDecision_Federated_AcceptSave.js';
-// import RiskDecision_Federated_Reject from './RiskDecision_Federated_Reject.js';
+import RiskDecisionFederatedStory from './RiskDecisionFederatedStory';
 
 const theme = getMuiTheme(tomisTheme);
 
@@ -31,22 +27,5 @@ storiesOf('RiskDecision - Federated', module)
   })
   .add('UAS Federated Section', () => {
     const title = 'UAS Federated Planning';
-    return (
-      <div>
-        <HeaderNavAction actionBarPageTitle={title} />
-        <RiskDecisionFederatedSection />
-      </div>
-    );
-  })
-  // .add('RiskDecision_Federated_Pending', () => {
-  //   return <RiskDecision_Federated_Pending />;
-  // })
-  // .add('RiskDecision_Federated_AcceptSave', () => {
-  //   return <RiskDecision_Federated_AcceptSave />;
-  // })
-  .add('RiskDecision_Federated_Accept', () => {
-    return <RiskDecision_Federated_Accept />;
+    return <RiskDecisionFederatedStory actionBarPageTitle={title} />;
   });
-// .add('RiskDecision_Federated_Reject', () => {
-//   return <RiskDecision_Federated_Reject />;
-// });

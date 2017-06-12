@@ -39,7 +39,6 @@ class FormWithAllComponents extends Component {
     event.stopPropagation();
     event.preventDefault();
     const { prevFlightStatus } = this;
-    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', value=', value);
     if (prevFlightStatus != 'PENDING' && value === 'PENDING') {
       this.setState(setStateIsConfirmVisible.bind(this, true));
     }

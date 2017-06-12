@@ -115,7 +115,6 @@ class RiskDecisionCore extends Component {
     evt.stopPropagation();
     evt.preventDefault();
     const { prevFlightStatus } = this;
-    console.log('handleChangeFlightStatus, prevFlightStatus=', prevFlightStatus, ', val=', val);
     if (prevFlightStatus != 'PENDING' && val === 'PENDING') {
       this.setState(setStateIsConfirmVisible.bind(this, true));
     } else {
@@ -146,6 +145,7 @@ class RiskDecisionCore extends Component {
       handleCloseConfirm
     } = this;
     const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
+    const { isSaved } = this.props;
     return (
       <div>
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
@@ -207,6 +207,13 @@ class RiskDecisionCore extends Component {
                 <FileAttachment label="Upload TSS Risk Assessment" />
               </div>
               {isReject && <FederatedReject />}
+              {isAccept &&
+                isSaved &&
+                <div className="flex-row row-spacer-24">
+                  <div>
+                    <ButtonRaisedSimplePrimary label="Proceed to Execution" />
+                  </div>
+                </div>}
             </PanelBody>
           </Panel>
         </div>
