@@ -3,6 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
@@ -29,7 +30,13 @@ storiesOf('RiskDecision - Consolidated', module)
     );
   })
   .add('UAS Consolidated Section', () => {
-    return <RiskDecisionConsolidatedSection />;
+    const title = 'UAS Consolidated Planning';
+    return (
+      <div>
+        <HeaderNavAction actionBarPageTitle={title} />
+        <RiskDecisionConsolidatedSection />
+      </div>
+    );
   })
   // .add('RiskDecision_Consolidated_Pending', () => {
   //   return <RiskDecision_Consolidated_Pending />;

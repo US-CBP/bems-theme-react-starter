@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import HeaderNavAction from '../../TomisMui/HeaderNavAction';
 import { Panel, PanelHeaderSection, PanelBody } from '../../TomisMui/Panel';
 import ToggleButtons from '../../TomisMui/ToggleButtons';
 import TextFieldSimple from '../../TomisMui/TextFieldSimple';
@@ -149,8 +148,6 @@ class RiskDecisionCore extends Component {
     const { isPending, isAccept, isReject, flightStatus, isInfoVisible, isConfirmVisible, isPanelExpanded } = this.state;
     return (
       <div>
-        <HeaderNavAction actionBarPageTitle="UAS Federated" />
-
         <DialogSimple title="Warning" onRequestClose={handleCloseConfirm} initOpen={isConfirmVisible} modal={true} buttonLabels={['Yes', 'No']}>
           <div>You will lose all of your changes. Is this ok?</div>
         </DialogSimple>
@@ -180,8 +177,6 @@ class RiskDecisionCore extends Component {
               <div className="flex-row">
                 <div className="flex-1">
                   <TextFieldReadOnly floatingLabelText="Number of Missions" value="5" />
-                  {/*<label style={{ fontSize: '12px', marginBottom: '4px' }}>Number of Missions</label>
-                  <div>5</div>*/}
                 </div>
                 <div className="flex-1">
                   <TextFieldSimple hintText="Risk Score" fullWidth={true} floatingLabelText={`Risk Score${isAccept ? '*' : ''}`} />
@@ -196,13 +191,13 @@ class RiskDecisionCore extends Component {
               </div>
 
               <div className="flex-row">
-                <div className="flex-1 flex-row">
+                <div className="flex-1">
                   <AutoComplete hintText="Choose Title" floatingLabelText={`Title${isAccept || isReject ? '*' : ''}`} />
                 </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                <div className="flex-1">
                   <AutoComplete hintText="Choose Name" floatingLabelText={`Name${isAccept || isReject ? '*' : ''}`} />
                 </div>
-                <div className="flex-1 flex-column-pad flex-row">
+                <div className="flex-1">
                   <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
                 </div>
               </div>

@@ -213,10 +213,10 @@ class RiskDecisionCore extends Component {
                 </div>
               </div>
               <div className="flex-row">
-                <div className="flex-1 flex-column-pad">
+                <div className="flex-1">
                   <AutoComplete hintText="Choose Name" floatingLabelText={`Name${isAccept || isReject ? '*' : ''}`} />
                 </div>
-                <div className="flex-1 flex-column-pad">
+                <div className="flex-1">
                   <DatePickerInlineLandscape floatingLabelText={`Date${isAccept || isReject ? '*' : ''}`} />
                 </div>
                 <div className="flex-1" />
