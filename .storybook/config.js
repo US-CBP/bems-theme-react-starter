@@ -22,7 +22,11 @@ storybook.configure(() => {
   require('../src/TomisInternal/index.story');
   require('../src/TomisNew/index.story');
   require('../src/TomisInternal/index.story');
+  require('../src/TomisPagesPlanningFlightV1/index.story');
+  require('../src/TomisPagesPlanningGroundV1/index.story');
   require('../src/TomisPagesRiskDecisionV1/index.story');
   require('../src/TomisPages_RiskDecision_Consolidated_v1/index.story');
   require('../src/TomisPages_RiskDecision_Federated_v1/index.story');
+  require('../src/TomisPagesCloningV1/index.story');
+
 }, module);
