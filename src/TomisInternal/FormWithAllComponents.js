@@ -2,11 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
 import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
-import TextFieldSimple from '../TomisMui/TextFieldSimple';
-import AutoComplete from '../TomisMui/AutoComplete';
+import TomisInput from 'TomisApp/TomisInput';
+import TomisSelect from 'TomisApp/TomisSelect';
 import ToggleButtons from '../TomisMui/ToggleButtons';
-import FormRow from '../TomisMui/helper/FormRow';
-import { FormCol } from '../TomisMui/helper/StyledComponents';
+import FormRow from 'TomisApp/helpers/FormRow';
+import { FormCol } from 'TomisApp/helpers/StyledComponents';
 import { toggleButtonsOptions, setStateFlightStatus, setStateIsConfirmVisible } from './helper';
 import DialogSimple from '../TomisMui/DialogSimple';
 
@@ -59,10 +59,10 @@ class FormWithAllComponents extends Component {
         <ToolbarActionBar pageTitle="Form with All Components" isHideDeleteIcon={false} />
         <div className="flex-row">
           <div className="flex-1">
-            <TextFieldSimple floatingLabelText="All Components TF" />
+            <TomisInput floatingLabelText="All Components TF" />
           </div>
           <div className="flex-1">
-            <AutoComplete floatingLabelText="All Components LOV" />
+            <TomisSelect floatingLabelText="All Components LOV" />
           </div>
         </div>
         <br />
@@ -72,10 +72,10 @@ class FormWithAllComponents extends Component {
         <div>FormRow / FormCol Component Example</div>
         <FormRow>
           <FormCol>
-            <TextFieldSimple floatingLabelText="All Components TF" />
+            <TomisInput floatingLabelText="All Components TF" />
           </FormCol>
           <FormCol>
-            <AutoComplete floatingLabelText="All Components LOV" />
+            <TomisSelect floatingLabelText="All Components LOV" />
           </FormCol>
         </FormRow>
         <br />

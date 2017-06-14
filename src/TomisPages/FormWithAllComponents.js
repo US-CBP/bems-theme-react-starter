@@ -5,7 +5,7 @@ import ToolbarCbpHeader from '../TomisMui/ToolbarCbpHeader';
 import ToolbarActionBar from '../TomisMui/ToolbarActionBar';
 import TextFieldSimple from '../TomisMui/TextFieldSimple';
 import TextArea from '../TomisMui/TextArea';
-import AutoComplete from '../TomisMui/AutoComplete';
+import TomisSelect from 'TomisApp/TomisSelect';
 import ToggleButtons from '../TomisMui/ToggleButtons';
 import FormRow from '../TomisMui/helpers/FormRow';
 import { FormCol } from '../TomisMui/helpers/StyledComponents';
@@ -64,7 +64,7 @@ class FormWithAllComponents extends Component {
             <TextFieldSimple floatingLabelText="All Components TF" />
           </div>
           <div className="flex-1">
-            <AutoComplete floatingLabelText="All Components LOV" />
+            <TomisSelect floatingLabelText="All Components LOV" />
           </div>
         </div>
         <br />
@@ -77,7 +77,7 @@ class FormWithAllComponents extends Component {
             <TextFieldSimple floatingLabelText="All Components TF" />
           </FormCol>
           <FormCol>
-            <AutoComplete floatingLabelText="All Components LOV" />
+            <TomisSelect floatingLabelText="All Components LOV" />
           </FormCol>
         </FormRow>
         <br />

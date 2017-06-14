@@ -7,7 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
 /* Keep all lines END */
-import RiskDecisionConsolidatedStory from './RiskDecisionConsolidatedStory';
+import RiskDecisionConsolidatedPage from './RiskDecisionConsolidatedPage';
 
 const theme = getMuiTheme(tomisTheme);
 
@@ -26,5 +26,5 @@ storiesOf('RiskDecision - Consolidated', module)
   })
   .add('UAS Consolidated Section', () => {
     const title = 'UAS Consolidated Planning';
-    return <RiskDecisionConsolidatedStory actionBarPageTitle={title} />;
+    return <RiskDecisionConsolidatedPage actionBarPageTitle={title} />;
   });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HeaderNavAction from '../TomisMui/HeaderNavAction';
-import RiskDecisionFederatedSection from './RiskDecisionFederatedSection';
+import RiskDecisionSection from './RiskDecisionSection';
 import { setStateIsSaved } from './riskDecisionCommon/helper';
 
 const initState = {
@@ -12,7 +12,7 @@ const propTypes = {
   actionBarPageTitle: PropTypes.string.isRequired
 };
 
-class RiskDecisionFederatedStory extends Component {
+class RiskDecisionPage extends Component {
   constructor(props) {
     super(props);
     this.state = initState;
@@ -30,11 +30,11 @@ class RiskDecisionFederatedStory extends Component {
     return (
       <div>
         <HeaderNavAction id="headerNavAction" actionBarPageTitle={actionBarPageTitle} handleStoryBookClick={handleClickSave} />
-        <RiskDecisionFederatedSection isSaved={isSaved} />
+        <RiskDecisionSection isSaved={isSaved} />
       </div>
     );
   }
 }
 
-RiskDecisionFederatedStory.propTypes = propTypes;
-export default RiskDecisionFederatedStory;
+RiskDecisionPage.propTypes = propTypes;
+export default RiskDecisionPage;

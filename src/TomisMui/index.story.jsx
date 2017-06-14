@@ -62,9 +62,6 @@ storiesOf('TOMIS', module)
   .add('AutoComplete', () => {
     return <AutoComplete />;
   })
-  .add('AutoComplete Info - Pending', () => {
-    return <AutoCompleteInfo />;
-  })
   .add('Button - Raised, Simple, Primary', () => {
     return <ButtonRaisedSimplePrimary />;
   })
