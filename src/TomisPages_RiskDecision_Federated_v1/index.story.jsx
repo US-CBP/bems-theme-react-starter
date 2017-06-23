@@ -8,7 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
 /* Keep all lines END */
-import RiskDecisionFederatedPage from './RiskDecisionFederatedPage';
+import RiskDecisionFederatedStory from './RiskDecisionFederatedStory';
 
 const theme = getMuiTheme(tomisTheme);
 
@@ -27,5 +27,5 @@ storiesOf('RiskDecision - Federated', module)
   })
   .add('UAS Federated Section', () => {
     const title = 'UAS Federated Planning';
-    return <RiskDecisionFederatedPage actionBarPageTitle={title} />;
+    return <RiskDecisionFederatedStory actionBarPageTitle={title} />;
   });

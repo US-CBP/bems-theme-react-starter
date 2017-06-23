@@ -6,8 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
-import RiskDecisionPage from './RiskDecisionPage';
-import GroundRiskDecisionPage from './GroundRiskDecisionPage';
+import RiskDecisionStory from './RiskDecisionStory';
+import GroundRiskDecisionStory from './GroundRiskDecisionStory';
 
 const theme = getMuiTheme(tomisTheme);
 
@@ -26,13 +26,13 @@ storiesOf('Risk Decision - Flight/Float/Ground', module)
   })
   .add('Flight Section', () => {
     const title = 'Flight Planning';
-    return <RiskDecisionPage actionBarPageTitle={title} />;
+    return <RiskDecisionStory actionBarPageTitle={title} />;
   })
   .add('Float Section', () => {
     const title = 'Float Planning';
-    return <RiskDecisionPage actionBarPageTitle={title} />;
+    return <RiskDecisionStory actionBarPageTitle={title} />;
   })
   .add('Ground Operation Section', () => {
     const title = 'Ground Operation';
-    return <GroundRiskDecisionPage actionBarPageTitle={title} />;
+    return <GroundRiskDecisionStory actionBarPageTitle={title} />;
   });

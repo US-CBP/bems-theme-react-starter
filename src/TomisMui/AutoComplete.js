@@ -7,40 +7,40 @@ const defaultProps = {};
 const propTypes = {};
 
 const initState = {
-  dataSource: ['d1', 'd2', 'd3', 'd4', 'd5', 'd6']
+    dataSource: ['d1', 'd2', 'd3', 'd4', 'd5', 'd6']
 };
 
 class AutoComplete extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initState;
-  }
+    constructor(props) {
+        super(props);
+        this.state = initState;
+    }
 
-  handleUpdateInput = (event, date) => {
-    this.setState({});
-  };
+    handleUpdateInput = (event, date) => {
+        this.setState({});
+    };
 
-  render() {
-    const { handleUpdateInput } = this;
-    const { fullWidth = true, hintText = 'Select Value', floatingLabelText = 'LOV Value' } = this.props;
-    const { dataSource } = this.state;
-    return (
-      <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
-        <AutoCompleteMui
-          fullWidth={fullWidth}
-          hintText={hintText}
-          dataSource={dataSource}
-          onUpdateInput={handleUpdateInput}
-          floatingLabelText={floatingLabelText}
-          {...this.props}
-        />
-        {/* must use inline style for position on IconButton to override default */}
-        <IconButton className="inline-icon" style={{ position: 'absolute', right: 0, bottom: 0 }}>
-          <SvgIconArrowDropDown />
-        </IconButton>
-      </div>
-    );
-  }
+    render() {
+        const { handleUpdateInput } = this;
+        const { fullWidth = true, hintText = 'Select Value', floatingLabelText = 'LOV Value' } = this.props;
+        const { dataSource } = this.state;
+        return (
+            <div style={{ position: 'relative', width: fullWidth ? '100%' : 'inherit' }}>
+                <AutoCompleteMui
+                    fullWidth={fullWidth}
+                    hintText={hintText}
+                    dataSource={dataSource}
+                    onUpdateInput={handleUpdateInput}
+                    floatingLabelText={floatingLabelText}
+                    {...this.props}
+                />
+                {/* must use inline style for position on IconButton to override default */}
+                <IconButton className="inline-icon" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+                    <SvgIconArrowDropDown />
+                </IconButton>
+            </div>
+        );
+    }
 }
 
 AutoComplete.defaultProps = defaultProps;

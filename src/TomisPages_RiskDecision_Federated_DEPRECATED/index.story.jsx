@@ -3,15 +3,16 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HeaderNavAction from '../TomisMui/HeaderNavAction';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../app/index.css';
 /* Keep all lines END */
-import RiskDecisionConsolidatedStory from './RiskDecisionConsolidatedStory';
+import RiskDecisionFederatedPage from './RiskDecisionFederatedPage';
 
 const theme = getMuiTheme(tomisTheme);
 
-storiesOf('RiskDecision - Consolidated', module)
+storiesOf('RiskDecision - Federated', module)
   .addDecorator(story => {
     const storyKind = story();
     return (
@@ -24,7 +25,7 @@ storiesOf('RiskDecision - Consolidated', module)
       </div>
     );
   })
-  .add('UAS Consolidated Section', () => {
-    const title = 'UAS Consolidated Planning';
-    return <RiskDecisionConsolidatedStory actionBarPageTitle={title} />;
+  .add('UAS Federated Section', () => {
+    const title = 'UAS Federated Planning';
+    return <RiskDecisionFederatedPage actionBarPageTitle={title} />;
   });
