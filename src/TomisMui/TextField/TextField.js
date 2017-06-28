@@ -29,7 +29,8 @@ const getStyles = (props, context, state) => {
       transition: Transitions.easeOut('200ms', 'height')
     },
     error: {
-      position: 'relative',
+      position: 'absolute',
+	  top: 72,
       bottom: 2,
       fontSize: 12,
       lineHeight: '12px',
@@ -84,7 +85,9 @@ const getStyles = (props, context, state) => {
     }
 
     if (state.errorText) {
-      styles.error.bottom = !props.multiLine ? styles.error.fontSize + 3 : 3;
+		// Brad Kahl changed to fix validation alignment on error
+		//styles.error.bottom = !props.multiLine ? styles.error.fontSize + 3 : 3;
+		styles.error.bottom = styles.error.top;
     }
   }
 
