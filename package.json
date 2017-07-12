@@ -1,6 +1,6 @@
 {
-  "name": "cbp-theme-react-starter",
-  "version": "1.0.16",
+  "name": "bems-theme-react-starter",
+  "version": "1.0.17",
   "description": "Themable React App based on Storybook",
   "main": "dist/App.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/US-CBP/cbp-theme-react-starter#readme"
+    "url": "https://github.com/US-CBP/bems-theme-react-starter#readme"
   },
   "contributors": [
     {
@@ -31,7 +31,7 @@
       "email": "gtfullton@gmail.com"
     }
   ],
-  "author": "CBP Common Framework",
+  "author": "BEMS Common Framework",
   "license": "MIT",
   "keywords": [
     "storybook",
@@ -53,9 +53,9 @@
     "addons"
   ],
   "bugs": {
-    "url": "https://github.com/US-CBP/cbp-theme-react-starter/issues"
+    "url": "https://github.com/US-CBP/bems-theme-react-starter/issues"
   },
-  "homepage": "https://github.com/US-CBP/cbp-theme-react-starter",
+  "homepage": "https://github.com/US-CBP/bems-theme-react-starter",
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "^3.3.0",
     "@kadira/storybook": "^2.33.1",
