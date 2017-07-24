@@ -13,7 +13,7 @@
     "license": "MIT",
     "name": "bems-theme-react-starter",
     "version": "1.0.18",
-    "private": true,
+    "private": false,
     "dependencies": {
         "keycode": "^2.1.9",
         "lodash": "^4.17.4",

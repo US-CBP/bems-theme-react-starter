@@ -1,0 +1,135 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Users\\Public\\CBP-Apps\\node6\\node.exe',
+1 verbose cli   'C:\\Users\\Public\\CBP-Apps\\node6\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.5
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\Users\\bbh4ixh\\cbpTheme\\bems-theme-react-starter',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\bbh4ixh\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 info lifecycle bems-theme-react-starter@1.0.18~prepublish: bems-theme-react-starter@1.0.18
+11 silly lifecycle bems-theme-react-starter@1.0.18~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ 'C:\\Users\\bbh4ixh\\AppData\\Roaming\\npm-cache\\bems-theme-react-starter\\1.0.18\\package.tgz',
+12 verbose tar pack   'C:\\Users\\bbh4ixh\\cbpTheme\\bems-theme-react-starter' ]
+13 verbose tarball C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package.tgz
+14 verbose folder C:\Users\bbh4ixh\cbpTheme\bems-theme-react-starter
+15 verbose addLocalTarball adding from inside cache C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package.tgz
+16 verbose correctMkdir C:\Users\bbh4ixh\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+17 silly cache afterAdd bems-theme-react-starter@1.0.18
+18 verbose afterAdd C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package\package.json not in flight; writing
+19 verbose correctMkdir C:\Users\bbh4ixh\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+20 verbose afterAdd C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package\package.json written
+21 silly publish { contributors:
+21 silly publish    [ { name: 'Brad Kahl', email: 'bkahl1984@gmail.com' },
+21 silly publish      { name: 'Greg Fulton', email: 'gtfullton@gmail.com' } ],
+21 silly publish   author: { name: 'BEMS Common Framework' },
+21 silly publish   license: 'MIT',
+21 silly publish   name: 'bems-theme-react-starter',
+21 silly publish   version: '1.0.18',
+21 silly publish   private: false,
+21 silly publish   dependencies:
+21 silly publish    { keycode: '^2.1.9',
+21 silly publish      lodash: '^4.17.4',
+21 silly publish      'material-ui': '^0.18.3',
+21 silly publish      moment: '^2.18.1',
+21 silly publish      'prop-types': '^15.5.10',
+21 silly publish      react: '^15.5.4',
+21 silly publish      'react-day-picker': '^6.1.0',
+21 silly publish      'react-dom': '^15.5.4',
+21 silly publish      'react-dropzone': '^3.13.2',
+21 silly publish      'react-event-listener': '^0.4.5',
+21 silly publish      'react-material-icons': '^1.0.2',
+21 silly publish      'react-measure': '^2.0.2',
+21 silly publish      'react-select': '^1.0.0-rc.5',
+21 silly publish      'react-swipeable-views': '^0.12.3',
+21 silly publish      'styled-components': '^2.1.1',
+21 silly publish      'velocity-animate': '^1.5.0',
+21 silly publish      warning: '^3.0.0' },
+21 silly publish   devDependencies:
+21 silly publish    { '@storybook/addon-notes': '^3.1.2',
+21 silly publish      '@storybook/addon-options': '^3.1.2',
+21 silly publish      '@storybook/react': '^3.1.2',
+21 silly publish      'react-scripts': '1.0.10' },
+21 silly publish   scripts:
+21 silly publish    { start: 'react-scripts start',
+21 silly publish      build: 'react-scripts build',
+21 silly publish      test: 'react-scripts test --env=jsdom',
+21 silly publish      eject: 'react-scripts eject',
+21 silly publish      storybook: 'start-storybook -p 9010 -s public',
+21 silly publish      'build-storybook': 'build-storybook -s public' },
+21 silly publish   readme: 'BEMS Theme React Starter',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '69699360d6ef148cc41e7328d47c1d19df670fc4',
+21 silly publish   description: 'BEMS Theme React Starter',
+21 silly publish   _id: 'bems-theme-react-starter@1.0.18',
+21 silly publish   _shasum: '770a8b8257b332aba185b7d5687d715dcdb44ebb',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name bems-theme-react-starter
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'bems-theme-react-starter',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'bems-theme-react-starter',
+26 silly mapToRegistry   name: 'bems-theme-react-starter',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/bems-theme-react-starter
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading C:\Users\bbh4ixh\AppData\Roaming\npm-cache\bems-theme-react-starter\1.0.18\package.tgz
+30 verbose request uri https://registry.npmjs.org/bems-theme-react-starter
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 4:10:59 PM
+33 verbose request using bearer token for auth
+34 verbose request id ebc22fc4e535e1d7
+35 http request PUT https://registry.npmjs.org/bems-theme-react-starter
+36 http 403 https://registry.npmjs.org/bems-theme-react-starter
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '118',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Mon, 24 Jul 2017 20:11:02 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'close',
+37 verbose headers   'x-served-by': 'cache-dca17740-DCA',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1500927061.885811,VS0,VE1547',
+37 verbose headers   vary: 'Accept-Encoding, Accept' }
+38 verbose request invalidating C:\Users\bbh4ixh\AppData\Roaming\npm-cache\registry.npmjs.org\bems-theme-react-starter on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: you do not have permission to publish "bems-theme-react-starter". Are you logged in as the correct user? : bems-theme-react-starter
+40 verbose stack     at makeError (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
+40 verbose stack     at Request._callback (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
+40 verbose stack     at Request.self.callback (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\request\request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\request\request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (C:\Users\Public\CBP-Apps\node6\node_modules\npm\node_modules\request\request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid bems-theme-react-starter
+43 verbose cwd C:\Users\bbh4ixh\cbpTheme\bems-theme-react-starter
+44 error Windows_NT 6.1.7601
+45 error argv "C:\\Users\\Public\\CBP-Apps\\node6\\node.exe" "C:\\Users\\Public\\CBP-Apps\\node6\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+46 error node v6.9.5
+47 error npm  v3.10.10
+48 error code E403
+49 error you do not have permission to publish "bems-theme-react-starter". Are you logged in as the correct user? : bems-theme-react-starter
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
