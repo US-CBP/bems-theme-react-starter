@@ -1,0 +1,113 @@
+*:focus {
+    outline: none;
+}
+
+abbr[title] {
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.DayPicker {
+    font-family: Roboto, sans-serif;
+    overflow: auto;
+}
+
+.DayPicker-wrapper {
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    padding: 0 1rem;
+    margin: 3rem 4px 0 4px;
+}
+
+.DayPicker-Month {
+    margin: 1rem 0;
+}
+
+.DayPicker-Caption {
+    height: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    border-top: 1px solid rgba(0,0,0,0.075);
+    padding-top: 16px;
+}
+
+.DayPicker-wrapper > .DayPicker-Month:first-child > .DayPicker-Caption {
+    border-top: none;
+}
+
+.DayPicker-Body {
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+}
+
+.DayPicker-Weekday {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.28);
+}
+
+.DayPicker-Day--disabled {
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.DayPicker-Day--today {
+    font-weight: 400;
+    color: #FFFFFF;
+    background-color: #1A237E;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: #FFCA28;
+    color: rgba(0,0,0,0.87);
+}
+
+
+/*
+.DayPicker-Day {
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.87);
+    border: none;
+    width: 20px;
+    height: 20px;
+}
+
+.DayPicker-Day--today {
+    font-weight: 400;
+    color: #FFA000;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: transparent;
+    background-image: url("/images/cloning-calendar/selected-circle.svg");
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: 50%; 
+}
+
+.DayPicker-Day:not(.DayPicker-Day--selected):hover {
+    color: #ffffff;
+    opacity: 0.5;
+    background-color: transparent;
+    background-image: url("/images/cloning-calendar/selected-circle.svg");
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    animation: growHover .2s;
+}
+
+.DayPicker-Day--disabled {
+    color: rgba(0,0,0,0.28);
+    font-weight: 400;
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.DayPicker-Day--outside {
+    pointer-events: none;
+}
+
+@keyframes growHover {
+    from { background-size: 0; }
+    to { background-size: 28px; color: #FFFFFF }
+}
+*/
