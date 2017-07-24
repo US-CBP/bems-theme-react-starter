@@ -12,7 +12,7 @@
     "author": "BEMS Common Framework",
     "license": "MIT",
     "name": "bems-theme-react-starter",
-    "version": "1.0.18",
+    "version": "1.0.19",
     "private": false,
     "dependencies": {
         "keycode": "^2.1.9",
