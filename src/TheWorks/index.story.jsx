@@ -12,25 +12,25 @@ import TomisContainerEmpty from 'TomisApp/layouts/TomisContainerEmpty';
 const theme = getMuiTheme(tomisTheme);
 
 storiesOf('The Works', module)
-  .addDecorator(story => {
-    const storyKind = story();
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', minWidth: 600, padding: '30px' }}>
-          <MuiThemeProvider muiTheme={theme}>
-            {storyKind}
-          </MuiThemeProvider>
-        </div>
-      </div>
-    );
-  })
-  .add('Input Field', () => {
-    return (
-      <TomisContainerEmpty>
-        <InputField />
-      </TomisContainerEmpty>
-    );
-  })
-  .add('Test2', () => {
-    return <Test2 />;
-  });
+    .addDecorator(story => {
+        const storyKind = story();
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ width: '100%', minWidth: 600, padding: '30px' }}>
+                    <MuiThemeProvider muiTheme={theme}>
+                        {storyKind}
+                    </MuiThemeProvider>
+                </div>
+            </div>
+        );
+    })
+    .add('Input Field', () => {
+        return (
+            <TomisContainerEmpty>
+                <InputField />
+            </TomisContainerEmpty>
+        );
+    })
+    .add('Test2', () => {
+        return <Test2 />;
+    });
