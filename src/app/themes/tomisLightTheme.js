@@ -1,9 +1,9 @@
-import { indigo900, indigo600, indigo100, amber700, amber400, amber100 } from 'material-ui/styles/colors';
-//import { blue900, blue700, blue600, blue500, blue400, blue300, blue200, blue100 } from 'material-ui/styles/colors';
+import indigo from 'material-ui/colors/indigo';
+import amber from 'material-ui/colors/amber';
 
-const primary1Color = indigo900;
-const primary2Color = indigo600;
-const accent1Color = amber700;
+const primary1Color = indigo['900'];
+const primary2Color = indigo['600'];
+const accent1Color = amber['700'];
 const textColor = 'rgba(0,0,0,0.87)';
 
 const tomisTheme = {
@@ -25,11 +25,11 @@ const tomisTheme = {
         //Primary = Indigo
         primary1Color,
         primary2Color,
-        primary3Color: indigo100,
+        primary3Color: indigo['100'],
         //Accent = Amber
         accent1Color,
-        accent2Color: amber400,
-        accent3Color: amber100,
+        accent2Color: amber['400'],
+        accent3Color: amber['100'],
         textColor,
         secondaryTextColor: '#ffffff',
         alternateTextColor: '#ffffff',
