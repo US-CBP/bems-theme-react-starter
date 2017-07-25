@@ -29,6 +29,7 @@ import DemoTabs from './tabs/DemoTabs';
 import DemoTextFields from './text-fields/DemoTextFields';
 
 const theme = createMuiTheme(createPalette(muiTheme));
+
 storiesOf('MUI', module)
     .addDecorator(story => {
         const storyKind = story();

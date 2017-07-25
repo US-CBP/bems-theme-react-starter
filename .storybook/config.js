@@ -16,7 +16,7 @@ setOptions({
 
 function loadStories() {
     require('../src/Mui/index.story');
-    // require('../src/BemsMui/index.story');
+    require('../src/BemsMui/index.story');
     // require('../src/TomisApp/index.story');
     // require('../src/TomisOperations/index.story');
     // require('../src/TomisTemplate/index.story');

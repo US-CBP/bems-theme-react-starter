@@ -7,5 +7,8 @@
 => Loading static files from: C:\Users\bbh4ixh\cbpTheme\bems-theme-react-starter\public .
 => Loading custom addons config.
 => Using default webpack setup based on "Create React App".
-webpack built 25bbf4e8053a5e34be93 in 9968ms
-Terminate batch job (Y/N)? 
+webpack built eabfee95eb2414f1aecf in 7161ms
+Storybook started on => http://localhost:9010/
+
+webpack building...
+webpack built 1be7566b83c326a37968 in 2595ms

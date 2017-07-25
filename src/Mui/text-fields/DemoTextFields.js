@@ -8,12 +8,16 @@ const DemoTextFields = () => {
     return (
         <div>
             <br />
+            <h6>Composed Text Field</h6>
             <ComposedTextField />
             <br /> <br />
+            <h6>Inputs</h6>
             <Inputs />
             <br /> <br />
+            <h6>FieldMargins</h6>
             <TextFieldMargins />
             <br /> <br />
+            <h6>TextFields</h6>
             <TextFields />
         </div>
     );
