@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Panel, PanelHeaderSection, PanelHeaderTable, PanelBody } from '../BemsMui/Panel';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../BemsMui/Table';
 import ButtonRaisedSimplePrimary from '../BemsMui/ButtonRaisedSimplePrimary';

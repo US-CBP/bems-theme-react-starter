@@ -4,8 +4,8 @@ import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import TomisIconButton from 'TomisApp/TomisIconButton';
-import Search from '../BemsMui/Search';
-import SearchIcon from 'react-material-icons/icons/action/search';
+import Search from 'BemsMui/Search';
+import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import AppBar from 'material-ui/AppBar';
 import { getDrawerSearchListStyle, getDrawerSearchListItemStyle } from '../app/helpers/styles';
@@ -65,7 +65,14 @@ class TomisDrawerNavigationExample extends Component {
             <div>
                 <List style={getDrawerSearchListStyle()}>
                     <ListItem innerDivStyle={getDrawerSearchListItemStyle()}>
-                        <AppBar iconElementLeft={<TomisIconButton><SearchIcon /></TomisIconButton>} title={<Search {...this.props} />} />
+                        <AppBar
+                            iconElementLeft={
+                                <TomisIconButton>
+                                    <TomisFontIcon name="search" />
+                                </TomisIconButton>
+                            }
+                            title={<Search {...this.props} />}
+                        />
                     </ListItem>
                 </List>
                 <Divider inset={false} />

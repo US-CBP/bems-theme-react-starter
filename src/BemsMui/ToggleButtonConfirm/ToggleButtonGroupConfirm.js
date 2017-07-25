@@ -1,34 +1,35 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ToggleButtonConfirm from './ToggleButtonConfirm';
 // import warning from 'warning';
 
 class ToggleButtonGroupConfirm extends Component {
-  static propTypes = {
-    /**
+    static propTypes = {
+        /**
      * Should be used to pass `ToggleButton` components.
      */
-    children: PropTypes.node,
-    /**
+        children: PropTypes.node,
+        /**
      * The CSS class name of the root element.
      */
-    className: PropTypes.string,
-    /**
+        className: PropTypes.string,
+        /**
      * The `value` property of the radio button that will be
      * selected by default. This takes precedence over the `checked` property
      * of the `ToggleButton` elements.
      */
-    defaultSelected: PropTypes.any,
-    /**
+        defaultSelected: PropTypes.any,
+        /**
      * Where the label will be placed for all child radio buttons.
      * This takes precedence over the `labelPosition` property of the
      * `ToggleButton` elements.
      */
-    labelPosition: PropTypes.oneOf(['left', 'right']),
-    /**
+        labelPosition: PropTypes.oneOf(['left', 'right']),
+        /**
      * The name that will be applied to all child radio buttons.
      */
-    name: PropTypes.string.isRequired,
-    /**
+        name: PropTypes.string.isRequired,
+        /**
      * Callback function that is fired when a radio button has
      * been checked.
      *
@@ -36,133 +37,133 @@ class ToggleButtonGroupConfirm extends Component {
      * radio button.
      * @param {*} value The `value` of the selected radio button.
      */
-    onChange: PropTypes.func,
-    /**
+        onChange: PropTypes.func,
+        /**
      * Override the inline-styles of the root element.
      */
-    style: PropTypes.object,
-    /**
+        style: PropTypes.object,
+        /**
      * The `value` of the currently selected radio button.
      */
-    valueSelected: PropTypes.any
-  };
+        valueSelected: PropTypes.any
+    };
 
-  static defaultProps = {
-    style: {}
-  };
+    static defaultProps = {
+        style: {}
+    };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired
-  };
+    static contextTypes = {
+        muiTheme: PropTypes.object.isRequired
+    };
 
-  state = {
-    numberCheckedRadioButtons: 0,
-    selected: ''
-  };
+    state = {
+        numberCheckedRadioButtons: 0,
+        selected: ''
+    };
 
-  componentWillMount() {
-    let cnt = 0;
-    let selected = '';
-    const { valueSelected, defaultSelected } = this.props;
-    if (valueSelected !== undefined) {
-      selected = valueSelected;
-    } else if (defaultSelected !== undefined) {
-      selected = defaultSelected;
+    componentWillMount() {
+        let cnt = 0;
+        let selected = '';
+        const { valueSelected, defaultSelected } = this.props;
+        if (valueSelected !== undefined) {
+            selected = valueSelected;
+        } else if (defaultSelected !== undefined) {
+            selected = defaultSelected;
+        }
+
+        React.Children.forEach(
+            this.props.children,
+            option => {
+                if (this.hasCheckAttribute(option)) cnt++;
+            },
+            this
+        );
+
+        this.setState({
+            numberCheckedRadioButtons: cnt,
+            selected
+        });
     }
 
-    React.Children.forEach(
-      this.props.children,
-      option => {
-        if (this.hasCheckAttribute(option)) cnt++;
-      },
-      this
-    );
-
-    this.setState({
-      numberCheckedRadioButtons: cnt,
-      selected
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.hasOwnProperty('valueSelected')) {
-      this.setState({
-        selected: nextProps.valueSelected
-      });
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.hasOwnProperty('valueSelected')) {
+            this.setState({
+                selected: nextProps.valueSelected
+            });
+        }
     }
-  }
 
-  hasCheckAttribute(radioButton) {
-    return radioButton.props.hasOwnProperty('checked') && radioButton.props.checked;
-  }
-
-  updateRadioButtons(newSelection) {
-    if (this.state.numberCheckedRadioButtons === 0) {
-      this.setState({ selected: newSelection });
-    } else {
-      // warning(false, `Material-UI: Cannot select a different radio button while another radio button
-      // has the 'checked' property set to true.`);
+    hasCheckAttribute(radioButton) {
+        return radioButton.props.hasOwnProperty('checked') && radioButton.props.checked;
     }
-  }
 
-  handleChange = (event, newSelection) => {
-    this.updateRadioButtons(newSelection);
-
-    // Successful update
-    if (this.state.numberCheckedRadioButtons === 0) {
-      if (this.props.onChange) this.props.onChange(event, newSelection);
+    updateRadioButtons(newSelection) {
+        if (this.state.numberCheckedRadioButtons === 0) {
+            this.setState({ selected: newSelection });
+        } else {
+            // warning(false, `Material-UI: Cannot select a different radio button while another radio button
+            // has the 'checked' property set to true.`);
+        }
     }
-  };
 
-  getSelectedValue() {
-    return this.state.selected;
-  }
+    handleChange = (event, newSelection) => {
+        this.updateRadioButtons(newSelection);
 
-  setSelectedValue(newSelectionValue) {
-    this.updateRadioButtons(newSelectionValue);
-  }
+        // Successful update
+        if (this.state.numberCheckedRadioButtons === 0) {
+            if (this.props.onChange) this.props.onChange(event, newSelection);
+        }
+    };
 
-  clearValue() {
-    this.setSelectedValue('');
-  }
+    getSelectedValue() {
+        return this.state.selected;
+    }
 
-  render() {
-    const { prepareStyles } = this.context.muiTheme;
+    setSelectedValue(newSelectionValue) {
+        this.updateRadioButtons(newSelectionValue);
+    }
 
-    const options = React.Children.map(
-      this.props.children,
-      option => {
-        const {
-          name, // eslint-disable-line no-unused-vars
-          value, // eslint-disable-line no-unused-vars
-          label, // eslint-disable-line no-unused-vars
-          onCheck, // eslint-disable-line no-unused-vars
-          ...other
-        } = option.props;
+    clearValue() {
+        this.setSelectedValue('');
+    }
+
+    render() {
+        const { prepareStyles } = this.context.muiTheme;
+
+        const options = React.Children.map(
+            this.props.children,
+            option => {
+                const {
+                    name, // eslint-disable-line no-unused-vars
+                    value, // eslint-disable-line no-unused-vars
+                    label, // eslint-disable-line no-unused-vars
+                    onCheck, // eslint-disable-line no-unused-vars
+                    ...other
+                } = option.props;
+
+                return (
+                    <ToggleButtonConfirm
+                        {...other}
+                        ref={option.props.value}
+                        name={this.props.name}
+                        key={option.props.value}
+                        value={option.props.value}
+                        label={option.props.label}
+                        labelPosition={this.props.labelPosition}
+                        onCheck={this.handleChange}
+                        checked={option.props.value === this.state.selected}
+                    />
+                );
+            },
+            this
+        );
 
         return (
-          <ToggleButtonConfirm
-            {...other}
-            ref={option.props.value}
-            name={this.props.name}
-            key={option.props.value}
-            value={option.props.value}
-            label={option.props.label}
-            labelPosition={this.props.labelPosition}
-            onCheck={this.handleChange}
-            checked={option.props.value === this.state.selected}
-          />
+            <div style={prepareStyles(Object.assign({}, this.props.style, { display: 'flex' }))} className={this.props.className}>
+                {options}
+            </div>
         );
-      },
-      this
-    );
-
-    return (
-      <div style={prepareStyles(Object.assign({}, this.props.style, { display: 'flex' }))} className={this.props.className}>
-        {options}
-      </div>
-    );
-  }
+    }
 }
 
 export default ToggleButtonGroupConfirm;

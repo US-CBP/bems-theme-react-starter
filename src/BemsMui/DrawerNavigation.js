@@ -1,13 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
-import Search from '../BemsMui/Search';
-import SearchIcon from 'react-material-icons/icons/action/search';
+import Search from 'BemsMui/Search';
+import FontIcon from 'BemsMui/FontIcon';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import AppBar from 'material-ui/AppBar';
-import { getDrawerSearchListStyle, getDrawerSearchListItemStyle } from '../app/helpers/styles';
+import { getDrawerSearchListStyle, getDrawerSearchListItemStyle } from 'app/helpers/styles';
 
 const isInitiallyOpen = false;
 const isPrimaryTogglesNestedList = true;
@@ -64,7 +65,14 @@ class NavigationDrawer extends Component {
             <div>
                 <List style={getDrawerSearchListStyle()}>
                     <ListItem innerDivStyle={getDrawerSearchListItemStyle()}>
-                        <AppBar iconElementLeft={<IconButton><SearchIcon /></IconButton>} title={<Search {...this.props} />} />
+                        <AppBar
+                            iconElementLeft={
+                                <IconButton>
+                                    <FontIcon name="search" />
+                                </IconButton>
+                            }
+                            title={<Search {...this.props} />}
+                        />
                     </ListItem>
                 </List>
                 <Divider inset={false} />

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
 import transitions from 'material-ui/styles/transitions';
@@ -77,7 +78,7 @@ class EnhancedSwitch extends Component {
         disabled: PropTypes.bool,
         iconStyle: PropTypes.object,
         inputStyle: PropTypes.object,
-		buttonStyles: PropTypes.object,
+        buttonStyles: PropTypes.object,
         inputType: PropTypes.string.isRequired,
         label: PropTypes.node,
         labelPosition: PropTypes.oneOf(['left', 'right']),
@@ -232,16 +233,13 @@ class EnhancedSwitch extends Component {
         // setTimeout is needed becuase the focus event fires first
         // Wait so that we can capture if this was a keyboard focus
         // or touch focus
-        setTimeout(
-            () => {
-                if (this.tabPressed) {
-                    this.setState({
-                        isKeyboardFocused: true
-                    });
-                }
-            },
-            150
-        );
+        setTimeout(() => {
+            if (this.tabPressed) {
+                this.setState({
+                    isKeyboardFocused: true
+                });
+            }
+        }, 150);
 
         if (this.props.onFocus) {
             this.props.onFocus(event);
@@ -252,7 +250,7 @@ class EnhancedSwitch extends Component {
         const {
             name,
             value,
-			buttonStyles,
+            buttonStyles,
             iconStyle,
             inputStyle,
             inputType,
@@ -292,7 +290,8 @@ class EnhancedSwitch extends Component {
             wrapStyles.marginRight /= 2;
         }
 
-        const labelElement = label &&
+        const labelElement =
+            label &&
             <label style={prepareStyles(Object.assign(styles.label, labelStyle))}>
                 {label}
             </label>;
@@ -339,18 +338,21 @@ class EnhancedSwitch extends Component {
               </div>
             : <div style={prepareStyles(wrapStyles)}>
                   <div style={prepareStyles(Object.assign({}, trackStyle))} />
-                  <Paper style={thumbStyle} zDepth={1} circle={true}> {ripples} </Paper>
+                  <Paper style={thumbStyle} zDepth={1} circle={true}>
+                      {' '}{ripples}{' '}
+                  </Paper>
               </div>;
 
-        const elementsInOrder = labelPosition === 'right'
-            ? <div style={styles.controls}>
-                  {switchOrThumbElement}
-                  {labelElement}
-              </div>
-            : <div style={styles.controls}>
-                  {labelElement}
-                  {switchOrThumbElement}
-              </div>;
+        const elementsInOrder =
+            labelPosition === 'right'
+                ? <div style={styles.controls}>
+                      {switchOrThumbElement}
+                      {labelElement}
+                  </div>
+                : <div style={styles.controls}>
+                      {labelElement}
+                      {switchOrThumbElement}
+                  </div>;
 
         return (
             <div ref="root" className={className} style={prepareStyles(Object.assign(styles.root, style))}>
