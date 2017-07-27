@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
-// import AutoComplete from './AutoComplete';
+import AutoComplete from './AutoComplete';
 // import AutoCompleteInfo from './AutoCompleteInfo';
 // import ButtonRaisedSimplePrimary from './ButtonRaisedSimplePrimary';
 // import ButtonRaisedComplexPrimary from './ButtonRaisedComplexPrimary';
@@ -44,21 +44,22 @@ import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
 
-storiesOf('BEMS Mui', module).addDecorator(story => {
+storiesOf('BEMS Mui', module)
+  .addDecorator(story => {
     const storyKind = story();
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '100%', minWidth: 600 }}>
-                <MuiThemeProvider theme={theme}>
-                    {storyKind}
-                </MuiThemeProvider>
-            </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100%', minWidth: 600 }}>
+          <MuiThemeProvider theme={theme}>
+            {storyKind}
+          </MuiThemeProvider>
         </div>
+      </div>
     );
-});
-// .add('AutoComplete', () => {
-//     return <AutoComplete />;
-// });
+  })
+  .add('AutoComplete', () => {
+    return <AutoComplete />;
+  });
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
     })
