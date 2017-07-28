@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import FontIcon from './FontIcon';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+import Input from 'material-ui/Input';
+import InputLabel from 'material-ui/Input/InputLabel';
+
+const options = [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }];
 
 const defaultProps = {
     id: `ACI-${new Date().getTime()}`
 };
 
-class AutoCompleteInput extends Component {
+class AutoCompleteSelect extends Component {
     input = null;
     isFocused = false;
+
+    state = {
+        val: ''
+    };
 
     focus = () => {
         this.input.focus();
@@ -18,6 +28,10 @@ class AutoCompleteInput extends Component {
     blur = () => {
         this.input.blur();
         this.isFocused = false;
+    };
+
+    handleChangeLovVal = val => {
+        this.setState({ val });
     };
 
     //   handleBlur = () => {
@@ -50,22 +64,19 @@ class AutoCompleteInput extends Component {
     // };
 
     render() {
+        const { handleChangeLovVal } = this;
+        const { val } = this.state;
+        const classes = this.props.classes;
         //this.props originate from MUI <Input /> Component
         //inputProps originate from AutoSuggest Component
-        const { handleClickArrowDropDown, handleFocus, handleBlur } = this;
-        const { id, inputProps, rowsMax, ...otherProps } = this.props;
-        // const { classes, home, inputRef, lov, ...otherInputProps } = inputProps;
         return (
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div>S</div>
-                <input ref={ref => (this.input = ref)} id={id} {...otherProps} />
-                <div onClick={handleClickArrowDropDown}>
-                    <FontIcon name="arrow_drop_down" />
-                </div>
+                <FontIcon name="arrow_drop_down" />
+                <Select options={options} onChange={handleChangeLovVal} value={val} clearable={false} />
             </div>
         );
     }
 }
 
-AutoCompleteInput.defaultProps = defaultProps;
-export default AutoCompleteInput;
+AutoCompleteSelect.defaultProps = defaultProps;
+export default AutoCompleteSelect;
