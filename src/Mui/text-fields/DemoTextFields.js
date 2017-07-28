@@ -14,10 +14,10 @@ const DemoTextFields = () => {
             <h6>Inputs</h6>
             <Inputs />
             <br /> <br />
-            <h6>FieldMargins</h6>
+            <h6>Field Margins</h6>
             <TextFieldMargins />
             <br /> <br />
-            <h6>TextFields</h6>
+            <h6>Text Fields</h6>
             <TextFields />
         </div>
     );
