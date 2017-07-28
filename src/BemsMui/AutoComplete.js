@@ -12,6 +12,7 @@ import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import FontIcon from './FontIcon';
+import AutoCompleteInput from './AutoCompleteInput';
 
 const suggestions = [
   { label: 'Afghanistan' },
@@ -67,9 +68,22 @@ function renderInputORIGINAL(inputProps) {
     />
   );
 }
-function renderInput(inputProps) {
-  const { classes, home, value, ref, ...other } = inputProps;
-  return <input {...inputProps} />;
+
+function renderInput(allInputProps) {
+  const { classes, home, value, ref, ...other } = allInputProps;
+  const inputProps = { classes: { input: classes.input }, ...other };
+  return (
+    <Input
+      disabled={false}
+      component={AutoCompleteInput}
+      fullWidth={true}
+      autoFocus={home}
+      classes={classes.input}
+      value={value}
+      inputRef={ref}
+      inputProps={{ inputProps }}
+    />
+  );
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
@@ -152,9 +166,6 @@ const styleSheet = createStyleSheet('AutoComplete', theme => ({
 }));
 
 class AutoComplete extends Component {
-  lov = null;
-  isOpen = false;
-
   state = {
     value: '',
     suggestions: [suggestions]
@@ -182,30 +193,13 @@ class AutoComplete extends Component {
     return true;
   };
 
-  handleClickToOpen = () => {
-    const { lov, lov: { input }, isOpen } = this;
-    if (lov && input) {
-      if (isOpen) {
-        this.lov.input.blur();
-      } else {
-        this.lov.input.focus();
-      }
-      this.isOpen = !isOpen;
-    }
-  };
-
   render() {
-    const { shouldRenderSuggestions, handleClickToOpen } = this;
+    const { shouldRenderSuggestions } = this;
     const { classes } = this.props;
 
     return (
       <div>
-        <div onClick={handleClickToOpen}>
-          <span>abcdefg</span>
-          <FontIcon name="arrow_drop_down" />
-        </div>
         <Autosuggest
-          ref={ref => (this.lov = ref)}
           theme={{
             container: classes.container,
             suggestionsContainerOpen: classes.suggestionsContainerOpen,
