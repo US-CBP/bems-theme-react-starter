@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
+import { withStyles, withTheme, createStyleSheet } from 'material-ui/styles';
+import CloneableIcon from './CloneableIcon';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
 import InputLabel from 'material-ui/Input/InputLabel';
@@ -11,14 +11,17 @@ import FormHelperText from 'material-ui/Form/FormHelperText';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const styleSheet = createStyleSheet('AutoComplete', theme => ({
+const styleSheet = createStyleSheet('AutoCompleteRender', theme => ({
   formControl: {
     width: '100%',
     flex: 1
   },
-  textField: {
-    width: '100%',
-    flex: 1
+  inputLabel: {
+    marginLeft: '24px'
+  },
+  inputRenderRoot: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
@@ -27,18 +30,18 @@ const propTypes = {
 };
 
 const AutoCompleteRender = props => {
-  const { classes, handleInputChange, payload: { name, val }, options, textFieldProps } = props;
+  const { classes, handleInputChange, payload: { name, val }, options, textFieldProps, isCloneable, disabledClone } = props;
   const { id, label, placeholder, disabled, readOnly, helperText } = textFieldProps;
   return (
-    <div style={{ display: 'flex' }}>
+    <div>
       <FormControl className={classes.formControl} margin="dense">
-        <InputLabel className="cloneable-floating-label" htmlFor={id}>
+        <InputLabel className={classes.inputLabel} htmlFor={id}>
           {label}
         </InputLabel>
         <Input
           className={classes.input}
           id={id}
-          component={_InputRender}
+          component={withStyles(styleSheet)(_InputRender)}
           onChange={handleInputChange}
           disableUnderline={readOnly}
           disabled={disabled}
@@ -46,35 +49,15 @@ const AutoCompleteRender = props => {
           placeholder={placeholder}
           inputProps={{
             options,
-            readOnly: readOnly
+            readOnly,
+            isCloneable,
+            disabledClone
           }}
         />
-        <FormHelperText>
+        <FormHelperText className={classes.formHelperText}>
           {helperText}
         </FormHelperText>
       </FormControl>
-
-      <TextField
-        id={id}
-        label={label}
-        labelClassName="cloneable-floating-label"
-        className={classes.textField}
-        value={name}
-        inputProps={{
-          options,
-          value: val,
-          placeholder: placeholder,
-          readOnly: readOnly
-        }}
-        InputProps={{
-          component: _InputRender,
-          onChange: handleInputChange,
-          disableUnderline: readOnly
-        }}
-        margin="dense"
-        helperText={helperText}
-        disabled={disabled}
-      />
     </div>
   );
 };
@@ -87,15 +70,27 @@ export default withStyles(styleSheet)(AutoCompleteRender);
  * Material-UI Input requires the use of ref.  Refs do not exist in stateless functional components.
  * As such, we must, unfortunately, use a class for the Input component.
  */
+const arrowRenderer = ({ onMouseDown, isOpen }) => {
+  return <FontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />;
+};
+
 class _InputRender extends Component {
   render() {
-    const { value, disabled, onChange, options, placeholder, readOnly } = this.props;
+    const { value, disabled, onChange, options, placeholder, readOnly, isCloneable, disabledClone, classes } = this.props;
     const isDisabled = readOnly ? true : disabled ? true : false;
     const displayPlaceholder = isDisabled ? '' : placeholder;
     return (
-      <div className="material-select" style={{ display: 'flex', alignItems: 'center' }}>
-        <FontIcon name="check_box" />
-        <Select options={options} disabled={isDisabled} placeholder={displayPlaceholder} onChange={onChange} value={value} clearable={false} />
+      <div className={classes.inputRenderRoot}>
+        <CloneableIcon isCloneable={isCloneable} disabledClone={disabledClone} disabled={disabled} readOnly={readOnly} />
+        <Select
+          options={options}
+          disabled={isDisabled}
+          placeholder={displayPlaceholder}
+          onChange={onChange}
+          value={value}
+          clearable={false}
+          arrowRenderer={arrowRenderer}
+        />
       </div>
     );
   }

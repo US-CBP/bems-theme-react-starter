@@ -14,9 +14,10 @@ const FontIcon = styled.i`
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-  color: ${props => props.color || 'inherit'};
+  color: ${({ color }) => color || 'inherit'};
+  pointer-events: ${({ disabledClone, disabled }) => (disabledClone || disabled ? 'none' : 'auto')};
   ::before {
-    content: '${props => props.name}';
+    content: '${({ name }) => name}';
   }
 `;
 

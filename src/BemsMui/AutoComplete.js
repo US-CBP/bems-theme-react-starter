@@ -15,7 +15,9 @@ const defaultProps = {
     disabled: false,
     readOnly: false
   },
-  options
+  options,
+  isCloneable: true,
+  disabledClone: false
 };
 
 const propTypes = {};

@@ -303,44 +303,31 @@ h3 {
     margin-bottom: 3rem;
 }
 
-.cloneable-floating-label {
-    margin-left: 24px;
-}
-
+/* react-select overrides */
 .Select.Select--single {
     width: 100%;
 }
-
 
 .Select.is-focused:not(.is-open) > .Select-control {
     border-color: transparent;
     box-shadow: none;
 }
 
+.Select .Select-placeholder, .Select--single > .Select-control .Select-value {
+    padding-left: 0;
+}
 
 .Select > .Select-control {
     border: none;
 }
 
+.Select .Select-input {
+    padding-left: 0;
+    width: 100%;
+}
+
 .Select .Select-control:hover {
     box-shadow: none;
-}
-
-.Select .Select-arrow {
-    border-color: #000 transparent transparent;
-    border-style: solid;
-    display: inline-block;
-    height: 0;
-    width: 0;
-}
-
-.material-select > .is-open > .Select-control > .Select-arrow {
-    border-color: transparent transparent #000;
-}
-
-.Select .Select-arrow-zone:hover > .Select-arrow,
-.Select .is-open .Select-arrow {
-    border-top-color: #000;
 }
 
 .Select.is-disabled > .Select-control {
