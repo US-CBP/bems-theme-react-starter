@@ -334,6 +334,15 @@ h3 {
     width: 0;
 }
 
+.material-select > .is-open > .Select-control > .Select-arrow {
+    border-color: transparent transparent #000;
+}
+
+.Select .Select-arrow-zone:hover > .Select-arrow,
+.Select .is-open .Select-arrow {
+    border-top-color: #000;
+}
+
 .Select.is-disabled > .Select-control {
     background-color: transparent;
 }
