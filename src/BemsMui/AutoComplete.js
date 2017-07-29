@@ -7,7 +7,7 @@ import AutoCompleteRender from './AutoCompleteRender';
 const options = [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }];
 
 const defaultProps = {
-  textFieldProps: {
+  inputFieldProps: {
     id: `ac-${new Date().getTime()}`,
     label: 'AC Field',
     placeholder: 'AC Placeholder',
@@ -17,7 +17,8 @@ const defaultProps = {
   },
   options,
   isCloneable: true,
-  disabledClone: false
+  disabledClone: false,
+  required: true
 };
 
 const propTypes = {};
@@ -25,8 +26,8 @@ const propTypes = {};
 class AutoComplete extends Component {
   state = {
     payload: {
-      val: 'two',
-      name: 'Two'
+      val: null,
+      name: null
     }
   };
 

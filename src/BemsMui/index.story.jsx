@@ -58,7 +58,11 @@ storiesOf('BEMS Mui', module)
     );
   })
   .add('AutoComplete', () => {
-    return <AutoComplete />;
+    return (
+      <div style={{ marginLeft: '64px', marginRight: '64px' }}>
+        <AutoComplete />
+      </div>
+    );
   });
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
