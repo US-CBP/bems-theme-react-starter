@@ -302,3 +302,41 @@ h3 {
 .cloning-stepbar-container {
     margin-bottom: 3rem;
 }
+
+.cloneable-floating-label {
+    margin-left: 24px;
+}
+
+.Select.Select--single {
+    width: 100%;
+}
+
+
+.Select.is-focused:not(.is-open) > .Select-control {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+
+.Select > .Select-control {
+    border: none;
+}
+
+.Select .Select-control:hover {
+    box-shadow: none;
+}
+
+.Select .Select-arrow {
+    border-color: #000 transparent transparent;
+    border-style: solid;
+    display: inline-block;
+    height: 0;
+    width: 0;
+}
+
+.Select.is-disabled > .Select-control {
+    background-color: transparent;
+}
+.Select.is-disabled > .Select-control:hover {
+    box-shadow: none;
+}
