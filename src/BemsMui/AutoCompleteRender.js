@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -10,18 +11,48 @@ import FormHelperText from 'material-ui/Form/FormHelperText';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+const styleSheet = createStyleSheet('AutoComplete', theme => ({
+  formControl: {
+    width: '100%',
+    flex: 1
+  },
+  textField: {
+    width: '100%',
+    flex: 1
+  }
+}));
+
+const propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 const AutoCompleteRender = props => {
   const { classes, handleInputChange, payload: { name, val }, options, textFieldProps } = props;
-  const { id, label, placeholder, disabled, readOnly = false, helperText } = textFieldProps;
+  const { id, label, placeholder, disabled, readOnly, helperText } = textFieldProps;
   return (
-    <div>
-      {/* <FormControl>
-          <InputLabel htmlFor="name">Cloneable</InputLabel>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Input id="name" component={AutoCompleteSelect} value="" />
-          </div>
-          <FormHelperText>Some important helper text</FormHelperText>
-        </FormControl> */}
+    <div style={{ display: 'flex' }}>
+      <FormControl className={classes.formControl} margin="dense">
+        <InputLabel className="cloneable-floating-label" htmlFor={id}>
+          {label}
+        </InputLabel>
+        <Input
+          className={classes.input}
+          id={id}
+          component={_InputRender}
+          onChange={handleInputChange}
+          disableUnderline={readOnly}
+          disabled={disabled}
+          value={val}
+          placeholder={placeholder}
+          inputProps={{
+            options,
+            readOnly: readOnly
+          }}
+        />
+        <FormHelperText>
+          {helperText}
+        </FormHelperText>
+      </FormControl>
 
       <TextField
         id={id}
@@ -48,11 +79,9 @@ const AutoCompleteRender = props => {
   );
 };
 
-AutoCompleteRender.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+AutoCompleteRender.propTypes = propTypes;
 
-export default AutoCompleteRender;
+export default withStyles(styleSheet)(AutoCompleteRender);
 
 /**
  * Material-UI Input requires the use of ref.  Refs do not exist in stateless functional components.
@@ -65,7 +94,7 @@ class _InputRender extends Component {
     const displayPlaceholder = isDisabled ? '' : placeholder;
     return (
       <div className="material-select" style={{ display: 'flex', alignItems: 'center' }}>
-        <FontIcon name="arrow_drop_down" />
+        <FontIcon name="check_box" />
         <Select options={options} disabled={isDisabled} placeholder={displayPlaceholder} onChange={onChange} value={value} clearable={false} />
       </div>
     );

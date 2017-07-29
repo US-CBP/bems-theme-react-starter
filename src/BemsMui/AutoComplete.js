@@ -1,15 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import _get from 'lodash/get';
 import AutoCompleteRender from './AutoCompleteRender';
-
-const styleSheet = createStyleSheet('AutoComplete', theme => ({
-  textField: {
-    width: '100%'
-  }
-}));
 
 const options = [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }];
 
@@ -25,13 +18,14 @@ const defaultProps = {
   options
 };
 
-const propTypes = {
-  classes: PropTypes.object.isRequired
-};
+const propTypes = {};
 
 class AutoComplete extends Component {
   state = {
-    payload: { name: null, val: null }
+    payload: {
+      val: 'two',
+      name: 'Two'
+    }
   };
 
   handleInputChange = val => {
@@ -48,4 +42,4 @@ class AutoComplete extends Component {
 AutoComplete.defaultProps = defaultProps;
 AutoComplete.propTypes = propTypes;
 
-export default withStyles(styleSheet)(AutoComplete);
+export default AutoComplete;
