@@ -8,7 +8,7 @@ const defaultProps = {
     label: 'DP Field',
     placeholder: 'DP Placeholder',
     helperText: null,
-    disabled: false,
+    disabled: true,
     readOnly: false
   },
   isCloneable: true,

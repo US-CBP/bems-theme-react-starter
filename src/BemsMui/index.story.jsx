@@ -7,6 +7,7 @@ import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import AutoComplete from './AutoComplete';
 import DatePicker from './DatePicker';
+import TimeSpinner from './TimeSpinner';
 // import AutoCompleteInfo from './AutoCompleteInfo';
 // import ButtonRaisedSimplePrimary from './ButtonRaisedSimplePrimary';
 // import ButtonRaisedComplexPrimary from './ButtonRaisedComplexPrimary';
@@ -63,6 +64,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Date Picker', () => {
     return <DatePicker />;
+  })
+  .add('Time Spinner', () => {
+    return <TimeSpinner />;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
