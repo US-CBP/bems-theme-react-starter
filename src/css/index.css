@@ -304,10 +304,6 @@ h3 {
 }
 
 /* react-select overrides */
-.Select.Select--single {
-    width: 100%;
-}
-
 .Select.is-focused:not(.is-open) > .Select-control {
     border-color: transparent;
     box-shadow: none;

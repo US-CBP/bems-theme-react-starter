@@ -27,17 +27,19 @@ const styleSheet = createStyleSheet('AutoCompleteRender', theme => ({
     display: 'flex',
     alignItems: 'center'
   },
-  leftPos: {
-    marginLeft: '4px'
+  lov: {
+    marginLeft: '4px',
+    width: '100%'
   },
-  leftPosCloneable: {
-    marginLeft: `${checkboxSize * checkboxMRFactor}px`
+  lovCloneable: {
+    marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
+    width: '100%'
   },
   inputLabel: {
     marginLeft: '5px'
   },
   inputLabelCloneable: {
-    marginLeft: `${checkboxSize * checkboxMRFactor + 1}px`
+    marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
   },
   checkbox: {
     color: theme.text.primary,
@@ -76,7 +78,9 @@ const AutoCompleteRender = props => {
       formHelperText: clsFormHelperText
     },
     handleInputChange,
-    payload: { name, val },
+    isCloneChecked,
+    onCloneCheckboxChange,
+    payload: { val },
     options,
     inputFieldProps,
     isCloneable,
@@ -84,10 +88,16 @@ const AutoCompleteRender = props => {
     required
   } = props;
   const { id, label, placeholder, disabled, readOnly, helperText } = inputFieldProps;
+  const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder });
   return (
     <div>
       <FormControl className={clsFormControl} margin="dense">
-        <InputLabel className={cx({ [clsInputLabelCloneable]: isCloneable, [clsInputLabel]: !isCloneable })} htmlFor={id} required={required} shrink={true}>
+        <InputLabel
+          className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+          htmlFor={id}
+          required={required}
+          shrink={true}
+        >
           {label}
         </InputLabel>
         <Input
@@ -104,7 +114,9 @@ const AutoCompleteRender = props => {
             readOnly,
             isCloneable,
             disabledClone,
-            classes
+            classes,
+            isCloneChecked,
+            onCloneCheckboxChange
           }}
         />
         <FormHelperText className={clsFormHelperText}>
@@ -119,8 +131,9 @@ AutoCompleteRender.propTypes = propTypes;
 
 export default withStyles(styleSheet)(AutoCompleteRender);
 
-const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
+const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOpen }) => {
   return (
+    !readOnly &&
     <IconButton className={clsSelectArrow} disabled={isDisabled} aria-label="Toggle select options display">
       <FontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
     </IconButton>
@@ -129,8 +142,9 @@ const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
 
 const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
   const isDisabled = readOnly ? true : disabled ? true : false;
-  const displayPlaceholder = isDisabled ? placeholder : placeholder;
-  return { isDisabled, displayPlaceholder };
+  const displayPlaceholder = readOnly ? '' : placeholder;
+  const isDisplayCloneable = isCloneable && !readOnly;
+  return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
 /**
@@ -146,32 +160,31 @@ class _InputRender extends Component {
       readOnly,
       isCloneable,
       disabledClone,
-      classes: {
-        checkbox: clsCheckbox,
-        checkboxDisabled: clsCheckboxDisabled,
-        leftPos: clsLeftPos,
-        leftPosCloneable: clsLeftPosCloneable,
-        selectArrow: clsSelectArrow
-      }
+      classes: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
+      isCloneChecked,
+      onCloneCheckboxChange
     } = this.props;
-    const { isDisabled, displayPlaceholder } = getDisplayVals(this.props);
+    const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
     return (
       <CloneableInputRender>
-        {isCloneable &&
+        {isDisplayCloneable &&
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
             disabled={isDisabled || disabledClone}
-            checked={true}
+            checked={isCloneChecked}
+            onChange={onCloneCheckboxChange}
           />}
         <Select
-          className={cx({ [clsLeftPos]: !isCloneable, [clsLeftPosCloneable]: isCloneable })}
+          className={cx({ [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
           options={options}
           disabled={isDisabled}
           placeholder={displayPlaceholder}
           onChange={onChange}
           value={value}
           clearable={false}
-          arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled)}
+          labelKey="description"
+          valueKey="code"
+          arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled, readOnly)}
         />
       </CloneableInputRender>
     );

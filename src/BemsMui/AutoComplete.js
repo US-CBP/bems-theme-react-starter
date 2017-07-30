@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 import AutoCompleteRender from './AutoCompleteRender';
+import { bigLov, smallLov } from 'globalJs/testData';
 
-const options = [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }];
+const options = smallLov;
+// const options = bigLov;
 
 const defaultProps = {
   inputFieldProps: {
@@ -28,17 +30,21 @@ class AutoComplete extends Component {
     payload: {
       val: null,
       name: null
-    }
+    },
+    isCloneChecked: true
+  };
+
+  handleCloneCheckboxChange = (evt, checked) => {
+    this.setState({ isCloneChecked: checked });
   };
 
   handleInputChange = val => {
-    console.log('handleInputChange val=', val);
-    this.setState({ payload: { name: _get(val, 'label', null), val: _get(val, 'value', null) } });
+    this.setState({ payload: { name: _get(val, 'description', null), val: _get(val, 'code', null) } });
   };
 
   render() {
-    const { handleInputChange } = this;
-    return <AutoCompleteRender handleInputChange={handleInputChange} {...this.state} {...this.props} />;
+    const { handleInputChange, handleCloneCheckboxChange } = this;
+    return <AutoCompleteRender handleInputChange={handleInputChange} onCloneCheckboxChange={handleCloneCheckboxChange} {...this.state} {...this.props} />;
   }
 }
 
