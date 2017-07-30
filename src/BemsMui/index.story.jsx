@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import AutoComplete from './AutoComplete';
+import DatePicker from './DatePicker';
 // import AutoCompleteInfo from './AutoCompleteInfo';
 // import ButtonRaisedSimplePrimary from './ButtonRaisedSimplePrimary';
 // import ButtonRaisedComplexPrimary from './ButtonRaisedComplexPrimary';
@@ -49,7 +50,7 @@ storiesOf('BEMS Mui', module)
     const storyKind = story();
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', minWidth: 600 }}>
+        <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
           <MuiThemeProvider theme={theme}>
             {storyKind}
           </MuiThemeProvider>
@@ -58,12 +59,12 @@ storiesOf('BEMS Mui', module)
     );
   })
   .add('AutoComplete', () => {
-    return (
-      <div style={{ marginLeft: '64px', marginRight: '64px' }}>
-        <AutoComplete />
-      </div>
-    );
+    return <AutoComplete />;
+  })
+  .add('Date Picker', () => {
+    return <DatePicker />;
   });
+
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
     })
