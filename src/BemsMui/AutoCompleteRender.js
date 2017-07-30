@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, cloneableStyleSheet, autoCompleteStyleSheet } from 'globalJs/tomisMuiStylesheets';
+import { getDisplayVals, handleCloneCheckboxChange, cloneableStyleSheet, autoCompleteStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -106,15 +106,17 @@ class _InputRender extends Component {
       isCloneChecked,
       onCloneCheckboxChange
     } = this.props;
+    //isMyCloneChecked must be assigned *after* it is set to a new value
     const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
+
     return (
       <CloneableInputRender>
         {isDisplayCloneable &&
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-            disabled={isDisabled || disabledClone}
             checked={isCloneChecked}
-            onChange={onCloneCheckboxChange}
+            onChange={handleCloneCheckboxChange.bind(this, onCloneCheckboxChange)}
+            disabled={isDisabled || disabledClone}
           />}
         <Select
           className={cx({ [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}

@@ -2,19 +2,37 @@ import { createStyleSheet } from 'material-ui/styles';
 import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import tomisTheme from 'app/themes/tomisLightTheme.js';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/share';
+import _get from 'lodash/get';
+import { RIPPLE_TIME_MS } from 'globalJs/constants';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
 
 const checkboxSize = 24;
 const checkboxW = 48;
 const checkboxMRFactor = 1.15;
+// Give ripple time to finish before updating HOC
+const cloneCheckboxChange$ = Observable.timer(RIPPLE_TIME_MS).take(1).share();
 
 export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
-  console.log('getDisplayVals disabled, isCloneable, disabledClone, readOnly, placeholder=', disabled, isCloneable, disabledClone, readOnly, placeholder);
   const isDisabled = readOnly ? true : disabled ? true : false;
   const displayPlaceholder = readOnly ? '' : placeholder;
   const isDisplayCloneable = isCloneable && !readOnly;
   return { isDisabled, displayPlaceholder, isDisplayCloneable };
+};
+
+export const handleCloneCheckboxChange = (onCloneCheckboxChange, evt) => {
+  evt.stopPropagation();
+  cloneCheckboxChange$.subscribe({
+    next: () => {
+      onCloneCheckboxChange();
+    },
+    err: () => {},
+    complete: () => {}
+  });
 };
 
 export const cloneableStyleSheet = createStyleSheet('CloneableRender', theme => ({

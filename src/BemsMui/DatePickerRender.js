@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, datePickerStyleSheet, datePickerStyles, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
+import { getDisplayVals, handleCloneCheckboxChange, datePickerStyleSheet, datePickerStyles, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -10,8 +10,6 @@ import CloneableInputRender from './CloneableInputRender';
 import FormControl from 'material-ui/Form/FormControl';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import cx from 'classnames';
 import moment from 'moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -74,11 +72,6 @@ const DatePickerRender = props => {
         {helperText}
       </FormHelperText>
     </FormControl>
-
-    // <div>
-    //   <div>Please type a day:</div>
-    //   <DayPickerInput placeholder="MM/DD/YYYY" />
-    // </div>
   );
 };
 
@@ -91,22 +84,17 @@ export default withStyles(cloneableStyleSheet)(DatePickerRender);
  */
 class _InputRender extends Component {
   dpInput = null;
-
-  state = {
-    isFocused: false
-  };
+  isFocused = false;
 
   handleClickIcon = evt => {
     evt.stopPropagation();
-    console.log('this.dpInput=', this.dpInput);
-    const { dpInput: { state: { showOverlay } } } = this;
-    const { isFocused } = this.state;
+    const { dpInput: { input }, isFocused } = this;
     if (isFocused) {
-      this.dpInput.input.blur();
-      this.setState({ isFocused: false });
+      input.blur();
+      this.isFocused = false;
     } else {
-      this.dpInput.input.focus();
-      this.setState({ isFocused: true });
+      input.focus();
+      this.isFocused = true;
     }
   };
 
@@ -123,18 +111,17 @@ class _InputRender extends Component {
       isCloneChecked,
       onCloneCheckboxChange
     } = this.props;
-
     const { dp, dpCloneable } = datePickerStyles;
     const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
-    console.log('render isDisabled, displayPlaceholder, isDisplayCloneable=', isDisabled, displayPlaceholder, isDisplayCloneable);
+
     return (
       <CloneableInputRender>
         {isDisplayCloneable &&
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-            disabled={isDisabled || disabledClone}
             checked={isCloneChecked}
-            onChange={onCloneCheckboxChange}
+            onChange={handleCloneCheckboxChange.bind(this, onCloneCheckboxChange)}
+            disabled={isDisabled || disabledClone}
           />}
         <DayPickerInput
           ref={ref => (this.dpInput = ref)}

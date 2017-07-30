@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 import AutoCompleteRender from './AutoCompleteRender';
+import { RIPPLE_TIME_MS } from 'globalJs/constants';
 import { bigLov, smallLov } from 'globalJs/testData';
 
 const options = smallLov;
@@ -34,8 +35,8 @@ class AutoComplete extends Component {
     isCloneChecked: true
   };
 
-  handleCloneCheckboxChange = (evt, checked) => {
-    this.setState({ isCloneChecked: checked });
+  handleCloneCheckboxChange = () => {
+    this.setState({ isCloneChecked: !this.state.isCloneChecked });
   };
 
   handleInputChange = val => {

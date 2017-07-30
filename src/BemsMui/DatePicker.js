@@ -26,8 +26,8 @@ class DatePicker extends Component {
     isCloneChecked: true
   };
 
-  handleCloneCheckboxChange = (evt, checked) => {
-    this.setState({ isCloneChecked: checked });
+  handleCloneCheckboxChange = () => {
+    this.setState({ isCloneChecked: !this.state.isCloneChecked });
   };
 
   handleInputChange = val => {
