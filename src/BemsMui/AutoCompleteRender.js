@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
+import { getDisplayVals, cloneableStyleSheet, autoCompleteStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -14,62 +15,13 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import cx from 'classnames';
 
-const checkboxSize = 24;
-const checkboxW = 48;
-const checkboxMRFactor = 1.15;
-
-const styleSheet = createStyleSheet('AutoCompleteRender', theme => ({
-  formControl: {
-    width: '100%',
-    flex: 1
-  },
-  inputRenderRoot: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  lov: {
-    marginLeft: '4px',
-    width: '100%'
-  },
-  lovCloneable: {
-    marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
-    width: '100%'
-  },
-  inputLabel: {
-    marginLeft: '5px'
-  },
-  inputLabelCloneable: {
-    marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
-  },
-  checkbox: {
-    color: theme.text.primary,
-    width: `${checkboxW}px`,
-    height: `${checkboxW}px`,
-    position: 'absolute',
-    zIndex: 1,
-    left: `${-1 * (checkboxW - checkboxSize) * 0.5}px`,
-    top: '-8px'
-  },
-  checkboxDisabled: {
-    color: theme.text.disabled
-  },
-  selectArrow: {
-    color: theme.text.primary,
-    position: 'absolute',
-    right: 0,
-    top: `${0}px`,
-    width: '36px',
-    height: '36px'
-  }
-}));
-
 const propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 const AutoCompleteRender = props => {
   const {
-    classes,
+    classes: renderClasses,
     classes: {
       formControl: clsFormControl,
       input: clsInput,
@@ -90,46 +42,43 @@ const AutoCompleteRender = props => {
   const { id, label, placeholder, disabled, readOnly, helperText } = inputFieldProps;
   const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder });
   return (
-    <div>
-      <FormControl className={clsFormControl} margin="dense">
-        <InputLabel
-          className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
-          htmlFor={id}
-          required={required}
-          shrink={true}
-        >
-          {label}
-        </InputLabel>
-        <Input
-          className={clsInput}
-          id={id}
-          component={_InputRender}
-          onChange={handleInputChange}
-          disableUnderline={readOnly}
-          disabled={disabled}
-          value={val}
-          placeholder={placeholder}
-          inputProps={{
-            options,
-            readOnly,
-            isCloneable,
-            disabledClone,
-            classes,
-            isCloneChecked,
-            onCloneCheckboxChange
-          }}
-        />
-        <FormHelperText className={clsFormHelperText}>
-          {helperText}
-        </FormHelperText>
-      </FormControl>
-    </div>
+    <FormControl className={clsFormControl} margin="dense">
+      <InputLabel
+        className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+        htmlFor={id}
+        required={required}
+        shrink={true}
+      >
+        {label}
+      </InputLabel>
+      <Input
+        className={clsInput}
+        id={id}
+        component={withStyles(autoCompleteStyleSheet)(_InputRender)}
+        onChange={handleInputChange}
+        disableUnderline={readOnly}
+        disabled={disabled}
+        value={val}
+        placeholder={placeholder}
+        inputProps={{
+          options,
+          readOnly,
+          isCloneable,
+          disabledClone,
+          renderClasses,
+          isCloneChecked,
+          onCloneCheckboxChange
+        }}
+      />
+      <FormHelperText className={clsFormHelperText}>
+        {helperText}
+      </FormHelperText>
+    </FormControl>
   );
 };
 
 AutoCompleteRender.propTypes = propTypes;
-
-export default withStyles(styleSheet)(AutoCompleteRender);
+export default withStyles(cloneableStyleSheet)(AutoCompleteRender);
 
 const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOpen }) => {
   return (
@@ -138,13 +87,6 @@ const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOp
       <FontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
     </IconButton>
   );
-};
-
-const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
-  const isDisabled = readOnly ? true : disabled ? true : false;
-  const displayPlaceholder = readOnly ? '' : placeholder;
-  const isDisplayCloneable = isCloneable && !readOnly;
-  return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
 /**
@@ -160,7 +102,7 @@ class _InputRender extends Component {
       readOnly,
       isCloneable,
       disabledClone,
-      classes: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
+      renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
       isCloneChecked,
       onCloneCheckboxChange
     } = this.props;
