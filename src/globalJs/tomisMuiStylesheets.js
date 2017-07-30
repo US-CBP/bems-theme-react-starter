@@ -236,3 +236,44 @@ export const timeSpinnerStyles = {
 };
 
 export const timeSpinnerStyleSheet = createStyleSheet('TimeSpinnerRender', theme => timeSpinnerStyles);
+
+export const textFieldSimpleStyles = {
+  formControl: {
+    width: '100%',
+    flex: 1
+  },
+  inpBase: {
+    marginLeft: '4px',
+    width: '100%',
+    height: `${30}px`,
+    outline: 'none',
+    border: 'none',
+    backgroundColor: 'transparent',
+    fontSize: '14px'
+  },
+  inpSpinner: {
+    marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+  },
+  inpCloneable: {
+    marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+  },
+  inputLabel: {
+    marginLeft: '5px'
+  },
+  inputLabelCloneable: {
+    marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
+  },
+  checkbox: {
+    color: theme.text.primary,
+    width: `${checkboxW}px`,
+    height: `${checkboxW}px`,
+    position: 'absolute',
+    left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
+    top: '-8px'
+  },
+  checkboxDisabled: {
+    color: theme.text.disabled
+  }
+};
+
+export const textFieldSimpleStyleSheet = createStyleSheet('TextFieldSimpleRender', theme => textFieldSimpleStyles);

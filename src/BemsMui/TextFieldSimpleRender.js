@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxChange, timeSpinnerStyleSheet, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
+import { getDisplayVals, handleCloneCheckboxChange, textFieldSimpleStyleSheet, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -16,14 +16,14 @@ const propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const TimeSpinnerRender = props => {
+const TextFieldSimpleRender = props => {
   const {
     classes: renderClasses,
     classes: {
       formControl: clsFormControl,
       input: clsInput,
       inputLabel: clsInputLabel,
-      inputLabel2Cloneable: clsInputLabel2Cloneable,
+      inputLabelCloneable: clsInputLabelCloneable,
       formHelperText: clsFormHelperText
     },
     handleInputChange,
@@ -40,7 +40,7 @@ const TimeSpinnerRender = props => {
   return (
     <FormControl className={clsFormControl} margin="dense">
       <InputLabel
-        className={cx({ [clsInputLabel2Cloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+        className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
         htmlFor={id}
         required={required}
         shrink={true}
@@ -50,7 +50,7 @@ const TimeSpinnerRender = props => {
       <Input
         className={clsInput}
         id={id}
-        component={withStyles(timeSpinnerStyleSheet)(_InputRender)}
+        component={withStyles(textFieldSimpleStyleSheet)(_InputRender)}
         onChange={handleInputChange}
         disableUnderline={readOnly}
         disabled={disabled}
@@ -72,28 +72,14 @@ const TimeSpinnerRender = props => {
   );
 };
 
-TimeSpinnerRender.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TimeSpinnerRender);
+TextFieldSimpleRender.propTypes = propTypes;
+export default withStyles(cloneableStyleSheet)(TextFieldSimpleRender);
 
 /**
  * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.
  * As such, we must, unfortunately, use a class for the Input component.
  */
 class _InputRender extends Component {
-  isFocused = false;
-
-  handleClickIcon = evt => {
-    evt.stopPropagation();
-    const { dpInput: { input }, isFocused } = this;
-    if (isFocused) {
-      input.blur();
-      this.isFocused = false;
-    } else {
-      input.focus();
-      this.isFocused = true;
-    }
-  };
-
   render() {
     const { handleClickIcon } = this;
     const {
@@ -103,18 +89,7 @@ class _InputRender extends Component {
       isCloneable,
       disabledClone,
       renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled },
-      classes: {
-        inpBase: clsInpBase,
-        inpSpinner: clsInpSpinner,
-        inpReadOnly: clsInpReadOnly,
-        inpCloneable: clsInpCloneable,
-        arrowsBase: clsArrowsBase,
-        arrowsCloneableTrue: clsArrowsCloneableTrue,
-        arrowsCloneableFalse: clsArrowsCloneableFalse,
-        arrowsDisabled: clsArrowsDisabled,
-        arrowUp: clsArrowUp,
-        arrowDown: clsArrowDown
-      },
+      classes: { inpBase: clsInpBase, inpSpinner: clsInpSpinner, inpReadOnly: clsInpReadOnly, inpCloneable: clsInpCloneable },
       isCloneChecked,
       onCloneCheckboxChange
     } = this.props;
@@ -131,7 +106,6 @@ class _InputRender extends Component {
           />}
         <input
           className={cx(clsInpBase, {
-            [clsInpSpinner]: !readOnly,
             [clsInpCloneable]: isDisplayCloneable,
             [clsCheckboxDisabled]: isDisabled || disabledClone,
             [clsInpReadOnly]: readOnly
@@ -139,33 +113,6 @@ class _InputRender extends Component {
           disabled={isDisabled}
           placeholder={displayPlaceholder}
         />
-        {!readOnly &&
-          <div>
-            <IconButton
-              className={cx(clsArrowsBase, clsArrowUp, {
-                [clsArrowsCloneableTrue]: isDisplayCloneable,
-                [clsArrowsCloneableFalse]: !isDisplayCloneable,
-                [clsArrowsDisabled]: isDisabled
-              })}
-              disabled={isDisabled}
-              aria-label="Toggle select date display"
-              onClick={handleClickIcon}
-            >
-              <FontIcon name="arrow_drop_up" />
-            </IconButton>
-            <IconButton
-              className={cx(clsArrowsBase, clsArrowDown, {
-                [clsArrowsCloneableTrue]: isDisplayCloneable,
-                [clsArrowsCloneableFalse]: !isDisplayCloneable,
-                [clsArrowsDisabled]: isDisabled
-              })}
-              disabled={isDisabled}
-              aria-label="Toggle select date display"
-              onClick={handleClickIcon}
-            >
-              <FontIcon name="arrow_drop_down" />
-            </IconButton>
-          </div>}
       </CloneableInputRender>
     );
   }

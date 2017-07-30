@@ -33,7 +33,7 @@ import TimeSpinner from './TimeSpinner';
 // import SnackbarSimple from './SnackbarSimple';
 // import TableEditable from './TableEditable';
 // import TextArea from './TextArea';
-// import TextFieldSimple from './TextFieldSimple';
+import TextFieldSimple from './TextFieldSimple';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 // import TimeSpinner from '../BemsMui/TimeSpinner';
 // import ToggleButtons from '../BemsMui/ToggleButtons';
@@ -67,6 +67,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Time Spinner', () => {
     return <TimeSpinner />;
+  })
+  .add('Text Field - Pending', () => {
+    return <TextFieldSimple />;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
