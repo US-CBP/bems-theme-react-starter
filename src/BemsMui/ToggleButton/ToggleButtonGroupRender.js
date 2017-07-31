@@ -7,33 +7,31 @@ import { bemsMuiToggleButtonGroupRenderStyleSheet } from 'globalJs/tomisMuiStyle
 import withStyles from 'material-ui/styles/withStyles';
 import FormGroup from 'material-ui/Form/FormGroup';
 
-class ToggleButtonGroupRender extends Component {
-  toggleButtons = undefined;
+let toggleButtons = undefined;
+// class ToggleButtonGroupRender extends Component {
+const ToggleButtonGroupRender = props => {
+  // render() {
+  const { onClick, children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = props;
+  toggleButtons = [];
 
-  render() {
-    const { onClick } = this.props;
-    const { children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = this.props;
-
-    this.toggleButtons = [];
-
-    return (
-      <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="ToggleButtonGroupRender" role="radiogroup" {...other}>
-        {Children.map(children, (child, index) => {
-          const selected = selectedValue === child.props.value;
-          return cloneElement(child, {
-            key: index,
-            name,
-            inputRef: node => {
-              this.toggleButtons.push(node);
-            },
-            checked: selected,
-            onClick: onClick,
-            disabled: disabled || child.props.disabled
-          });
-        })}
-      </FormGroup>
-    );
-  }
-}
+  return (
+    <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="ToggleButtonGroupRender" role="radiogroup" {...other}>
+      {Children.map(children, (child, index) => {
+        const selected = selectedValue === child.props.value;
+        return cloneElement(child, {
+          key: index,
+          name,
+          inputRef: node => {
+            toggleButtons.push(node);
+          },
+          checked: selected,
+          onClick: onClick,
+          disabled: disabled || child.props.disabled
+        });
+      })}
+    </FormGroup>
+  );
+  // }
+};
 
 export default withStyles(bemsMuiToggleButtonGroupRenderStyleSheet)(ToggleButtonGroupRender);
