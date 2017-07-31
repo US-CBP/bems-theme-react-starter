@@ -172,7 +172,6 @@ export const datePickerStyles = {
     color: theme.text.disabled
   }
 };
-
 export const datePickerStyleSheet = createStyleSheet('DatePickerRender', theme => datePickerStyles);
 
 export const timeSpinnerStyles = {
@@ -234,7 +233,6 @@ export const timeSpinnerStyles = {
     color: theme.text.disabled
   }
 };
-
 export const timeSpinnerStyleSheet = createStyleSheet('TimeSpinnerRender', theme => timeSpinnerStyles);
 
 export const textFieldSimpleStyles = {
@@ -275,5 +273,41 @@ export const textFieldSimpleStyles = {
     color: theme.text.disabled
   }
 };
-
 export const textFieldSimpleStyleSheet = createStyleSheet('TextFieldSimpleRender', theme => textFieldSimpleStyles);
+
+export const bemsMuiToggleButtonGroupRenderStyles = {
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: '1 1 auto',
+    margin: 0,
+    padding: 0
+  }
+};
+export const bemsMuiToggleButtonGroupRenderStyleSheet = createStyleSheet('BemsMuiToggleButtonRenderGroup', bemsMuiToggleButtonGroupRenderStyles);
+
+export const bemsMuiToggleButtonStyles = {
+  default: {
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.common.white,
+    borderRadius: 0,
+    margin: '0.5px'
+  },
+  disabled: {
+    color: theme.palette.action.disabled
+  },
+  checked: {
+    color: theme.palette.common.darkWhite,
+    backgroundColor: theme.palette.common.minBlack,
+    '&$disabled': {
+      boxShadow: theme.shadows[0],
+      color: theme.palette.action.disabled,
+      backgroundColor: theme.palette.common.minBlack,
+      '&:hover': {
+        backgroundColor: theme.palette.common.minBlack
+      }
+    }
+  }
+};
+
+export const bemsMuiToggleButtonStyleSheet = createStyleSheet('BemsMuiToggleButton', theme => bemsMuiToggleButtonStyles);

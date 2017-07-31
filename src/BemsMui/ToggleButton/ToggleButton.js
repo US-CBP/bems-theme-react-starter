@@ -2,36 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bemsMuiToggleButtonStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import createButtonSwitch from 'app/helpers/SwitchButtonBase';
 import Button from 'material-ui/Button';
 
-export const styleSheet = createStyleSheet('BemsMuiToggleButton', theme => ({
-  default: {
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.common.white,
-    borderRadius: 0,
-    margin: '0.5px'
-  },
-  disabled: {
-    color: theme.palette.action.disabled
-  },
-  checked: {
-    color: theme.palette.common.darkWhite,
-    backgroundColor: theme.palette.common.minBlack,
-    '&$disabled': {
-      boxShadow: theme.shadows[0],
-      color: theme.palette.action.disabled,
-      backgroundColor: theme.palette.common.minBlack,
-      '&:hover': {
-        backgroundColor: theme.palette.common.minBlack
-      }
-    }
-  }
-}));
-
 const ToggleButton = createButtonSwitch({
-  styleSheet,
+  styleSheet: bemsMuiToggleButtonStyleSheet,
   inputType: 'radio'
 });
 
