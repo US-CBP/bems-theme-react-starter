@@ -1,169 +1,117 @@
-import React, { Component } from 'react';
+// @flow weak
+
+import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import ToggleButton from './ToggleButton';
-// import warning from 'warning';
+import classNames from 'classnames';
+import createStyleSheet from 'material-ui/styles/createStyleSheet';
+import withStyles from 'material-ui/styles/withStyles';
+import FormGroup from 'material-ui/Form/FormGroup';
+import { find } from 'material-ui/utils/helpers';
+
+export const styleSheet = createStyleSheet('BemsMuiToggleButtonGroup', {
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: '1 1 auto',
+    margin: 0,
+    padding: 0
+  }
+});
 
 class ToggleButtonGroup extends Component {
-    static propTypes = {
-        /**
-     * Should be used to pass `ToggleButton` components.
-     */
-        children: PropTypes.node,
-        /**
-     * The CSS class name of the root element.
-     */
-        className: PropTypes.string,
-        /**
-     * The `value` property of the radio button that will be
-     * selected by default. This takes precedence over the `checked` property
-     * of the `ToggleButton` elements.
-     */
-        defaultSelected: PropTypes.any,
-        /**
-     * Where the label will be placed for all child radio buttons.
-     * This takes precedence over the `labelPosition` property of the
-     * `ToggleButton` elements.
-     */
-        labelPosition: PropTypes.oneOf(['left', 'right']),
-        /**
-     * The name that will be applied to all child radio buttons.
-     */
-        name: PropTypes.string.isRequired,
-        /**
-     * Callback function that is fired when a radio button has
-     * been checked.
-     *
-     * @param {object} event `change` event targeting the selected
-     * radio button.
-     * @param {*} value The `value` of the selected radio button.
-     */
-        onChange: PropTypes.func,
-        /**
-     * Override the inline-styles of the root element.
-     */
-        style: PropTypes.object,
-        /**
-     * The `value` of the currently selected radio button.
-     */
-        valueSelected: PropTypes.any
-    };
+  radios = undefined;
 
-    static defaultProps = {
-        style: {}
-    };
+  focus = () => {
+    if (!this.radios || !this.radios.length) {
+      return;
+    }
 
-    static contextTypes = {
-        muiTheme: PropTypes.object.isRequired
-    };
+    const focusRadios = this.radios.filter(n => !n.disabled);
 
-    state = {
-        numberCheckedRadioButtons: 0,
-        selected: ''
-    };
+    if (!focusRadios.length) {
+      return;
+    }
 
-    componentWillMount() {
-        let cnt = 0;
-        let selected = '';
-        const { valueSelected, defaultSelected } = this.props;
-        if (valueSelected !== undefined) {
-            selected = valueSelected;
-        } else if (defaultSelected !== undefined) {
-            selected = defaultSelected;
-        }
+    const selectedRadio = find(focusRadios, n => n.checked);
 
-        React.Children.forEach(
-            this.props.children,
-            option => {
-                if (this.hasCheckAttribute(option)) cnt++;
+    if (selectedRadio) {
+      selectedRadio.focus();
+      return;
+    }
+
+    focusRadios[0].focus();
+  };
+
+  handleToggleButtonClick = event => {
+    console.log('handleRadioChange event.target.checked=', event.target.checked);
+    const checked = event.target.checked;
+    if (checked && this.props.onChange) {
+      this.props.onChange(event, event.target.value);
+    }
+  };
+
+  render() {
+    const { handleToggleButtonClick } = this;
+    const { children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = this.props;
+
+    this.radios = [];
+
+    return (
+      <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="ToggleButtonGroup" role="radiogroup" {...other}>
+        {Children.map(children, (child, index) => {
+          const selected = selectedValue === child.props.value;
+          return cloneElement(child, {
+            key: index,
+            name,
+            inputRef: node => {
+              this.radios.push(node);
             },
-            this
-        );
-
-        this.setState({
-            numberCheckedRadioButtons: cnt,
-            selected
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.hasOwnProperty('valueSelected')) {
-            this.setState({
-                selected: nextProps.valueSelected
-            });
-        }
-    }
-
-    hasCheckAttribute(radioButton) {
-        return radioButton.props.hasOwnProperty('checked') && radioButton.props.checked;
-    }
-
-    updateRadioButtons(newSelection) {
-        if (this.state.numberCheckedRadioButtons === 0) {
-            this.setState({ selected: newSelection });
-        } else {
-            // warning(false, `Material-UI: Cannot select a different radio button while another radio button
-            // has the 'checked' property set to true.`);
-        }
-    }
-
-    handleChange = (event, newSelection) => {
-        this.updateRadioButtons(newSelection);
-
-        // Successful update
-        if (this.state.numberCheckedRadioButtons === 0) {
-            if (this.props.onChange) this.props.onChange(event, newSelection);
-        }
-    };
-
-    getSelectedValue() {
-        return this.state.selected;
-    }
-
-    setSelectedValue(newSelectionValue) {
-        this.updateRadioButtons(newSelectionValue);
-    }
-
-    clearValue() {
-        this.setSelectedValue('');
-    }
-
-    render() {
-        const { prepareStyles } = this.context.muiTheme;
-
-        const options = React.Children.map(
-            this.props.children,
-            option => {
-                const {
-                    name, // eslint-disable-line no-unused-vars
-                    value, // eslint-disable-line no-unused-vars
-                    label, // eslint-disable-line no-unused-vars
-                    onCheck, // eslint-disable-line no-unused-vars
-                    ...other
-                } = option.props;
-
-                return (
-                    <ToggleButton
-                        {...other}
-                        ref={option.props.value}
-                        name={this.props.name}
-                        key={option.props.value}
-                        value={option.props.value}
-                        label={option.props.label}
-                        labelPosition={this.props.labelPosition}
-                        onCheck={this.handleChange}
-                        checked={option.props.value === this.state.selected}
-                    />
-                );
-            },
-            this
-        );
-
-        return (
-            <div style={prepareStyles(Object.assign({}, this.props.style, { display: 'flex' }))} className={this.props.className}>
-                {options}
-            </div>
-        );
-    }
+            checked: selected,
+            onClick: handleToggleButtonClick,
+            disabled: disabled || child.props.disabled
+          });
+        })}
+      </FormGroup>
+    );
+  }
 }
 
-export default ToggleButtonGroup;
+ToggleButtonGroup.propTypes = {
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Useful to extend the style applied to components.
+   */
+  classes: PropTypes.object.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The name used to reference the value of the control.
+   */
+  name: PropTypes.string,
+  /**
+   * @ignore
+   */
+  onBlur: PropTypes.func,
+  /**
+   * Callback fired when a radio button is selected.
+   *
+   * @param {object} event The event source of the callback
+   * @param {boolean} checked The `checked` value of the switch
+   */
+  onChange: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onKeyDown: PropTypes.func,
+  /**
+   * Value of the selected radio button
+   */
+  selectedValue: PropTypes.string
+};
+
+export default withStyles(styleSheet)(ToggleButtonGroup);

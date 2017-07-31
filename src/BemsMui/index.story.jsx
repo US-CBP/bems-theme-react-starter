@@ -36,7 +36,7 @@ import TimeSpinner from './TimeSpinner';
 import TextFieldSimple from './TextFieldSimple';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 // import TimeSpinner from '../BemsMui/TimeSpinner';
-// import ToggleButtons from '../BemsMui/ToggleButtons';
+import ToggleButtons from '../BemsMui/ToggleButtons';
 // import ToolbarActionBar from './ToolbarActionBar';
 // import ToolbarCbpHeader from './ToolbarCbpHeader';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -70,6 +70,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Text Field - Pending', () => {
     return <TextFieldSimple />;
+  })
+  .add('Toggle Buttons - Pending', () => {
+    return <ToggleButtons />;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
