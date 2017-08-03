@@ -25,10 +25,12 @@ export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly,
   return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
-export const handleCloneCheckboxChange = (onCloneCheckboxChange, evt) => {
+export const handleCloneCheckboxClick = (onCloneCheckboxChange, evt) => {
   evt.stopPropagation();
   cloneCheckboxChange$.subscribe({
     next: () => {
+      console.log('cloneCheckboxChange$ called');
+
       onCloneCheckboxChange();
     },
     err: () => {},

@@ -26,7 +26,7 @@ class TimeSpinner extends Component {
     isCloneChecked: true
   };
 
-  handleCloneCheckboxChange = () => {
+  handleCloneCheckboxClick = () => {
     this.setState({ isCloneChecked: !this.state.isCloneChecked });
   };
 
@@ -36,8 +36,8 @@ class TimeSpinner extends Component {
   };
 
   render() {
-    const { handleInputChange, handleCloneCheckboxChange } = this;
-    return <TimeSpinnerRender handleInputChange={handleInputChange} onCloneCheckboxChange={handleCloneCheckboxChange} {...this.state} {...this.props} />;
+    const { handleInputChange, handleCloneCheckboxClick } = this;
+    return <TimeSpinnerRender handleInputChange={handleInputChange} onCloneCheckboxChange={handleCloneCheckboxClick} {...this.state} {...this.props} />;
   }
 }
 TimeSpinner.defaultProps = defaultProps;

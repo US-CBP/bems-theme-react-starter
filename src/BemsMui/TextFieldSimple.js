@@ -26,7 +26,7 @@ class TextFieldSimple extends Component {
     isCloneChecked: true
   };
 
-  handleCloneCheckboxChange = () => {
+  handleCloneCheckboxClick = () => {
     this.setState({ isCloneChecked: !this.state.isCloneChecked });
   };
 
@@ -36,8 +36,8 @@ class TextFieldSimple extends Component {
   };
 
   render() {
-    const { handleInputChange, handleCloneCheckboxChange } = this;
-    return <TextFieldSimpleRender handleInputChange={handleInputChange} onCloneCheckboxChange={handleCloneCheckboxChange} {...this.state} {...this.props} />;
+    const { handleInputChange, handleCloneCheckboxClick } = this;
+    return <TextFieldSimpleRender handleInputChange={handleInputChange} onCloneCheckboxChange={handleCloneCheckboxClick} {...this.state} {...this.props} />;
   }
 }
 TextFieldSimple.defaultProps = defaultProps;
