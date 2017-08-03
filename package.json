@@ -1,55 +1,55 @@
 {
-  "contributors": [
-    {
-      "name": "Brad Kahl",
-      "email": "bkahl1984@gmail.com"
+    "contributors": [
+        {
+            "name": "Brad Kahl",
+            "email": "bkahl1984@gmail.com"
+        },
+        {
+            "name": "Greg Fulton",
+            "email": "gtfullton@gmail.com"
+        }
+    ],
+    "author": "BEMS Common Framework",
+    "license": "MIT",
+    "name": "bems-theme-react-starter",
+    "version": "1.0.19",
+    "private": false,
+    "dependencies": {
+        "autosuggest-highlight": "^3.1.0",
+        "classnames": "^2.2.5",
+        "keycode": "^2.1.9",
+        "lodash": "^4.17.4",
+        "material-ui": "^1.0.0-beta.3",
+        "material-ui-icons": "^1.0.0-alpha.19",
+        "moment": "^2.18.1",
+        "prop-types": "^15.5.10",
+        "react": "^16.0.0-beta.2",
+        "react-autosuggest": "^9.3.1",
+        "react-day-picker": "^6.1.0",
+        "react-dom": "^16.0.0-beta.2",
+        "react-dropzone": "^3.13.3",
+        "react-event-listener": "^0.4.5",
+        "react-material-icons": "^1.0.2",
+        "react-measure": "^2.0.2",
+        "react-select": "^1.0.0-rc.5",
+        "react-swipeable-views": "^0.12.5",
+        "rxjs": "^5.4.2",
+        "styled-components": "^2.1.1",
+        "velocity-animate": "^1.5.0",
+        "warning": "^3.0.0"
     },
-    {
-      "name": "Greg Fulton",
-      "email": "gtfullton@gmail.com"
+    "devDependencies": {
+        "@storybook/addon-notes": "^3.1.6",
+        "@storybook/addon-options": "^3.1.6",
+        "@storybook/react": "^3.1.9",
+        "react-scripts": "1.0.10"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "storybook": "start-storybook -p 9010 -s public",
+        "build-storybook": "build-storybook -s public"
     }
-  ],
-  "author": "BEMS Common Framework",
-  "license": "MIT",
-  "name": "bems-theme-react-starter",
-  "version": "1.0.19",
-  "private": false,
-  "dependencies": {
-    "autosuggest-highlight": "^3.1.0",
-    "classnames": "^2.2.5",
-    "keycode": "^2.1.9",
-    "lodash": "^4.17.4",
-    "material-ui": "^1.0.0-beta.2",
-    "material-ui-icons": "^1.0.0-alpha.19",
-    "moment": "^2.18.1",
-    "prop-types": "^15.5.10",
-    "react": "^16.0.0-beta.2",
-    "react-autosuggest": "^9.3.1",
-    "react-day-picker": "^6.1.0",
-    "react-dom": "^16.0.0-beta.2",
-    "react-dropzone": "^3.13.3",
-    "react-event-listener": "^0.4.5",
-    "react-material-icons": "^1.0.2",
-    "react-measure": "^2.0.2",
-    "react-select": "^1.0.0-rc.5",
-    "react-swipeable-views": "^0.12.5",
-    "rxjs": "^5.4.2",
-    "styled-components": "^2.1.1",
-    "velocity-animate": "^1.5.0",
-    "warning": "^3.0.0"
-  },
-  "devDependencies": {
-    "@storybook/addon-notes": "^3.1.6",
-    "@storybook/addon-options": "^3.1.6",
-    "@storybook/react": "^3.1.9",
-    "react-scripts": "1.0.10"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9010 -s public",
-    "build-storybook": "build-storybook -s public"
-  }
 }

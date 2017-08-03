@@ -47,33 +47,33 @@ import '../css/index.css';
 const theme = createMuiTheme(createPalette(tomisTheme));
 
 storiesOf('BEMS Mui', module)
-  .addDecorator(story => {
-    const storyKind = story();
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
-          <MuiThemeProvider theme={theme}>
-            {storyKind}
-          </MuiThemeProvider>
-        </div>
-      </div>
-    );
-  })
-  .add('AutoComplete', () => {
-    return <AutoComplete />;
-  })
-  .add('Date Picker', () => {
-    return <DatePicker />;
-  })
-  .add('Time Spinner', () => {
-    return <TimeSpinner />;
-  })
-  .add('Text Field - Pending', () => {
-    return <TextFieldSimple />;
-  })
-  .add('Toggle Buttons - Pending', () => {
-    return <ToggleButtons />;
-  });
+    .addDecorator(story => {
+        const storyKind = story();
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
+                    <MuiThemeProvider theme={theme}>
+                        {storyKind}
+                    </MuiThemeProvider>
+                </div>
+            </div>
+        );
+    })
+    .add('AutoComplete', () => {
+        return <AutoComplete />;
+    })
+    .add('Date Picker', () => {
+        return <DatePicker />;
+    })
+    .add('Time Spinner', () => {
+        return <TimeSpinner />;
+    })
+    .add('Text Field - Pending', () => {
+        return <TextFieldSimple />;
+    })
+    .add('Toggle Buttons - Pending', () => {
+        return <ToggleButtons />;
+    });
 
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
