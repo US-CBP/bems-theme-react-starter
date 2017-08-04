@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxChange, datePickerStyleSheet, datePickerStyles, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
+import { getDisplayVals, handleCloneCheckboxClick, datePickerStyleSheet, datePickerStyles, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -120,7 +120,7 @@ class _InputRender extends Component {
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
             checked={isCloneChecked}
-            onChange={handleCloneCheckboxChange.bind(this, onCloneCheckboxChange)}
+            onChange={handleCloneCheckboxClick.bind(this, onCloneCheckboxChange)}
             disabled={isDisabled || disabledClone}
           />}
         <DayPickerInput

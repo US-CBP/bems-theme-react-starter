@@ -1,8 +1,7 @@
-// @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxChange, cloneableStyleSheet, autoCompleteStyleSheet } from 'globalJs/tomisMuiStylesheets';
+import { getDisplayVals, handleCloneCheckboxClick, textFieldSimpleStyleSheet, cloneableStyleSheet } from 'globalJs/tomisMuiStylesheets';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 import Input from 'material-ui/Input';
@@ -11,15 +10,13 @@ import CloneableInputRender from './CloneableInputRender';
 import FormControl from 'material-ui/Form/FormControl';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import cx from 'classnames';
 
 const propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const AutoCompleteRender = props => {
+const TextFieldSimpleRender = props => {
   const {
     classes: renderClasses,
     classes: {
@@ -33,7 +30,6 @@ const AutoCompleteRender = props => {
     isCloneChecked,
     onCloneCheckboxChange,
     payload: { val },
-    options,
     inputFieldProps,
     isCloneable,
     disabledClone,
@@ -54,14 +50,13 @@ const AutoCompleteRender = props => {
       <Input
         className={clsInput}
         id={id}
-        component={withStyles(autoCompleteStyleSheet)(_InputRender)}
+        component={withStyles(textFieldSimpleStyleSheet)(_InputRender)}
         onChange={handleInputChange}
         disableUnderline={readOnly}
         disabled={disabled}
         value={val}
         placeholder={placeholder}
         inputProps={{
-          options,
           readOnly,
           isCloneable,
           disabledClone,
@@ -77,17 +72,8 @@ const AutoCompleteRender = props => {
   );
 };
 
-AutoCompleteRender.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(AutoCompleteRender);
-
-const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOpen }) => {
-  return (
-    !readOnly &&
-    <IconButton className={clsSelectArrow} disabled={isDisabled} aria-label="Toggle select options display">
-      <FontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
-    </IconButton>
-  );
-};
+TextFieldSimpleRender.propTypes = propTypes;
+export default withStyles(cloneableStyleSheet)(TextFieldSimpleRender);
 
 /**
  * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.
@@ -95,18 +81,18 @@ const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOp
  */
 class _InputRender extends Component {
   render() {
+    const { handleClickIcon } = this;
     const {
       value,
       onChange,
-      options,
       readOnly,
       isCloneable,
       disabledClone,
-      renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
+      renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled },
+      classes: { inpBase: clsInpBase, inpSpinner: clsInpSpinner, inpReadOnly: clsInpReadOnly, inpCloneable: clsInpCloneable },
       isCloneChecked,
       onCloneCheckboxChange
     } = this.props;
-    //isMyCloneChecked must be assigned *after* it is set to a new value
     const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
 
     return (
@@ -115,20 +101,17 @@ class _InputRender extends Component {
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
             checked={isCloneChecked}
-            onChange={handleCloneCheckboxChange.bind(this, onCloneCheckboxChange)}
+            onChange={handleCloneCheckboxClick.bind(this, onCloneCheckboxChange)}
             disabled={isDisabled || disabledClone}
           />}
-        <Select
-          className={cx({ [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
-          options={options}
+        <input
+          className={cx(clsInpBase, {
+            [clsInpCloneable]: isDisplayCloneable,
+            [clsCheckboxDisabled]: isDisabled || disabledClone,
+            [clsInpReadOnly]: readOnly
+          })}
           disabled={isDisabled}
           placeholder={displayPlaceholder}
-          onChange={onChange}
-          value={value}
-          clearable={false}
-          labelKey="description"
-          valueKey="code"
-          arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled, readOnly)}
         />
       </CloneableInputRender>
     );
