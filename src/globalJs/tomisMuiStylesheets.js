@@ -15,8 +15,6 @@ const checkboxSize = 24;
 const checkboxW = 36;
 const checkboxMRFactor = 1.15;
 const twoIconMRFactor = 1.75;
-// Give ripple time to finish before updating HOC
-const cloneCheckboxChange$ = Observable.timer(RIPPLE_TIME_MS).take(1).share();
 
 export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
   const isDisabled = readOnly ? true : disabled ? true : false;
@@ -25,13 +23,13 @@ export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly,
   return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
-export const handleCloneCheckboxClick = (onCloneCheckboxChange, evt) => {
+// Give ripple time to finish before updating HOC
+const cloneCheckboxChange$ = Observable.timer(RIPPLE_TIME_MS).take(1).share();
+export const handleCloneCheckboxClick = (onCloneCheckboxChange, evt, val) => {
   evt.stopPropagation();
   cloneCheckboxChange$.subscribe({
     next: () => {
-      console.log('cloneCheckboxChange$ called');
-
-      onCloneCheckboxChange();
+      onCloneCheckboxChange(evt, val);
     },
     err: () => {},
     complete: () => {}
@@ -277,7 +275,7 @@ export const textFieldSimpleStyles = {
 };
 export const textFieldSimpleStyleSheet = createStyleSheet('TextFieldSimpleRender', theme => textFieldSimpleStyles);
 
-export const bemsMuiToggleButtonGroupRenderStyles = {
+export const bemsMuiToggleButtonGroupStyles = {
   root: {
     display: 'flex',
     flexDirection: 'row',
@@ -286,7 +284,7 @@ export const bemsMuiToggleButtonGroupRenderStyles = {
     padding: 0
   }
 };
-export const bemsMuiToggleButtonGroupRenderStyleSheet = createStyleSheet('BemsMuiToggleButtonRenderGroup', bemsMuiToggleButtonGroupRenderStyles);
+export const bemsMuiToggleButtonGroupStyleSheet = createStyleSheet('BemsMuiToggleButtonGroup', bemsMuiToggleButtonGroupStyles);
 
 export const bemsMuiToggleButtonStyles = {
   default: {

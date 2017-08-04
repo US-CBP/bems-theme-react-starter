@@ -44,13 +44,12 @@ class AutoComplete extends Component {
     payload: {
       val: null,
       name: null
-    },
-    isCloneChecked: true
+    }
   };
 
-  handleCloneCheckboxChange = () => {
-    console.log('handleCloneCheckboxChange called, this.state=', this.state);
-    this.setState({ isCloneChecked: !this.state.isCloneChecked });
+  handleCloneCheckboxChange = (evt, value) => {
+    console.log('handleCloneCheckboxChange called, this.state, evt, value=', this.state, evt, value);
+    // this.setState({ isCloneChecked: !this.state.isCloneChecked });
   };
 
   handleInputChange = val => {
@@ -59,7 +58,7 @@ class AutoComplete extends Component {
 
   render() {
     const { handleInputChange, handleCloneCheckboxChange } = this;
-    const { payload: { val }, isCloneChecked } = this.state;
+    const { payload: { val } } = this.state;
     const {
       classes: renderClasses,
       classes: {
@@ -102,8 +101,7 @@ class AutoComplete extends Component {
             isCloneable,
             disabledClone,
             renderClasses,
-            isCloneChecked,
-            onCloneCheckboxChange: handleCloneCheckboxChange
+            onDelayCloneCheckboxChange: handleCloneCheckboxChange
           }}
         />
         <FormHelperText className={clsFormHelperText}>
@@ -141,8 +139,7 @@ class _InputRender extends Component {
       isCloneable,
       disabledClone,
       renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
-      isCloneChecked,
-      onCloneCheckboxChange
+      onDelayCloneCheckboxChange
     } = this.props;
     //isMyCloneChecked must be assigned *after* it is set to a new value
     const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
@@ -152,8 +149,7 @@ class _InputRender extends Component {
         {isDisplayCloneable &&
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-            checked={isCloneChecked}
-            onChange={handleCloneCheckboxClick.bind(this, onCloneCheckboxChange)}
+            onChange={handleCloneCheckboxClick.bind(null, onDelayCloneCheckboxChange)}
             disabled={isDisabled || disabledClone}
           />}
         <Select
