@@ -22,7 +22,6 @@ import DialogConfirmation from './DialogConfirmation';
 // import FileAttachment from '../BemsMui/FileAttachment';
 // import IconFontMaterial from './IconFontMaterial';
 // import { ListItem } from 'material-ui/List';
-// import ListSimple from './ListSimple';
 // import ListNested from './ListNested';
 // import MenuSimple from './MenuSimple';
 // import PanelExample from '../BemsMui/PanelExample';
@@ -45,6 +44,8 @@ import FontIcon from './FontIcon';
 import ButtonFlat from './ButtonFlat';
 import ButtonRaised from './ButtonRaised';
 import ButtonIcon from './ButtonIcon';
+import DrawerLeft from './DrawerLeft';
+import ListSimpleExample from './ListSimpleExample';
 import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
@@ -106,9 +107,22 @@ storiesOf('BEMS Mui', module)
     .add('Button Icon', () => {
         return (
             <div>
-                <ButtonIcon />
+                <ButtonIcon icon={<FontIcon name="delete" />} />
             </div>
         );
+    })
+    .add('Drawer - Left', () => {
+        return (
+            <DrawerLeft isOpen={true}>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ul>
+            </DrawerLeft>
+        );
+    })
+    .add('List - Simple Example', () => {
+        return <ListSimpleExample />;
     });
 
 /*.add('AutoComplete Info - Pending', () => {

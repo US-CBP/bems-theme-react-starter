@@ -6,8 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 
 const defaultProps = {
-    icon: <FontIcon name="delete" />,
-    color: '#ffffff'
+    icon: <FontIcon name="delete" />
 };
 
 const propTypes = {
