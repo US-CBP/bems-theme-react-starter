@@ -13,9 +13,9 @@ const propTypes = {
     icon: PropTypes.node.isRequired
 };
 
-const ButtonIcon = ({ icon }) => {
+const ButtonIcon = ({ icon, onClick }) => {
     return (
-        <IconButton>
+        <IconButton onClick={onClick}>
             {icon}
         </IconButton>
     );

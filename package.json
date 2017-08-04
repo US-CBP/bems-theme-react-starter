@@ -1,14 +1,14 @@
 {
-    "contributors": [
-        {
-            "name": "Brad Kahl",
-            "email": "bkahl1984@gmail.com"
-        },
-        {
-            "name": "Greg Fulton",
-            "email": "gtfullton@gmail.com"
-        }
-    ],
+  "contributors": [
+    {
+      "name": "Brad Kahl",
+      "email": "bkahl1984@gmail.com"
+    },
+    {
+      "name": "Greg Fulton",
+      "email": "gtfullton@gmail.com"
+    }
+  ],
   "author": "BEMS Common Framework",
   "license": "MIT",
   "name": "bems-theme-react-starter",
@@ -42,6 +42,7 @@
     "@storybook/addon-notes": "^3.1.6",
     "@storybook/addon-options": "^3.1.6",
     "@storybook/react": "^3.1.9",
+    "chai": "^4.1.0",
     "react-scripts": "1.0.10"
   },
   "scripts": {
