@@ -36,12 +36,15 @@ import DialogConfirmation from './DialogConfirmation';
 import TextFieldSimple from './TextFieldSimple';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 // import TimeSpinner from '../BemsMui/TimeSpinner';
-import ToggleButtons from '../BemsMui/ToggleButtons';
+import ToggleButtons from './ToggleButtons';
 // import ToolbarActionBar from './ToolbarActionBar';
 // import ToolbarCbpHeader from './ToolbarCbpHeader';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
-// import Divider from 'material-ui/Divider';
-import FontIcon from 'BemsMui/FontIcon';
+import Divider from './Divider';
+import FontIcon from './FontIcon';
+import ButtonFlat from './ButtonFlat';
+import ButtonRaised from './ButtonRaised';
+import ButtonIcon from './ButtonIcon';
 import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
@@ -76,6 +79,36 @@ storiesOf('BEMS Mui', module)
     })
     .add('Dialog - Confirmation', () => {
         return <DialogConfirmation initIsOpen={true}>Only actions can close this dialog.</DialogConfirmation>;
+    })
+    .add('Divider', () => {
+        return (
+            <div>
+                <br />
+                <br />
+                <Divider />
+            </div>
+        );
+    })
+    .add('Button Flat', () => {
+        return (
+            <div>
+                <ButtonFlat label="My Flat Label" />
+            </div>
+        );
+    })
+    .add('Button Raised', () => {
+        return (
+            <div>
+                <ButtonRaised label="My Raised Label" />
+            </div>
+        );
+    })
+    .add('Button Icon', () => {
+        return (
+            <div>
+                <ButtonIcon />
+            </div>
+        );
     });
 
 /*.add('AutoComplete Info - Pending', () => {
