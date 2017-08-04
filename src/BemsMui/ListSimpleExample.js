@@ -3,39 +3,38 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ListItemExpandable from './List/ListItemExpandable';
 import FontIcon from './FontIcon';
 import ButtonIcon from './ButtonIcon';
-import Divider from './Divider';
 
 const ListSimpleExample = props =>
     <List>
-        <ListItem button>
+        <ListItem button={true} divider={true}>
             <ListItemIcon>
                 <FontIcon name="inbox" />
             </ListItemIcon>
             <ListItemText primary="Inbox" />
         </ListItem>
-        <Divider />
-        <ListItem button>
+        <ListItem button={true} divider={true}>
             <ListItemIcon>
                 <FontIcon name="drafts" />
             </ListItemIcon>
             <ListItemText primary="Drafts" />
         </ListItem>
-        <Divider />
-        <ListItemExpandable>
+        <ListItemExpandable expandableChildIdx={2}>
+            <ListItemIcon>
+                <FontIcon name="person" />
+            </ListItemIcon>
             <ListItemText primary="Expandable?" secondary="Click it" />
             <List>
-                <ListItem button>
+                <ListItem button={true} divider={true}>
                     <ListItemIcon>
-                        <FontIcon name="inbox" />
+                        <FontIcon name="content_copy" />
                     </ListItemIcon>
-                    <ListItemText primary="Inbox" />
+                    <ListItemText primary="Copy" />
                 </ListItem>
-                <Divider inset={true} />
-                <ListItem button>
+                <ListItem button={true} divider={true}>
                     <ListItemIcon>
-                        <FontIcon name="drafts" />
+                        <FontIcon name="event_note" />
                     </ListItemIcon>
-                    <ListItemText primary="Drafts" />
+                    <ListItemText primary="Note" />
                 </ListItem>
             </List>
         </ListItemExpandable>

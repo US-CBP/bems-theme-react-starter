@@ -8,6 +8,7 @@ import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import FontIcon from '../FontIcon';
 import ButtonIcon from '../ButtonIcon';
+import Divider from 'material-ui/Divider';
 import { ListItemSecondaryAction } from 'material-ui/List';
 import velocity from 'velocity-animate';
 
@@ -90,7 +91,11 @@ type Props = DefaultProps & {
     /**
    * If `true`, a 1px light border is added to the bottom of the list item.
    */
-    divider?: boolean
+    divider?: boolean,
+    /**
+   * All children whose index is greater than or equal to expandableChildIdx to collapse when expansion button is clicked.
+   */
+    expandableChildIdx?: boolean
 };
 
 const isAnimate = true;
@@ -104,7 +109,7 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
         disabled: false,
         disableGutters: false,
         divider: false,
-        expandableIdx: 1
+        expandableChildIdx: 1
     };
     expandableBody = null;
 
@@ -146,7 +151,7 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
             disabled,
             divider,
             disableGutters,
-            expandableIdx,
+            expandableChildIdx,
             ...other
         } = this.props;
         const isDense = dense || this.context.dense || false;
@@ -174,12 +179,15 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
                 <ListItemSecondaryAction className={classes.secondaryAction}>
                     <ButtonIcon icon={<FontIcon name="keyboard_arrow_down" />} onClick={handleExpanding} />
                 </ListItemSecondaryAction>
-                {children.filter((child, idx) => {
-                    return idx < expandableIdx;
-                })}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    {children.filter((child, idx) => {
+                        return idx < expandableChildIdx;
+                    })}
+                </div>
+                <Divider />
                 <div ref={ref => (this.expandableBody = ref)}>
                     {children.filter((child, idx) => {
-                        return idx >= expandableIdx;
+                        return idx >= expandableChildIdx;
                     })}
                 </div>
             </ComponentProp>
