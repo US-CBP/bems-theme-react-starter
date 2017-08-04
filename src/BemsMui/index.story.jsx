@@ -14,7 +14,7 @@ import TimeSpinner from './TimeSpinner';
 // import ButtonIconFurther from './ButtonIconFurther';
 // import CardExpandable from './CardExpandable';
 // import DatePickerInlineLandscape from './DatePickerInlineLandscape';
-// import DialogModal from './DialogModal';
+import DialogConfirmation from './DialogConfirmation';
 // import DividerMenu from './DividerMenu';
 // import DrawerNavigation from './DrawerNavigation';
 // import MenuItem from 'material-ui/MenuItem';
@@ -73,6 +73,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Toggle Buttons - Pending', () => {
     return <ToggleButtons />;
+  })
+  .add('Dialog - Confirmation', () => {
+    return <DialogConfirmation>Only actions can close this dialog.</DialogConfirmation>;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
