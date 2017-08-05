@@ -28,7 +28,7 @@ import PanelExample from './PanelExample';
 // import Paper from '../BemsMui/Paper';
 // import PopoverSimple from './PopoverSimple';
 // import ProgressRefreshLoading from './ProgressRefreshLoading';
-// import SwitchCheckbox from './SwitchCheckbox';
+import SelectionControlsCheckbox from './SelectionControlsCheckbox';
 // import SnackbarSimple from './SnackbarSimple';
 // import TableEditable from './TableEditable';
 // import TextArea from './TextArea';
@@ -46,6 +46,7 @@ import ButtonRaised from './ButtonRaised';
 import ButtonIcon from './ButtonIcon';
 import DrawerLeft from './DrawerLeft';
 import ListSimpleExample from './ListSimpleExample';
+import ProgressCircular from './ProgressCircular';
 import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
@@ -136,6 +137,12 @@ storiesOf('BEMS Mui', module)
   })
   .add('Panel Example', () => {
     return <PanelExample />;
+  })
+  .add('Progress Circular', () => {
+    return <ProgressCircular />;
+  })
+  .add('Selection Controls - Checkbox', () => {
+    return <SelectionControlsCheckbox />;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
