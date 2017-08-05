@@ -23,7 +23,7 @@ class SelectionControlsCheckbox extends Component {
 
   render() {
     const { handleChange } = this;
-    const { classes, label } = this.props;
+    const { classes, label, onChange = handleChange } = this.props;
     const { checked } = this.state;
 
     return (
