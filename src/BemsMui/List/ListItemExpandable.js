@@ -13,194 +13,190 @@ import { ListItemSecondaryAction } from 'material-ui/List';
 import velocity from 'velocity-animate';
 
 export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme => ({
-    root: {
-        display: 'block',
-        alignItems: 'center',
-        position: 'relative',
-        textDecoration: 'none'
-    },
-    container: {
-        position: 'relative'
-    },
-    keyboardFocused: {
-        background: theme.palette.text.divider
-    },
-    default: {
-        paddingTop: 12,
-        paddingBottom: 12
-    },
-    dense: {
-        paddingTop: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
-    },
-    disabled: {
-        opacity: 0.5
-    },
-    divider: {
-        borderBottom: `1px solid ${theme.palette.text.lightDivider}`
-    },
-    gutters: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2
-    },
-    secondaryAction: {
-        top: 0,
-        marginTop: 0
-    }
+  root: {
+    display: 'block',
+    alignItems: 'center',
+    position: 'relative',
+    textDecoration: 'none'
+  },
+  container: {
+    position: 'relative'
+  },
+  keyboardFocused: {
+    background: theme.palette.text.divider
+  },
+  default: {
+    paddingTop: 12,
+    paddingBottom: 12
+  },
+  dense: {
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit
+  },
+  disabled: {
+    opacity: 0.5
+  },
+  divider: {
+    borderBottom: `1px solid ${theme.palette.text.lightDivider}`
+  },
+  gutters: {
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2
+  },
+  secondaryAction: {
+    top: 0,
+    marginTop: 0
+  }
 }));
 
 type DefaultProps = {
-    button: boolean,
-    component: string,
-    dense: boolean,
-    disabled: false,
-    disableGutters: false,
-    divider: false
+  button: boolean,
+  component: string,
+  dense: boolean,
+  disabled: false,
+  disableGutters: false,
+  divider: false
 };
 
 type Props = DefaultProps & {
-    /**
+  /**
    * The content of the component.
    */
-    children?: Element<*>,
-    /**
+  children?: Element<*>,
+  /**
    * Useful to extend the style applied to components.
    */
-    classes: Object,
-    /**
+  classes: Object,
+  /**
    * @ignore
    */
-    className?: string,
-    /**
+  className?: string,
+  /**
    * The component used for the root node.
    * Either a string to use a DOM element or a component.
    */
-    component?: string | Function,
-    /**
+  component?: string | Function,
+  /**
    * If `true`, compact vertical padding designed for keyboard and mouse input will be used.
    */
-    dense?: boolean,
-    /**
+  dense?: boolean,
+  /**
    * @ignore
    */
-    disabled?: boolean,
-    /**
+  disabled?: boolean,
+  /**
    * If `true`, the left and right padding is removed.
    */
-    disableGutters?: boolean,
-    /**
+  disableGutters?: boolean,
+  /**
    * If `true`, a 1px light border is added to the bottom of the list item.
    */
-    divider?: boolean,
-    /**
-   * All children whose index is greater than or equal to expandableChildIdx to collapse when expansion button is clicked.
-   */
-    expandableChildIdx?: boolean
+  divider?: boolean
 };
 
 const isAnimate = true;
-const expansionDuration = 250;
+const expansionDuration = 100;
 
 class ListItemExpandable extends Component<DefaultProps, Props, void> {
-    props: Props;
-    static defaultProps: DefaultProps = {
-        component: 'li',
-        dense: false,
-        disabled: false,
-        disableGutters: false,
-        divider: false,
-        expandableChildIdx: 1
-    };
-    expandableBody = null;
+  props: Props;
+  static defaultProps: DefaultProps = {
+    component: 'li',
+    dense: false,
+    disabled: false,
+    disableGutters: false,
+    divider: false
+  };
+  expandableBody = null;
 
-    state = {
-        isExpanded: true
-    };
+  state = {
+    isExpanded: true
+  };
 
-    handleExpanding = evt => {
-        evt.preventDefault();
-        if (this.expandableBody === null) {
-            return false;
-        }
-        const newExpandedState = !this.state.isExpanded;
-        const duration = isAnimate ? expansionDuration : 0;
-        const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
-        const self = this;
-        this.setState({ isExpanded: newExpandedState }, () => {
-            velocity(this.expandableBody, animVal, {
-                duration,
-                complete: () => {}
-            });
-        });
-    };
-
-    getChildContext() {
-        return {
-            dense: this.props.dense || this.context.dense || false
-        };
+  handleClickExpand = evt => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (this.expandableBody === null) {
+      return false;
     }
+    const newExpandedState = !this.state.isExpanded;
+    const duration = isAnimate ? expansionDuration : 0;
+    const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
+    const self = this;
+    this.setState({ isExpanded: newExpandedState }, () => {
+      velocity(this.expandableBody, animVal, {
+        duration,
+        complete: () => {}
+      });
+    });
+  };
 
-    render() {
-        const { handleExpanding } = this;
-        const {
-            children: childrenProp,
-            classes,
-            className: classNameProp,
-            component: ComponentProp,
-            dense,
-            disabled,
-            divider,
-            disableGutters,
-            expandableChildIdx,
-            ...other
-        } = this.props;
-        const isDense = dense || this.context.dense || false;
-        const children = React.Children.toArray(childrenProp);
+  getChildContext() {
+    return {
+      dense: this.props.dense || this.context.dense || false
+    };
+  }
 
-        const hasAvatar = children.some(value => {
-            return value.type && value.type.muiName === 'ListItemAvatar';
-        });
+  render() {
+    const { handleClickExpand } = this;
+    const { isExpanded } = this.state;
+    const {
+      children: childrenProp,
+      classes,
+      className: classNameProp,
+      component: ComponentProp,
+      dense,
+      disabled,
+      divider,
+      disableGutters,
+      ...other
+    } = this.props;
+    const isDense = dense || this.context.dense || false;
+    const children = React.Children.toArray(childrenProp);
 
-        const className = classNames(
-            classes.root,
-            {
-                [classes.gutters]: !disableGutters,
-                [classes.divider]: divider,
-                [classes.disabled]: disabled,
-                [isDense || hasAvatar ? classes.dense : classes.default]: true
-            },
-            classNameProp
-        );
+    const hasAvatar = children.some(value => {
+      return value.type && value.type.muiName === 'ListItemAvatar';
+    });
 
-        const listItemProps = { className, disabled, ...other };
+    const className = classNames(
+      classes.root,
+      {
+        [classes.gutters]: !disableGutters,
+        [classes.divider]: divider,
+        [classes.disabled]: disabled,
+        [isDense || hasAvatar ? classes.dense : classes.default]: true
+      },
+      classNameProp
+    );
 
-        return (
-            <ComponentProp {...listItemProps}>
-                <ListItemSecondaryAction className={classes.secondaryAction}>
-                    <ButtonIcon icon={<FontIcon name="keyboard_arrow_down" />} onClick={handleExpanding} />
-                </ListItemSecondaryAction>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    {children.filter((child, idx) => {
-                        return idx < expandableChildIdx;
-                    })}
-                </div>
-                <Divider />
-                <div ref={ref => (this.expandableBody = ref)}>
-                    {children.filter((child, idx) => {
-                        return idx >= expandableChildIdx;
-                    })}
-                </div>
-            </ComponentProp>
-        );
-    }
+    const listItemProps = { className, disabled, ...other };
+
+    return (
+      <ComponentProp {...listItemProps}>
+        <ListItemSecondaryAction className={classes.secondaryAction}>
+          <ButtonIcon icon={<FontIcon name={isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} onClick={handleClickExpand} />
+        </ListItemSecondaryAction>
+        {/* All children except for final child are considered to be part of the ListItem */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {children.filter((child, idx) => {
+            return idx < children.length - 1;
+          })}
+        </div>
+        <Divider />
+        {/* Final child is the only component that is expanded/collapsed */}
+        <div ref={ref => (this.expandableBody = ref)}>
+          {children[children.length - 1]}
+        </div>
+      </ComponentProp>
+    );
+  }
 }
 
 ListItemExpandable.contextTypes = {
-    dense: PropTypes.bool
+  dense: PropTypes.bool
 };
 
 ListItemExpandable.childContextTypes = {
-    dense: PropTypes.bool
+  dense: PropTypes.bool
 };
 
 export default withStyles(styleSheet)(ListItemExpandable);

@@ -17,14 +17,14 @@ import TimeSpinner from './TimeSpinner';
 import DialogConfirmation from './DialogConfirmation';
 // import DividerMenu from './DividerMenu';
 // import DrawerNavigation from './DrawerNavigation';
-// import MenuItem from 'material-ui/MenuItem';
+import { MenuItem } from 'material-ui/Menu';
 // import DrawerUndocked from './DrawerUndocked';
 // import FileAttachment from '../BemsMui/FileAttachment';
 // import IconFontMaterial from './IconFontMaterial';
 // import { ListItem } from 'material-ui/List';
 // import ListNested from './ListNested';
-// import MenuSimple from './MenuSimple';
-// import PanelExample from '../BemsMui/PanelExample';
+import MenuSimpleExample from './MenuSimpleExample';
+import PanelExample from './PanelExample';
 // import Paper from '../BemsMui/Paper';
 // import PopoverSimple from './PopoverSimple';
 // import ProgressRefreshLoading from './ProgressRefreshLoading';
@@ -51,79 +51,92 @@ import '../css/index.css';
 const theme = createMuiTheme(createPalette(tomisTheme));
 
 storiesOf('BEMS Mui', module)
-    .addDecorator(story => {
-        const storyKind = story();
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
-                    <MuiThemeProvider theme={theme}>
-                        {storyKind}
-                    </MuiThemeProvider>
-                </div>
-            </div>
-        );
-    })
-    .add('AutoComplete', () => {
-        return <AutoComplete />;
-    })
-    .add('Date Picker', () => {
-        return <DatePicker />;
-    })
-    .add('Time Spinner', () => {
-        return <TimeSpinner />;
-    })
-    .add('Text Field - Pending', () => {
-        return <TextFieldSimple />;
-    })
-    .add('Toggle Buttons - Pending', () => {
-        return <ToggleButtons />;
-    })
-    .add('Dialog - Confirmation', () => {
-        return <DialogConfirmation initIsOpen={true}>Only actions can close this dialog.</DialogConfirmation>;
-    })
-    .add('Divider', () => {
-        return (
-            <div>
-                <br />
-                <br />
-                <Divider />
-            </div>
-        );
-    })
-    .add('Button Flat', () => {
-        return (
-            <div>
-                <ButtonFlat label="My Flat Label" />
-            </div>
-        );
-    })
-    .add('Button Raised', () => {
-        return (
-            <div>
-                <ButtonRaised label="My Raised Label" />
-            </div>
-        );
-    })
-    .add('Button Icon', () => {
-        return (
-            <div>
-                <ButtonIcon icon={<FontIcon name="delete" />} />
-            </div>
-        );
-    })
-    .add('Drawer - Left', () => {
-        return (
-            <DrawerLeft isOpen={true}>
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                </ul>
-            </DrawerLeft>
-        );
-    })
-    .add('List - Simple Example', () => {
-        return <ListSimpleExample />;
-    });
+  .addDecorator(story => {
+    const storyKind = story();
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
+          <MuiThemeProvider theme={theme}>
+            {storyKind}
+          </MuiThemeProvider>
+        </div>
+      </div>
+    );
+  })
+  .add('AutoComplete', () => {
+    return <AutoComplete />;
+  })
+  .add('Date Picker', () => {
+    return <DatePicker />;
+  })
+  .add('Time Spinner', () => {
+    return <TimeSpinner />;
+  })
+  .add('Text Field - Pending', () => {
+    return <TextFieldSimple />;
+  })
+  .add('Toggle Buttons - Pending', () => {
+    return <ToggleButtons />;
+  })
+  .add('Dialog - Confirmation', () => {
+    return <DialogConfirmation initIsOpen={true}>Only actions can close this dialog.</DialogConfirmation>;
+  })
+  .add('Divider', () => {
+    return (
+      <div>
+        <br />
+        <br />
+        <Divider />
+      </div>
+    );
+  })
+  .add('Button Flat', () => {
+    return (
+      <div>
+        <ButtonFlat label="My Flat Label" />
+      </div>
+    );
+  })
+  .add('Button Raised', () => {
+    return (
+      <div>
+        <ButtonRaised label="My Raised Label" />
+      </div>
+    );
+  })
+  .add('Button Icon', () => {
+    return (
+      <div>
+        <ButtonIcon icon={<FontIcon name="delete" />} />
+      </div>
+    );
+  })
+  .add('Drawer - Left', () => {
+    return (
+      <DrawerLeft isOpen={true}>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+        </ul>
+      </DrawerLeft>
+    );
+  })
+  .add('List - Simple Example', () => {
+    return <ListSimpleExample />;
+  })
+  .add('Menu - Simple Example', () => {
+    return (
+      <MenuSimpleExample open={true}>
+        <MenuItem>Maps</MenuItem>
+        <MenuItem>Books</MenuItem>
+        <MenuItem>Flights</MenuItem>
+        <MenuItem>Apps</MenuItem>
+      </MenuSimpleExample>
+    );
+  })
+  .add('Panel Example', () => {
+    return <PanelExample />;
+  });
 
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
@@ -186,9 +199,6 @@ storiesOf('BEMS Mui', module)
                 <MenuItem primaryText="Apps" />
             </MenuSimple>
         );
-    })
-    .add('Panel Example', () => {
-        return <PanelExample />;
     })
     .add('Paper Example', () => {
         return <Paper style={{ width: '100px', height: '300px' }} zDepth={1} />;

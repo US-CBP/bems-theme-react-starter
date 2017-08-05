@@ -1,192 +1,187 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import createStyleSheet from 'material-ui/styles/createStyleSheet';
+import withStyles from 'material-ui/styles/withStyles';
+import FontIcon from '../FontIcon';
+import ButtonIcon from '../ButtonIcon';
 import Paper from 'material-ui/Paper';
 import PanelExpandable from './PanelExpandable';
 import velocity from 'velocity-animate';
 import _omit from 'lodash/omit';
 
-class Panel extends Component {
-  constructor(props) {
-    super(props);
-    this.panelBody = null;
-    this.keepProps = {};
+export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
+  root: {
+    display: 'block',
+    alignItems: 'center',
+    position: 'relative',
+    textDecoration: 'none'
+  },
+  container: {
+    position: 'relative'
+  },
+  keyboardFocused: {
+    background: theme.palette.text.divider
+  },
+  default: {
+    paddingTop: 12,
+    paddingBottom: 12
+  },
+  dense: {
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit
+  },
+  disabled: {
+    opacity: 0.5
+  },
+  divider: {
+    borderBottom: `1px solid ${theme.palette.text.lightDivider}`
+  },
+  gutters: {
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2
+  },
+  secondaryAction: {
+    top: 0,
+    marginTop: 0
   }
+}));
 
-  static propTypes = {
-    /**
+const defaultProps = {};
+
+const propTypes = {
+  /**
      * Can be used to render elements inside the Card.
      */
-    children: PropTypes.node,
-    /**
+  children: PropTypes.node,
+  /**
      * Override the inline-styles of the container element.
      */
-    containerStyle: PropTypes.object,
-    /**
+  containerStyle: PropTypes.object,
+  /**
      * If true, this card component is expandable. Can be set on any child of the `Card` component.
      */
-    expandable: PropTypes.bool,
-    /**
+  expandable: PropTypes.bool,
+  /**
      * Whether this card is expanded.
      * If `true` or `false` the component is controlled.
      * if `null` the component is uncontrolled.
      */
-    expanded: PropTypes.bool,
-    /**
+  expanded: PropTypes.bool,
+  /**
      * Whether this card is initially expanded.
      */
-    initiallyExpanded: PropTypes.bool,
-    /**
+  initiallyExpanded: PropTypes.bool,
+  /**
      * Callback function fired when the `expandable` state of the card has changed.
      *
      * @param {boolean} newExpandedState Represents the new `expanded` state of the card.
      */
-    onExpandChange: PropTypes.func,
-    /**
+  onExpandChange: PropTypes.func,
+  /**
      * If true, this card component will include a button to expand the card. `CardTitle`,
      * `CardHeader` and `CardActions` implement `showExpandableButton`. Any child component
      * of `Card` can implements `showExpandableButton` or forwards the property to a child
      * component supporting it.
      */
-    showExpandableButton: PropTypes.bool,
-    /**
+  showExpandableButton: PropTypes.bool,
+  /**
      * Override the inline-styles of the root element.
      */
-    style: PropTypes.object,
-    /**
+  style: PropTypes.object,
+  /**
      * Override the default animation expansionDuration.  Set this to 0 if you do not want any animation on open/close
      */
-    expansionDuration: PropTypes.number
-    /**
+  expansionDuration: PropTypes.number
+  /**
      * Override the default animation flag.  Default is yes, animate open/close.  If you don't want that, set isAnimate to false, then open/close is immediate.
      */
-  };
+};
 
-  static defaultProps = {
-    expandable: false,
-    expanded: null,
-    initiallyExpanded: true,
-    expansionDuration: 500,
-    isAnimate: true
-  };
+const isAnimate = true;
+const expansionDuration = 250;
+
+class Panel extends Component {
+  constructor(props) {
+    super(props);
+    this.keepProps = {};
+  }
+  expandableBody = null;
 
   state = {
-    expanded: null
+    isExpanded: true
   };
-
-  componentWillMount() {
-    this.setState({
-      expanded: this.props.expanded === null ? this.props.initiallyExpanded === true : this.props.expanded
-    });
-  }
 
   componentWillReceiveProps(nextProps) {
     // update the state when the component is controlled.
     if (nextProps.expanded !== null) this.setState({ expanded: nextProps.expanded });
   }
 
-  handleExpanding = event => {
-    event.preventDefault();
-    const newExpandedState = !this.state.expanded;
-    // no automatic state update when the component is controlled
-    // if (this.props.expanded === null) {
-    //   this.setState({ expanded: newExpandedState });
-    // }
-    if (this.props.onExpandChange) {
-      this.props.onExpandChange(newExpandedState);
+  handleClickExpand = evt => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (this.expandableBody === null) {
+      return false;
     }
-    const { expansionDuration, isAnimate } = this.props;
+    const newExpandedState = !this.state.isExpanded;
     const duration = isAnimate ? expansionDuration : 0;
     const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
     const self = this;
-    this.setState({ expanded: newExpandedState }, () => {
-      velocity(this.panelBody, animVal, {
+    this.setState({ isExpanded: newExpandedState }, () => {
+      velocity(this.expandableBody, animVal, {
         duration,
         complete: () => {}
       });
     });
   };
 
-  registerCollapseRef = childRef => {
-    this.panelBody = childRef;
-  };
+  // getChildContext() {
+  //   return {
+  //     dense: this.props.dense || this.context.dense || false
+  //   };
+  // }
 
   render() {
+    const { handleClickExpand } = this;
+    const { isExpanded } = this.state;
     const {
-      style,
-      containerStyle,
-      children,
-      expandable, // eslint-disable-line no-unused-vars
-      expanded: expandedProp, // eslint-disable-line no-unused-vars
-      initiallyExpanded, // eslint-disable-line no-unused-vars
-      onExpandChange, // eslint-disable-line no-unused-vars
+      title,
+      children: childrenProp,
+      classes,
+      className: classNameProp,
+      component: ComponentProp,
+      dense,
+      disabled,
+      divider,
+      disableGutters,
+      expandableChildIdx,
       ...other
     } = this.props;
-
-    let lastElement;
-    const expanded = this.state.expanded;
-    const newChildren = React.Children.map(
-      children,
-      currentChild => {
-        let doClone = false;
-        let newChild = undefined;
-        const newProps = {};
-        let element = currentChild;
-        if (!currentChild || !currentChild.props) {
-          return null;
-        }
-        if (expanded === false && currentChild.props.expandable === true) return;
-        if (currentChild.props.actAsExpander === true) {
-          doClone = true;
-          newProps.onTouchTap = this.handleExpanding;
-          newProps.style = Object.assign({ cursor: 'pointer' }, currentChild.props.style);
-        }
-        if (currentChild.props.showExpandableButton === true) {
-          doClone = true;
-          newChild = (
-            <PanelExpandable
-              closeIcon={currentChild.props.closeIcon}
-              expanded={expanded}
-              onExpanding={this.handleExpanding}
-              openIcon={currentChild.props.openIcon}
-            />
-          );
-        }
-        if (currentChild.type.muiName === 'PanelBody') {
-          newProps.registerCollapseRef = this.registerCollapseRef;
-          doClone = true;
-        }
-        if (doClone) {
-          element = React.cloneElement(currentChild, newProps, currentChild.props.children, newChild);
-        }
-        lastElement = element;
-        return element;
-      },
-      this
-    );
-
-    // If the last element is text or a title we should add
-    // 8px padding to the bottom of the card
-    const mergedStyles = Object.assign(
-      {
-        padding: '8px',
-        width: '100%',
-        zIndex: 'auto'
-      },
-      style
-    );
-    const containerMergedStyles = Object.assign({}, containerStyle);
-
-    this.keepProps = _omit(other, ['expansionDuration', 'isAnimate']);
-    const { keepProps } = this;
+    const isDense = dense || this.context.dense || false;
+    const children = React.Children.toArray(childrenProp);
     return (
-      <Paper {...keepProps} style={mergedStyles}>
-        <div style={containerMergedStyles}>
-          {newChildren}
+      <Paper {...other}>
+        <div className={classes.secondaryAction}>
+          <span>
+            {title}
+          </span>
+          <ButtonIcon icon={<FontIcon name={isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} onClick={handleClickExpand} />
+        </div>
+        {/* All children except for final child are considered to be actions placed in header */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {children.filter((child, idx) => {
+            return idx < children.length - 1;
+          })}
+        </div>
+        {/* Final child is the only component that is expanded/collapsed - considered the panel body */}
+        <div ref={ref => (this.expandableBody = ref)}>
+          {children[children.length - 1]}
         </div>
       </Paper>
     );
   }
 }
 
-export default Panel;
+Panel.defaultProps = defaultProps;
+Panel.propTypes = propTypes;
+export default withStyles(styleSheet)(Panel);
