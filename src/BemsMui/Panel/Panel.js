@@ -3,18 +3,29 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import Collapse from 'material-ui/transitions/Collapse';
 import FontIcon from '../FontIcon';
 import ButtonIcon from '../ButtonIcon';
 import Paper from 'material-ui/Paper';
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
+  flex: {
+    flex: 1
+  },
   root: {
+    marginTop: 30,
+    width: '100%',
     display: 'block',
     alignItems: 'center',
     position: 'relative',
     textDecoration: 'none'
+  },
+  appBar: {
+    boxShadow: 'none'
   },
   container: {
     position: 'relative'
@@ -128,27 +139,31 @@ class Panel extends Component {
     const children = React.Children.toArray(childrenProp);
     //All children except for final child are considered to be "actions" placed in header.
     //Final child is the only component that is expanded/collapsed - considered the panel body
-    let finalChild = false;
+    let panelBody = false;
     if (children.length > 0) {
-      finalChild = children.pop();
+      panelBody = children.pop();
     }
     return (
-      <Paper {...other}>
-        <div className={classes.secondaryAction}>
-          {title}
-          {children}
-          <ButtonIcon
-            className={classNames(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            icon={<FontIcon name={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />}
-            onClick={handleClickExpand}
-            aria-expanded={expanded}
-            aria-label="Show more"
-          />
-        </div>
+      <Paper>
+        <AppBar position="static" className={classes.appBar}>
+          <Toolbar>
+            <Typography type="title" color="inherit" className={classes.flex}>
+              {title}
+            </Typography>
+            {children}
+            <ButtonIcon
+              className={classNames(classes.expand, {
+                [classes.expandOpen]: expanded
+              })}
+              icon={<FontIcon color="#ffffff" name="keyboard_arrow_up" />}
+              onClick={handleClickExpand}
+              aria-expanded={expanded}
+              aria-label="Show more"
+            />
+          </Toolbar>
+        </AppBar>
         <Collapse in={expanded} transitionDuration="auto" unmountOnExit={false}>
-          {finalChild}
+          {panelBody}
         </Collapse>
       </Paper>
     );

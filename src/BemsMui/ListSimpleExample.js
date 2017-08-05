@@ -37,9 +37,7 @@ const ListSimpleExample = props =>
           <ListItemText primary="Note" />
         </ListItem>
         <ListItemExpandable>
-          <ListItem button={true} divider={true}>
-            <ListItemText primary="Level 2 Menu" />
-          </ListItem>
+          <ListItemText primary="Level 2 Menu" />
           <List>
             <ListItem button={true} divider={true}>
               <ListItemIcon>

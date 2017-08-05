@@ -11,7 +11,6 @@ import FontIcon from '../FontIcon';
 import ButtonIcon from '../ButtonIcon';
 import Divider from 'material-ui/Divider';
 import { ListItemSecondaryAction } from 'material-ui/List';
-// import velocity from 'velocity-animate';
 
 export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme => ({
   root: {
@@ -44,10 +43,12 @@ export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme =>
     transform: 'rotate(180deg)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
-    })
+    }),
+    animationFillMode: 'forwards'
   },
   expandOpen: {
-    transform: 'rotate(0deg)'
+    transform: 'rotate(0deg)',
+    animationFillMode: 'forwards'
   },
   gutters: {
     paddingLeft: theme.spacing.unit * 2,
@@ -122,24 +123,6 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
     expanded: true
   };
 
-  //   handleClickExpandORIGINAL = evt => {
-  //     evt.preventDefault();
-  //     evt.stopPropagation();
-  //     if (this.expandableBody === null) {
-  //       return false;
-  //     }
-  //     const newExpandedState = !this.state.isExpanded;
-  //     const duration = isAnimate ? expansionDuration : 0;
-  //     const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
-  //     const self = this;
-  //     this.setState({ isExpanded: newExpandedState }, () => {
-  //       velocity(this.expandableBody, animVal, {
-  //         duration,
-  //         complete: () => {}
-  //       });
-  //     });
-  //   };
-
   handleClickExpand = evt => {
     this.setState({ expanded: !this.state.expanded });
   };
@@ -204,7 +187,7 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
             className={classNames(classes.expand, {
               [classes.expandOpen]: expanded
             })}
-            icon={<FontIcon name={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />}
+            icon={<FontIcon name="keyboard_arrow_up" />}
             onClick={handleClickExpand}
             aria-expanded={expanded}
             aria-label="Show more"
