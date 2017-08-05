@@ -24,12 +24,12 @@ const options = [
   'Sedna',
   'Titania',
   'Triton',
-  'Umbriel',
+  'Umbriel'
 ];
 
 class ConfirmationDialog extends Component {
   state = {
-    selectedValue: undefined,
+    selectedValue: undefined
   };
 
   componentWillMount() {
@@ -65,13 +65,7 @@ class ConfirmationDialog extends Component {
     const { selectedValue, ...other } = this.props;
 
     return (
-      <Dialog
-        ignoreBackdropClick
-        ignoreEscapeKeyUp
-        maxWidth="xs"
-        onEntering={this.handleEntering}
-        {...other}
-      >
+      <Dialog ignoreBackdropClick ignoreEscapeKeyUp maxWidth="xs" onEntering={this.handleEntering} {...other}>
         <DialogTitle>Phone Ringtone</DialogTitle>
         <DialogContent>
           <RadioGroup
@@ -83,9 +77,7 @@ class ConfirmationDialog extends Component {
             selectedValue={this.state.selectedValue}
             onChange={this.handleChange}
           >
-            {options.map(option =>
-              <FormControlLabel value={option} key={option} control={<Radio />} label={option} />,
-            )}
+            {options.map(option => <FormControlLabel value={option} key={option} control={<Radio />} label={option} />)}
           </RadioGroup>
         </DialogContent>
         <DialogActions>
@@ -103,26 +95,26 @@ class ConfirmationDialog extends Component {
 
 ConfirmationDialog.propTypes = {
   onRequestClose: PropTypes.func,
-  selectedValue: PropTypes.string,
+  selectedValue: PropTypes.string
 };
 
 const styleSheet = createStyleSheet('ConfirmationDialogDemo', theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    background: theme.palette.background.paper,
+    background: theme.palette.background.paper
   },
   dialog: {
     width: '80%',
-    maxHeight: 435,
-  },
+    maxHeight: 435
+  }
 }));
 
 class ConfirmationDialogDemo extends Component {
   state = {
     anchorEl: undefined,
     open: false,
-    selectedValue: 'Dione',
+    selectedValue: 'Dione'
   };
 
   button = undefined;
@@ -143,14 +135,7 @@ class ConfirmationDialogDemo extends Component {
           <ListItem button divider disabled>
             <ListItemText primary="Interruptions" />
           </ListItem>
-          <ListItem
-            button
-            divider
-            aria-haspopup="true"
-            aria-controls="ringtone-menu"
-            aria-label="Phone ringtone"
-            onClick={this.handleClickListItem}
-          >
+          <ListItem button divider aria-haspopup="true" aria-controls="ringtone-menu" aria-label="Phone ringtone" onClick={this.handleClickListItem}>
             <ListItemText primary="Phone ringtone" secondary={this.state.selectedValue} />
           </ListItem>
           <ListItem button divider disabled>
@@ -158,7 +143,7 @@ class ConfirmationDialogDemo extends Component {
           </ListItem>
           <ConfirmationDialog
             classes={{
-              paper: classes.dialog,
+              paper: classes.dialog
             }}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}
@@ -171,7 +156,7 @@ class ConfirmationDialogDemo extends Component {
 }
 
 ConfirmationDialogDemo.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styleSheet)(ConfirmationDialogDemo);

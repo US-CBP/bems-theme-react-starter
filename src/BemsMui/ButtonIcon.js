@@ -6,19 +6,19 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from './FontIcon';
 
 const defaultProps = {
-    icon: <FontIcon name="delete" />
+  icon: <FontIcon name="delete" />
 };
 
 const propTypes = {
-    icon: PropTypes.node.isRequired
+  icon: PropTypes.node.isRequired
 };
 
-const ButtonIcon = ({ icon, onClick }) => {
-    return (
-        <IconButton onClick={onClick}>
-            {icon}
-        </IconButton>
-    );
+const ButtonIcon = ({ icon, onClick, className = '' }) => {
+  return (
+    <IconButton onClick={onClick} className={className}>
+      {icon}
+    </IconButton>
+  );
 };
 
 ButtonIcon.defaultProps = defaultProps;

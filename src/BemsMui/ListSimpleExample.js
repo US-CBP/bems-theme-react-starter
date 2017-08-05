@@ -38,23 +38,20 @@ const ListSimpleExample = props =>
         </ListItem>
         <ListItemExpandable>
           <ListItem button={true} divider={true}>
-            <ListItemIcon>
-              <FontIcon name="inbox" />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary="Level 2 Menu" />
           </ListItem>
           <List>
             <ListItem button={true} divider={true}>
               <ListItemIcon>
-                <FontIcon name="content_copy" />
+                <FontIcon name="android" />
               </ListItemIcon>
-              <ListItemText primary="Copy" />
+              <ListItemText primary="Android" />
             </ListItem>
             <ListItem button={true} divider={true}>
               <ListItemIcon>
-                <FontIcon name="event_note" />
+                <FontIcon name="search" />
               </ListItemIcon>
-              <ListItemText primary="Note" />
+              <ListItemText primary="Search" />
             </ListItem>
           </List>
         </ListItemExpandable>

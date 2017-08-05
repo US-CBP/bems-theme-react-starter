@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
+import Collapse from 'material-ui/transitions/Collapse';
 import FontIcon from '../FontIcon';
 import ButtonIcon from '../ButtonIcon';
 import Divider from 'material-ui/Divider';
 import { ListItemSecondaryAction } from 'material-ui/List';
-import velocity from 'velocity-animate';
+// import velocity from 'velocity-animate';
 
 export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme => ({
   root: {
@@ -38,6 +39,15 @@ export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme =>
   },
   divider: {
     borderBottom: `1px solid ${theme.palette.text.lightDivider}`
+  },
+  expand: {
+    transform: 'rotate(180deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(0deg)'
   },
   gutters: {
     paddingLeft: theme.spacing.unit * 2,
@@ -109,25 +119,29 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
   expandableBody = null;
 
   state = {
-    isExpanded: true
+    expanded: true
   };
 
+  //   handleClickExpandORIGINAL = evt => {
+  //     evt.preventDefault();
+  //     evt.stopPropagation();
+  //     if (this.expandableBody === null) {
+  //       return false;
+  //     }
+  //     const newExpandedState = !this.state.isExpanded;
+  //     const duration = isAnimate ? expansionDuration : 0;
+  //     const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
+  //     const self = this;
+  //     this.setState({ isExpanded: newExpandedState }, () => {
+  //       velocity(this.expandableBody, animVal, {
+  //         duration,
+  //         complete: () => {}
+  //       });
+  //     });
+  //   };
+
   handleClickExpand = evt => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    if (this.expandableBody === null) {
-      return false;
-    }
-    const newExpandedState = !this.state.isExpanded;
-    const duration = isAnimate ? expansionDuration : 0;
-    const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
-    const self = this;
-    this.setState({ isExpanded: newExpandedState }, () => {
-      velocity(this.expandableBody, animVal, {
-        duration,
-        complete: () => {}
-      });
-    });
+    this.setState({ expanded: !this.state.expanded });
   };
 
   getChildContext() {
@@ -138,7 +152,7 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
 
   render() {
     const { handleClickExpand } = this;
-    const { isExpanded } = this.state;
+    const { expanded } = this.state;
     const {
       children: childrenProp,
       classes,
@@ -152,6 +166,12 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
     } = this.props;
     const isDense = dense || this.context.dense || false;
     const children = React.Children.toArray(childrenProp);
+    //All children except for final child are considered to be "actions" placed in header.
+    //Final child is the only component that is expanded/collapsed - considered the panel body
+    let finalChild = false;
+    if (children.length > 0) {
+      finalChild = children.pop();
+    }
 
     const hasAvatar = children.some(value => {
       return value.type && value.type.muiName === 'ListItemAvatar';
@@ -172,20 +192,24 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
 
     return (
       <ComponentProp {...listItemProps}>
-        <ListItemSecondaryAction className={classes.secondaryAction}>
-          <ButtonIcon icon={<FontIcon name={isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} onClick={handleClickExpand} />
-        </ListItemSecondaryAction>
-        {/* All children except for final child are considered to be part of the ListItem */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {children.filter((child, idx) => {
-            return idx < children.length - 1;
-          })}
+          {children}
         </div>
         <Divider />
-        {/* Final child is the only component that is expanded/collapsed */}
-        <div ref={ref => (this.expandableBody = ref)}>
-          {children[children.length - 1]}
-        </div>
+        <Collapse in={expanded} transitionDuration="auto" unmountOnExit={false}>
+          {finalChild}
+        </Collapse>
+        <ListItemSecondaryAction className={classes.secondaryAction}>
+          <ButtonIcon
+            className={classNames(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            icon={<FontIcon name={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />}
+            onClick={handleClickExpand}
+            aria-expanded={expanded}
+            aria-label="Show more"
+          />
+        </ListItemSecondaryAction>
       </ComponentProp>
     );
   }

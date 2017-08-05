@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
+import Collapse from 'material-ui/transitions/Collapse';
 import FontIcon from '../FontIcon';
 import ButtonIcon from '../ButtonIcon';
 import Paper from 'material-ui/Paper';
-import PanelExpandable from './PanelExpandable';
-import velocity from 'velocity-animate';
-import _omit from 'lodash/omit';
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
   root: {
@@ -37,13 +36,24 @@ export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
   divider: {
     borderBottom: `1px solid ${theme.palette.text.lightDivider}`
   },
+  expand: {
+    transform: 'rotate(180deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(0deg)'
+  },
   gutters: {
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2
   },
   secondaryAction: {
     top: 0,
-    marginTop: 0
+    marginTop: 0,
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
@@ -88,51 +98,20 @@ const propTypes = {
   /**
      * Override the inline-styles of the root element.
      */
-  style: PropTypes.object,
-  /**
-     * Override the default animation expansionDuration.  Set this to 0 if you do not want any animation on open/close
-     */
-  expansionDuration: PropTypes.number
-  /**
-     * Override the default animation flag.  Default is yes, animate open/close.  If you don't want that, set isAnimate to false, then open/close is immediate.
-     */
+  style: PropTypes.object
 };
-
-const isAnimate = true;
-const expansionDuration = 250;
 
 class Panel extends Component {
   constructor(props) {
     super(props);
-    this.keepProps = {};
   }
-  expandableBody = null;
 
   state = {
-    isExpanded: true
+    expanded: true
   };
 
-  componentWillReceiveProps(nextProps) {
-    // update the state when the component is controlled.
-    if (nextProps.expanded !== null) this.setState({ expanded: nextProps.expanded });
-  }
-
   handleClickExpand = evt => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    if (this.expandableBody === null) {
-      return false;
-    }
-    const newExpandedState = !this.state.isExpanded;
-    const duration = isAnimate ? expansionDuration : 0;
-    const animVal = !newExpandedState ? 'slideUp' : 'slideDown';
-    const self = this;
-    this.setState({ isExpanded: newExpandedState }, () => {
-      velocity(this.expandableBody, animVal, {
-        duration,
-        complete: () => {}
-      });
-    });
+    this.setState({ expanded: !this.state.expanded });
   };
 
   // getChildContext() {
@@ -143,40 +122,34 @@ class Panel extends Component {
 
   render() {
     const { handleClickExpand } = this;
-    const { isExpanded } = this.state;
-    const {
-      title,
-      children: childrenProp,
-      classes,
-      className: classNameProp,
-      component: ComponentProp,
-      dense,
-      disabled,
-      divider,
-      disableGutters,
-      expandableChildIdx,
-      ...other
-    } = this.props;
+    const { expanded } = this.state;
+    const { title, children: childrenProp, classes, className: classNameProp, dense, disableGutters, ...other } = this.props;
     const isDense = dense || this.context.dense || false;
     const children = React.Children.toArray(childrenProp);
+    //All children except for final child are considered to be "actions" placed in header.
+    //Final child is the only component that is expanded/collapsed - considered the panel body
+    let finalChild = false;
+    if (children.length > 0) {
+      finalChild = children.pop();
+    }
     return (
       <Paper {...other}>
         <div className={classes.secondaryAction}>
-          <span>
-            {title}
-          </span>
-          <ButtonIcon icon={<FontIcon name={isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} onClick={handleClickExpand} />
+          {title}
+          {children}
+          <ButtonIcon
+            className={classNames(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            icon={<FontIcon name={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />}
+            onClick={handleClickExpand}
+            aria-expanded={expanded}
+            aria-label="Show more"
+          />
         </div>
-        {/* All children except for final child are considered to be actions placed in header */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          {children.filter((child, idx) => {
-            return idx < children.length - 1;
-          })}
-        </div>
-        {/* Final child is the only component that is expanded/collapsed - considered the panel body */}
-        <div ref={ref => (this.expandableBody = ref)}>
-          {children[children.length - 1]}
-        </div>
+        <Collapse in={expanded} transitionDuration="auto" unmountOnExit={false}>
+          {finalChild}
+        </Collapse>
       </Paper>
     );
   }

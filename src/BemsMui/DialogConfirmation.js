@@ -8,69 +8,69 @@ import Button from 'material-ui/Button';
 const buttonDefinitions = [{ label: 'Cancel', onClick: () => {}, parms: { type: 'Cancel' } }, { label: 'Submit', onClick: () => {}, parms: { type: 'Ok' } }];
 
 const setStateIsOpen = (isOpen, state, props) => {
-    return { isOpen };
+  return { isOpen };
 };
 
 const defaultProps = {
-    buttonDefinitions,
-    initIsOpen: false
+  buttonDefinitions,
+  initIsOpen: false
 };
 
 const propTypes = {
-    title: PropTypes.string,
-    labels: PropTypes.array
+  title: PropTypes.string,
+  labels: PropTypes.array
 };
 
 class DialogConfirmation extends Component {
-    constructor(props) {
-        super(props);
-        this.state.isOpen = props.initIsOpen;
-    }
+  constructor(props) {
+    super(props);
+    this.state.isOpen = props.initIsOpen;
+  }
 
-    state = {
-        isOpen: false
-    };
+  state = {
+    isOpen: false
+  };
 
-    handleClose = () => {
-        this.setState(setStateIsOpen.bind(null, false));
-    };
+  handleClose = () => {
+    this.setState(setStateIsOpen.bind(null, false));
+  };
 
-    handleClickButton = (onClickCallback, buttonParms) => {
-        this.handleClose();
-        onClickCallback(buttonParms);
-    };
+  handleClickButton = (onClickCallback, buttonParms) => {
+    this.handleClose();
+    onClickCallback(buttonParms);
+  };
 
-    renderButtonActions = () => {
-        const { buttonDefinitions } = this.props;
-        const actions = buttonDefinitions.map((buttonDefinition, idx) => {
-            const { label, onClick, parms } = buttonDefinition;
-            return (
-                <Button key={`BTN-${idx}-${label}`} onClick={this.handleClickButton.bind(this, onClick, parms)} color="primary">
-                    {label}
-                </Button>
-            );
-        });
-        return actions;
-    };
+  renderButtonActions = () => {
+    const { buttonDefinitions } = this.props;
+    const actions = buttonDefinitions.map((buttonDefinition, idx) => {
+      const { label, onClick, parms } = buttonDefinition;
+      return (
+        <Button key={`BTN-${idx}-${label}`} onClick={this.handleClickButton.bind(this, onClick, parms)} color="primary">
+          {label}
+        </Button>
+      );
+    });
+    return actions;
+  };
 
-    render() {
-        const { renderButtonActions } = this;
-        const { isOpen } = this.state;
-        const { title, children } = this.props;
-        return (
-            <Dialog ignoreBackdropClick={true} ignoreEscapeKeyUp={true} open={isOpen}>
-                <DialogTitle>
-                    {title}
-                </DialogTitle>
-                <DialogContent>
-                    {children}
-                </DialogContent>
-                <DialogActions>
-                    {renderButtonActions()}
-                </DialogActions>
-            </Dialog>
-        );
-    }
+  render() {
+    const { renderButtonActions } = this;
+    const { isOpen } = this.state;
+    const { title, children } = this.props;
+    return (
+      <Dialog ignoreBackdropClick={true} ignoreEscapeKeyUp={true} open={isOpen}>
+        <DialogTitle>
+          {title}
+        </DialogTitle>
+        <DialogContent>
+          {children}
+        </DialogContent>
+        <DialogActions>
+          {renderButtonActions()}
+        </DialogActions>
+      </Dialog>
+    );
+  }
 }
 
 DialogConfirmation.defaultProps = defaultProps;
