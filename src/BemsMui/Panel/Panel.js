@@ -48,7 +48,7 @@ export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
     borderBottom: `1px solid ${theme.palette.text.lightDivider}`
   },
   expand: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(-180deg)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
     })

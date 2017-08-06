@@ -1,130 +1,115 @@
-import React from 'react';
-import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../BemsMui/Table';
-import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
+// @flow weak
 
-const styles = {
-    propContainer: {
-        width: 200,
-        overflow: 'hidden',
-        margin: '20px auto 0'
-    },
-    propToggleHeader: {
-        margin: '20px auto 10px'
-    }
-};
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
-const tableData = [
-    {
-        name: 'John Smith',
-        status: 'Employed',
-        selected: true
-    },
-    {
-        name: 'Randal White',
-        status: 'Unemployed'
-    },
-    {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-        selected: true
-    },
-    {
-        name: 'Steve Brown',
-        status: 'Employed'
-    },
-    {
-        name: 'Joyce Whitten',
-        status: 'Employed'
-    },
-    {
-        name: 'Samuel Roberts',
-        status: 'Employed'
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed'
-    }
+const styleSheet = createStyleSheet(theme => ({
+  paper: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto'
+  }
+}));
+
+let counter = 0;
+function createData(name, calories, fat, carbs, protein) {
+  counter += 1;
+  return { id: counter, name, calories, fat, carbs, protein };
+}
+
+const columnData = [
+  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' }
 ];
 
-export default class TableReadOnly extends React.Component {
-    constructor(props) {
-        super(props);
+const createSortHandler = property => event => {
+  this.props.onRequestSort(event, property);
+};
 
-        this.state = {
-            fixedHeader: true,
-            fixedFooter: false,
-            stripedRows: true,
-            showRowHover: true,
-            selectable: false,
-            multiSelectable: false,
-            enableSelectAll: false,
-            deselectOnClickaway: true,
-            showCheckboxes: false,
-            height: '500px'
-        };
+class TableReadOnly extends Component {
+  state = {
+    order: 'asc',
+    orderBy: 'calories',
+    selected: [],
+    data: [
+      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+      createData('Eclair', 262, 16.0, 24, 6.0),
+      createData('Cupcake', 305, 3.7, 67, 4.3),
+      createData('Gingerbread', 356, 16.0, 49, 3.9)
+    ]
+  };
+
+  handleRequestSort = (property, event) => {
+    const orderBy = property;
+    let order = 'desc';
+
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
     }
 
-    handleToggle = (event, toggled) => {
-        this.setState({
-            [event.target.name]: toggled
-        });
-    };
+    const data = this.state.data.sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
 
-    handleChange = event => {
-        this.setState({ height: event.target.value });
-    };
+    this.setState({ data, order, orderBy });
+  };
 
-    render() {
-        return (
-            <div>
-                <Table
-                    height={this.state.height}
-                    fixedHeader={this.state.fixedHeader}
-                    fixedFooter={this.state.fixedFooter}
-                    selectable={this.state.selectable}
-                    multiSelectable={this.state.multiSelectable}
-                >
-                    <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes} enableSelectAll={this.state.enableSelectAll}>
-                        <TableRow>
-                            <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{ textAlign: 'center' }}>
-                                Super Header
-                            </TableHeaderColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody
-                        displayRowCheckbox={this.state.showCheckboxes}
-                        deselectOnClickaway={this.state.deselectOnClickaway}
-                        showRowHover={this.state.showRowHover}
-                        stripedRows={this.state.stripedRows}
-                    >
-                        {tableData.map((row, index) =>
-                            <TableRow key={index} selected={row.selected}>
-                                <TableRowColumn>{index}</TableRowColumn>
-                                <TableRowColumn>{row.name}</TableRowColumn>
-                                <TableRowColumn>{row.status}</TableRowColumn>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter adjustForCheckbox={this.state.showCheckboxes}>
-                        <TableRow>
-                            <TableRowColumn>ID</TableRowColumn>
-                            <TableRowColumn>Name</TableRowColumn>
-                            <TableRowColumn>Status</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn colSpan="3" style={{ textAlign: 'center' }}>
-                                Super Footer
-                            </TableRowColumn>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </div>
-        );
-    }
+  render() {
+    const { handleRequestSort } = this;
+    const { classes } = this.props;
+    const { data, order, orderBy, selected } = this.state;
+    return (
+      <Paper className={classes.paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {columnData.map(column => {
+                return (
+                  <TableCell key={column.id} numeric={column.numeric} disablePadding={column.disablePadding}>
+                    <TableSortLabel active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}>
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map(n => {
+              return (
+                <TableRow key={n.id}>
+                  <TableCell>
+                    {n.name}
+                  </TableCell>
+                  <TableCell numeric>
+                    {n.calories}
+                  </TableCell>
+                  <TableCell numeric>
+                    {n.fat}
+                  </TableCell>
+                  <TableCell numeric>
+                    {n.carbs}
+                  </TableCell>
+                  <TableCell numeric>
+                    {n.protein}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
 }
+
+TableReadOnly.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styleSheet)(TableReadOnly);

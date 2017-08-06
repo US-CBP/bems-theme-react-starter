@@ -31,6 +31,7 @@ import PanelExample from './PanelExample';
 import SelectionControlsCheckbox from './SelectionControlsCheckbox';
 // import SnackbarSimple from './SnackbarSimple';
 // import TableEditable from './TableEditable';
+import TableReadOnly from './TableReadOnly';
 // import TextArea from './TextArea';
 import TextFieldSimple from './TextFieldSimple';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
@@ -143,6 +144,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Selection Controls - Checkbox', () => {
     return <SelectionControlsCheckbox />;
+  })
+  .add('Table Example - Read-Only', () => {
+    return <TableReadOnly />;
   });
 
 /*.add('AutoComplete Info - Pending', () => {
@@ -231,9 +235,6 @@ storiesOf('BEMS Mui', module)
     })
     .add('Text Field, Default Value - Pending', () => {
         return <TextFieldSimpleDefaultValue />;
-    })
-    .add('Table Example - Read-Only', () => {
-        return <TableReadOnly />;
     })
     .add('Table Example - Editable', () => {
         return <TableEditable />;
