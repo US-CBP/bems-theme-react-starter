@@ -30,7 +30,7 @@ import PanelExample from './PanelExample';
 // import ProgressRefreshLoading from './ProgressRefreshLoading';
 import SelectionControlsCheckbox from './SelectionControlsCheckbox';
 // import SnackbarSimple from './SnackbarSimple';
-// import TableEditable from './TableEditable';
+import TableEditable from './TableEditable';
 import TableReadOnly from './TableReadOnly';
 // import TextArea from './TextArea';
 import TextFieldSimple from './TextFieldSimple';
@@ -144,6 +144,9 @@ storiesOf('BEMS Mui', module)
   })
   .add('Selection Controls - Checkbox', () => {
     return <SelectionControlsCheckbox />;
+  })
+  .add('Table Example - Editable', () => {
+    return <TableEditable />;
   })
   .add('Table Example - Read-Only', () => {
     return <TableReadOnly />;

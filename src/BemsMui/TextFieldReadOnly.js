@@ -1,10 +1,10 @@
 import React from 'react';
-import TextField from '../BemsMui/TextField/TextField';
+import TextField from 'material-ui/TextField';
 
 const TextFieldReadOnly = ({ ...props }) => {
-    return (
-        <TextField value="&nbsp;" floatingLabelText="Floating Label Text" fullWidth={true} {...props} underlineShow={false} inputStyle={{ cursor: 'default' }} readOnly={true} />
-    );
+  return (
+    <TextField fullWidth={true} {...props} underlineShow={false} inputStyle={{ cursor: 'default' }} readOnly={true} InputProps={{ disableUnderline: true }} />
+  );
 };
 
 export default TextFieldReadOnly;

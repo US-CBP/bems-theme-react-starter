@@ -1,206 +1,165 @@
+// @flow weak
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import { Panel, PanelHeaderTable, PanelBody } from '../BemsMui/Panel';
-import {
-  Table,
-  TableBody,
-  TableFooter,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-  TextFieldTableRowColumn,
-  DatePickerTableRowColumn,
-  TomisSelectTableRowColumn
-} from '../BemsMui/Table';
-import Checkbox from '../BemsMui/Checkbox';
-import IconButton from '../BemsMui/IconButton';
-import ButtonRaisedSimplePrimary from '../BemsMui/ButtonRaisedSimplePrimary';
-import moment from 'moment';
-import FontIcon from 'BemsMui/FontIcon';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Table, { TableBody, TableHead, TableCell, TableRow, TableSortLabel } from 'material-ui/Table';
+import { TableCellEdit } from 'BemsMui/Table';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
 
-const tableData = [
-  {
-    name: 'John Smith',
-    status: 'Sample Justification 1',
-    departureDt: undefined,
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Randal White',
-    status: 'Sample Justification 2',
-    departureDt: moment().toDate(),
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Stephanie Sanders',
-    status: 'Sample Justification 3',
-    departureDt: undefined,
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Steve Brown',
-    status: 'Sample Justification 4',
-    departureDt: moment().toDate(),
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Sample Justification 5',
-    departureDt: moment().subtract(2, 'months').toDate(),
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Sample Justification 6',
-    departureDt: undefined,
-    departureTime: 0,
-    selected: true
-  },
-  {
-    name: 'Adam Moore',
-    status: 'Sample Justification 7',
-    departureDt: moment().subtract(3, 'years').toDate(),
-    departureTime: 0,
-    selected: true
+const styleSheet = createStyleSheet(theme => ({
+  paper: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto'
   }
+}));
+
+let counter = 0;
+const createData = (name, calories, fat, carbs, protein) => {
+  counter += 1;
+  return {
+    id: counter,
+    name: { value: name, isOpen: false },
+    calories: { value: calories, isOpen: false },
+    fat: { value: fat, isOpen: false },
+    carbs: { value: carbs, isOpen: false },
+    protein: { value: protein, isOpen: false }
+  };
+};
+
+const columnHeaderData = [
+  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)', cell: null },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories', cell: null },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)', cell: null },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)', cell: null },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)', cell: null }
 ];
 
-const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
-let subCategoryEditValue = '';
-let subCategoryEditIdx = 0;
-let justificationEditValue = '';
-let justificationEditIdx = 0;
+const setStateActiveCell = (activeCell, state, props) => {
+  return { activeCell };
+};
 
-const initState = {
-  fixedHeader: true,
-  fixedFooter: false,
-  stripedRows: false,
-  showRowHover: true,
-  selectable: false,
-  multiSelectable: false,
-  enableSelectAll: false,
-  deselectOnClickaway: true,
-  showCheckboxes: false,
-  height: '500px',
-  tableRowCnt: tableData.length
+const getCellRowColm = (idx, property) => {
+  return `C${idx}-${property}`;
 };
 
 class TableEditable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initState;
-    this.addRow = this.addRow.bind(this);
-    this.delNoLaunchReasonRow = this.delNoLaunchReasonRow.bind(this);
-    this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
-    this.handleSaveTableRowColumnDate = this.handleSaveTableRowColumnDate.bind(this);
-  }
+  state = {
+    order: 'asc',
+    orderBy: 'calories',
+    selected: [],
+    data: [
+      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+      createData('Eclair', 262, 16.0, 24, 6.0),
+      createData('Cupcake', 305, 3.7, 67, 4.3),
+      createData('Gingerbread', 356, 16.0, 49, 3.9)
+    ],
+    activeCell: ''
+  };
 
-  addRow(evt) {
-    evt.stopPropagation();
-    tableData.push({ name: '', status: '' });
-    //force table refresh
-    this.setState({ tableRowCnt: tableData.length });
-  }
+  openCell = null;
 
-  delNoLaunchReasonRow(idx, evt) {
-    evt.stopPropagation();
-    tableData.splice(idx, 1);
-    //force table refresh
-    this.setState({ tableRowCnt: tableData.length });
-  }
+  updateData = (idx, property, evt) => {
+    const data = this.state.data;
+    data[idx][property]['value'] = evt.target.value;
+    this.setState({ data });
+  };
 
-  handleSaveTableRowColumnValue(rowIdx, propertyName, newValue) {
-    tableData[rowIdx][propertyName] = newValue;
-    //force table refresh
-    this.setState({ tableRowCnt: tableData.length });
-  }
+  handleRequestSort = (property, evt) => {
+    const orderBy = property;
+    let order = 'desc';
 
-  handleSaveTableRowColumnDate(rowIdx, propertyName, newValue) {
-    tableData[rowIdx][propertyName] = newValue;
-    //force table refresh
-    this.setState({ tableRowCnt: tableData.length });
-  }
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
+    }
+
+    const data = this.state.data.sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
+
+    this.setState({ data, order, orderBy });
+  };
+
+  handleClickTableCell = activeCell => {
+    this.setState(setStateActiveCell.bind(null, activeCell));
+  };
+
+  handleRequestClose = () => {
+    this.setState(setStateActiveCell.bind(null, ''));
+  };
 
   render() {
-    const { addRow, delNoLaunchReasonRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate } = this;
-    const { height, fixedHeader, fixedFooter, selectable, multiSelectable, showCheckboxes, deselectOnClickaway, showRowHover, stripedRows } = this.state;
+    const { handleRequestSort, updateData, handleRequestClose, handleClickTableCell, openCell } = this;
+    const { classes } = this.props;
+    const { data, order, orderBy, selected, activeCell } = this.state;
     return (
-      <div className="flex-row row-spacer-24">
-        <Panel>
-          <PanelHeaderTable title="My Table Panel Title">
-            <ButtonRaisedSimplePrimary label="Add Row" onTouchTap={addRow} />
-          </PanelHeaderTable>
-          <PanelBody>
-            <div>
-              <Table height={height} fixedHeader={fixedHeader} fixedFooter={fixedFooter} selectable={selectable} multiSelectable={multiSelectable}>
-                <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
-                  <TableRow selectable={false}>
-                    <TableHeaderColumn tooltip="Primary">Primary*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Departure Date">Departure Date*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Sub-Category">Sub-Category*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Justification">Justification*</TableHeaderColumn>
-                    <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-                  </TableRow>
-                </TableHeader>
-                <TableBody displayRowCheckbox={showCheckboxes} deselectOnClickaway={deselectOnClickaway} showRowHover={showRowHover} stripedRows={stripedRows}>
-                  {tableData.map((row, idx) =>
-                    <TableRow key={idx} selected={row.selected}>
-                      <TableRowColumn>
-                        <Checkbox />
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        <DatePickerTableRowColumn
-                          hintText="Select Date"
-                          floatingLabelText="Date*"
-                          rowPropertyName="departureDt"
-                          onSave={handleSaveTableRowColumnDate}
-                          rowData={row}
-                          rowIdx={idx}
-                        />
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        <TomisSelectTableRowColumn
-                          hintText="Select Name"
-                          floatingLabelText="Name*"
-                          rowPropertyName="name"
-                          onSave={handleSaveTableRowColumnValue}
-                          rowData={row}
-                          rowIdx={idx}
-                          dataSource={subcategoryLovValues}
-                        />
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        <TextFieldTableRowColumn
-                          hintText="Type Justification"
-                          floatingLabelText="Justification*"
-                          rowPropertyName="status"
-                          onSave={handleSaveTableRowColumnValue}
-                          rowData={row}
-                          rowIdx={idx}
-                        />
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        <IconButton onTouchTap={delNoLaunchReasonRow.bind(this, idx)}>
-                          <FontIcon name="delete" />
-                        </IconButton>
-                      </TableRowColumn>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-          </PanelBody>
-        </Panel>
-      </div>
+      <Paper className={classes.paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {columnHeaderData.map(column => {
+                return (
+                  <TableCell key={column.id} numeric={column.numeric} disablePadding={column.disablePadding}>
+                    <TableSortLabel active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}>
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((n, idx) => {
+              const {
+                id,
+                name: { value: valueName },
+                calories: { value: valueCalories },
+                fat: { value: valueFat },
+                carbs: { value: valueCarbs },
+                protein: { value: valueProtein }
+              } = n;
+              return (
+                <TableRow key={id}>
+                  <TableCellEdit
+                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColm(idx, 'name'))}
+                    isOpen={activeCell === getCellRowColm(idx, 'name')}
+                    onRequestClose={handleRequestClose}
+                  >
+                    <TextField
+                      id={getCellRowColm(idx, 'name')}
+                      placeholder="Type Name Type Name Type Name Type Name Type Name"
+                      label="Name"
+                      className={classes.textField}
+                      value={''}
+                      onChange={updateData.bind(null, idx, 'name')}
+                      margin="dense"
+                    />
+                  </TableCellEdit>
+                  <TableCell numeric>
+                    {valueCalories}
+                  </TableCell>
+                  <TableCell numeric>
+                    {valueFat}
+                  </TableCell>
+                  <TableCell numeric>
+                    {valueCarbs}
+                  </TableCell>
+                  <TableCell numeric>
+                    {valueProtein}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
     );
   }
 }
 
-export default muiThemeable()(TableEditable);
+TableEditable.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styleSheet)(TableEditable);
