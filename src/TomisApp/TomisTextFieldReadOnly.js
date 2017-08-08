@@ -6,13 +6,17 @@ import FormControl from 'material-ui/Form/FormControl';
 const styleSheet = createStyleSheet(theme => ({
     root: {
         pointerEvents: 'none'
+    },
+    formControl: {
+        width: '100%',
+        flex: 1
     }
 }));
 
 const TomisTextFieldReadOnly = props => {
-    const { classes: { root: clsRoot }, value, ...other } = props;
+    const { classes: { root: clsRoot, formControl: clsFormControl }, value, ...other } = props;
     return (
-        <FormControl margin="dense">
+        <FormControl className={clsFormControl} margin="dense">
             <TextField
                 className={clsRoot}
                 fullWidth={true}

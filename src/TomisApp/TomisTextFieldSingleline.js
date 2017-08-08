@@ -88,7 +88,7 @@ class TomisTextFieldSingleline extends Component {
         } = this.props;
         const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder, multiline });
         return (
-            <FormControl margin="dense">
+            <FormControl className={clsFormControl} margin="dense">
                 {isDisplayCloneable &&
                     <Checkbox
                         className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
