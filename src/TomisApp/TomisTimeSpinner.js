@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxClick, timeSpinnerStyleSheet, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
-import IconButton from 'material-ui/IconButton';
-import TomisFontIcon from './TomisFontIcon';
-import Input from 'material-ui/Input';
-import InputLabel from 'material-ui/Input/InputLabel';
-import CloneableInputRender from './CloneableInputRender';
+import { getDisplayVals, textFieldSimpleStyleSheet, timeSpinnerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
+import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
+import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
 
 const defaultProps = {
-    inputFieldProps: {
-        id: `ts-${new Date().getTime()}`,
-        label: 'TS Field',
-        placeholder: 'TS Placeholder',
-        helperText: null,
-        disabled: false,
-        readOnly: false
-    },
-    isCloneable: true,
+    id: `ts-${new Date().getTime()}`,
+    label: 'TS Field',
+    placeholder: 'TS Placeholder',
+    helperText: null,
+    disabled: false,
+    isCloneable: false,
     disabledClone: false,
-    required: true
+    required: false
 };
 
 const propTypes = {
@@ -33,53 +28,115 @@ const propTypes = {
 class TomisTimeSpinner extends Component {
     state = {
         payload: {
-            val: null
+            val: '',
+            isCloneChecked: true
         }
     };
 
-    handleCloneCheckboxChange = (evt, value) => {
-        console.log('handleCloneCheckboxChange called, this.state, evt, value=', this.state, evt, value);
-        // this.setState({ isCloneChecked: !this.state.isCloneChecked });
+    handleCloneCheckboxChange = (evt, isCloneChecked) => {
+        const { payload: { val } } = this.state;
+        this.setState({ payload: { isCloneChecked, val } });
     };
 
-    handleInputChange = val => {
-        console.log('handleInputChange val=', val);
-        // this.setState({ payload: { name: _get(val, 'description', null), val: _get(val, 'code', null) } });
+    handleInputChange = evt => {
+        evt.stopPropagation();
+        const val = evt.target.value;
+        this.setState({ payload: { val } });
+    };
+
+    handleClickUpArrow = evt => {
+        evt.stopPropagation();
+        console.log('handleClickUpArrow');
+    };
+
+    handleClickDownArrow = evt => {
+        evt.stopPropagation();
+        console.log('handleClickDownArrow');
     };
 
     render() {
-        const { handleInputChange, handleCloneCheckboxChange } = this;
-        const { payload: { val } } = this.state;
+        const { handleInputChange, handleCloneCheckboxChange, handleClickUpArrow, handleClickDownArrow } = this;
+        const { payload: { val, isCloneChecked } } = this.state;
         const {
-            classes: renderClasses,
-            classes: { formControl: clsFormControl, input: clsInput, inputLabel: clsInputLabel, inputLabel2Cloneable: clsInputLabel2Cloneable, formHelperText: clsFormHelperText },
-            inputFieldProps,
+            id,
+            label,
+            placeholder,
+            disabled,
+            helperText,
+            classes: {
+                formControl: clsFormControl,
+                inputLabel: clsInputLabel,
+                inputLabelCloneable: clsInputLabelCloneable,
+                formHelperText: clsFormHelperText,
+                checkbox: clsCheckbox,
+                checkboxDisabled: clsCheckboxDisabled,
+                inpBase: clsInpBase,
+                inpCloneable: clsInpCloneable,
+                inpDisabled: clsInpDisabled,
+                inpSpinner: clsInpSpinner,
+                arrowsBase: clsArrowsBase,
+                arrowsCloneableTrue: clsArrowsCloneableTrue,
+                arrowsCloneableFalse: clsArrowsCloneableFalse,
+                arrowsDisabled: clsArrowsDisabled,
+                arrowUp: clsArrowUp,
+                arrowDown: clsArrowDown
+            },
             isCloneable,
             disabledClone,
             required
         } = this.props;
-        const { id, label, placeholder, disabled, readOnly, helperText } = inputFieldProps;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder });
+        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
         return (
             <FormControl className={clsFormControl} margin="dense">
-                <InputLabel className={cx({ [clsInputLabel2Cloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })} htmlFor={id} required={required} shrink={true}>
-                    {label}
-                </InputLabel>
-                <Input
-                    className={clsInput}
+                {isDisplayCloneable &&
+                    <Checkbox
+                        className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+                        onChange={handleCloneCheckboxChange}
+                        disabled={isDisabled || disabledClone}
+                        tabIndex="-1"
+                        checked={isCloneChecked || disabledClone}
+                    />}
+                <IconButton
+                    className={cx(clsArrowsBase, clsArrowUp, {
+                        [clsArrowsCloneableTrue]: isDisplayCloneable,
+                        [clsArrowsCloneableFalse]: !isDisplayCloneable,
+                        [clsArrowsDisabled]: isDisabled
+                    })}
+                    disabled={isDisabled}
+                    aria-label="Increase time"
+                    onClick={handleClickUpArrow}
+                >
+                    <TomisFontIcon name="arrow_drop_up" />
+                </IconButton>
+                <IconButton
+                    className={cx(clsArrowsBase, clsArrowDown, {
+                        [clsArrowsCloneableTrue]: isDisplayCloneable,
+                        [clsArrowsCloneableFalse]: !isDisplayCloneable,
+                        [clsArrowsDisabled]: isDisabled
+                    })}
+                    disabled={isDisabled}
+                    aria-label="Decrease Time"
+                    onClick={handleClickDownArrow}
+                >
+                    <TomisFontIcon name="arrow_drop_down" />
+                </IconButton>
+                <TextField
                     id={id}
-                    component={withStyles(timeSpinnerStyleSheet)(_InputRender)}
-                    onChange={handleInputChange}
-                    disableUnderline={readOnly}
-                    disabled={disabled}
+                    label={label}
+                    labelClassName={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+                    placeholder={displayPlaceholder}
                     value={val}
-                    placeholder={placeholder}
+                    disabled={disabled}
+                    margin="dense"
+                    fullWidth={true}
+                    required={required}
+                    onChange={handleInputChange}
+                    inputClassName={cx(clsInpBase, clsInpSpinner, {
+                        [clsInpCloneable]: isDisplayCloneable,
+                        [clsInpDisabled]: isDisabled
+                    })}
                     inputProps={{
-                        readOnly,
-                        isCloneable,
-                        disabledClone,
-                        renderClasses,
-                        onDelayCloneCheckboxChange: handleCloneCheckboxChange
+                        maxLength: 4
                     }}
                 />
                 <FormHelperText className={clsFormHelperText}>
@@ -91,7 +148,7 @@ class TomisTimeSpinner extends Component {
 }
 TomisTimeSpinner.defaultProps = defaultProps;
 TomisTimeSpinner.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TomisTimeSpinner);
+export default withStyles(timeSpinnerStyleSheet)(TomisTimeSpinner);
 
 /**
  * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.

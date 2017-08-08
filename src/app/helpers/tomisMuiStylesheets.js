@@ -17,9 +17,9 @@ const checkboxMRFactor = 1.15;
 const twoIconMRFactor = 1.75;
 
 export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
-    const isDisabled = readOnly ? true : disabled ? true : false;
+    const isDisabled = disabled ? true : false;
     const displayPlaceholder = disabled ? '' : placeholder;
-    const isDisplayCloneable = isCloneable && !readOnly;
+    const isDisplayCloneable = isCloneable;
     return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
@@ -96,9 +96,6 @@ export const cloneableStyleSheet = createStyleSheet('CloneableRender', theme => 
         outline: 'none',
         border: 'none',
         fontSize: '14px'
-    },
-    inpSpinner: {
-        marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inpCloneable: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
@@ -213,7 +210,6 @@ export const timeSpinnerStyles = {
         height: `${30}px`,
         outline: 'none',
         border: 'none',
-        backgroundColor: 'transparent',
         fontSize: '14px'
     },
     inpSpinner: {
@@ -223,7 +219,7 @@ export const timeSpinnerStyles = {
         marginLeft: `${Number(twoIconMRFactor * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inputLabel: {
-        marginLeft: '5px'
+        marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inputLabelCloneable: {
         marginLeft: `${Number(twoIconMRFactor * checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
@@ -234,7 +230,8 @@ export const timeSpinnerStyles = {
         height: `${checkboxW}px`,
         position: 'absolute',
         left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
-        top: '-8px'
+        top: '24px',
+        zIndex: 1
     },
     checkboxDisabled: {
         color: theme.text.disabled
@@ -249,13 +246,14 @@ export const timeSpinnerStyles = {
         color: theme.text.primary,
         position: 'absolute',
         width: '24px',
-        height: '24px'
+        height: '24px',
+        zIndex: 1
     },
     arrowUp: {
-        top: `${-4}px`
+        top: `${22}px`
     },
     arrowDown: {
-        top: `${10}px`
+        top: `${36}px`
     },
     arrowsDisabled: {
         color: theme.text.disabled

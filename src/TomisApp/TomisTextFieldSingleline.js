@@ -4,10 +4,10 @@ import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, textFieldSimpleStyleSheet, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import CloneableInputRender from './CloneableInputRender';
 import FormControl from 'material-ui/Form/FormControl';
+import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
 import cx from 'classnames';
-import TextField from 'material-ui/TextField';
 
 const defaultProps = {
     id: `tfs-${new Date().getTime()}`,
@@ -83,10 +83,9 @@ class TomisTextFieldSingleline extends Component {
             maxLength,
             multiline = false,
             rows,
-            rowsMax,
-            readOnly = false
+            rowsMax
         } = this.props;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder, multiline });
+        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder, multiline });
         return (
             <FormControl className={clsFormControl} margin="dense">
                 {isDisplayCloneable &&

@@ -6,12 +6,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import TomisAutocomplete from './TomisAutocomplete';
+import TomisButtonFlat from './TomisButtonFlat';
+import TomisButtonRaised from './TomisButtonRaised';
+import TomisButtonIcon from './TomisButtonIcon';
 import TomisDatePicker from './TomisDatePicker';
-import TomisTimeSpinner from './TomisTimeSpinner';
 import TomisDialogConfirmation from './TomisDialogConfirmation';
-import { MenuItem } from 'material-ui/Menu';
+import TomisDividerFullbleed from './TomisDividerFullbleed';
+import TomisFontIcon from './TomisFontIcon';
+import TomisTimeSpinner from './TomisTimeSpinner';
+import TomisListNestedExample from './TomisListNestedExample';
 import TomisMenuSimpleExample from './TomisMenuSimpleExample';
+import { MenuItem } from 'material-ui/Menu';
+import TomisNavigationDrawerUndockedExample from './TomisNavigationDrawerUndockedExample';
 import TomisPanelExample from './TomisPanelExample';
+import TomisProgressIndeterminateCircular from './TomisProgressIndeterminateCircular';
 import TomisSelectionControlsCheckbox from './TomisSelectionControlsCheckbox';
 import TomisTableEditableExample from './TomisTableEditableExample';
 import TomisTableReadOnlyExample from './TomisTableReadOnlyExample';
@@ -20,14 +28,6 @@ import TomisTextFieldSingleline from './TomisTextFieldSingleline';
 import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 import TomisToggleButtonsExample from './TomisToggleButtonsExample';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
-import TomisDividerFullbleed from './TomisDividerFullbleed';
-import TomisFontIcon from './TomisFontIcon';
-import TomisButtonFlat from './TomisButtonFlat';
-import TomisButtonRaised from './TomisButtonRaised';
-import TomisButtonIcon from './TomisButtonIcon';
-import TomisNavigationDrawerUndockedExample from './TomisNavigationDrawerUndockedExample';
-import TomisListNestedExample from './TomisListNestedExample';
-import TomisProgressIndeterminateCircular from './TomisProgressIndeterminateCircular';
 import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
@@ -132,7 +132,7 @@ storiesOf('TOMIS App', module)
         return <TomisTextFieldMultiline label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
     })
     .add('Time Spinner', () => {
-        return <TomisTimeSpinner />;
+        return <TomisTimeSpinner isCloneable={true} />;
     })
     .add('Toggle Buttons', () => {
         return <TomisToggleButtonsExample />;
