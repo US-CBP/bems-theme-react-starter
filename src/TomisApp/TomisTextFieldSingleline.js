@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, textFieldSimpleStyleSheet, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
-import CloneableInputRender from './CloneableInputRender';
+import { getDisplayVals, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';

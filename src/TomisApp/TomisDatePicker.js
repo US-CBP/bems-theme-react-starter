@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxClick, datePickerStyleSheet, datePickerStyles, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
-import IconButton from 'material-ui/IconButton';
-import TomisFontIcon from './TomisFontIcon';
-import Input from 'material-ui/Input';
-import InputLabel from 'material-ui/Input/InputLabel';
-import CloneableInputRender from './CloneableInputRender';
+import { getDisplayVals, datePickerStyleSheet, datePickerStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
+import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
+import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
-import moment from 'moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
 const defaultProps = {
-    inputFieldProps: {
-        id: `dp-${new Date().getTime()}`,
-        label: 'DP Field',
-        placeholder: 'DP Placeholder',
-        helperText: null,
-        disabled: false,
-        readOnly: false
-    },
-    isCloneable: true,
+    id: `tdp-${new Date().getTime()}`,
+    label: 'TDP Field',
+    placeholder: 'TDP Placeholder',
+    helperText: null,
+    disabled: false,
+    isCloneable: false,
     disabledClone: false,
-    required: true
+    required: false,
+    multiline: false
 };
 
 const propTypes = {
@@ -36,73 +31,35 @@ const propTypes = {
 class TomisDatePicker extends Component {
     state = {
         payload: {
-            val: null
-        }
+            val: '',
+            isCloneChecked: true
+        },
+        isFocused: false
     };
 
-    handleCloneCheckboxChange = (evt, value) => {
-        console.log('handleCloneCheckboxChange called, this.state, evt, value=', this.state, evt, value);
-        // this.setState({ isCloneChecked: !this.state.isCloneChecked });
-    };
-
-    handleInputChange = val => {
-        console.log('handleInputChange val=', val);
-        // this.setState({ payload: { name: _get(val, 'description', null), val: _get(val, 'code', null) } });
-    };
-
-    render() {
-        const { handleInputChange, handleCloneCheckboxChange } = this;
-        const { payload: { val } } = this.state;
-        const {
-            classes: renderClasses,
-            classes: { formControl: clsFormControl, input: clsInput, inputLabel: clsInputLabel, inputLabelCloneable: clsInputLabelCloneable, formHelperText: clsFormHelperText },
-            inputFieldProps,
-            isCloneable,
-            disabledClone,
-            required
-        } = this.props;
-        const { id, label, placeholder, disabled, readOnly, helperText } = inputFieldProps;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder });
-        return (
-            <FormControl className={clsFormControl} margin="dense">
-                <InputLabel className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })} htmlFor={id} required={required} shrink={true}>
-                    {label}
-                </InputLabel>
-                <Input
-                    className={clsInput}
-                    id={id}
-                    component={withStyles(datePickerStyleSheet)(_InputRender)}
-                    onChange={handleInputChange}
-                    disableUnderline={readOnly}
-                    disabled={disabled}
-                    value={val}
-                    placeholder={placeholder}
-                    inputProps={{
-                        readOnly,
-                        isCloneable,
-                        disabledClone,
-                        renderClasses,
-                        onDelayCloneCheckboxChange: handleCloneCheckboxChange
-                    }}
-                />
-                <FormHelperText className={clsFormHelperText}>
-                    {helperText}
-                </FormHelperText>
-            </FormControl>
-        );
-    }
-}
-TomisDatePicker.defaultProps = defaultProps;
-TomisDatePicker.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TomisDatePicker);
-
-/**
- * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.
- * As such, we must, unfortunately, use a class for the Input component.
- */
-class _InputRender extends Component {
     dpInput = null;
     isFocused = false;
+
+    handleCloneCheckboxChange = (evt, isCloneChecked) => {
+        const { payload: { val } } = this.state;
+        this.setState({ payload: { isCloneChecked, val } });
+    };
+
+    handleInputChange = evt => {
+        evt.stopPropagation();
+        const val = evt.target.value;
+        this.setState({ payload: { val } });
+    };
+
+    // handleInputFocus = evt => {
+    //     evt.stopPropagation();
+    //     this.setState({ isFocused: true });
+    // };
+
+    // handleInputBlur = evt => {
+    //     evt.stopPropagation();
+    //     this.setState({ isFocused: false });
+    // };
 
     handleClickIcon = evt => {
         evt.stopPropagation();
@@ -117,39 +74,86 @@ class _InputRender extends Component {
     };
 
     render() {
-        const { handleClickIcon } = this;
+        const { handleInputChange, handleCloneCheckboxChange, handleClickIcon } = this;
+        const { payload: { val, isCloneChecked } } = this.state;
         const {
-            value,
-            onChange,
-            readOnly,
+            id,
+            label,
+            placeholder,
+            disabled,
+            helperText,
+            classes: {
+                formControl: clsFormControl,
+                inputLabel: clsInputLabel,
+                inputLabelCloneable: clsInputLabelCloneable,
+                formHelperText: clsFormHelperText,
+                checkbox: clsCheckbox,
+                checkboxDisabled: clsCheckboxDisabled,
+                inpBase: clsInpBase,
+                inpCloneable: clsInpCloneable,
+                inpDisabled: clsInpDisabled,
+                inpSpinner: clsInpSpinner,
+                dpInput: clsDpInput,
+                selectCalendar: clsSelectCalendar,
+                selectCalendarDisabled: clsSelectCalendarDisabled
+            },
             isCloneable,
             disabledClone,
-            renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, dp: clsDp, dpCloneable: clsDpCloneable },
-            classes: { selectCalendar: clsSelectCalendar, selectCalendarDisabled: clsSelectCalendarDisabled },
-            onDelayCloneCheckboxChange
+            required
         } = this.props;
+        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
         const { dp, dpCloneable } = datePickerStyles;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
-
         return (
-            <CloneableInputRender>
+            <FormControl className={clsFormControl} margin="dense">
                 {isDisplayCloneable &&
                     <Checkbox
                         className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-                        onChange={handleCloneCheckboxClick.bind(null, onDelayCloneCheckboxChange)}
+                        onChange={handleCloneCheckboxChange}
                         disabled={isDisabled || disabledClone}
+                        tabIndex="-1"
+                        checked={isCloneChecked || disabledClone}
                     />}
-                <DayPickerInput ref={ref => (this.dpInput = ref)} style={isDisplayCloneable ? dpCloneable : dp} disabled={isDisabled} placeholder={displayPlaceholder} />
-                {!readOnly &&
-                    <IconButton
-                        className={cx(clsSelectCalendar, { [clsSelectCalendarDisabled]: isDisabled || disabledClone })}
-                        disabled={isDisabled}
-                        aria-label="Toggle select date display"
-                        onClick={handleClickIcon}
-                    >
-                        <TomisFontIcon name="event_note" />
-                    </IconButton>}
-            </CloneableInputRender>
+                <TextField
+                    id={id}
+                    label={label}
+                    labelClassName={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+                    placeholder={displayPlaceholder}
+                    value={val}
+                    disabled={disabled}
+                    margin="dense"
+                    fullWidth={true}
+                    required={required}
+                    onChange={handleInputChange}
+                    inputClassName={cx(clsInpBase, clsInpSpinner, {
+                        [clsInpCloneable]: isDisplayCloneable,
+                        [clsInpDisabled]: isDisabled
+                    })}
+                    inputProps={{
+                        maxLength: 10
+                    }}
+                />
+                <DayPickerInput
+                    ref={ref => (this.dpInput = ref)}
+                    style={isDisplayCloneable ? dpCloneable : dp}
+                    disabled={isDisabled}
+                    placeholder={displayPlaceholder}
+                    className={cx(clsDpInput)}
+                />
+                <IconButton
+                    className={cx(clsSelectCalendar, { [clsSelectCalendarDisabled]: isDisabled || disabledClone })}
+                    disabled={isDisabled}
+                    aria-label="Toggle select date display"
+                    onClick={handleClickIcon}
+                >
+                    <TomisFontIcon name="event_note" />
+                </IconButton>
+                <FormHelperText className={clsFormHelperText}>
+                    {helperText}
+                </FormHelperText>
+            </FormControl>
         );
     }
 }
+TomisDatePicker.defaultProps = defaultProps;
+TomisDatePicker.propTypes = propTypes;
+export default withStyles(datePickerStyleSheet)(TomisDatePicker);

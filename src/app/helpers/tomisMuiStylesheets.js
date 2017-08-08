@@ -151,21 +151,23 @@ export const datePickerStyles = {
         width: '100%',
         flex: 1
     },
+    dpInput: {
+        position: 'absolute',
+        top: '30px'
+    },
     dp: {
         marginLeft: '4px',
         width: '100%',
-        height: `${30}px`,
+        height: `${20}px`,
         outline: 'none',
-        border: 'none',
-        backgroundColor: 'transparent'
+        border: 'none'
     },
     dpCloneable: {
         marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
         width: '100%',
-        height: `${30}px`,
+        height: `${20}px`,
         outline: 'none',
-        border: 'none',
-        backgroundColor: 'transparent'
+        border: 'none'
     },
     inputLabel: {
         marginLeft: '5px'
@@ -189,7 +191,7 @@ export const datePickerStyles = {
         color: theme.text.primary,
         position: 'absolute',
         right: 0,
-        top: `${-2}px`,
+        top: `${20}px`,
         width: '36px',
         height: '36px'
     },

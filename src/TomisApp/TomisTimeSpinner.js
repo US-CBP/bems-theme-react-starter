@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, textFieldSimpleStyleSheet, timeSpinnerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import { getDisplayVals, timeSpinnerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
@@ -149,97 +149,3 @@ class TomisTimeSpinner extends Component {
 TomisTimeSpinner.defaultProps = defaultProps;
 TomisTimeSpinner.propTypes = propTypes;
 export default withStyles(timeSpinnerStyleSheet)(TomisTimeSpinner);
-
-/**
- * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.
- * As such, we must, unfortunately, use a class for the Input component.
- */
-class _InputRender extends Component {
-    isFocused = false;
-
-    handleClickIcon = evt => {
-        evt.stopPropagation();
-        const { dpInput: { input }, isFocused } = this;
-        if (isFocused) {
-            input.blur();
-            this.isFocused = false;
-        } else {
-            input.focus();
-            this.isFocused = true;
-        }
-    };
-
-    render() {
-        const { handleClickIcon } = this;
-        const {
-            value,
-            onChange,
-            readOnly,
-            isCloneable,
-            disabledClone,
-            renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled },
-            classes: {
-                inpBase: clsInpBase,
-                inpSpinner: clsInpSpinner,
-                inpReadOnly: clsInpReadOnly,
-                inpCloneable: clsInpCloneable,
-                arrowsBase: clsArrowsBase,
-                arrowsCloneableTrue: clsArrowsCloneableTrue,
-                arrowsCloneableFalse: clsArrowsCloneableFalse,
-                arrowsDisabled: clsArrowsDisabled,
-                arrowUp: clsArrowUp,
-                arrowDown: clsArrowDown
-            },
-            onDelayCloneCheckboxChange
-        } = this.props;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
-
-        return (
-            <CloneableInputRender>
-                {isDisplayCloneable &&
-                    <Checkbox
-                        className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-                        onChange={handleCloneCheckboxClick.bind(null, onDelayCloneCheckboxChange)}
-                        disabled={isDisabled || disabledClone}
-                    />}
-                <input
-                    className={cx(clsInpBase, {
-                        [clsInpSpinner]: !readOnly,
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsCheckboxDisabled]: isDisabled || disabledClone,
-                        [clsInpReadOnly]: readOnly
-                    })}
-                    disabled={isDisabled}
-                    placeholder={displayPlaceholder}
-                />
-                {!readOnly &&
-                    <div>
-                        <IconButton
-                            className={cx(clsArrowsBase, clsArrowUp, {
-                                [clsArrowsCloneableTrue]: isDisplayCloneable,
-                                [clsArrowsCloneableFalse]: !isDisplayCloneable,
-                                [clsArrowsDisabled]: isDisabled
-                            })}
-                            disabled={isDisabled}
-                            aria-label="Toggle select date display"
-                            onClick={handleClickIcon}
-                        >
-                            <TomisFontIcon name="arrow_drop_up" />
-                        </IconButton>
-                        <IconButton
-                            className={cx(clsArrowsBase, clsArrowDown, {
-                                [clsArrowsCloneableTrue]: isDisplayCloneable,
-                                [clsArrowsCloneableFalse]: !isDisplayCloneable,
-                                [clsArrowsDisabled]: isDisabled
-                            })}
-                            disabled={isDisabled}
-                            aria-label="Toggle select date display"
-                            onClick={handleClickIcon}
-                        >
-                            <TomisFontIcon name="arrow_drop_down" />
-                        </IconButton>
-                    </div>}
-            </CloneableInputRender>
-        );
-    }
-}
