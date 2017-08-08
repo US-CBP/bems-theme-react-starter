@@ -32,8 +32,9 @@ import SelectionControlsCheckbox from './SelectionControlsCheckbox';
 // import SnackbarSimple from './SnackbarSimple';
 import TableEditable from './TableEditable';
 import TableReadOnly from './TableReadOnly';
-// import TextArea from './TextArea';
-import TextFieldSimple from './TextFieldSimple';
+import TomisTextFieldMultiline from './TomisTextFieldMultiline';
+import TomisTextFieldSingleline from './TomisTextFieldSingleline';
+import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 // import TimeSpinner from '../BemsMui/TimeSpinner';
 import ToggleButtons from './ToggleButtons';
@@ -52,105 +53,111 @@ import '../css/index.css';
 
 const theme = createMuiTheme(createPalette(tomisTheme));
 
-storiesOf('BEMS Mui', module)
-  .addDecorator(story => {
-    const storyKind = story();
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
-          <MuiThemeProvider theme={theme}>
-            {storyKind}
-          </MuiThemeProvider>
-        </div>
-      </div>
-    );
-  })
-  .add('AutoComplete', () => {
-    return <AutoComplete />;
-  })
-  .add('Date Picker', () => {
-    return <DatePicker />;
-  })
-  .add('Time Spinner', () => {
-    return <TimeSpinner />;
-  })
-  .add('Text Field - Pending', () => {
-    return <TextFieldSimple />;
-  })
-  .add('Toggle Buttons - Pending', () => {
-    return <ToggleButtons />;
-  })
-  .add('Dialog - Confirmation', () => {
-    return <DialogConfirmation initIsOpen={true}>Only actions can close this dialog.</DialogConfirmation>;
-  })
-  .add('Divider', () => {
-    return (
-      <div>
-        <br />
-        <br />
-        <Divider />
-      </div>
-    );
-  })
-  .add('Button Flat', () => {
-    return (
-      <div>
-        <ButtonFlat label="My Flat Label" />
-      </div>
-    );
-  })
-  .add('Button Raised', () => {
-    return (
-      <div>
-        <ButtonRaised label="My Raised Label" />
-      </div>
-    );
-  })
-  .add('Button Icon', () => {
-    return (
-      <div>
-        <ButtonIcon icon={<FontIcon name="delete" />} />
-      </div>
-    );
-  })
-  .add('Drawer - Left', () => {
-    return (
-      <DrawerLeft isOpen={true}>
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-        </ul>
-      </DrawerLeft>
-    );
-  })
-  .add('List - Simple Example', () => {
-    return <ListSimpleExample />;
-  })
-  .add('Menu - Simple Example', () => {
-    return (
-      <MenuSimpleExample open={true}>
-        <MenuItem>Maps</MenuItem>
-        <MenuItem>Books</MenuItem>
-        <MenuItem>Flights</MenuItem>
-        <MenuItem>Apps</MenuItem>
-      </MenuSimpleExample>
-    );
-  })
-  .add('Panel Example', () => {
-    return <PanelExample />;
-  })
-  .add('Progress Circular', () => {
-    return <ProgressCircular />;
-  })
-  .add('Selection Controls - Checkbox', () => {
-    return <SelectionControlsCheckbox />;
-  })
-  .add('Table Example - Editable', () => {
-    return <TableEditable />;
-  })
-  .add('Table Example - Read-Only', () => {
-    return <TableReadOnly />;
-  });
+storiesOf('TOMIS App', module)
+    .addDecorator(story => {
+        const storyKind = story();
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ width: '100%', minWidth: 600, marginLeft: '64px', marginRight: '64px' }}>
+                    <MuiThemeProvider theme={theme}>
+                        {storyKind}
+                    </MuiThemeProvider>
+                </div>
+            </div>
+        );
+    })
+    .add('AutoComplete', () => {
+        return <AutoComplete />;
+    })
+    .add('Date Picker', () => {
+        return <DatePicker />;
+    })
+    .add('Time Spinner', () => {
+        return <TimeSpinner />;
+    })
+    .add('Text Field Single-line - Pending', () => {
+        return <TomisTextFieldSingleline label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
+    })
+    .add('Text Field ReadOnly - Pending', () => {
+        return <TomisTextFieldReadOnly label="Read Only Label" placeholder="My Placeholder" required={true} value="My read-only val" />;
+    })
+    .add('Text Field Multi-line - Pending', () => {
+        return <TomisTextFieldMultiline label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
+    })
+    .add('Toggle Buttons - Pending', () => {
+        return <ToggleButtons />;
+    })
+    .add('Dialog - Confirmation', () => {
+        return <DialogConfirmation initIsOpen={true}>Only actions can close this dialog.</DialogConfirmation>;
+    })
+    .add('Divider', () => {
+        return (
+            <div>
+                <br />
+                <br />
+                <Divider />
+            </div>
+        );
+    })
+    .add('Button Flat', () => {
+        return (
+            <div>
+                <ButtonFlat label="My Flat Label" />
+            </div>
+        );
+    })
+    .add('Button Raised', () => {
+        return (
+            <div>
+                <ButtonRaised label="My Raised Label" />
+            </div>
+        );
+    })
+    .add('Button Icon', () => {
+        return (
+            <div>
+                <ButtonIcon icon={<FontIcon name="delete" />} />
+            </div>
+        );
+    })
+    .add('Drawer - Left', () => {
+        return (
+            <DrawerLeft isOpen={true}>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ul>
+            </DrawerLeft>
+        );
+    })
+    .add('List - Simple Example', () => {
+        return <ListSimpleExample />;
+    })
+    .add('Menu - Simple Example', () => {
+        return (
+            <MenuSimpleExample open={true}>
+                <MenuItem>Maps</MenuItem>
+                <MenuItem>Books</MenuItem>
+                <MenuItem>Flights</MenuItem>
+                <MenuItem>Apps</MenuItem>
+            </MenuSimpleExample>
+        );
+    })
+    .add('Panel Example', () => {
+        return <PanelExample />;
+    })
+    .add('Progress Circular', () => {
+        return <ProgressCircular />;
+    })
+    .add('Selection Controls - Checkbox', () => {
+        return <SelectionControlsCheckbox />;
+    })
+    .add('Table Example - Editable', () => {
+        return <TableEditable />;
+    })
+    .add('Table Example - Read-Only', () => {
+        return <TableReadOnly />;
+    });
 
 /*.add('AutoComplete Info - Pending', () => {
         return <AutoCompleteInfo />;
