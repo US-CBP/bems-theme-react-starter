@@ -23,8 +23,8 @@ import TomisProgressIndeterminateCircular from './TomisProgressIndeterminateCirc
 import TomisSelectionControlsCheckbox from './TomisSelectionControlsCheckbox';
 import TomisTableEditableExample from './TomisTableEditableExample';
 import TomisTableReadOnlyExample from './TomisTableReadOnlyExample';
-import TomisTextFieldMultiline from './TomisTextFieldMultiline';
-import TomisTextFieldSingleline from './TomisTextFieldSingleline';
+import TomisTextFieldMultiLine from './TomisTextFieldMultiLine';
+import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
 import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 import TomisToggleButtonsExample from './TomisToggleButtonsExample';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
@@ -123,13 +123,13 @@ storiesOf('TOMIS App', module)
         return <TomisTableReadOnlyExample />;
     })
     .add('Text Field Single-line - Pending', () => {
-        return <TomisTextFieldSingleline label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
+        return <TomisTextFieldSingleLine label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
     })
     .add('Text Field ReadOnly - Pending', () => {
         return <TomisTextFieldReadOnly label="Read Only Label" placeholder="My Placeholder" required={true} value="My read-only val" />;
     })
     .add('Text Field Multi-line - Pending', () => {
-        return <TomisTextFieldMultiline label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
+        return <TomisTextFieldMultiLine label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
     })
     .add('Time Spinner', () => {
         return <TomisTimeSpinner isCloneable={true} />;

@@ -6,7 +6,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Table, { TableBody, TableHead, TableCell, TableRow, TableSortLabel } from 'material-ui/Table';
 import { TableCellEdit } from './Table';
 import TomisPaper from 'TomisApp/TomisPaper';
-import TomisTextFieldSingleline from 'TomisApp/TomisTextFieldSingleline';
+import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
 
 const styleSheet = createStyleSheet(theme => ({
     paper: {
@@ -126,7 +126,7 @@ class TomisTableEditableExample extends Component {
                                         isOpen={activeCell === getCellRowColm(idx, 'name')}
                                         onRequestClose={handleRequestClose}
                                     >
-                                        <TomisTextFieldSingleline
+                                        <TomisTextFieldSingleLine
                                             id={getCellRowColm(idx, 'name')}
                                             placeholder="My Long Long Long super-long placeholder that I hope gets truncated with ellipse"
                                             label="Name"

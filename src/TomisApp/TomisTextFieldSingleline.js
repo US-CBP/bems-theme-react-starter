@@ -24,7 +24,7 @@ const propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-class TomisTextFieldSingleline extends Component {
+class TomisTextFieldSingleLine extends Component {
     state = {
         payload: {
             val: '',
@@ -135,6 +135,6 @@ class TomisTextFieldSingleline extends Component {
         );
     }
 }
-TomisTextFieldSingleline.defaultProps = defaultProps;
-TomisTextFieldSingleline.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TomisTextFieldSingleline);
+TomisTextFieldSingleLine.defaultProps = defaultProps;
+TomisTextFieldSingleLine.propTypes = propTypes;
+export default withStyles(cloneableStyleSheet)(TomisTextFieldSingleLine);

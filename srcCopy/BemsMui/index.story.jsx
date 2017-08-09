@@ -32,8 +32,8 @@ import SelectionControlsCheckbox from './SelectionControlsCheckbox';
 // import SnackbarSimple from './SnackbarSimple';
 import TableEditable from './TableEditable';
 import TableReadOnly from './TableReadOnly';
-import TomisTextFieldMultiline from './TomisTextFieldMultiline';
-import TomisTextFieldSingleline from './TomisTextFieldSingleline';
+import TomisTextFieldMultiLine from './TomisTextFieldMultiLine';
+import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
 import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 // import TextFieldSimpleDefaultValue from './TextFieldSimpleDefaultValue';
 // import TimeSpinner from '../BemsMui/TimeSpinner';
@@ -76,13 +76,13 @@ storiesOf('BEMS Mui', module)
         return <TimeSpinner />;
     })
     .add('Text Field Single-line - Pending', () => {
-        return <TomisTextFieldSingleline label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
+        return <TomisTextFieldSingleLine label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
     })
     .add('Text Field ReadOnly - Pending', () => {
         return <TomisTextFieldReadOnly label="Read Only Label" placeholder="My Placeholder" required={true} value="My read-only val" />;
     })
     .add('Text Field Multi-line - Pending', () => {
-        return <TomisTextFieldMultiline label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
+        return <TomisTextFieldMultiLine label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
     })
     .add('Toggle Buttons - Pending', () => {
         return <ToggleButtons />;
