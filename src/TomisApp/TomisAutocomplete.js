@@ -1,96 +1,143 @@
 // @flow
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, handleCloneCheckboxClick, cloneableStyleSheet, autoCompleteStyleSheet } from 'app/helpers/tomisMuiStylesheets';
-import IconButton from 'material-ui/IconButton';
-import TomisFontIcon from './TomisFontIcon';
-import Input from 'material-ui/Input';
-import InputLabel from 'material-ui/Input/InputLabel';
-import CloneableInputRender from './CloneableInputRender';
+import { getDisplayVals, autoCompleteStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
+import InputLabel from 'material-ui/Input/InputLabel';
+import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
+import TomisFontIcon from './TomisFontIcon';
+import CloneableInputRender from './CloneableInputRender';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import cx from 'classnames';
 import { RIPPLE_TIME_MS } from 'globalJs/constants';
 import { bigLov, smallLov } from 'globalJs/testData';
 
-const options = smallLov;
-
 const defaultProps = {
-    inputFieldProps: {
-        id: `ac-${new Date().getTime()}`,
-        label: 'AC Field',
-        placeholder: 'AC Placeholder',
-        helperText: null,
-        disabled: false,
-        readOnly: false
-    },
-    options,
-    isCloneable: true,
+    id: `ac-${new Date().getTime()}`,
+    label: 'AC Field',
+    placeholder: 'AC Placeholder',
+    helperText: null,
+    disabled: false,
+    isCloneable: false,
     disabledClone: false,
-    required: true
+    required: false,
+    options
 };
 
 const propTypes = {
     classes: PropTypes.object.isRequired
 };
 
+const options = smallLov;
+
 class TomisAutocomplete extends Component {
     state = {
         payload: {
             val: null,
-            name: null
-        }
+            name: null,
+            isCloneChecked: true
+        },
+        shrink: false,
+        isFocusedLov: false
     };
 
-    handleCloneCheckboxChange = (evt, value) => {
-        console.log('handleCloneCheckboxChange called, this.state, evt, value=', this.state, evt, value);
-        // this.setState({ isCloneChecked: !this.state.isCloneChecked });
+    handleCloneCheckboxChange = (evt, isCloneChecked) => {
+        this.state.payload.isCloneChecked = isCloneChecked;
+        this.setState(this.state);
     };
+
     handleInputChange = val => {
-        this.setState({ payload: { name: _get(val, 'description', null), val: _get(val, 'code', null) } });
+        // evt.stopPropagation();
+        this.state.payload = { name: _get(val, 'description', null), val: _get(val, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
+        this.setState(this.state);
+    };
+
+    handleFocusLov = () => {
+        this.state.shrink = true;
+        this.state.isFocusedLov = true;
+        this.setState(this.state);
     };
 
     render() {
-        const { handleInputChange, handleCloneCheckboxChange } = this;
-        const { payload: { val } } = this.state;
+        const { handleInputChange, handleCloneCheckboxChange, handleFocusLov } = this;
+        const { payload: { val, name, isCloneChecked, shrink, isFocusedLov } } = this.state;
         const {
-            classes: renderClasses,
-            classes: { formControl: clsFormControl, input: clsInput, inputLabel: clsInputLabel, inputLabelCloneable: clsInputLabelCloneable, formHelperText: clsFormHelperText },
-            options,
-            inputFieldProps,
+            id,
+            label,
+            placeholder,
+            disabled,
+            helperText,
+            classes: {
+                formControl: clsFormControl,
+                inputLabel: clsInputLabel,
+                inputLabelCloneable: clsInputLabelCloneable,
+                inputLabelShrink: clsInputLabelShrink,
+                formHelperText: clsFormHelperText,
+                checkbox: clsCheckbox,
+                checkboxDisabled: clsCheckboxDisabled,
+                inpBase: clsInpBase,
+                inpMultilineBase: clsInpMultilineBase,
+                inpCloneable: clsInpCloneable,
+                inpDisabled: clsInpDisabled,
+                selectArrow: clsSelectArrow,
+                lov: clsLov,
+                lovCloneable: clsLovCloneable,
+                inpLov: clsInpLov
+            },
             isCloneable,
             disabledClone,
             required
         } = this.props;
-        const { id, label, placeholder, disabled, readOnly, helperText } = inputFieldProps;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly, placeholder });
+        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
         return (
             <FormControl className={clsFormControl} margin="dense">
-                <InputLabel className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })} htmlFor={id} required={required} shrink={true}>
+                {isDisplayCloneable &&
+                    <Checkbox
+                        className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+                        onChange={handleCloneCheckboxChange}
+                        disabled={isDisabled || disabledClone}
+                        tabIndex="-1"
+                        checked={isCloneChecked || disabledClone}
+                    />}
+                <InputLabel
+                    className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable, [clsInputLabelShrink]: isFocusedLov })}
+                    htmlFor={id}
+                    required={required}
+                    style={{ zIndex: isFocusedLov ? 10 : 0 }}
+                >
                     {label}
                 </InputLabel>
-                <Input
-                    className={clsInput}
-                    id={id}
-                    component={withStyles(autoCompleteStyleSheet)(_InputRender)}
-                    onChange={handleInputChange}
-                    disableUnderline={readOnly}
+                <TextField
+                    placeholder={displayPlaceholder}
                     disabled={disabled}
+                    margin="dense"
+                    fullWidth={true}
+                    required={required}
+                    inputClassName={cx(clsInpBase, {
+                        [clsInpCloneable]: isDisplayCloneable,
+                        [clsInpDisabled]: isDisabled
+                    })}
+                />
+                <Select
+                    id={id}
+                    className={cx(clsInpLov, { [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
+                    options={options}
+                    disabled={isDisabled}
+                    placeholder={displayPlaceholder}
+                    onChange={handleInputChange}
+                    onFocus={handleFocusLov}
                     value={val}
-                    placeholder={placeholder}
-                    inputProps={{
-                        options,
-                        readOnly,
-                        isCloneable,
-                        disabledClone,
-                        renderClasses,
-                        onDelayCloneCheckboxChange: handleCloneCheckboxChange
-                    }}
+                    clearable={false}
+                    labelKey="description"
+                    valueKey="code"
+                    arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled)}
                 />
                 <FormHelperText className={clsFormHelperText}>
                     {helperText}
@@ -102,11 +149,10 @@ class TomisAutocomplete extends Component {
 
 TomisAutocomplete.defaultProps = defaultProps;
 TomisAutocomplete.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TomisAutocomplete);
+export default withStyles(autoCompleteStyleSheet)(TomisAutocomplete);
 
-const arrowRenderer = (clsSelectArrow, isDisabled, readOnly, { onMouseDown, isOpen }) => {
+const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
     return (
-        !readOnly &&
         <IconButton className={clsSelectArrow} disabled={isDisabled} aria-label="Toggle select options display">
             <TomisFontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
         </IconButton>

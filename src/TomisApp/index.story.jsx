@@ -46,7 +46,7 @@ storiesOf('TOMIS App', module)
         );
     })
     .add('AutoComplete', () => {
-        return <TomisAutocomplete />;
+        return <TomisAutocomplete isCloneable={true} />;
     })
     .add('Button Flat', () => {
         return (
@@ -70,7 +70,7 @@ storiesOf('TOMIS App', module)
         );
     })
     .add('Date Picker', () => {
-        return <TomisDatePicker />;
+        return <TomisDatePicker label="My Date Picker" isCloneable={true} />;
     })
     .add('Dialog - Confirmation', () => {
         return <TomisDialogConfirmation initIsOpen={true}>Only actions can close this dialog.</TomisDialogConfirmation>;

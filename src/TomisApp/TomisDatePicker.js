@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, datePickerStyleSheet, datePickerStyles } from 'app/helpers/tomisMuiStylesheets';
+import { getDisplayVals, datePickerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
@@ -10,7 +10,10 @@ import IconButton from 'material-ui/IconButton';
 import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import moment from 'moment';
+import Backdrop from 'material-ui/internal/Backdrop';
 
 const defaultProps = {
     id: `tdp-${new Date().getTime()}`,
@@ -34,48 +37,76 @@ class TomisDatePicker extends Component {
             val: '',
             isCloneChecked: true
         },
-        isFocused: false
+        isDayPickerOpen: false
     };
 
-    dpInput = null;
-    isFocused = false;
+    // dpInput = null;
+    // isFocused = false;
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
-        const { payload: { val } } = this.state;
-        this.setState({ payload: { isCloneChecked, val } });
+        this.state.payload.isCloneChecked = isCloneChecked;
+        this.setState(this.state);
     };
 
     handleInputChange = evt => {
         evt.stopPropagation();
         const val = evt.target.value;
-        this.setState({ payload: { val } });
+        this.state.payload.val = val;
+        this.setState(this.state);
     };
 
-    // handleInputFocus = evt => {
-    //     evt.stopPropagation();
-    //     this.setState({ isFocused: true });
-    // };
+    handleDayClick = (day, { selected }, evt) => {
+        evt.stopPropagation();
+        const val = day.toLocaleDateString();
+        console.log('handleDayClick val, evt=', val, evt);
+        this.state.payload.val = val;
+        this.state.isDayPickerOpen = false;
+        this.setState(this.state);
+    };
 
-    // handleInputBlur = evt => {
-    //     evt.stopPropagation();
-    //     this.setState({ isFocused: false });
-    // };
+    handleInputFocus = evt => {
+        evt.stopPropagation();
+        this.state.isDayPickerOpen = true;
+        this.setState(this.state);
+    };
+
+    handleInputBlur = evt => {
+        // evt.stopPropagation();
+        console.log('evt.target=', evt.target);
+        // this.state.isDayPickerOpen = false;
+        // this.setState(this.state);
+    };
+
+    handleClickDayPicker = evt => {
+        evt.stopPropagation();
+        evt.preventDefault();
+        console.log('handleClickDayPicker, evt=', evt);
+    };
+
+    handleClickBackdrop = evt => {
+        console.log('handleClickBackdrop, evt.target=', evt.target);
+        this.state.isDayPickerOpen = false;
+        this.setState(this.state);
+    };
 
     handleClickIcon = evt => {
         evt.stopPropagation();
-        const { dpInput: { input }, isFocused } = this;
-        if (isFocused) {
-            input.blur();
-            this.isFocused = false;
-        } else {
-            input.focus();
-            this.isFocused = true;
-        }
+        this.state.isDayPickerOpen = !this.state.isDayPickerOpen;
+        this.setState(this.state);
     };
 
     render() {
-        const { handleInputChange, handleCloneCheckboxChange, handleClickIcon } = this;
-        const { payload: { val, isCloneChecked } } = this.state;
+        const {
+            handleInputChange,
+            handleCloneCheckboxChange,
+            handleClickIcon,
+            handleDayClick,
+            handleInputFocus,
+            handleInputBlur,
+            handleClickDayPicker,
+            handleClickBackdrop
+        } = this;
+        const { payload: { val, isCloneChecked }, isDayPickerOpen } = this.state;
         const {
             id,
             label,
@@ -95,14 +126,15 @@ class TomisDatePicker extends Component {
                 inpSpinner: clsInpSpinner,
                 dpInput: clsDpInput,
                 selectCalendar: clsSelectCalendar,
-                selectCalendarDisabled: clsSelectCalendarDisabled
+                selectCalendarDisabled: clsSelectCalendarDisabled,
+                dp: clsDp,
+                dpCloneable: clsDpCloneable
             },
             isCloneable,
             disabledClone,
             required
         } = this.props;
         const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
-        const { dp, dpCloneable } = datePickerStyles;
         return (
             <FormControl className={clsFormControl} margin="dense">
                 {isDisplayCloneable &&
@@ -124,7 +156,9 @@ class TomisDatePicker extends Component {
                     fullWidth={true}
                     required={required}
                     onChange={handleInputChange}
-                    inputClassName={cx(clsInpBase, clsInpSpinner, {
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                    inputClassName={cx(clsInpBase, {
                         [clsInpCloneable]: isDisplayCloneable,
                         [clsInpDisabled]: isDisabled
                     })}
@@ -132,13 +166,25 @@ class TomisDatePicker extends Component {
                         maxLength: 10
                     }}
                 />
-                <DayPickerInput
-                    ref={ref => (this.dpInput = ref)}
-                    style={isDisplayCloneable ? dpCloneable : dp}
-                    disabled={isDisabled}
-                    placeholder={displayPlaceholder}
-                    className={cx(clsDpInput)}
-                />
+                {isDayPickerOpen &&
+                    <div>
+                        <DayPicker
+                            className={cx(clsDp, {
+                                [clsDp]: isDisplayCloneable
+                            })}
+                            onFocus={handleClickDayPicker}
+                            onDayClick={handleDayClick}
+                        />
+                        <Backdrop onClick={handleClickBackdrop} invisible={false} />
+                    </div>}
+                {/* <DayPickerInput
+          style={{ display: 'block' }}
+          ref={ref => (this.dpInput = ref)}
+          style={isDisplayCloneable ? dpCloneable : dp}
+          disabled={isDisabled}
+          placeholder={displayPlaceholder}
+          className={cx(clsDpInput)}
+        /> */}
                 <IconButton
                     className={cx(clsSelectCalendar, { [clsSelectCalendarDisabled]: isDisabled || disabledClone })}
                     disabled={isDisabled}

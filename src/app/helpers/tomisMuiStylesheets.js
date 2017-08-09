@@ -110,6 +110,21 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
         width: '100%',
         flex: 1
     },
+    inpBase: {
+        marginLeft: '4px',
+        width: '100%',
+        height: `${30}px`,
+        outline: 'none',
+        border: 'none',
+        fontSize: '14px'
+    },
+    inpCloneable: {
+        marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+    },
+    inpLov: {
+        position: 'absolute',
+        top: '9px'
+    },
     lov: {
         marginLeft: '4px',
         width: '100%'
@@ -119,10 +134,15 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
         width: '100%'
     },
     inputLabel: {
-        marginLeft: '5px'
+        marginLeft: '5px',
+        zIndex: 0
     },
     inputLabelCloneable: {
-        marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
+        marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`,
+        zIndex: 0
+    },
+    inputLabelShrink: {
+        zIndex: 10
     },
     checkbox: {
         color: theme.text.primary,
@@ -131,7 +151,7 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
         position: 'absolute',
         zIndex: 1,
         left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
-        top: '-8px'
+        top: '10px'
     },
     checkboxDisabled: {
         color: theme.text.disabled
@@ -139,7 +159,7 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
     selectArrow: {
         color: theme.text.primary,
         position: 'absolute',
-        right: 0,
+        right: '24px',
         top: `${0}px`,
         width: '36px',
         height: '36px'
@@ -151,23 +171,27 @@ export const datePickerStyles = {
         width: '100%',
         flex: 1
     },
+    inpBase: {
+        marginLeft: '4px',
+        width: '100%',
+        height: `${30}px`,
+        outline: 'none',
+        border: 'none',
+        fontSize: '14px'
+    },
+    inpCloneable: {
+        marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+    },
     dpInput: {
         position: 'absolute',
         top: '30px'
     },
     dp: {
         marginLeft: '4px',
-        width: '100%',
-        height: `${20}px`,
-        outline: 'none',
-        border: 'none'
+        width: '256px'
     },
     dpCloneable: {
-        marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
-        width: '100%',
-        height: `${20}px`,
-        outline: 'none',
-        border: 'none'
+        marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inputLabel: {
         marginLeft: '5px'
@@ -182,7 +206,7 @@ export const datePickerStyles = {
         position: 'absolute',
         zIndex: 1,
         left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
-        top: '-8px'
+        top: '20px'
     },
     checkboxDisabled: {
         color: theme.text.disabled

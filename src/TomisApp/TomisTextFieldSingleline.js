@@ -35,8 +35,8 @@ class TomisTextFieldSingleline extends Component {
     };
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
-        const { payload: { val } } = this.state;
-        this.setState({ payload: { isCloneChecked, val } });
+        this.state.payload.isCloneChecked = isCloneChecked;
+        this.setState(this.state);
     };
 
     handleInputChange = evt => {
