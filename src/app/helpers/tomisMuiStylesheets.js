@@ -111,19 +111,35 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
         flex: 1
     },
     inpBase: {
+        color: 'transparent'
+    },
+    inpBaseHOLD2: {
+        font: 'inherit',
+        color: 'currentColor',
+        width: '100%',
+        border: 0,
+        margin: 0,
+        padding: '7px 0',
+        display: 'block',
+        boxSizing: 'content-box',
+        background: 'none',
+        verticalAlign: 'middle',
+        outline: 'none'
+    },
+    inpBaseHOLD: {
         marginLeft: '4px',
         width: '100%',
         height: `${30}px`,
-        outline: 'none',
-        border: 'none',
-        fontSize: '14px'
+        fontSize: '16px',
+        backgroundColor: '#ffffff'
     },
     inpCloneable: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inpLov: {
         position: 'absolute',
-        top: '9px'
+        top: '14px',
+        backgroundColor: 'transparent'
     },
     lov: {
         marginLeft: '4px',
@@ -161,8 +177,8 @@ export const autoCompleteStyleSheet = createStyleSheet('AutoCompleteRender', the
         position: 'absolute',
         right: '24px',
         top: `${0}px`,
-        width: '36px',
-        height: '36px'
+        width: '30px',
+        height: '30px'
     }
 }));
 

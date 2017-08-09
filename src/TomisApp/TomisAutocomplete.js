@@ -6,7 +6,9 @@ import _get from 'lodash/get';
 import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, autoCompleteStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
+import FormLabel from 'material-ui/Form/FormLabel';
 import InputLabel from 'material-ui/Input/InputLabel';
+import Input from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
@@ -44,8 +46,7 @@ class TomisAutocomplete extends Component {
             name: null,
             isCloneChecked: true
         },
-        shrink: false,
-        isFocusedLov: false
+        textFieldVal: ''
     };
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
@@ -53,21 +54,17 @@ class TomisAutocomplete extends Component {
         this.setState(this.state);
     };
 
-    handleInputChange = val => {
+    handleLovChange = val => {
         // evt.stopPropagation();
-        this.state.payload = { name: _get(val, 'description', null), val: _get(val, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
+        this.state.payload = { name: _get(val, 'description', ''), val: _get(val, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
+        this.state.textFieldVal = _get(val, 'description', '') + 'ABCDEFGHIDLJFS';
         this.setState(this.state);
-    };
-
-    handleFocusLov = () => {
-        this.state.shrink = true;
-        this.state.isFocusedLov = true;
-        this.setState(this.state);
+        console.log('this.textField=', this.textField);
     };
 
     render() {
-        const { handleInputChange, handleCloneCheckboxChange, handleFocusLov } = this;
-        const { payload: { val, name, isCloneChecked, shrink, isFocusedLov } } = this.state;
+        const { handleCloneCheckboxChange, handleLovChange } = this;
+        const { payload: { val, name, isCloneChecked }, textFieldVal } = this.state;
         const {
             id,
             label,
@@ -78,7 +75,6 @@ class TomisAutocomplete extends Component {
                 formControl: clsFormControl,
                 inputLabel: clsInputLabel,
                 inputLabelCloneable: clsInputLabelCloneable,
-                inputLabelShrink: clsInputLabelShrink,
                 formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
@@ -106,33 +102,26 @@ class TomisAutocomplete extends Component {
                         tabIndex="-1"
                         checked={isCloneChecked || disabledClone}
                     />}
-                <InputLabel
-                    className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable, [clsInputLabelShrink]: isFocusedLov })}
-                    htmlFor={id}
-                    required={required}
-                    style={{ zIndex: isFocusedLov ? 10 : 0 }}
-                >
+                <InputLabel className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })} htmlFor={id} required={required}>
                     {label}
                 </InputLabel>
-                <TextField
-                    placeholder={displayPlaceholder}
+                <Input
+                    className={cx(clsInpBase)}
+                    id={id}
                     disabled={disabled}
                     margin="dense"
+                    placeholder={displayPlaceholder}
                     fullWidth={true}
+                    onChange={() => {}}
+                    value={textFieldVal}
                     required={required}
-                    inputClassName={cx(clsInpBase, {
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsInpDisabled]: isDisabled
-                    })}
                 />
                 <Select
-                    id={id}
                     className={cx(clsInpLov, { [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
                     options={options}
                     disabled={isDisabled}
-                    placeholder={displayPlaceholder}
-                    onChange={handleInputChange}
-                    onFocus={handleFocusLov}
+                    onChange={handleLovChange}
+                    placeholder={''}
                     value={val}
                     clearable={false}
                     labelKey="description"
