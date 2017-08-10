@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
-import TextField from 'material-ui/TextField';
+// import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
 import cx from 'classnames';
+import InputLabel from 'material-ui/Input/InputLabel';
+import Input from 'material-ui/Input';
+import TextField from 'material-ui/TextField';
 
 const defaultProps = {
     id: `tfs-${new Date().getTime()}`,
@@ -42,7 +45,9 @@ class TomisTextFieldSingleLine extends Component {
     handleInputChange = evt => {
         evt.stopPropagation();
         const val = evt.target.value;
-        this.setState({ payload: { val }, currentCharCount: val.length });
+        this.state.payload.val = val;
+        this.state.currentCharCount = val.length;
+        this.setState(this.state);
     };
 
     handleInputFocus = evt => {

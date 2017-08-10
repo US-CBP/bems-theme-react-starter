@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { createStyleSheet, withStyles } from 'material-ui/styles';
 import { getDisplayVals, datePickerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
@@ -14,6 +14,84 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment';
 import Backdrop from 'material-ui/internal/Backdrop';
+
+const checkboxSize = 24;
+const checkboxW = 36;
+const checkboxMRFactor = 1.15;
+const twoIconMRFactor = 1.75;
+
+// export const datePickerStyleSheet = createStyleSheet('DatePickerRender', theme => {
+//     console.log('datePickerStyleSheet theme=', theme);
+//     return {
+//         checkbox: {
+//             color: theme.text.primary,
+//             width: `${checkboxW}px`,
+//             height: `${checkboxW}px`,
+//             position: 'absolute',
+//             zIndex: 1,
+//             left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
+//             top: '20px'
+//         },
+//         checkboxDisabled: {
+//             color: theme.text.disabled
+//         },
+//         dp: {
+//             marginLeft: '4px',
+//             width: '256px'
+//         },
+//         dpCloneable: {
+//             marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`
+//         },
+//         dpInput: {
+//             position: 'absolute',
+//             top: '30px'
+//         },
+//         formControl: {
+//             width: '100%',
+//             flex: 1
+//         },
+//         formHelperText: {
+//             display: 'flex',
+//             justifyContent: 'space-between'
+//         },
+//         inkbar: {
+//             '&:after': {
+//                 backgroundColor: 'red'
+//             }
+//         },
+//         inpBase: {
+//             marginLeft: '4px',
+//             width: '100%',
+//             height: `${30}px`,
+//             outline: 'none',
+//             border: 'none',
+//             fontSize: '14px'
+//         },
+//         inpCloneable: {
+//             marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+//         },
+//         inpDisabled: {
+//             backgroundColor: 'transparent'
+//         },
+//         inputLabel: {
+//             marginLeft: '5px'
+//         },
+//         inputLabelCloneable: {
+//             marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
+//         },
+//         selectCalendar: {
+//             color: theme.text.primary,
+//             position: 'absolute',
+//             right: 0,
+//             top: `${20}px`,
+//             width: '36px',
+//             height: '36px'
+//         },
+//         selectCalendarDisabled: {
+//             color: theme.text.disabled
+//         }
+//     };
+// });
 
 const defaultProps = {
     id: `tdp-${new Date().getTime()}`,
@@ -39,6 +117,11 @@ class TomisDatePicker extends Component {
         },
         isDayPickerOpen: false
     };
+
+    // componentDidMount() {
+    //     const { theme } = this.props;
+    //     console.log('componentDidMount theme.palette.primary=', theme.palette.primary);
+    // }
 
     // dpInput = null;
     // isFocused = false;
@@ -72,15 +155,15 @@ class TomisDatePicker extends Component {
 
     handleInputBlur = evt => {
         // evt.stopPropagation();
+        evt.preventDefault();
         console.log('evt.target=', evt.target);
-        // this.state.isDayPickerOpen = false;
-        // this.setState(this.state);
+        this.state.isDayPickerOpen = false;
+        this.setState(this.state);
     };
 
     handleClickDayPicker = evt => {
-        evt.stopPropagation();
         evt.preventDefault();
-        console.log('handleClickDayPicker, evt=', evt);
+        evt.stopPropagation();
     };
 
     handleClickBackdrop = evt => {
@@ -114,21 +197,21 @@ class TomisDatePicker extends Component {
             disabled,
             helperText,
             classes: {
-                formControl: clsFormControl,
-                inputLabel: clsInputLabel,
-                inputLabelCloneable: clsInputLabelCloneable,
-                formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
+                dp: clsDp,
+                dpCloneable: clsDpCloneable,
+                dpInput: clsDpInput,
+                formControl: clsFormControl,
+                formHelperText: clsFormHelperText,
+                inkbar: clsInkbar,
                 inpBase: clsInpBase,
                 inpCloneable: clsInpCloneable,
                 inpDisabled: clsInpDisabled,
-                inpSpinner: clsInpSpinner,
-                dpInput: clsDpInput,
+                inputLabel: clsInputLabel,
+                inputLabelCloneable: clsInputLabelCloneable,
                 selectCalendar: clsSelectCalendar,
-                selectCalendarDisabled: clsSelectCalendarDisabled,
-                dp: clsDp,
-                dpCloneable: clsDpCloneable
+                selectCalendarDisabled: clsSelectCalendarDisabled
             },
             isCloneable,
             disabledClone,
@@ -167,15 +250,8 @@ class TomisDatePicker extends Component {
                     }}
                 />
                 {isDayPickerOpen &&
-                    <div>
-                        <DayPicker
-                            className={cx(clsDp, {
-                                [clsDp]: isDisplayCloneable
-                            })}
-                            onFocus={handleClickDayPicker}
-                            onDayClick={handleDayClick}
-                        />
-                        <Backdrop onClick={handleClickBackdrop} invisible={false} />
+                    <div className={cx(clsDp, { [clsDp]: isDisplayCloneable })} onMouseDown={handleClickDayPicker}>
+                        <DayPicker onDayClick={handleDayClick} />
                     </div>}
                 {/* <DayPickerInput
           style={{ display: 'block' }}

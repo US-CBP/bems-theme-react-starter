@@ -316,6 +316,10 @@ h3 {
     line-height: 30px;
 }
 
+.is-disabled.Select--single > .Select-control .Select-value .Select-value-label {
+    color: rgba(0, 0, 0, 0.38);
+}
+
 .Select > .Select-control {
     border: none;
     height: 100%;

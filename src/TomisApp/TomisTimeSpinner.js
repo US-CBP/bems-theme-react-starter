@@ -41,7 +41,8 @@ class TomisTimeSpinner extends Component {
     handleInputChange = evt => {
         evt.stopPropagation();
         const val = evt.target.value;
-        this.setState({ payload: { val } });
+        this.state.payload.val = val;
+        this.setState(this.state);
     };
 
     handleClickUpArrow = evt => {

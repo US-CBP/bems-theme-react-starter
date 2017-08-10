@@ -6,19 +6,15 @@ import _get from 'lodash/get';
 import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, autoCompleteStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
-import FormLabel from 'material-ui/Form/FormLabel';
 import InputLabel from 'material-ui/Input/InputLabel';
 import Input from 'material-ui/Input';
-import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import TomisFontIcon from './TomisFontIcon';
-import CloneableInputRender from './CloneableInputRender';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import cx from 'classnames';
-import { RIPPLE_TIME_MS } from 'globalJs/constants';
 import { bigLov, smallLov } from 'globalJs/testData';
 
 const defaultProps = {
@@ -42,29 +38,28 @@ const options = smallLov;
 class TomisAutocomplete extends Component {
     state = {
         payload: {
-            val: null,
+            val: '',
             name: null,
             isCloneChecked: true
         },
-        textFieldVal: ''
+        dummyVal: ''
     };
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
+        evt.stopPropagation();
         this.state.payload.isCloneChecked = isCloneChecked;
         this.setState(this.state);
     };
 
     handleLovChange = val => {
-        // evt.stopPropagation();
         this.state.payload = { name: _get(val, 'description', ''), val: _get(val, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
-        this.state.textFieldVal = _get(val, 'description', '') + 'ABCDEFGHIDLJFS';
+        this.state.dummyVal = this.state.payload.name;
         this.setState(this.state);
-        console.log('this.textField=', this.textField);
     };
 
     render() {
         const { handleCloneCheckboxChange, handleLovChange } = this;
-        const { payload: { val, name, isCloneChecked }, textFieldVal } = this.state;
+        const { payload: { val, name, isCloneChecked }, dummyVal } = this.state;
         const {
             id,
             label,
@@ -79,9 +74,10 @@ class TomisAutocomplete extends Component {
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
                 inpBase: clsInpBase,
+                input: clsInput,
+                underlineCloneable: clsUnderlineCloneable,
                 inpMultilineBase: clsInpMultilineBase,
                 inpCloneable: clsInpCloneable,
-                inpDisabled: clsInpDisabled,
                 selectArrow: clsSelectArrow,
                 lov: clsLov,
                 lovCloneable: clsLovCloneable,
@@ -106,15 +102,14 @@ class TomisAutocomplete extends Component {
                     {label}
                 </InputLabel>
                 <Input
-                    className={cx(clsInpBase)}
+                    className={cx(clsInput, { [clsInputLabelCloneable]: isDisplayCloneable, [clsUnderlineCloneable]: isDisplayCloneable })}
                     id={id}
-                    disabled={disabled}
+                    disabled={isDisabled}
                     margin="dense"
                     placeholder={displayPlaceholder}
                     fullWidth={true}
                     onChange={() => {}}
-                    value={textFieldVal}
-                    required={required}
+                    value={dummyVal}
                 />
                 <Select
                     className={cx(clsInpLov, { [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
@@ -147,47 +142,3 @@ const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
         </IconButton>
     );
 };
-
-/**
- * Material-UI Input requires the use of ref.  Refs are not allowed in stateless functional components.
- * As such, we must, unfortunately, use a class for the Input component.
- */
-class _InputRender extends Component {
-    render() {
-        const {
-            value,
-            onChange,
-            options,
-            readOnly,
-            isCloneable,
-            disabledClone,
-            renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, selectArrow: clsSelectArrow, lov: clsLov, lovCloneable: clsLovCloneable },
-            onDelayCloneCheckboxChange
-        } = this.props;
-        //isMyCloneChecked must be assigned *after* it is set to a new value
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals(this.props);
-
-        return (
-            <CloneableInputRender>
-                {isDisplayCloneable &&
-                    <Checkbox
-                        className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
-                        onChange={handleCloneCheckboxClick.bind(null, onDelayCloneCheckboxChange)}
-                        disabled={isDisabled || disabledClone}
-                    />}
-                <Select
-                    className={cx({ [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
-                    options={options}
-                    disabled={isDisabled}
-                    placeholder={displayPlaceholder}
-                    onChange={onChange}
-                    value={value}
-                    clearable={false}
-                    labelKey="description"
-                    valueKey="code"
-                    arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled, readOnly)}
-                />
-            </CloneableInputRender>
-        );
-    }
-}

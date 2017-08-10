@@ -30,7 +30,7 @@ import TomisToggleButtonsExample from './TomisToggleButtonsExample';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../css/index.css';
 
-const theme = createMuiTheme(createPalette(tomisTheme));
+const theme = createMuiTheme({ palette: createPalette(tomisTheme) });
 
 storiesOf('TOMIS App', module)
     .addDecorator(story => {
@@ -46,7 +46,7 @@ storiesOf('TOMIS App', module)
         );
     })
     .add('AutoComplete', () => {
-        return <TomisAutocomplete isCloneable={true} />;
+        return <TomisAutocomplete isCloneable={true} disabledClone={true} disabled={false} />;
     })
     .add('Button Flat', () => {
         return (
@@ -70,7 +70,11 @@ storiesOf('TOMIS App', module)
         );
     })
     .add('Date Picker', () => {
-        return <TomisDatePicker label="My Date Picker" isCloneable={true} />;
+        return (
+            <div>
+                <TomisDatePicker label="My Date Picker" isCloneable={true} />
+            </div>
+        );
     })
     .add('Dialog - Confirmation', () => {
         return <TomisDialogConfirmation initIsOpen={true}>Only actions can close this dialog.</TomisDialogConfirmation>;
