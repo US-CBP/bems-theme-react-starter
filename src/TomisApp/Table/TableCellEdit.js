@@ -37,6 +37,9 @@ export const styleSheet = createStyleSheet('BemsMuiTableCellEdit', theme => ({
         paddingLeft: 12,
         paddingRight: 12
     },
+    popoverPadding: {
+        padding: '24px'
+    },
     footer: {}
 }));
 
@@ -86,7 +89,14 @@ function TableCellEdit(props, context) {
                 );
             })}
             {isOpen &&
-                <Popover style={{ padding: '24px' }} open={true} anchorEl={openCell} anchorOrigin={anchorOrigin} transformOrigin={targetOrigin} onRequestClose={onRequestClose}>
+                <Popover
+                    className={classNames(classes.popoverPadding)}
+                    open={true}
+                    anchorEl={openCell}
+                    anchorOrigin={anchorOrigin}
+                    transformOrigin={targetOrigin}
+                    onRequestClose={onRequestClose}
+                >
                     {children}
                     <div>
                         <Button onClick={onRequestClose.bind(null, 'CANCEL')} color="primary">

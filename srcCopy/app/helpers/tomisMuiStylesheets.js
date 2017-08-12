@@ -82,7 +82,7 @@ export const cloneableStyleSheet = createStyleSheet('CloneableRender', theme => 
         display: 'flex',
         justifyContent: 'space-between'
     },
-    inpBase: {
+    inputBase: {
         marginLeft: '4px',
         width: '100%',
         height: `${30}px`,
@@ -90,20 +90,20 @@ export const cloneableStyleSheet = createStyleSheet('CloneableRender', theme => 
         border: 'none',
         fontSize: '14px'
     },
-    inpMultilineBase: {
+    inputMultilineBase: {
         marginLeft: '4px',
         width: '100%',
         outline: 'none',
         border: 'none',
         fontSize: '14px'
     },
-    inpSpinner: {
+    inputSpinner: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
-    inpCloneable: {
+    inputCloneable: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
-    inpDisabled: {
+    inputDisabled: {
         backgroundColor: 'transparent'
     }
 }));
@@ -207,7 +207,7 @@ export const timeSpinnerStyles = {
         width: '100%',
         flex: 1
     },
-    inpBase: {
+    inputBase: {
         marginLeft: '4px',
         width: '100%',
         height: `${30}px`,
@@ -216,10 +216,10 @@ export const timeSpinnerStyles = {
         backgroundColor: 'transparent',
         fontSize: '14px'
     },
-    inpSpinner: {
+    inputSpinner: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
-    inpCloneable: {
+    inputCloneable: {
         marginLeft: `${Number(twoIconMRFactor * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inputLabel: {
@@ -268,7 +268,7 @@ export const textFieldSimpleStyles = {
         width: '100%',
         flex: 1
     },
-    inpBase: {
+    inputBase: {
         marginLeft: '4px',
         width: '100%',
         height: `${30}px`,
@@ -277,10 +277,10 @@ export const textFieldSimpleStyles = {
         backgroundColor: 'transparent',
         fontSize: '14px'
     },
-    inpSpinner: {
+    inputSpinner: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
-    inpCloneable: {
+    inputCloneable: {
         marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
     },
     inputLabel: {
@@ -312,7 +312,7 @@ export const bemsMuiToggleButtonGroupStyles = {
         padding: 0
     }
 };
-export const bemsMuiToggleButtonGroupStyleSheet = createStyleSheet('BemsMuiToggleButtonGroup', bemsMuiToggleButtonGroupStyles);
+export const toggleButtonGroupStyleSheet = createStyleSheet('BemsMuiToggleButtonGroup', bemsMuiToggleButtonGroupStyles);
 
 export const bemsMuiToggleButtonStyles = {
     default: {
@@ -338,4 +338,4 @@ export const bemsMuiToggleButtonStyles = {
     }
 };
 
-export const bemsMuiToggleButtonStyleSheet = createStyleSheet('BemsMuiToggleButton', theme => bemsMuiToggleButtonStyles);
+export const toggleButtonStyleSheet = createStyleSheet('BemsMuiToggleButton', theme => bemsMuiToggleButtonStyles);

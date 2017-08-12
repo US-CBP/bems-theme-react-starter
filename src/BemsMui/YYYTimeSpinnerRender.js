@@ -93,10 +93,10 @@ class _InputRender extends Component {
             disabledClone,
             renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled },
             classes: {
-                inpBase: clsInpBase,
-                inpSpinner: clsInpSpinner,
+                inputBase: clsInputBase,
+                inputSpinner: clsInputSpinner,
                 inpReadOnly: clsInpReadOnly,
-                inpCloneable: clsInpCloneable,
+                inputCloneable: clsInputCloneable,
                 arrowsBase: clsArrowsBase,
                 arrowsCloneableTrue: clsArrowsCloneableTrue,
                 arrowsCloneableFalse: clsArrowsCloneableFalse,
@@ -119,9 +119,9 @@ class _InputRender extends Component {
                         disabled={isDisabled || disabledClone}
                     />}
                 <input
-                    className={cx(clsInpBase, {
-                        [clsInpSpinner]: !readOnly,
-                        [clsInpCloneable]: isDisplayCloneable,
+                    className={cx(clsInputBase, {
+                        [clsInputSpinner]: !readOnly,
+                        [clsInputCloneable]: isDisplayCloneable,
                         [clsCheckboxDisabled]: isDisabled || disabledClone,
                         [clsInpReadOnly]: readOnly
                     })}

@@ -16,11 +16,13 @@ const styleSheet = createStyleSheet('RaisedButtons', theme => ({
 
 const defaultProps = {
     options: [{ label: 'Btn 1 Value 1', value: 'V1' }, { label: 'Btn2', value: 'V2' }, { label: 'Btn4', value: 'V3' }],
+    disabled: false,
     defaultSelected: -1
 };
 
 const propTypes = {
     options: PropTypes.array.isRequired,
+    disabled: PropTypes.bool,
     labelText: PropTypes.string
 };
 
@@ -36,11 +38,11 @@ class TomisToggleButtonsExample extends Component {
 
     render() {
         const { handleChange } = this;
-        const { options, labelText = 'Default Label', classes } = this.props;
+        const { options, labelText = 'Default Label', classes, disabled } = this.props;
         const { selectedValue } = this.state;
         return (
             <div>
-                <ToggleButtonGroup aria-label="gender" name="gender" disabled={false} className={classes.group} selectedValue={selectedValue} onChange={handleChange}>
+                <ToggleButtonGroup aria-label="gender" name="gender" disabled={disabled} className={classes.group} selectedValue={selectedValue} onChange={handleChange}>
                     <ToggleButton label="Male" value="male" checked={selectedValue === 'male'} />
                     <ToggleButton label="Female" value="female" checked={selectedValue === 'female'} />
                     <ToggleButton label="Other" value="other" checked={selectedValue === 'other'} />

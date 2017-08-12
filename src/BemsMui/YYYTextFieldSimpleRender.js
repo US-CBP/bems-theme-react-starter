@@ -78,7 +78,7 @@ class _InputRender extends Component {
             isCloneable,
             disabledClone,
             renderClasses: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled },
-            classes: { inpBase: clsInpBase, inpSpinner: clsInpSpinner, inpReadOnly: clsInpReadOnly, inpCloneable: clsInpCloneable },
+            classes: { inputBase: clsInputBase, inputSpinner: clsInputSpinner, inpReadOnly: clsInpReadOnly, inputCloneable: clsInputCloneable },
             isCloneChecked,
             onCloneCheckboxChange
         } = this.props;
@@ -94,8 +94,8 @@ class _InputRender extends Component {
                         disabled={isDisabled || disabledClone}
                     />}
                 <input
-                    className={cx(clsInpBase, {
-                        [clsInpCloneable]: isDisplayCloneable,
+                    className={cx(clsInputBase, {
+                        [clsInputCloneable]: isDisplayCloneable,
                         [clsCheckboxDisabled]: isDisabled || disabledClone,
                         [clsInpReadOnly]: readOnly
                     })}

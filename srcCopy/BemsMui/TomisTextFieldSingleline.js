@@ -72,10 +72,10 @@ class TomisTextFieldSingleLine extends Component {
                 formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
-                inpBase: clsInpBase,
-                inpMultilineBase: clsInpMultilineBase,
-                inpCloneable: clsInpCloneable,
-                inpDisabled: clsInpDisabled
+                inputBase: clsInputBase,
+                inputMultilineBase: clsInputMultilineBase,
+                inputCloneable: clsInputCloneable,
+                inputDisabled: clsInputDisabled
             },
             isCloneable,
             disabledClone,
@@ -114,10 +114,10 @@ class TomisTextFieldSingleLine extends Component {
                     rows={rows}
                     rowsMax={rowsMax}
                     inputClassName={cx({
-                        [clsInpBase]: !multiline,
-                        [clsInpMultilineBase]: multiline,
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsInpDisabled]: isDisabled
+                        [clsInputBase]: !multiline,
+                        [clsInputMultilineBase]: multiline,
+                        [clsInputCloneable]: isDisplayCloneable,
+                        [clsInputDisabled]: isDisabled
                     })}
                     inputProps={{
                         maxLength

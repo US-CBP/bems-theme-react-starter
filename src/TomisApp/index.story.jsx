@@ -139,5 +139,5 @@ storiesOf('TOMIS App', module)
         return <TomisTimeSpinner isCloneable={true} />;
     })
     .add('Toggle Buttons', () => {
-        return <TomisToggleButtonsExample />;
+        return <TomisToggleButtonsExample disabled={false} />;
     });

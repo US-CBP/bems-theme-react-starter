@@ -71,10 +71,10 @@ class TomisTimeSpinner extends Component {
                 formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
-                inpBase: clsInpBase,
-                inpCloneable: clsInpCloneable,
-                inpDisabled: clsInpDisabled,
-                inpSpinner: clsInpSpinner,
+                inputBase: clsInputBase,
+                inputCloneable: clsInputCloneable,
+                inputDisabled: clsInputDisabled,
+                inputSpinner: clsInputSpinner,
                 arrowsBase: clsArrowsBase,
                 arrowsCloneableTrue: clsArrowsCloneableTrue,
                 arrowsCloneableFalse: clsArrowsCloneableFalse,
@@ -132,9 +132,9 @@ class TomisTimeSpinner extends Component {
                     fullWidth={true}
                     required={required}
                     onChange={handleInputChange}
-                    inputClassName={cx(clsInpBase, clsInpSpinner, {
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsInpDisabled]: isDisabled
+                    inputClassName={cx(clsInputBase, clsInputSpinner, {
+                        [clsInputCloneable]: isDisplayCloneable,
+                        [clsInputDisabled]: isDisabled
                     })}
                     inputProps={{
                         maxLength: 4

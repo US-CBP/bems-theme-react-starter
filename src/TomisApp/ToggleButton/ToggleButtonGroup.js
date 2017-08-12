@@ -3,7 +3,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { bemsMuiToggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import { toggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import withStyles from 'material-ui/styles/withStyles';
 import FormGroup from 'material-ui/Form/FormGroup';
 
@@ -11,19 +11,18 @@ let toggleButtons = undefined;
 
 class ToggleButtonGroup extends Component {
     handleToggleButtonClick = event => {
-        const checked = event.target.checked;
-        if (checked && this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange(event, event.target.value);
         }
     };
 
     render() {
-        const { handleToggleButtonClick } = this;
+        const { handleToggleButtonClick, doNothing } = this;
         const { children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = this.props;
         toggleButtons = [];
 
         return (
-            <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="ToggleButtonGroupRender" role="radiogroup" {...other}>
+            <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="TomisToggleButtonGroup" role="radiogroup" {...other}>
                 {Children.map(children, (child, index) => {
                     const selected = selectedValue === child.props.value;
                     return cloneElement(child, {
@@ -80,4 +79,4 @@ ToggleButtonGroup.propTypes = {
     selectedValue: PropTypes.string
 };
 
-export default withStyles(bemsMuiToggleButtonGroupStyleSheet)(ToggleButtonGroup);
+export default withStyles(toggleButtonGroupStyleSheet)(ToggleButtonGroup);
