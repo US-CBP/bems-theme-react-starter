@@ -23,6 +23,7 @@
     "material-ui-icons": "^1.0.0-alpha.19",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "rc-tooltip": "^3.4.8",
     "react": "^16.0.0-beta.3",
     "react-autosuggest": "^9.3.2",
     "react-day-picker": "^6.1.0",

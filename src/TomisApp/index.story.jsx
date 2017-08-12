@@ -11,7 +11,6 @@ import TomisButtonRaised from './TomisButtonRaised';
 import TomisButtonIcon from './TomisButtonIcon';
 import TomisDatePicker from './TomisDatePicker';
 import TomisDialogConfirmation from './TomisDialogConfirmation';
-import TomisDividerFullbleed from './TomisDividerFullbleed';
 import TomisFontIcon from './TomisFontIcon';
 import TomisTimeSpinner from './TomisTimeSpinner';
 import TomisListNestedExample from './TomisListNestedExample';
@@ -23,9 +22,9 @@ import TomisProgressIndeterminateCircular from './TomisProgressIndeterminateCirc
 import TomisSelectionControlsCheckbox from './TomisSelectionControlsCheckbox';
 import TomisTableEditableExample from './TomisTableEditableExample';
 import TomisTableReadOnlyExample from './TomisTableReadOnlyExample';
+import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
 import TomisTextFieldMultiLine from './TomisTextFieldMultiLine';
-import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 import TomisToggleButtonsExample from './TomisToggleButtonsExample';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../css/index.css';
@@ -78,15 +77,6 @@ storiesOf('TOMIS App', module)
   })
   .add('Dialog - Confirmation', () => {
     return <TomisDialogConfirmation initIsOpen={true}>Only actions can close this dialog.</TomisDialogConfirmation>;
-  })
-  .add('Divider Full-bleed', () => {
-    return (
-      <div>
-        <br />
-        <br />
-        <TomisDividerFullbleed />
-      </div>
-    );
   })
   .add('Drawer Navigation Undocked Example', () => {
     return (
