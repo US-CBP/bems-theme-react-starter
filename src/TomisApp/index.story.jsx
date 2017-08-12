@@ -26,6 +26,7 @@ import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
 import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
 import TomisTextFieldMultiLine from './TomisTextFieldMultiLine';
 import TomisToggleButtonsExample from './TomisToggleButtonsExample';
+import TomisDuration from 'common/TomisDuration';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import '../css/index.css';
 
@@ -126,8 +127,11 @@ storiesOf('TOMIS App', module)
     return <TomisTextFieldMultiLine label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;
   })
   .add('Time Spinner', () => {
-    return <TomisTimeSpinner isCloneable={true} />;
+    return <TomisTimeSpinner isCloneable={false} />;
   })
   .add('Toggle Buttons', () => {
-    return <TomisToggleButtonsExample disabled={false} />;
+    return <TomisToggleButtonsExample />;
+  })
+  .add('Tomis Duration - TESTING', () => {
+    return <TomisDuration />;
   });

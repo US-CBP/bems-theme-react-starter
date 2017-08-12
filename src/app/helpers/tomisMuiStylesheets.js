@@ -288,6 +288,9 @@ const timeSpinnerStyles = {
     marginLeft: `${Number(twoIconMRFactor * checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`
   },
   inputSpinner: {
+    marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+  },
+  inputSpinnerCloneable: {
     marginLeft: `${Number(twoIconMRFactor * checkboxSize * checkboxMRFactor).toFixed(0)}px`
   }
 };
