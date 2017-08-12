@@ -161,6 +161,9 @@ const cloneableStyles = {
   lovCloneable: {
     marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
     width: '100%'
+  },
+  readOnly: {
+    pointerEvents: 'none'
   }
 };
 export const cloneableStyleSheet = createStyleSheet('TomisCloneable', theme => cloneableStyles);

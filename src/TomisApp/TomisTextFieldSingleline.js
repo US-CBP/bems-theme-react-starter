@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
-// import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
-import cx from 'classnames';
-import InputLabel from 'material-ui/Input/InputLabel';
-import Input from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
+import cx from 'classnames';
 
 const defaultProps = {
   id: `tfs-${new Date().getTime()}`,
@@ -23,19 +20,27 @@ const defaultProps = {
   multiline: false
 };
 
-const propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-class TomisTextFieldSingleLine extends Component {
-  state = {
+const initState = props => {
+  const { value } = props;
+  return {
     payload: {
-      val: '',
+      val: props.value,
       isCloneChecked: true
     },
     currentCharCount: 0,
     isFocused: false
   };
+};
+
+const propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+class TomisTextFieldSingleLine extends Component {
+  constructor(props) {
+    super(props);
+    this.state = initState(props);
+  }
 
   handleCloneCheckboxChange = (evt, isCloneChecked) => {
     this.state.payload.isCloneChecked = isCloneChecked;
@@ -79,9 +84,11 @@ class TomisTextFieldSingleLine extends Component {
         inputBase: clsInputBase,
         inputBaseMultiLine: clsInputBaseMultiLine,
         inputCloneable: clsInputCloneable,
-        inputDisabled: clsInputDisabled
+        inputDisabled: clsInputDisabled,
+        readOnly: clsReadOnly
       },
       isCloneable,
+      isReadOnly,
       disabledClone,
       required,
       maxLength,
@@ -98,7 +105,7 @@ class TomisTextFieldSingleLine extends Component {
       multiline
     });
     return (
-      <FormControl className={clsFormControl} margin="dense">
+      <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!isReadOnly })} margin="dense">
         {isDisplayCloneable &&
           <Checkbox
             className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
@@ -130,8 +137,10 @@ class TomisTextFieldSingleLine extends Component {
             [clsInputBaseMultiLine]: multiline
           })}
           inputProps={{
-            maxLength
+            maxLength,
+            readOnly: !!isReadOnly
           }}
+          InputProps={{ disableUnderline: !!isReadOnly }}
         />
         <FormHelperText className={clsFormHelperText}>
           <span>
