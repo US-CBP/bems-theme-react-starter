@@ -19,7 +19,7 @@ const twoIconMRFactor = 1.75;
 export const getDisplayVals = ({ disabled, isCloneable, disabledClone, readOnly, placeholder }) => {
   const isDisabled = disabled ? true : false;
   const displayPlaceholder = disabled ? '' : placeholder;
-  const isDisplayCloneable = isCloneable;
+  const isDisplayCloneable = isCloneable && !readOnly;
   return { isDisabled, displayPlaceholder, isDisplayCloneable };
 };
 
@@ -340,3 +340,55 @@ export const toggleButtonStyleSheet = createStyleSheet('TomisToggleButton', them
   console.log('tomisMuiStylesheets theme=', theme);
   return toggleButtonStyles;
 });
+
+//Keep class names in alphabetical order to maintain our sanity
+const tomisDurationStyles = {
+  checkbox: {
+    color: theme.palette.text.primary,
+    width: `${checkboxW}px`,
+    height: `${checkboxW}px`,
+    alignSelf: 'flex-end'
+  },
+  checkboxDisabled: {
+    color: theme.palette.text.disabled
+  },
+  formControl: {
+    marginTop: 0,
+    width: '100%',
+    flex: 1
+  },
+  formHelperTextCloneable: {
+    marginLeft: `${Number(1.25 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
+  },
+  header: {
+    width: '72px'
+  },
+  headerCloneable: {
+    width: '130px',
+    marginLeft: '2px'
+  },
+  inputBase: {
+    marginLeft: '4px',
+    width: '24px',
+    outline: 'none',
+    border: 'none',
+    fontSize: '16px'
+  },
+  inputDisabled: {
+    backgroundColor: 'transparent'
+  },
+  inputLabel: {
+    marginLeft: '4px'
+  },
+  plusSign: {
+    alignSelf: 'flex-end',
+    margin: '0 4px 8px 4px'
+  },
+  readOnly: {
+    pointerEvents: 'none'
+  },
+  textFieldRoot: {
+    marginTop: 0
+  }
+};
+export const tomisDurationStyleSheet = createStyleSheet('TomisDuration', theme => tomisDurationStyles);

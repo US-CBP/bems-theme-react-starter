@@ -1,75 +1,137 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
-import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
+import { withStyles } from 'material-ui/styles';
+import { getDisplayVals, tomisDurationStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import FormControl from 'material-ui/Form/FormControl';
+import FormLabel from 'material-ui/Form/FormLabel';
 import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
+import FormHelperText from 'material-ui/Form/FormHelperText';
+import Typography from 'material-ui/Typography';
+import FlexRow from 'app/helpers/FlexRow';
+import cx from 'classnames';
 
-const floatingLabelStyle = {
-  height: '24px',
-  top: '24px',
-  marginLeft: '12px'
+const initState = props => {
+  const { value } = props;
+  return {
+    payload: {
+      val: props.value,
+      isCloneChecked: true
+    }
+  };
 };
 
 const defaultProps = {
-  isRequired: true,
+  id: `tduration-${new Date().getTime()}`,
+  label: 'Duration',
+  placeholder: ' ',
+  helperText: null,
+  disabled: false,
   isCloneable: false,
-  disabledClone: false
+  disabledClone: false,
+  required: false
 };
 
-const propTypes = {
-  isRequired: PropTypes.bool.isRequired,
-  isCloneable: PropTypes.bool.isRequired,
-  disabledClone: PropTypes.bool.isRequired
-};
+const propTypes = {};
 
 class TomisDuration extends Component {
   constructor(props) {
     super(props);
+    this.state = initState(props);
   }
+
   render() {
-    const { isRequired, isCloneable, disabledClone } = this.props;
-    const { height } = floatingLabelStyle;
+    const { handleInputChange, handleCloneCheckboxChange, handleInputBlur, handleInputFocus } = this;
+    const { payload: { val, isCloneChecked }, currentCharCount, isFocused } = this.state;
+    const {
+      id,
+      label,
+      placeholder,
+      disabled,
+      helperText,
+      classes: {
+        formControl: clsFormControl,
+        inputLabel: clsInputLabel,
+        formHelperTextCloneable: clsFormHelperTextCloneable,
+        checkbox: clsCheckbox,
+        checkboxDisabled: clsCheckboxDisabled,
+        header: clsHeader,
+        headerCloneable: clsHeaderCloneable,
+        inputBase: clsInputBase,
+        inputCloneable: clsInputCloneable,
+        inputDisabled: clsInputDisabled,
+        plusSign: clsPlusSign,
+        readOnly: clsReadOnly,
+        textFieldRoot: clsTextFieldRoot
+      },
+      isCloneable,
+      isReadOnly,
+      disabledClone,
+      required
+    } = this.props;
+    const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({
+      disabled,
+      isCloneable,
+      disabledClone,
+      readOnly: isReadOnly,
+      placeholder
+    });
     return (
-      <div style={{ paddingTop: '8px', width: '150px', textAlign: 'center' }}>
-        <label style={{ fontSize: '12px', paddingLeft: isCloneable ? '24px' : 0 }}>
-          Duration{isRequired}
-        </label>
-        <div style={{ display: 'flex' }}>
-          {isCloneable &&
-            <Checkbox underlineShow={false} style={{ height: '56px' }} fullWidth={true} isCloneable={isCloneable} disabledClone={disabledClone} />}
-          <TomisTimeSpinner
+      <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!isReadOnly })} margin="dense">
+        <FormLabel disabled={isDisabled} required={required}>
+          <Typography className={cx({ [clsHeader]: !isDisplayCloneable, [clsHeaderCloneable]: isDisplayCloneable })} align="center">
+            Duration
+          </Typography>
+        </FormLabel>
+        <FlexRow>
+          {isDisplayCloneable &&
+            <Checkbox
+              className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+              onChange={handleCloneCheckboxChange}
+              disabled={isDisabled || disabledClone}
+              tabIndex="-1"
+              checked={isCloneChecked || disabledClone}
+            />}
+          <TextField
+            className={clsTextFieldRoot}
             label="HH"
-            floatingLabelStyle={floatingLabelStyle}
-            inputStyle={{ marginTop: 0, marginLeft: '12px' }}
-            underlineStyle={{ bottom: '12px' }}
+            labelClassName={clsInputLabel}
+            placeholder="HH"
             value="00"
-            fullWidth={false}
-            textFieldSimpleStyle={{ width: '40px', height: '60px', flex: 'none' }}
-            isDisplayArrowIcons={false}
+            margin="dense"
+            disabled={disabled}
+            inputClassName={cx({
+              [clsInputBase]: true,
+              [clsInputDisabled]: isDisabled
+            })}
+            InputProps={{ disableUnderline: !!isReadOnly }}
           />
-          <TomisTextFieldReadOnly
-            label=" "
-            floatingLabelStyle={floatingLabelStyle}
-            value="+"
-            style={{ height: '24px', paddingLeft: '8px' }}
-            inputStyle={{ width: '20px' }}
-          />
-          <TomisTimeSpinner
+          <div className={cx(clsPlusSign)}>+</div>
+          <TextField
+            className={clsTextFieldRoot}
             label="MM"
-            floatingLabelStyle={floatingLabelStyle}
-            inputStyle={{ marginTop: 0, marginLeft: '12px' }}
-            underlineStyle={{ bottom: '12px' }}
+            labelClassName={clsInputLabel}
+            placeholder="MM"
             value="00"
-            fullWidth={false}
-            textFieldSimpleStyle={{ width: '40px', height: '60px', flex: 'none' }}
-            isDisplayArrowIcons={false}
+            margin="dense"
+            disabled={disabled}
+            inputClassName={cx({
+              [clsInputBase]: true,
+              [clsInputDisabled]: isDisabled
+            })}
+            InputProps={{ disableUnderline: !!isReadOnly }}
           />
-        </div>
-      </div>
+        </FlexRow>
+        <FormHelperText className={cx({ [clsFormHelperTextCloneable]: isDisplayCloneable })}>
+          <span>
+            {helperText}
+          </span>
+        </FormHelperText>
+      </FormControl>
     );
   }
 }
 
 TomisDuration.defaultProps = defaultProps;
 TomisDuration.propTypes = propTypes;
-export default TomisDuration;
+export default withStyles(tomisDurationStyleSheet)(TomisDuration);
