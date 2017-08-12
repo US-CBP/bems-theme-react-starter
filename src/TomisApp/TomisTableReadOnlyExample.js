@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import TomisTableHeader from 'TomisApp/TomisTableHeader';
 import TomisPaper from 'TomisApp/TomisPaper';
 
@@ -53,7 +53,7 @@ class TomisTableReadOnlyExample extends Component {
     return (
       <TomisPaper className={classes.paper}>
         <Table>
-          <TomisTableHeader columnData={columnData} />
+          <TomisTableHeader columnData={columnData} onRequestSort={handleRequestSort} />
           <TableBody>
             {data.map(n => {
               return (
