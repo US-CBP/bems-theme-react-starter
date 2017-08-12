@@ -16,7 +16,7 @@ const propTypes = {
   label: PropTypes.string.isRequired
 };
 
-const TomisTableHeaderColumn = ({ column }) => {
+const TomisTableHeaderColumn = ({ column, handleRequestSort, orderBy, order, cursor }) => {
   return (
     <TableCell numeric={column.numeric} disablePadding={column.disablePadding}>
       <Tooltip
@@ -25,16 +25,14 @@ const TomisTableHeaderColumn = ({ column }) => {
         mouseLeaveDelay={0.1}
         destroyTooltipOnHide={true}
         overlay={
-          <div style={{ height: '24px', width: 'auto' }}>
+          <div>
             {column.label}
           </div>
         }
       >
-        {/* <TableSortLabel active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}> */}
-        <span>
+        <TableSortLabel style={{ cursor }} active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}>
           {column.label}
-        </span>
-        {/* </TableSortLabel> */}
+        </TableSortLabel>
       </Tooltip>
     </TableCell>
   );

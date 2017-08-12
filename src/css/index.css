@@ -34,6 +34,12 @@ body {
     flex: 2;
 }
 
+
+/*rc-tooltip*/
+.rc-tooltip-inner {
+    min-height: auto;
+}
+
 /* Apply spacing to any flex- items inside a flex row */
 .flex-row > div[class *=flex-] {
     margin-right: 24px;
