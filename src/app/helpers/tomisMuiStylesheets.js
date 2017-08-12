@@ -103,6 +103,10 @@ export const autoCompleteStyleSheet = createStyleSheet('TomisAutoComplete', them
 });
 
 //Keep class names in alphabetical order to maintain our sanity
+//  NOTE, however, material-ui applies the class names in the order specified by the keys listed in styles.
+//  For example, inputBaseMultiLine is always placed before inputCloneable in the React component.  If you
+//  need inputBaseMultiLine to occur *after* inputCloneable, you need to include inputBaseMultiLine after
+//  inputCloneable here.
 const cloneableStyles = {
   checkbox: {
     color: theme.palette.text.primary,
@@ -132,6 +136,12 @@ const cloneableStyles = {
     border: 'none',
     fontSize: '14px'
   },
+  inputBaseMultiLine: {
+    marginLeft: '4px',
+    width: '100%',
+    outline: 'none',
+    border: 'none'
+  },
   inputCloneable: {
     marginLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`
   },
@@ -143,13 +153,6 @@ const cloneableStyles = {
   },
   inputLabelCloneable: {
     marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`
-  },
-  inputMultilineBase: {
-    marginLeft: '4px',
-    width: '100%',
-    outline: 'none',
-    border: 'none',
-    fontSize: '14px'
   },
   lov: {
     marginLeft: '4px',
