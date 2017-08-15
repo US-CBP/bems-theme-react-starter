@@ -12,6 +12,7 @@ import FlexRow from 'app/helpers/FlexRow';
 import cx from 'classnames';
 
 const initState = props => {
+<<<<<<< HEAD
     const { value } = props;
     return {
         payload: {
@@ -30,11 +31,32 @@ const defaultProps = {
     isCloneable: false,
     disabledClone: false,
     required: false
+=======
+  const { value } = props;
+  return {
+    payload: {
+      val: props.value,
+      isCloneChecked: true
+    }
+  };
+};
+
+const defaultProps = {
+  id: `tduration-${new Date().getTime()}`,
+  label: 'Duration',
+  placeholder: ' ',
+  helperText: null,
+  disabled: false,
+  isCloneable: false,
+  disabledClone: false,
+  required: false
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 };
 
 const propTypes = {};
 
 class TomisDuration extends Component {
+<<<<<<< HEAD
     constructor(props) {
         super(props);
         this.state = initState(props);
@@ -130,6 +152,103 @@ class TomisDuration extends Component {
             </FormControl>
         );
     }
+=======
+  constructor(props) {
+    super(props);
+    this.state = initState(props);
+  }
+
+  render() {
+    const { handleInputChange, handleCloneCheckboxChange, handleInputBlur, handleInputFocus } = this;
+    const { payload: { val, isCloneChecked }, currentCharCount, isFocused } = this.state;
+    const {
+      id,
+      label,
+      placeholder,
+      disabled,
+      helperText,
+      classes: {
+        formControl: clsFormControl,
+        inputLabel: clsInputLabel,
+        formHelperTextCloneable: clsFormHelperTextCloneable,
+        checkbox: clsCheckbox,
+        checkboxDisabled: clsCheckboxDisabled,
+        header: clsHeader,
+        headerCloneable: clsHeaderCloneable,
+        inputBase: clsInputBase,
+        inputCloneable: clsInputCloneable,
+        inputDisabled: clsInputDisabled,
+        plusSign: clsPlusSign,
+        readOnly: clsReadOnly,
+        textFieldRoot: clsTextFieldRoot
+      },
+      isCloneable,
+      isReadOnly,
+      disabledClone,
+      required
+    } = this.props;
+    const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({
+      disabled,
+      isCloneable,
+      disabledClone,
+      readOnly: isReadOnly,
+      placeholder
+    });
+    return (
+      <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!isReadOnly })} margin="dense">
+        <FormLabel disabled={isDisabled} required={required}>
+          <Typography className={cx({ [clsHeader]: !isDisplayCloneable, [clsHeaderCloneable]: isDisplayCloneable })} align="center">
+            Duration
+          </Typography>
+        </FormLabel>
+        <FlexRow>
+          {isDisplayCloneable &&
+            <Checkbox
+              className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+              onChange={handleCloneCheckboxChange}
+              disabled={isDisabled || disabledClone}
+              tabIndex="-1"
+              checked={isCloneChecked || disabledClone}
+            />}
+          <TextField
+            className={clsTextFieldRoot}
+            label="HH"
+            labelClassName={clsInputLabel}
+            placeholder="HH"
+            value="00"
+            margin="dense"
+            disabled={disabled}
+            inputClassName={cx({
+              [clsInputBase]: true,
+              [clsInputDisabled]: isDisabled
+            })}
+            InputProps={{ disableUnderline: !!isReadOnly }}
+          />
+          <div className={cx(clsPlusSign)}>+</div>
+          <TextField
+            className={clsTextFieldRoot}
+            label="MM"
+            labelClassName={clsInputLabel}
+            placeholder="MM"
+            value="00"
+            margin="dense"
+            disabled={disabled}
+            inputClassName={cx({
+              [clsInputBase]: true,
+              [clsInputDisabled]: isDisabled
+            })}
+            InputProps={{ disableUnderline: !!isReadOnly }}
+          />
+        </FlexRow>
+        <FormHelperText className={cx({ [clsFormHelperTextCloneable]: isDisplayCloneable })}>
+          <span>
+            {helperText}
+          </span>
+        </FormHelperText>
+      </FormControl>
+    );
+  }
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 }
 
 TomisDuration.defaultProps = defaultProps;

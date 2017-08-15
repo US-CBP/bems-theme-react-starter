@@ -34,6 +34,7 @@ body {
     flex: 2;
 }
 
+<<<<<<< HEAD
 /*rc-tooltip*/
 .rc-tooltip-inner {
     min-height: auto;
@@ -45,6 +46,12 @@ body {
 }
 .rc-tooltip-arrow {
     display: none;
+=======
+
+/*rc-tooltip*/
+.rc-tooltip-inner {
+    min-height: auto;
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 }
 
 /* Apply spacing to any flex- items inside a flex row */

@@ -19,6 +19,7 @@ import autocompleteMenuRenderer from 'TomisApp/helpers/autocompleteMenuRenderer'
 import { bigLov, smallLov } from 'globalJs/testData';
 
 const defaultProps = {
+<<<<<<< HEAD
     id: `ac-${new Date().getTime()}`,
     label: null,
     placeholder: null,
@@ -51,13 +52,42 @@ class TomisAutocomplete extends Component {
         super(props);
         this.state = initState(props);
     }
+=======
+  id: `ac-${new Date().getTime()}`,
+  label: 'AC Field',
+  placeholder: 'AC Placeholder',
+  helperText: null,
+  disabled: false,
+  isCloneable: false,
+  disabledClone: false,
+  required: false,
+  options
+};
 
-    handleCloneCheckboxChange = (evt, isCloneChecked) => {
-        evt.stopPropagation();
-        this.state.payload.isCloneChecked = isCloneChecked;
-        this.setState(this.state);
-    };
+const propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
+const options = smallLov;
+
+class TomisAutocomplete extends Component {
+  state = {
+    payload: {
+      val: '',
+      name: null,
+      isCloneChecked: true
+    },
+    dummyVal: ''
+  };
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
+
+  handleCloneCheckboxChange = (evt, isCloneChecked) => {
+    evt.stopPropagation();
+    this.state.payload.isCloneChecked = isCloneChecked;
+    this.setState(this.state);
+  };
+
+<<<<<<< HEAD
     handleLovChange = value => {
         this.state.payload = { name: _get(value, 'description', ''), value: _get(value, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
         this.state.shadowVal = this.state.payload.name;
@@ -159,6 +189,86 @@ class TomisAutocomplete extends Component {
             </FormControl>
         );
     }
+=======
+  handleLovChange = val => {
+    this.state.payload = { name: _get(val, 'description', ''), val: _get(val, 'code', null), isCloneChecked: this.state.payload.isCloneChecked };
+    this.state.dummyVal = this.state.payload.name;
+    this.setState(this.state);
+  };
+
+  render() {
+    const { handleCloneCheckboxChange, handleLovChange } = this;
+    const { payload: { val, name, isCloneChecked }, dummyVal } = this.state;
+    const {
+      id,
+      label,
+      placeholder,
+      disabled,
+      helperText,
+      classes: {
+        formControl: clsFormControl,
+        inputLabel: clsInputLabel,
+        inputLabelCloneable: clsInputLabelCloneable,
+        formHelperText: clsFormHelperText,
+        checkbox: clsCheckbox,
+        checkboxDisabled: clsCheckboxDisabled,
+        inputBase: clsInputBase,
+        input: clsInput,
+        underlineCloneable: clsUnderlineCloneable,
+        inputMultilineBase: clsInputMultilineBase,
+        inputCloneable: clsInputCloneable,
+        selectArrow: clsSelectArrow,
+        lov: clsLov,
+        lovCloneable: clsLovCloneable,
+        inputLov: clsInputLov
+      },
+      isCloneable,
+      disabledClone,
+      required
+    } = this.props;
+    const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
+    return (
+      <FormControl className={clsFormControl} margin="dense">
+        {isDisplayCloneable &&
+          <Checkbox
+            className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+            onChange={handleCloneCheckboxChange}
+            disabled={isDisabled || disabledClone}
+            tabIndex="-1"
+            checked={isCloneChecked || disabledClone}
+          />}
+        <InputLabel className={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })} htmlFor={id} required={required}>
+          {label}
+        </InputLabel>
+        <Input
+          className={cx(clsInput, { [clsInputLabelCloneable]: isDisplayCloneable, [clsUnderlineCloneable]: isDisplayCloneable })}
+          id={id}
+          disabled={isDisabled}
+          margin="dense"
+          placeholder={displayPlaceholder}
+          fullWidth={true}
+          onChange={() => {}}
+          value={dummyVal}
+        />
+        <Select
+          className={cx(clsInputLov, { [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
+          options={options}
+          disabled={isDisabled}
+          onChange={handleLovChange}
+          placeholder={''}
+          value={val}
+          clearable={false}
+          labelKey="description"
+          valueKey="code"
+          arrowRenderer={arrowRenderer.bind(this, clsSelectArrow, isDisabled)}
+        />
+        <FormHelperText className={clsFormHelperText}>
+          {helperText}
+        </FormHelperText>
+      </FormControl>
+    );
+  }
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 }
 
 TomisAutocomplete.defaultProps = defaultProps;
@@ -166,9 +276,9 @@ TomisAutocomplete.propTypes = propTypes;
 export default withStyles(autoCompleteStyleSheet)(TomisAutocomplete);
 
 const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
-    return (
-        <IconButton className={clsSelectArrow} disabled={isDisabled} aria-label="Toggle select options display">
-            <TomisFontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
-        </IconButton>
-    );
+  return (
+    <IconButton className={clsSelectArrow} disabled={isDisabled} aria-label="Toggle select options display">
+      <TomisFontIcon name={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'} />
+    </IconButton>
+  );
 };

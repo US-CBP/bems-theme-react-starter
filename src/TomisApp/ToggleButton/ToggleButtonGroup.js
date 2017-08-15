@@ -2,7 +2,11 @@
 
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import cx from 'classnames';
+=======
+import classNames from 'classnames';
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 import { toggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import withStyles from 'material-ui/styles/withStyles';
 import FormGroup from 'material-ui/Form/FormGroup';
@@ -42,6 +46,7 @@ class ToggleButtonGroup extends Component {
     };
 
     render() {
+<<<<<<< HEAD
         const { handleToggleButtonClick, doNothing, handleCloneCheckboxChange } = this;
         const { payload: { value, isCloneChecked } } = this.state;
         const {
@@ -90,6 +95,28 @@ class ToggleButtonGroup extends Component {
                     })}
                 </FormGroup>
             </div>
+=======
+        const { handleToggleButtonClick, doNothing } = this;
+        const { children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = this.props;
+        toggleButtons = [];
+
+        return (
+            <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="TomisToggleButtonGroup" role="radiogroup" {...other}>
+                {Children.map(children, (child, index) => {
+                    const selected = selectedValue === child.props.value;
+                    return cloneElement(child, {
+                        key: index,
+                        name,
+                        inputRef: node => {
+                            toggleButtons.push(node);
+                        },
+                        checked: selected,
+                        onClick: handleToggleButtonClick,
+                        disabled: disabled || child.props.disabled
+                    });
+                })}
+            </FormGroup>
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
         );
     }
 }

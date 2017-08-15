@@ -11,6 +11,7 @@ import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
 
 const initState = props => {
+<<<<<<< HEAD
     const { value } = props;
     return {
         payload: {
@@ -20,51 +21,70 @@ const initState = props => {
         currentCharCount: 0,
         isFocused: false
     };
+=======
+  const { value } = props;
+  return {
+    payload: {
+      val: props.value,
+      isCloneChecked: true
+    },
+    currentCharCount: 0,
+    isFocused: false
+  };
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 };
 
 const defaultProps = {
-    id: `ts-${new Date().getTime()}`,
-    label: 'TS Field',
-    placeholder: 'TS Placeholder',
-    helperText: null,
-    disabled: false,
-    isCloneable: false,
-    disabledClone: false,
-    required: false
+  id: `ts-${new Date().getTime()}`,
+  label: 'TS Field',
+  placeholder: 'TS Placeholder',
+  helperText: null,
+  disabled: false,
+  isCloneable: false,
+  disabledClone: false,
+  required: false
 };
 
 const propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 class TomisTimeSpinner extends Component {
+<<<<<<< HEAD
     constructor(props) {
         super(props);
         this.state = initState(props);
     }
+=======
+  constructor(props) {
+    super(props);
+    this.state = initState(props);
+  }
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 
-    handleCloneCheckboxChange = (evt, isCloneChecked) => {
-        const { payload: { val } } = this.state;
-        this.setState({ payload: { isCloneChecked, val } });
-    };
+  handleCloneCheckboxChange = (evt, isCloneChecked) => {
+    const { payload: { val } } = this.state;
+    this.setState({ payload: { isCloneChecked, val } });
+  };
 
-    handleInputChange = evt => {
-        evt.stopPropagation();
-        const val = evt.target.value;
-        this.state.payload.val = val;
-        this.setState(this.state);
-    };
+  handleInputChange = evt => {
+    evt.stopPropagation();
+    const val = evt.target.value;
+    this.state.payload.val = val;
+    this.setState(this.state);
+  };
 
-    handleClickUpArrow = evt => {
-        evt.stopPropagation();
-        console.log('handleClickUpArrow');
-    };
+  handleClickUpArrow = evt => {
+    evt.stopPropagation();
+    console.log('handleClickUpArrow');
+  };
 
-    handleClickDownArrow = evt => {
-        evt.stopPropagation();
-        console.log('handleClickDownArrow');
-    };
+  handleClickDownArrow = evt => {
+    evt.stopPropagation();
+    console.log('handleClickDownArrow');
+  };
 
+<<<<<<< HEAD
     render() {
         const { handleInputChange, handleCloneCheckboxChange, handleClickUpArrow, handleClickDownArrow } = this;
         const { payload: { val, isCloneChecked } } = this.state;
@@ -160,6 +180,102 @@ class TomisTimeSpinner extends Component {
             </FormControl>
         );
     }
+=======
+  render() {
+    const { handleInputChange, handleCloneCheckboxChange, handleClickUpArrow, handleClickDownArrow } = this;
+    const { payload: { val, isCloneChecked } } = this.state;
+    const {
+      id,
+      label,
+      placeholder,
+      disabled,
+      helperText,
+      classes: {
+        formControl: clsFormControl,
+        inputLabel: clsInputLabel,
+        inputLabelCloneable: clsInputLabelCloneable,
+        formHelperText: clsFormHelperText,
+        checkbox: clsCheckbox,
+        checkboxDisabled: clsCheckboxDisabled,
+        inputBase: clsInputBase,
+        inputCloneable: clsInputCloneable,
+        inputDisabled: clsInputDisabled,
+        inputSpinner: clsInputSpinner,
+        inputSpinnerCloneable: clsInputSpinnerCloneable,
+        arrowsBase: clsArrowsBase,
+        arrowsCloneableTrue: clsArrowsCloneableTrue,
+        arrowsCloneableFalse: clsArrowsCloneableFalse,
+        arrowsDisabled: clsArrowsDisabled,
+        arrowUp: clsArrowUp,
+        arrowDown: clsArrowDown
+      },
+      isCloneable,
+      disabledClone,
+      required
+    } = this.props;
+    const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder });
+    return (
+      <FormControl className={clsFormControl} margin="dense">
+        {isDisplayCloneable &&
+          <Checkbox
+            className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
+            onChange={handleCloneCheckboxChange}
+            disabled={isDisabled || disabledClone}
+            tabIndex="-1"
+            checked={isCloneChecked || disabledClone}
+          />}
+        <IconButton
+          className={cx(clsArrowsBase, clsArrowUp, {
+            [clsArrowsCloneableTrue]: isDisplayCloneable,
+            [clsArrowsCloneableFalse]: !isDisplayCloneable,
+            [clsArrowsDisabled]: isDisabled
+          })}
+          disabled={isDisabled}
+          aria-label="Increase time"
+          onClick={handleClickUpArrow}
+        >
+          <TomisFontIcon name="arrow_drop_up" />
+        </IconButton>
+        <IconButton
+          className={cx(clsArrowsBase, clsArrowDown, {
+            [clsArrowsCloneableTrue]: isDisplayCloneable,
+            [clsArrowsCloneableFalse]: !isDisplayCloneable,
+            [clsArrowsDisabled]: isDisabled
+          })}
+          disabled={isDisabled}
+          aria-label="Decrease Time"
+          onClick={handleClickDownArrow}
+        >
+          <TomisFontIcon name="arrow_drop_down" />
+        </IconButton>
+        <TextField
+          id={id}
+          label={label}
+          labelClassName={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
+          placeholder={displayPlaceholder}
+          value={val}
+          disabled={disabled}
+          margin="dense"
+          fullWidth={true}
+          required={required}
+          onChange={handleInputChange}
+          inputClassName={cx(clsInputBase, {
+            [clsInputCloneable]: isDisplayCloneable,
+            [clsInputDisabled]: isDisabled,
+            [clsInputSpinner]: !isDisplayCloneable,
+            [clsInputSpinnerCloneable]: isDisplayCloneable
+          })}
+          inputProps={{
+            maxLength: 4
+          }}
+        />
+        <FormHelperText className={clsFormHelperText}>
+          {helperText}
+        </FormHelperText>
+      </FormControl>
+    );
+  }
+>>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 }
 TomisTimeSpinner.defaultProps = defaultProps;
 TomisTimeSpinner.propTypes = propTypes;
