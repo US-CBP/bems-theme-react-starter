@@ -3,14 +3,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { WithNotes } from '@storybook/addon-notes';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import createMuiTheme from 'material-ui/styles/theme';
+import createPalette from 'TomisApp/helpers/palette';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import TomisContainer from 'TomisApp/layouts/TomisContainer';
 import FormWithAllComponents from './FormWithAllComponents';
 import StarterPage from './StarterPage';
+import '../css/index.css';
 
-const theme = getMuiTheme(tomisTheme);
+const theme = createMuiTheme({ palette: createPalette(tomisTheme) });
 
 storiesOf('TOMIS Template', module)
     .addDecorator(story => {
@@ -18,7 +19,7 @@ storiesOf('TOMIS Template', module)
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: '100%', minWidth: 600 }}>
-                    <MuiThemeProvider muiTheme={theme}>
+                    <MuiThemeProvider theme={theme}>
                         {storyKind}
                     </MuiThemeProvider>
                 </div>
@@ -39,11 +40,3 @@ storiesOf('TOMIS Template', module)
             </TomisContainer>
         );
     });
-
-function withNote(note, child) {
-    return (
-        <WithNotes notes={note}>
-            {child || null}
-        </WithNotes>
-    );
-}

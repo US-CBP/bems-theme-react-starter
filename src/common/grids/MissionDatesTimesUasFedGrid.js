@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeaderTable, PanelBody } from 'TomisApp/TomisPanel';
 import MissionDatesTimesUasFedGridRender from './MissionDatesTimesUasFedGridRender';
+import moment from 'moment';
+import _cloneDeep from 'lodash/cloneDeep';
+import { subcategoryLovValues } from 'globalJs/testData';
 
-const tableData = [
+let tableData = (tableData = [
     {
         draggable: false,
         siteType: 'LRE',
@@ -40,67 +42,95 @@ const tableData = [
         duration: '00 + 00',
         endTime: '0100'
     }
+]);
+
+let shadowTableData = _cloneDeep(tableData);
+
+const columnData = [
+    { id: 'draggable', numeric: false, disablePadding: false, label: '', cell: null },
+    { id: 'siteType', numeric: false, disablePadding: false, label: 'Site Type', cell: null },
+    { id: 'siteName', numeric: false, disablePadding: false, label: 'Site Name*', cell: null },
+    { id: 'date', numeric: false, disablePadding: false, label: 'Date (Zulu)*', cell: null },
+    { id: 'time', numeric: false, disablePadding: false, label: 'Time (Zulu)*', cell: null },
+    { id: 'duration', numeric: false, disablePadding: false, label: 'Duration*<br />HH + MM', cell: null },
+    { id: 'delete', numeric: false, disablePadding: false, label: 'Delete', cell: null }
 ];
 
-const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
-let subCategoryEditValue = '';
-let subCategoryEditIdx = 0;
-let justificationEditValue = '';
-let justificationEditIdx = 0;
+const setStateActiveCell = (activeCell, state, props) => {
+    return { activeCell };
+};
 
 const initState = {
-    tableRowCnt: tableData.length
+    tableRowCnt: tableData.length,
+    activeCell: '',
+    refresh: 0
 };
 
 class MissionDatesTimesUasFedGrid extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState;
-        this.addRow = this.addRow.bind(this);
-        this.delRow = this.delRow.bind(this);
-        this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
-        this.handleSaveTableRowColumnDate = this.handleSaveTableRowColumnDate.bind(this);
-    }
+    state = initState;
 
-    addRow(evt) {
+    handleAddRow = evt => {
         evt.stopPropagation();
-        tableData.push({ name: '', status: '' });
+        tableData.push({ siteType: '', siteName: '', date: undefined, time: '', duration: '' });
         //force table refresh
         this.setState({ tableRowCnt: tableData.length });
-    }
+    };
 
-    delRow(idx, evt) {
+    handleDeleteRow = (idx, evt) => {
         evt.stopPropagation();
         tableData.splice(idx, 1);
         //force table refresh
         this.setState({ tableRowCnt: tableData.length });
-    }
+    };
 
-    handleSaveTableRowColumnValue(rowIdx, propertyName, newValue) {
-        tableData[rowIdx][propertyName] = newValue;
-        //force table refresh
-        this.setState({ tableRowCnt: tableData.length });
-    }
+    handleClickTableCell = activeCell => {
+        this.setState(setStateActiveCell.bind(null, activeCell));
+    };
 
-    handleSaveTableRowColumnDate(rowIdx, propertyName, newValue) {
-        tableData[rowIdx][propertyName] = newValue;
-        //force table refresh
-        this.setState({ tableRowCnt: tableData.length });
-    }
+    handleUpdateData = (idx, property, payload) => {
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleUpdateDataLov = (idx, property, payload) => {
+        console.log('handleUpdateDataLov payload=', payload);
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleUpdateDataDate = (idx, property, payload) => {
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleRequestClose = action => {
+        console.log('handleRequestClose action=', action);
+        if (action === 'SAVE') {
+            tableData = shadowTableData;
+        }
+        this.setState(setStateActiveCell.bind(null, ''));
+    };
 
     render() {
-        const { addRow, delRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate } = this;
+        const { handleUpdateData, handleUpdateDataLov, handleUpdateDataDate, handleClickTableCell, handleRequestClose, handleAddRow, handleDeleteRow } = this;
+        const { activeCell } = this.state;
         return (
-            <MissionDatesTimesUasFedGridRender
-                tableData={tableData}
-                addRow={addRow}
-                delRow={delRow}
-                handleSaveTableRowColumnValue={handleSaveTableRowColumnValue}
-                handleSaveTableRowColumnDate={handleSaveTableRowColumnDate}
-                subcategoryLovValues={subcategoryLovValues}
-            />
+            <div>
+                <MissionDatesTimesUasFedGridRender
+                    columnData={columnData}
+                    tableData={tableData}
+                    activeCell={activeCell}
+                    handleAddRow={handleAddRow}
+                    handleDeleteRow={handleDeleteRow}
+                    handleClickTableCell={handleClickTableCell}
+                    handleUpdateData={handleUpdateData}
+                    handleUpdateDataLov={handleUpdateDataLov}
+                    handleUpdateDataDate={handleUpdateDataDate}
+                    handleRequestClose={handleRequestClose}
+                    subcategoryLovValues={subcategoryLovValues}
+                />
+            </div>
         );
     }
 }
-
 export default MissionDatesTimesUasFedGrid;

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
+import TomisButtonFlat from 'TomisApp/TomisButtonFlat';
 
 const buttonDefinitions = [{ label: 'Cancel', onClick: () => {}, parms: { type: 'Cancel' } }, { label: 'Submit', onClick: () => {}, parms: { type: 'Ok' } }];
 
@@ -45,9 +45,9 @@ class TomisDialogConfirmation extends Component {
         const actions = buttonDefinitions.map((buttonDefinition, idx) => {
             const { label, onClick, parms } = buttonDefinition;
             return (
-                <Button key={`BTN-${idx}-${label}`} onClick={this.handleClickButton.bind(this, onClick, parms)} color="primary">
+                <TomisButtonFlat key={`BTN-${idx}-${label}`} onClick={this.handleClickButton.bind(this, onClick, parms)}>
                     {label}
-                </Button>
+                </TomisButtonFlat>
             );
         });
         return actions;

@@ -34,6 +34,19 @@ body {
     flex: 2;
 }
 
+/*rc-tooltip*/
+.rc-tooltip-inner {
+    min-height: auto;
+    font-family: Roboto;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 2px;
+}
+.rc-tooltip-arrow {
+    display: none;
+}
+
 /* Apply spacing to any flex- items inside a flex row */
 .flex-row > div[class *=flex-] {
     margin-right: 24px;
@@ -106,6 +119,7 @@ h3 {
 .panel-link {
     text-decoration: underline;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .info-field-label-pad {
@@ -350,4 +364,9 @@ h3 {
 
 [placeholder] {
     text-overflow: ellipsis;
+}
+
+/* react-select */
+.Select-menu-outer {
+    z-index: 2000;
 }

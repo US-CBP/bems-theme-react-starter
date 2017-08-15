@@ -1,83 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeaderTable, PanelBody } from 'TomisApp/TomisPanel';
-import {
-  Table,
-  TableBody,
-  TableFooter,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-  TomisTextFieldTableRowColumn,
-  TomisDatePickerTableRowColumn,
-  TomisSelectTableRowColumn
-} from 'TomisApp/TomisTable';
-import Checkbox from 'TomisApp/TomisCheckbox';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from 'TomisApp/TomisIconButton';
-import ButtonRaisedSimplePrimary from 'TomisApp/TomisButtonRaisedSimplePrimary';
+import { TomisPanelTable } from 'TomisApp/TomisPanel';
+import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import TomisCheckbox from 'TomisApp/TomisCheckbox';
+import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
+import TomisFontIcon from 'TomisApp/TomisFontIcon';
+import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
+import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
+import { getCellRowColmId } from 'globalJs/functions';
 
 const propTypes = {
-  tableData: PropTypes.array.isRequired,
-  addRow: PropTypes.func.isRequired,
-  delRow: PropTypes.func.isRequired,
-  handleSaveTableRowColumnValue: PropTypes.func.isRequired,
-  handleSaveTableRowColumnDate: PropTypes.func.isRequired,
-  subcategoryLovValues: PropTypes.array.isRequired
+    tableData: PropTypes.array.isRequired,
+    handleAddRow: PropTypes.func.isRequired,
+    handleDeleteRow: PropTypes.func.isRequired,
+    handleUpdateDataLov: PropTypes.func.isRequired
 };
 
-class AgentInfoGridRender extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { tableData, addRow, delRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate, subcategoryLovValues } = this.props;
+const AgentInfoGridRender = props => {
+    const {
+        columnData,
+        tableData,
+        activeCell,
+        handleAddRow,
+        handleDeleteRow,
+        handleClickTableCell,
+        handleUpdateData,
+        handleUpdateDataLov,
+        handleUpdateDataDate,
+        handleRequestClose,
+        subcategoryLovValues
+    } = props;
     return (
-      <div className="flex-row row-spacer-24">
-        <Panel>
-          <PanelHeaderTable title="Agent Information">
-            <ButtonRaisedSimplePrimary label="Add Agent" onTouchTap={addRow} />
-          </PanelHeaderTable>
-          <PanelBody>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderColumn tooltip="Agent Name">Agent Name</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tableData.map((row, idx) =>
-                  <TableRow key={idx} selected={row.selected}>
-                    <TableRowColumn>
-                      <TomisSelectTableRowColumn
-                        hintText="Agent Name"
-                        floatingLabelText="Name*"
-                        rowPropertyName="name"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                        dataSource={subcategoryLovValues}
-                      />
-                    </TableRowColumn>
-
-                    <TableRowColumn>
-                      <IconButton tooltip="Delete Row" onTouchTap={delRow.bind(this, idx)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableRowColumn>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </PanelBody>
-        </Panel>
-      </div>
+        <div className="flex-row row-spacer-24">
+            <TomisPanelTable label="Agent Information">
+                <TomisButtonRaised label="Add Agent" onClick={handleAddRow} />
+                <TomisTable>
+                    <TomisTableHeader columnData={columnData} />
+                    <TomisTableBody>
+                        {tableData.map((row, idx) =>
+                            <TomisTableRow key={idx}>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'name'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'name')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisAutocomplete
+                                        placeholder="Select Name"
+                                        label="Name"
+                                        value={row['name']}
+                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'name')}
+                                        options={subcategoryLovValues}
+                                    />
+                                </TomisTableCellEdit>
+                                <TomisTableCell>
+                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
+                                        <TomisFontIcon name="delete" />
+                                    </TomisButtonIcon>
+                                </TomisTableCell>
+                            </TomisTableRow>
+                        )}
+                    </TomisTableBody>
+                </TomisTable>
+            </TomisPanelTable>
+        </div>
     );
-  }
-}
+};
 
 AgentInfoGridRender.propTypes = propTypes;
 export default AgentInfoGridRender;

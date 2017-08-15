@@ -1,11 +1,6 @@
 import indigo from 'material-ui/colors/indigo';
 import amber from 'material-ui/colors/amber';
 
-const primary1Color = indigo['900'];
-const primary2Color = indigo['600'];
-const accent1Color = amber['700'];
-const textColor = 'rgba(0,0,0,0.87)';
-
 const tomisTheme = {
     direction: 'ltr',
     common: {
@@ -14,7 +9,8 @@ const tomisTheme = {
         transparent: 'rgba(0, 0, 0, 0)',
         fullBlack: 'rgba(0, 0, 0, 1)',
         darkBlack: 'rgba(0, 0, 0, 0.87)',
-        lightBlack: 'rgba(0, 0, 0, 0.54)',
+        lightBlack: 'rgba(0, 0, 0, 0.87)',
+        lightBlackOriginal: 'rgba(0, 0, 0, 0.54)',
         minBlack: 'rgba(0, 0, 0, 0.26)',
         faintBlack: 'rgba(0, 0, 0, 0.12)',
         fullWhite: 'rgba(255, 255, 255, 1)',
@@ -38,7 +34,11 @@ const tomisTheme = {
                 helperText: 'rgba(255, 255, 255, 0.7)',
                 labelText: 'rgba(255, 255, 255, 0.7)',
                 inputText: 'rgba(255, 255, 255, 1)',
-                disabled: 'rgba(255, 255, 255, 0.5)'
+                disabled: 'rgba(255, 255, 255, 0.5)',
+                placeholder: {
+                    color: 'currentColor',
+                    opacity: 0.5
+                }
             },
             action: {
                 active: 'rgba(255, 255, 255, 1)',
@@ -55,7 +55,8 @@ const tomisTheme = {
         light: {
             text: {
                 primary: 'rgba(0, 0, 0, 0.87)',
-                secondary: 'rgba(0, 0, 0, 0.54)',
+                secondary: 'rgba(0, 0, 0, 0.87)',
+                secondaryOriginal: 'rgba(0, 0, 0, 0.54)',
                 disabled: 'rgba(0, 0, 0, 0.38)',
                 hint: 'rgba(0, 0, 0, 0.38)',
                 icon: 'rgba(0, 0, 0, 0.38)',
@@ -65,9 +66,14 @@ const tomisTheme = {
             input: {
                 bottomLine: 'rgba(0, 0, 0, 0.42)',
                 helperText: 'rgba(0, 0, 0, 0.54)',
-                labelText: 'rgba(0, 0, 0, 0.54)',
+                labelText: 'rgba(0, 0, 0, 0.87)',
+                labelTextOriginal: 'rgba(0, 0, 0, 0.54)',
                 inputText: 'rgba(0, 0, 0, 0.87)',
-                disabled: 'rgba(0, 0, 0, 0.42)'
+                disabled: 'rgba(0, 0, 0, 0.42)',
+                placeholder: {
+                    color: 'currentColor',
+                    opacity: 0.5
+                }
             },
             action: {
                 active: 'rgba(0, 0, 0, 0.54)',
@@ -83,7 +89,8 @@ const tomisTheme = {
     },
     text: {
         primary: 'rgba(0, 0, 0, 0.87)',
-        secondary: 'rgba(0, 0, 0, 0.54)',
+        secondary: 'rgba(0, 0, 0, 0.87)',
+        secondaryOriginal: 'rgba(0, 0, 0, 0.54)',
         disabled: 'rgba(0, 0, 0, 0.38)',
         hint: 'rgba(0, 0, 0, 0.38)',
         icon: 'rgba(0, 0, 0, 0.38)',
@@ -93,9 +100,14 @@ const tomisTheme = {
     input: {
         bottomLine: 'rgba(0, 0, 0, 0.42)',
         helperText: 'rgba(0, 0, 0, 0.54)',
-        labelText: 'rgba(0, 0, 0, 0.54)',
+        labelText: 'rgba(0, 0, 0, 0.87)',
+        labelTextOriginal: 'rgba(0, 0, 0, 0.54)',
         inputText: 'rgba(0, 0, 0, 0.87)',
-        disabled: 'rgba(0, 0, 0, 0.42)'
+        disabled: 'rgba(0, 0, 0, 0.42)',
+        placeholder: {
+            color: 'currentColor',
+            opacity: 0.5
+        }
     },
     action: {
         active: 'rgba(0, 0, 0, 0.54)',
@@ -109,19 +121,20 @@ const tomisTheme = {
     },
     primary: {
         '50': '#e3f2fd',
-        '100': '#bbdefb',
+        '100': indigo['100'],
         '200': '#90caf9',
         '300': '#64b5f6',
         '400': '#42a5f5',
-        '500': '#2196f3',
-        '600': '#1e88e5',
+        '500': indigo['900'],
+        '500Original': '#2196f3',
+        '600': indigo['600'],
         '700': '#1976d2',
         '800': '#1565c0',
-        '900': primary1Color,
+        '900': indigo['900'],
         A100: '#82b1ff',
         A200: '#448aff',
         A400: '#2979ff',
-        A700: primary1Color,
+        A700: indigo['900'],
         contrastDefaultColor: 'light'
     },
     accent: {
@@ -129,10 +142,10 @@ const tomisTheme = {
         '100': '#f8bbd0',
         '200': '#f48fb1',
         '300': '#f06292',
-        '400': '#ec407a',
+        '400': amber['400'],
         '500': '#e91e63',
         '600': '#d81b60',
-        '700': accent1Color,
+        '700': amber['700'],
         '800': '#ad1457',
         '900': '#880e4f',
         A100: '#ff80ab',

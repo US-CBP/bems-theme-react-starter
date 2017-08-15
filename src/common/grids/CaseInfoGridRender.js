@@ -1,121 +1,93 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeaderTable, PanelBody } from 'TomisApp/TomisPanel';
-import {
-  Table,
-  TableBody,
-  TableFooter,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-  TomisTextFieldTableRowColumn,
-  TomisDatePickerTableRowColumn,
-  TomisSelectTableRowColumn
-} from 'TomisApp/TomisTable';
-import Checkbox from 'TomisApp/TomisCheckbox';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from 'TomisApp/TomisIconButton';
-import ButtonRaisedSimplePrimary from 'TomisApp/TomisButtonRaisedSimplePrimary';
-import TomisCheckboxClone from 'TomisApp/TomisCheckboxClone';
+import { TomisPanelTable } from 'TomisApp/TomisPanel';
+import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import TomisCheckbox from 'TomisApp/TomisCheckbox';
+import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
+import TomisFontIcon from 'TomisApp/TomisFontIcon';
+import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
+import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisDatePicker from 'TomisApp/TomisDatePicker';
+import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
+import TomisDuration from 'common/TomisDuration';
+import { getCellRowColmId } from 'globalJs/functions';
 
-const propTypes = {
-  tableData: PropTypes.array.isRequired,
-  addRow: PropTypes.func.isRequired,
-  delRow: PropTypes.func.isRequired,
-  handleSaveTableRowColumnValue: PropTypes.func.isRequired,
-  handleSaveTableRowColumnDate: PropTypes.func.isRequired,
-  subcategoryLovValues: PropTypes.array.isRequired
+const CaseInfoGridRender = props => {
+    const {
+        columnData,
+        tableData,
+        activeCell,
+        handleAddRow,
+        handleDeleteRow,
+        handleClickTableCell,
+        handleUpdateData,
+        handleUpdateDataLov,
+        handleUpdateDataDate,
+        handleRequestClose,
+        subcategoryLovValues
+    } = props;
+    return (
+        <div className="flex-row row-spacer-24">
+            <TomisPanelTable label="Case Information">
+                <TomisButtonRaised label="Add Case" onClick={handleAddRow} />
+                <TomisTable>
+                    <TomisTableHeader columnData={columnData} />
+                    <TomisTableBody>
+                        {tableData.map((row, idx) =>
+                            <TomisTableRow key={idx}>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'caseNbr'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'caseNbr')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisTextFieldSingleLine placeholder="Type Case #" value={row['caseNbr']} reportToHoc={handleUpdateData.bind(null, idx, 'caseNbr')} />
+                                </TomisTableCellEdit>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'agentFullName'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'agentFullName')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisTextFieldSingleLine
+                                        placeholder="Type Agent Full Name"
+                                        value={row['agentFullName']}
+                                        reportToHoc={handleUpdateData.bind(null, idx, 'agentFullName')}
+                                    />
+                                </TomisTableCellEdit>
+
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'agentPhoneNbr'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'agentPhoneNbr')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisTextFieldSingleLine
+                                        placeholder="Type Agent Phone #"
+                                        value={row['agentPhoneNbr']}
+                                        reportToHoc={handleUpdateData.bind(null, idx, 'agentPhoneNbr')}
+                                    />
+                                </TomisTableCellEdit>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'description'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'description')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisTextFieldSingleLine
+                                        placeholder="Type Case Description"
+                                        value={row['description']}
+                                        reportToHoc={handleUpdateData.bind(null, idx, 'description')}
+                                    />
+                                </TomisTableCellEdit>
+                                <TomisTableCell>
+                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
+                                        <TomisFontIcon name="delete" />
+                                    </TomisButtonIcon>
+                                </TomisTableCell>
+                            </TomisTableRow>
+                        )}
+                    </TomisTableBody>
+                </TomisTable>
+            </TomisPanelTable>
+        </div>
+    );
 };
 
-class CaseInfoGridRender extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { tableData, addRow, delRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate, subcategoryLovValues } = this.props;
-    return (
-      <div>
-        <Panel>
-          <PanelHeaderTable title="Case Information">
-            <ButtonRaisedSimplePrimary label="Add Case" onTouchTap={addRow} />
-          </PanelHeaderTable>
-          <PanelBody>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderColumn tooltip="Case #">
-                    Case #
-                    {/*<div className="flex-row flex-align-center">
-                      <TomisCheckboxClone />
-                      <span>Case #</span>
-                    </div>*/}
-                  </TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Agent Full Name">Agent Full Name</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Agent Phone #">Agent Phone #</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Case Description">Case Description</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tableData.map((row, idx) =>
-                  <TableRow key={idx} selected={row.selected}>
-                    <TableRowColumn>
-                      <TomisTextFieldTableRowColumn
-                        hintText="Type Case #"
-                        floatingLabelText="Case #"
-                        rowPropertyName="status"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <TomisTextFieldTableRowColumn
-                        hintText="Type Agent Full Name"
-                        floatingLabelText="Agent Full Name"
-                        rowPropertyName="status"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <TomisTextFieldTableRowColumn
-                        hintText="Agent Phone #"
-                        floatingLabelText="Agent Phone #"
-                        rowPropertyName="status"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <TomisTextFieldTableRowColumn
-                        hintText="Type Case Description"
-                        floatingLabelText="Case Description*"
-                        rowPropertyName="desc"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <IconButton tooltip="Delete Row" onTouchTap={delRow.bind(this, idx)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableRowColumn>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </PanelBody>
-        </Panel>
-      </div>
-    );
-  }
-}
-
-CaseInfoGridRender.propTypes = propTypes;
 export default CaseInfoGridRender;

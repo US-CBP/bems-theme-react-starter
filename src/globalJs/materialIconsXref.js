@@ -2,6 +2,7 @@
 export const materialIconsXref = {
     menu: '\ue5d2',
     public: '\ue80b',
+    arrow_drop_down: '\ue5c5',
     today: '\ue8df',
     date_range: '\ue916',
     event_note: '\ue616',

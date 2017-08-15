@@ -3,18 +3,15 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { getDisplayVals, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
-// import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
-import cx from 'classnames';
-import InputLabel from 'material-ui/Input/InputLabel';
-import Input from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
+import cx from 'classnames';
 
 const defaultProps = {
     id: `tfs-${new Date().getTime()}`,
-    label: 'TFS Field',
-    placeholder: 'TFS Placeholder',
+    label: null,
+    placeholder: null,
     helperText: null,
     disabled: false,
     isCloneable: false,
@@ -23,19 +20,27 @@ const defaultProps = {
     multiline: false
 };
 
-const propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
-class TomisTextFieldSingleLine extends Component {
-    state = {
+const initState = props => {
+    const { value } = props;
+    return {
         payload: {
-            val: '',
+            value: props.value || '',
             isCloneChecked: true
         },
         currentCharCount: 0,
         isFocused: false
     };
+};
+
+const propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+class TomisTextFieldSingleLine extends Component {
+    constructor(props) {
+        super(props);
+        this.state = initState(props);
+    }
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
         this.state.payload.isCloneChecked = isCloneChecked;
@@ -45,13 +50,14 @@ class TomisTextFieldSingleLine extends Component {
     handleInputChange = evt => {
         evt.stopPropagation();
         const val = evt.target.value;
-        this.state.payload.val = val;
+        this.state.payload.value = val;
         this.state.currentCharCount = val.length;
         this.setState(this.state);
     };
 
     handleInputFocus = evt => {
         evt.stopPropagation();
+        evt.preventDefault();
         this.setState({ isFocused: true });
     };
 
@@ -62,7 +68,7 @@ class TomisTextFieldSingleLine extends Component {
 
     render() {
         const { handleInputChange, handleCloneCheckboxChange, handleInputBlur, handleInputFocus } = this;
-        const { payload: { val, isCloneChecked }, currentCharCount, isFocused } = this.state;
+        const { payload: { value, isCloneChecked }, currentCharCount, isFocused } = this.state;
         const {
             id,
             label,
@@ -76,22 +82,35 @@ class TomisTextFieldSingleLine extends Component {
                 formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
-                inpBase: clsInpBase,
-                inpMultilineBase: clsInpMultilineBase,
-                inpCloneable: clsInpCloneable,
-                inpDisabled: clsInpDisabled
+                inputBase: clsInputBase,
+                inputBaseMultiLine: clsInputBaseMultiLine,
+                inputCloneable: clsInputCloneable,
+                inputDisabled: clsInputDisabled,
+                readOnly: clsReadOnly
             },
             isCloneable,
+            isReadOnly,
             disabledClone,
             required,
             maxLength,
             multiline = false,
             rows,
-            rowsMax
+            rowsMax,
+            floatingLabelText,
+            hintText,
+            error
         } = this.props;
-        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({ disabled, isCloneable, disabledClone, readOnly: false, placeholder, multiline });
+        const usePlaceholder = placeholder || hintText;
+        const { isDisabled, displayPlaceholder, isDisplayCloneable } = getDisplayVals({
+            disabled,
+            isCloneable,
+            disabledClone,
+            readOnly: false,
+            placeholder: usePlaceholder,
+            multiline
+        });
         return (
-            <FormControl className={clsFormControl} margin="dense">
+            <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!isReadOnly })} margin="dense" error={error}>
                 {isDisplayCloneable &&
                     <Checkbox
                         className={cx(clsCheckbox, { [clsCheckboxDisabled]: isDisabled || disabledClone })}
@@ -102,11 +121,11 @@ class TomisTextFieldSingleLine extends Component {
                     />}
                 <TextField
                     id={id}
-                    label={label}
+                    label={label || floatingLabelText}
                     labelClassName={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
                     placeholder={displayPlaceholder}
-                    value={val}
-                    disabled={disabled}
+                    value={value}
+                    disabled={isDisabled}
                     margin="dense"
                     fullWidth={true}
                     required={required}
@@ -116,15 +135,19 @@ class TomisTextFieldSingleLine extends Component {
                     multiline={multiline}
                     rows={rows}
                     rowsMax={rowsMax}
+                    error={error}
                     inputClassName={cx({
-                        [clsInpBase]: !multiline,
-                        [clsInpMultilineBase]: multiline,
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsInpDisabled]: isDisabled
+                        [clsInputBase]: !multiline,
+                        [clsInputCloneable]: isDisplayCloneable,
+                        [clsInputDisabled]: isDisabled,
+                        [clsInputBaseMultiLine]: multiline
                     })}
                     inputProps={{
-                        maxLength
+                        maxLength,
+                        readOnly: !!isReadOnly
                     }}
+                    InputLabelProps={{ disabled: isDisabled }}
+                    InputProps={{ disableUnderline: !!isReadOnly }}
                 />
                 <FormHelperText className={clsFormHelperText}>
                     <span>

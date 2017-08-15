@@ -69,7 +69,7 @@ function TableCellEdit(props, context) {
 
     // render() {
     return (
-        <td className={className} onClick={handleClick.bind(null, onRequestOpen)} {...other} style={{ maxWidth: '256px' }}>
+        <td className={className} onClick={handleClick.bind(null, onRequestOpen)} {...other}>
             {React.Children.map(children, (child, idx) => {
                 // Obtain properties from first child to display as read-only text
                 if (idx > 1) return;

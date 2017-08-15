@@ -1,87 +1,82 @@
+import { createStyleSheet } from 'material-ui/styles';
 import tomisTheme from 'app/themes/tomisLightTheme.js';
 
 export const getStatusBarStyle = props => {
-  const { muiTheme: { palette: { primary1Color } } } = props;
-  return {
-    backgroundColor: primary1Color
-  };
+    const { muiTheme: { palette: { primary1Color } } } = props;
+    return {
+        backgroundColor: primary1Color
+    };
 };
 
-export const getStatusBarTitleStyle = props => {
-  const { muiTheme: { palette: { alternateTextColor } } } = props;
-  return {
-    color: alternateTextColor,
-    marginLeft: '16px',
-    lineHeight: '14px'
-  };
+export const getStatusBarTitleStyle = () => {
+    return {
+        color: tomisTheme.common.white,
+        marginLeft: '16px',
+        lineHeight: '14px'
+    };
 };
 
-export const getToolbarTitleStyle = props => {
-  const { muiTheme: { palette: { alternateTextColor } } } = props;
-  return {
-    color: alternateTextColor
-  };
+export const getToolbarTitleStyle = () => {
+    return {
+        color: tomisTheme.common.white
+    };
 };
 
-export const getActionBarPopoverStyle = props => {
-  return {
-    marginLeft: '0',
-    marginRight: '0',
-    lineHeight: '12px',
-    whiteSpace: 'nowrap'
-  };
+export const getActionBarPopoverStyle = () => {
+    return {
+        marginLeft: '0',
+        marginRight: '0',
+        lineHeight: '12px',
+        whiteSpace: 'nowrap'
+    };
 };
 
-export const getActionBarLovStyle = props => {
-  const { muiTheme: { palette: { alternateTextColor } } } = props;
-  return {
-    color: alternateTextColor
-  };
+export const getActionBarLovStyle = () => {
+    return {
+        color: tomisTheme.common.white
+    };
 };
 
 export const getStatusBarSubTitleStyle = props => {
-  const { muiTheme: { palette: { alternateTextColor } } } = props;
-  return {
-    color: alternateTextColor,
-    lineHeight: '14px',
-    fontStyle: 'italic',
-    paddingLeft: '16px'
-  };
+    const { muiTheme: { palette: { alternateTextColor } } } = props;
+    return {
+        color: alternateTextColor,
+        lineHeight: '14px',
+        fontStyle: 'italic',
+        paddingLeft: '16px'
+    };
 };
 
 export const getActionBarStyle = props => {
-  const { muiTheme: { palette: { primary2Color } } } = props;
-  return {
-    backgroundColor: primary2Color
-  };
+    return {
+        backgroundColor: tomisTheme.primary['600']
+    };
 };
 
 export const getActionBarLabelStyle = props => {
-  const { muiTheme: { palette: { secondaryTextColor } } } = props;
-  return {
-    color: secondaryTextColor
-  };
+    const { muiTheme: { palette: { secondaryTextColor } } } = props;
+    return {
+        color: secondaryTextColor
+    };
 };
 
 export const getAppBarIconColor = () => {
-  const { palette: { secondaryTextColor } } = tomisTheme;
-  return secondaryTextColor;
+    return tomisTheme.common.white;
 };
 
 export const getActionBarIconColor = props => {
-  const { muiTheme: { palette: { secondaryTextColor } } } = props;
-  return secondaryTextColor;
+    return tomisTheme.common.white;
 };
 
 export const getLoggedInSocialPersonStyle = props => {
-  return {
-    minWidth: '24px'
-  };
+    return {
+        minWidth: '24px'
+    };
 };
 
 export const getDrawerNavigationIconColor = props => {
-  const { muiTheme: { palette: { primaryTextColor } } } = props;
-  return primaryTextColor;
+    const { muiTheme: { palette: { primaryTextColor } } } = props;
+    return primaryTextColor;
 };
 
 // export const getFloatingLabelStyle = props => {
@@ -93,33 +88,84 @@ export const getDrawerNavigationIconColor = props => {
 // };
 
 export const getTextFieldAlternateTextStyle = props => {
-  const { muiTheme: { palette: { alternateTextColor } } } = props;
-  return {
-    color: alternateTextColor,
-    borderColor: alternateTextColor
-  };
+    const { muiTheme: { palette: { alternateTextColor } } } = props;
+    return {
+        color: alternateTextColor,
+        borderColor: alternateTextColor
+    };
 };
 
 export const getTextFieldDisabledTextStyle = props => {
-  const { muiTheme: { palette: { disabledColor } } } = props;
-  return {
-    color: disabledColor,
-    borderColor: disabledColor
-  };
+    const { muiTheme: { palette: { disabledColor } } } = props;
+    return {
+        color: disabledColor,
+        borderColor: disabledColor
+    };
 };
 
 export const getDrawerSearchTextFieldFocusStyle = props => {
-  const { muiTheme: { palette: { accent1Color } } } = props;
-  return {
-    color: accent1Color,
-    borderColor: accent1Color
-  };
+    const { muiTheme: { palette: { accent1Color } } } = props;
+    return {
+        color: accent1Color,
+        borderColor: accent1Color
+    };
 };
 
 export const getDrawerSearchListStyle = props => {
-  return { paddingBottom: '0' };
+    return { paddingBottom: '0' };
 };
 
 export const getDrawerSearchListItemStyle = props => {
-  return { paddingLeft: '0', paddingRight: '0', paddingBottom: '0', paddingTop: '0' };
+    return { paddingLeft: '0', paddingRight: '0', paddingBottom: '0', paddingTop: '0' };
 };
+
+//Keep class names in alphabetical order to maintain our sanity
+const getHeaderNavActionStyles = theme => {
+    return {
+        actionBar: {
+            backgroundColor: theme.palette.primary['600']
+        },
+        drawer: {
+            width: '360px'
+        },
+        drawerList: {
+            paddingTop: 0
+        },
+        firstGroup: {
+            marginLeft: '16px'
+        },
+        flatPrimary: {
+            color: theme.palette.common.white
+        },
+        headerBar: {
+            backgroundColor: theme.palette.primary['900']
+        },
+        listItemFirst: {
+            paddingTop: 0
+        },
+        pageTitle: {
+            display: 'flex',
+            alignItems: 'center'
+        },
+        text: {
+            fontFamily: 'Roboto',
+            color: theme.palette.common.white
+        },
+        textHeader: {
+            fontSize: '20px'
+        },
+        textSubheader: {
+            fontStyle: 'italic'
+        },
+        toolbar: {
+            height: '56px',
+            justifyContent: 'space-between',
+            [theme.breakpoints.up('sm')]: {
+                minHeight: 56
+            }
+        }
+    };
+};
+export const headerNavActionStyleSheet = createStyleSheet('TomisHeaderNavAction', theme => {
+    return getHeaderNavActionStyles(theme);
+});

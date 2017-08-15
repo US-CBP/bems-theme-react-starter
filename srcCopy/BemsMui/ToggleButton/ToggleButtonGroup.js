@@ -3,7 +3,7 @@
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { bemsMuiToggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import { toggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import withStyles from 'material-ui/styles/withStyles';
 import FormGroup from 'material-ui/Form/FormGroup';
 
@@ -80,4 +80,4 @@ ToggleButtonGroup.propTypes = {
     selectedValue: PropTypes.string
 };
 
-export default withStyles(bemsMuiToggleButtonGroupStyleSheet)(ToggleButtonGroup);
+export default withStyles(toggleButtonGroupStyleSheet)(ToggleButtonGroup);

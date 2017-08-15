@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisToggle from 'TomisApp/TomisToggle';
+import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
 const propTypes = {
-  handleChangeLocalZulu: PropTypes.func.isRequired,
-  localZuluValue: PropTypes.string.isRequired
+    handleChangeLocalZulu: PropTypes.func.isRequired,
+    localZuluValue: PropTypes.string.isRequired
 };
 
 class ToggleButtonLocalZuluRender extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { localZuluValue, handleChangeLocalZulu, isCloneable, disabledClone, toggleOptions } = this.props;
-    return (
-      <TomisToggle
-        labelText="Local/Zulu"
-        isCloneable={isCloneable}
-        disabledClone={disabledClone}
-        valueSelected={localZuluValue}
-        options={toggleOptions}
-        onChange={handleChangeLocalZulu}
-      />
-    );
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const { localZuluValue, handleChangeLocalZulu, isCloneable, disabledClone, disabled } = this.props;
+        return (
+            <ToggleButtonGroup
+                aria-label="local-zulu"
+                name="local-zulu"
+                label="Local/Zulu"
+                isCloneable={isCloneable}
+                disabledClone={disabledClone}
+                disabled={disabled}
+                selectedValue={localZuluValue}
+                onChange={handleChangeLocalZulu}
+            >
+                <ToggleButton label="Local" value="LOCAL" checked={localZuluValue === 'LOCAL'} />
+                <ToggleButton label="Zulu" value="ZULU" checked={localZuluValue === 'ZULU'} />
+            </ToggleButtonGroup>
+        );
+    }
 }
 
 ToggleButtonLocalZuluRender.propTypes = propTypes;

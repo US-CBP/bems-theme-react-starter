@@ -10,6 +10,18 @@ import IconButton from 'material-ui/IconButton';
 import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
 
+const initState = props => {
+    const { value } = props;
+    return {
+        payload: {
+            val: props.value,
+            isCloneChecked: true
+        },
+        currentCharCount: 0,
+        isFocused: false
+    };
+};
+
 const defaultProps = {
     id: `ts-${new Date().getTime()}`,
     label: 'TS Field',
@@ -26,12 +38,10 @@ const propTypes = {
 };
 
 class TomisTimeSpinner extends Component {
-    state = {
-        payload: {
-            val: '',
-            isCloneChecked: true
-        }
-    };
+    constructor(props) {
+        super(props);
+        this.state = initState(props);
+    }
 
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
         const { payload: { val } } = this.state;
@@ -71,10 +81,11 @@ class TomisTimeSpinner extends Component {
                 formHelperText: clsFormHelperText,
                 checkbox: clsCheckbox,
                 checkboxDisabled: clsCheckboxDisabled,
-                inpBase: clsInpBase,
-                inpCloneable: clsInpCloneable,
-                inpDisabled: clsInpDisabled,
-                inpSpinner: clsInpSpinner,
+                inputBase: clsInputBase,
+                inputCloneable: clsInputCloneable,
+                inputDisabled: clsInputDisabled,
+                inputSpinner: clsInputSpinner,
+                inputSpinnerCloneable: clsInputSpinnerCloneable,
                 arrowsBase: clsArrowsBase,
                 arrowsCloneableTrue: clsArrowsCloneableTrue,
                 arrowsCloneableFalse: clsArrowsCloneableFalse,
@@ -127,15 +138,18 @@ class TomisTimeSpinner extends Component {
                     labelClassName={cx({ [clsInputLabelCloneable]: isDisplayCloneable, [clsInputLabel]: !isDisplayCloneable })}
                     placeholder={displayPlaceholder}
                     value={val}
-                    disabled={disabled}
+                    disabled={isDisabled}
                     margin="dense"
                     fullWidth={true}
                     required={required}
                     onChange={handleInputChange}
-                    inputClassName={cx(clsInpBase, clsInpSpinner, {
-                        [clsInpCloneable]: isDisplayCloneable,
-                        [clsInpDisabled]: isDisabled
+                    inputClassName={cx(clsInputBase, {
+                        [clsInputCloneable]: isDisplayCloneable,
+                        [clsInputDisabled]: isDisabled,
+                        [clsInputSpinner]: !isDisplayCloneable,
+                        [clsInputSpinnerCloneable]: isDisplayCloneable
                     })}
+                    InputLabelProps={{ disabled: isDisabled }}
                     inputProps={{
                         maxLength: 4
                     }}

@@ -6,46 +6,34 @@ import withStyles from 'material-ui/styles/withStyles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import Collapse from 'material-ui/transitions/Collapse';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import Paper from 'material-ui/Paper';
 
-export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
-    flex: {
-        flex: 1
-    },
+export const styleSheet = createStyleSheet('TomisPanel', theme => ({
     root: {
-        marginTop: 30,
-        width: '100%',
-        display: 'block',
-        alignItems: 'center',
-        position: 'relative',
-        textDecoration: 'none'
+        padding: '8px',
+        width: '100%'
     },
     appBar: {
         boxShadow: 'none'
     },
-    container: {
-        position: 'relative'
+    colorPrimary: {
+        backgroundColor: theme.palette.primary[100],
+        color: theme.palette.getContrastText(theme.palette.primary[100])
     },
-    keyboardFocused: {
-        background: theme.palette.text.divider
+    colorPrimaryTable: {
+        backgroundColor: theme.palette.grey['300'],
+        color: theme.palette.getContrastText(theme.palette.grey['300'])
     },
-    default: {
-        paddingTop: 12,
-        paddingBottom: 12
+    title: {
+        fontSize: '15px',
+        fontWeight: 'normal',
+        marginTop: '4px'
     },
-    dense: {
-        paddingTop: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
-    },
-    disabled: {
-        opacity: 0.5
-    },
-    divider: {
-        borderBottom: `1px solid ${theme.palette.text.lightDivider}`
+    flex: {
+        flex: 1
     },
     expand: {
         transform: 'rotate(-180deg)',
@@ -56,15 +44,9 @@ export const styleSheet = createStyleSheet('BemsMuiPanel', theme => ({
     expandOpen: {
         transform: 'rotate(0deg)'
     },
-    gutters: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2
-    },
-    secondaryAction: {
-        top: 0,
-        marginTop: 0,
-        display: 'flex',
-        alignItems: 'center'
+    toolBar: {
+        minHeight: '56px',
+        paddingRight: '4px'
     }
 }));
 
@@ -72,51 +54,21 @@ const defaultProps = {};
 
 const propTypes = {
     /**
-     * Can be used to render elements inside the Card.
+     * Final child is considered the Panel body.  All other children are actions that are placed in the header area.
      */
     children: PropTypes.node,
     /**
-     * Override the inline-styles of the container element.
+     * Text that appears in header on left-hand side.
      */
-    containerStyle: PropTypes.object,
+    label: PropTypes.string.isRequired,
+
     /**
-     * If true, this card component is expandable. Can be set on any child of the `Card` component.
-     */
-    expandable: PropTypes.bool,
-    /**
-     * Whether this card is expanded.
-     * If `true` or `false` the component is controlled.
-     * if `null` the component is uncontrolled.
-     */
-    expanded: PropTypes.bool,
-    /**
-     * Whether this card is initially expanded.
-     */
-    initiallyExpanded: PropTypes.bool,
-    /**
-     * Callback function fired when the `expandable` state of the card has changed.
-     *
-     * @param {boolean} newExpandedState Represents the new `expanded` state of the card.
-     */
-    onExpandChange: PropTypes.func,
-    /**
-     * If true, this card component will include a button to expand the card. `CardTitle`,
-     * `CardHeader` and `CardActions` implement `showExpandableButton`. Any child component
-     * of `Card` can implements `showExpandableButton` or forwards the property to a child
-     * component supporting it.
-     */
-    showExpandableButton: PropTypes.bool,
-    /**
-     * Override the inline-styles of the root element.
-     */
-    style: PropTypes.object
+     * If true, display using panel table background color.
+    */
+    isTable: PropTypes.bool
 };
 
 class TomisPanel extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         expanded: true
     };
@@ -125,17 +77,10 @@ class TomisPanel extends Component {
         this.setState({ expanded: !this.state.expanded });
     };
 
-    // getChildContext() {
-    //   return {
-    //     dense: this.props.dense || this.context.dense || false
-    //   };
-    // }
-
     render() {
         const { handleClickExpand } = this;
         const { expanded } = this.state;
-        const { title, children: childrenProp, classes, className: classNameProp, dense, disableGutters, ...other } = this.props;
-        const isDense = dense || this.context.dense || false;
+        const { label, children: childrenProp, classes, className: classNameProp, disableGutters, isTable = false, ...other } = this.props;
         const children = React.Children.toArray(childrenProp);
         //All children except for final child are considered to be "actions" placed in header.
         //Final child is the only component that is expanded/collapsed - considered the panel body
@@ -144,21 +89,21 @@ class TomisPanel extends Component {
             panelBody = children.pop();
         }
         return (
-            <Paper>
-                <AppBar position="static" className={classes.appBar}>
-                    <Toolbar>
-                        <Typography type="title" color="inherit" className={classes.flex}>
-                            {title}
+            <Paper className={classNames(classes.root)}>
+                <AppBar position="static" className={classNames(classes.appBar, { [classes.colorPrimary]: !isTable }, { [classes.colorPrimaryTable]: isTable })}>
+                    <Toolbar className={classNames(classes.toolBar)}>
+                        <Typography type="title" color="inherit" className={classNames(classes.flex, classes.title)}>
+                            {label}
                         </Typography>
                         {children}
                         <TomisButtonIcon
                             className={classNames(classes.expand, {
                                 [classes.expandOpen]: expanded
                             })}
-                            icon={<TomisFontIcon color="#ffffff" name="keyboard_arrow_up" />}
+                            icon={<TomisFontIcon name="keyboard_arrow_up" />}
                             onClick={handleClickExpand}
                             aria-expanded={expanded}
-                            aria-label="Show more"
+                            aria-label="Open/Close"
                         />
                     </Toolbar>
                 </AppBar>

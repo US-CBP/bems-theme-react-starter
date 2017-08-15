@@ -1,106 +1,93 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeaderTable, PanelBody } from 'TomisApp/TomisPanel';
-import {
-  Table,
-  TableBody,
-  TableFooter,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-  TomisTextFieldTableRowColumn,
-  TomisDatePickerTableRowColumn,
-  TomisSelectTableRowColumn
-} from 'TomisApp/TomisTable';
-import Checkbox from 'TomisApp/TomisCheckbox';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import IconButton from 'TomisApp/TomisIconButton';
-import ButtonRaisedSimplePrimary from 'TomisApp/TomisButtonRaisedSimplePrimary';
+import { TomisPanelTable } from 'TomisApp/TomisPanel';
+import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import TomisCheckbox from 'TomisApp/TomisCheckbox';
+import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
+import TomisFontIcon from 'TomisApp/TomisFontIcon';
+import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
+import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisDatePicker from 'TomisApp/TomisDatePicker';
+import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
+import TomisDuration from 'common/TomisDuration';
+import { getCellRowColmId } from 'globalJs/functions';
 
-const propTypes = {
-  tableData: PropTypes.array.isRequired,
-  addRow: PropTypes.func.isRequired,
-  delRow: PropTypes.func.isRequired,
-  handleSaveTableRowColumnValue: PropTypes.func.isRequired,
-  handleSaveTableRowColumnDate: PropTypes.func.isRequired,
-  subcategoryLovValues: PropTypes.array.isRequired
+const LocationInfoGridRender = props => {
+    const {
+        columnData,
+        tableData,
+        activeCell,
+        handleAddRow,
+        handleDeleteRow,
+        handleClickTableCell,
+        handleUpdateData,
+        handleUpdateDataLov,
+        handleUpdateDataDate,
+        handleRequestClose,
+        subcategoryLovValues
+    } = props;
+    return (
+        <div className="flex-row row-spacer-24">
+            <TomisPanelTable label="Location Information">
+                <TomisButtonRaised label="Add Location" onClick={handleAddRow} />
+                <TomisTable>
+                    <TomisTableHeader columnData={columnData} />
+                    <TomisTableBody>
+                        {tableData.map((row, idx) =>
+                            <TomisTableRow key={idx}>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'locationName'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'locationName')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisTextFieldSingleLine
+                                        placeholder="Enter an Airport Code,..."
+                                        value={row['locationName']}
+                                        required={true}
+                                        reportToHoc={handleUpdateData.bind(null, idx, 'locationName')}
+                                    />
+                                </TomisTableCellEdit>
+
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'city'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'city')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisAutocomplete
+                                        placeholder="Select City"
+                                        required={true}
+                                        label="City"
+                                        value={row['city']}
+                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'city')}
+                                        options={subcategoryLovValues}
+                                    />
+                                </TomisTableCellEdit>
+                                <TomisTableCellEdit
+                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'state'))}
+                                    isOpen={activeCell === getCellRowColmId(idx, 'state')}
+                                    onRequestClose={handleRequestClose}
+                                >
+                                    <TomisAutocomplete
+                                        placeholder="Select State"
+                                        required={true}
+                                        label="State"
+                                        value={row['state']}
+                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'state')}
+                                        options={subcategoryLovValues}
+                                    />
+                                </TomisTableCellEdit>
+                                <TomisTableCell>
+                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
+                                        <TomisFontIcon name="delete" />
+                                    </TomisButtonIcon>
+                                </TomisTableCell>
+                            </TomisTableRow>
+                        )}
+                    </TomisTableBody>
+                </TomisTable>
+            </TomisPanelTable>
+        </div>
+    );
 };
 
-class LocationInfoGridRender extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { tableData, addRow, delRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate, subcategoryLovValues } = this.props;
-    return (
-      <div className="flex-row row-spacer-24">
-        <Panel>
-          <PanelHeaderTable title="Location Information">
-            <ButtonRaisedSimplePrimary label="Add Location" onTouchTap={addRow} />
-          </PanelHeaderTable>
-          <PanelBody>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderColumn tooltip="Location (Airport/Marina)*">Location (Airport/Marina)</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="City*">City</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="State*">State</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tableData.map((row, idx) =>
-                  <TableRow key={idx} selected={row.selected}>
-                    <TableRowColumn>
-                      <TomisTextFieldTableRowColumn
-                        hintText="Select Location"
-                        floatingLabelText="Location"
-                        rowPropertyName="location"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                        dataSource={subcategoryLovValues}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <TomisSelectTableRowColumn
-                        hintText="Select City"
-                        floatingLabelText="City"
-                        rowPropertyName="city"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                        dataSource={subcategoryLovValues}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <TomisSelectTableRowColumn
-                        hintText="Select State"
-                        floatingLabelText="State"
-                        rowPropertyName="state"
-                        onSave={handleSaveTableRowColumnValue}
-                        rowData={row}
-                        rowIdx={idx}
-                        dataSource={subcategoryLovValues}
-                      />
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <IconButton tooltip="Delete Row" onTouchTap={delRow.bind(this, idx)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableRowColumn>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </PanelBody>
-        </Panel>
-      </div>
-    );
-  }
-}
-
-LocationInfoGridRender.propTypes = propTypes;
 export default LocationInfoGridRender;

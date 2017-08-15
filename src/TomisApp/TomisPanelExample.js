@@ -1,14 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TomisPanel } from './TomisPanel';
+import { TomisPanel, TomisPanelBody } from './TomisPanel';
+import TomisButtonRaised from './TomisButtonRaised';
+import TableExample from 'TheWorks/TableExample';
 
-const TomisPanelExample = ({ ...props }) => {
+const TomisPanelExample = ({ label, ...other }) => {
     return (
         <div>
-            <TomisPanel title="My Panel Title">
-                <div>Action 1</div>
-                <div>Action 2</div>
-                <div>Body 1</div>
+            <TomisPanel label={label || 'My Panel Title'}>
+                <a href="https://www.google.com" className="panel-link">
+                    Search Google
+                </a>
+                <TomisPanelBody>
+                    <div className="flex-row">
+                        <div className="flex-1">Panel Body can contain any and all components you desire.</div>
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">Panel Body can contain any and all components you desire.</div>
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">Panel Body can contain any and all components you desire.</div>
+                    </div>
+                    <div>
+                        <h3>Panel with Table</h3>
+                        <TableExample />
+                    </div>
+                </TomisPanelBody>
             </TomisPanel>
         </div>
     );

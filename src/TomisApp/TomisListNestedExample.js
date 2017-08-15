@@ -3,7 +3,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ListItemExpandable from './List/ListItemExpandable';
 import TomisFontIcon from './TomisFontIcon';
 
-const TomisListSimpleExample = props =>
+const TomisListNestedExample = props =>
     <List>
         <ListItem button={true} divider={true}>
             <ListItemIcon>
@@ -56,4 +56,4 @@ const TomisListSimpleExample = props =>
         </ListItemExpandable>
     </List>;
 
-export default TomisListSimpleExample;
+export default TomisListNestedExample;

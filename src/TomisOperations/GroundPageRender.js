@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import StatusBar from 'common/StatusBar';
 import PageNavLinksGround from 'common/PageNavLinksGround';
-import { Panel, PanelHeaderSection, PanelBody } from 'TomisApp/TomisPanel';
-import TomisSelect from 'TomisApp/TomisSelect';
+import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
+import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisInput from 'TomisApp/TomisInput';
+import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
-import TomisTextarea from 'TomisApp/TomisTextarea';
+import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import CrewInfoGrid from 'common/grids/CrewInfoGrid';
 import TomisHeading from 'TomisApp/TomisHeading';
-import Duration from 'TomisApp/TomisDurationReadOnly';
+import Duration from 'common/TomisDurationReadOnly';
 import ToggleButtonLocalZulu from 'common/ToggleButtonLocalZulu';
 import ToggleButtonYesNo from 'common/ToggleButtonYesNo';
 import CaseInfoGrid from 'common/grids/CaseInfoGrid';
@@ -21,6 +21,7 @@ import LocationInfoGrid from 'common/grids/LocationInfoGrid';
 import CowAndActionableIntelligenceSection from 'common/CowAndActionableIntelligenceSection';
 import PlanningDataSection from 'common/PlanningDataSection';
 import CloningStepBarPosition from 'common/CloningStepBarPosition';
+import TomisDuration from 'common/TomisDuration';
 
 const propTypes = {
     localZuluValue: PropTypes.string.isRequired,
@@ -39,26 +40,25 @@ class GroundPageRender extends Component {
             <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                 {!isCloneable && <PageNavLinksGround pageTitle="Ground Information" />}
                 {isCloneable && <CloningStepBarPosition stepNbr={1} dimensions={dimensions} />}
-                <Panel>
-                    <PanelHeaderSection title="Ground Operation Information" />
-                    <PanelBody>
+                <TomisPanel label="Ground Operation Information">
+                    <TomisPanelBody>
                         <div className="flex-row">
                             <div className="flex-2">
-                                <TomisTextFieldReadOnly floatingLabelText="Branch/Unit*" value="Buffalo Air Branch" />
+                                <TomisTextFieldReadOnly floatingLabelText="Branch/Unit" value="Buffalo Air Branch" />
                             </div>
                             <div className="flex-1">
                                 <TomisCheckbox label="Stand By" />
                             </div>
                         </div>
                         <div className="flex-row flex-1">
-                            <TomisInput floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
+                            <TomisTextFieldSingleLine floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
                         </div>
                         <div className="flex-row flex-1">
-                            <TomisTextarea floatingLabelText="Remarks" isCloneable={isCloneable} />
+                            <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} />
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisSelect floatingLabelText="Team Lead" isCloneable={isCloneable} />
+                                <TomisAutocomplete floatingLabelText="Team Lead" isCloneable={isCloneable} />
                             </div>
                             <div className="flex-1" />
                             <div className="flex-1" />
@@ -70,30 +70,34 @@ class GroundPageRender extends Component {
                             </div>
                         </div>
                         <br />
-                        <div className="flex-row">
+                        <div className="flex-row" style={{ marginBottom: '36px' }}>
                             <TomisHeading label="Capabilities" />
                         </div>
                         <div className="flex-row">
-                            <TomisCheckbox label="EMT" />
+                            <TomisCheckbox style={{ width: '100px' }} label="EMT" />
                         </div>
-                    </PanelBody>
-                </Panel>
+                    </TomisPanelBody>
+                </TomisPanel>
                 <br />
-                <Panel>
-                    <PanelHeaderSection title="Planning" />
-                    <PanelBody>
+                <TomisPanel label="Planning">
+                    <TomisPanelBody>
                         <div className="flex-row">
                             <TomisHeading label="Initiation Details" />
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisSelect floatingLabelText="Time Zone*" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisAutocomplete floatingLabelText="Time Zone*" isCloneable={isCloneable} disabledClone={true} />
                             </div>
                             <div className="flex-1">
                                 <TomisDatePicker floatingLabelText="Date (Local)*" isCloneable={isCloneable} disabledClone={true} />
                             </div>
                             <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
+                            </div>
+                        </div>
+                        <div className="flex-row">
+                            <div className="flex-1">
+                                <TomisDuration isCloneable={isCloneable} disabledClone={true} />
                             </div>
                         </div>
                         <br />
@@ -109,13 +113,16 @@ class GroundPageRender extends Component {
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="07/31/2017" />
+                            </div>
+                            <div className="flex-1">
+                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
                             </div>
                             <div className="flex-1" />
                             <div className="flex-1" />
                         </div>
-                    </PanelBody>
-                </Panel>
+                    </TomisPanelBody>
+                </TomisPanel>
                 <br />
             </div>
         );

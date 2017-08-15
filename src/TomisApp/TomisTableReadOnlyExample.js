@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
+import { TomisTableHeader } from './TomisTable';
 import TomisPaper from 'TomisApp/TomisPaper';
 
 const styleSheet = createStyleSheet(theme => ({
@@ -28,17 +29,10 @@ const columnData = [
     { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' }
 ];
 
-const createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-};
-
 class TomisTableReadOnlyExample extends Component {
     state = {
-        order: 'asc',
-        orderBy: 'calories',
-        selected: [],
         data: [
-            createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+            createData('Frozen yogurt', 159, 6.0, 24, 4.0),
             createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
             createData('Eclair', 262, 16.0, 24, 6.0),
             createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -46,39 +40,20 @@ class TomisTableReadOnlyExample extends Component {
         ]
     };
 
-    handleRequestSort = (property, event) => {
+    handleRequestSort = (property, order) => {
         const orderBy = property;
-        let order = 'desc';
-
-        if (this.state.orderBy === property && this.state.order === 'desc') {
-            order = 'asc';
-        }
-
         const data = this.state.data.sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
-
-        this.setState({ data, order, orderBy });
+        this.setState({ data });
     };
 
     render() {
         const { handleRequestSort } = this;
+        const { data } = this.state;
         const { classes } = this.props;
-        const { data, order, orderBy, selected } = this.state;
         return (
             <TomisPaper className={classes.paper}>
                 <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columnData.map(column => {
-                                return (
-                                    <TableCell key={column.id} numeric={column.numeric} disablePadding={column.disablePadding}>
-                                        <TableSortLabel active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}>
-                                            {column.label}
-                                        </TableSortLabel>
-                                    </TableCell>
-                                );
-                            })}
-                        </TableRow>
-                    </TableHead>
+                    <TomisTableHeader columnData={columnData} onRequestSort={handleRequestSort} />
                     <TableBody>
                         {data.map(n => {
                             return (

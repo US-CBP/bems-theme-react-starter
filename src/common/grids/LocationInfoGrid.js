@@ -1,69 +1,96 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeaderTable, PanelBody } from 'TomisApp/TomisPanel';
 import LocationInfoGridRender from './LocationInfoGridRender';
+import moment from 'moment';
+import _cloneDeep from 'lodash/cloneDeep';
+import { subcategoryLovValues } from 'globalJs/testData';
 
-const tableData = [];
+let tableData = [];
 
-const subcategoryLovValues = ['SubcategoryAlpha', 'SubcategoryBeta', 'SubcategoryDelta'];
-let subCategoryEditValue = '';
-let subCategoryEditIdx = 0;
-let justificationEditValue = '';
-let justificationEditIdx = 0;
+let shadowTableData = _cloneDeep(tableData);
+
+const columnData = [
+    { id: 'locationName', numeric: false, disablePadding: false, label: 'Location Name*', cell: null },
+    { id: 'city', numeric: false, disablePadding: false, label: 'City*', cell: null },
+    { id: 'state', numeric: false, disablePadding: false, label: 'State*', cell: null },
+    { id: 'delete', numeric: false, disablePadding: false, label: 'Delete', cell: null }
+];
+
+const setStateActiveCell = (activeCell, state, props) => {
+    return { activeCell };
+};
 
 const initState = {
-    tableRowCnt: tableData.length
+    tableRowCnt: tableData.length,
+    activeCell: '',
+    refresh: 0
 };
 
 class LocationInfoGrid extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState;
-        this.addRow = this.addRow.bind(this);
-        this.delRow = this.delRow.bind(this);
-        this.handleSaveTableRowColumnValue = this.handleSaveTableRowColumnValue.bind(this);
-        this.handleSaveTableRowColumnDate = this.handleSaveTableRowColumnDate.bind(this);
-    }
+    state = initState;
 
-    addRow(evt) {
+    handleAddRow = evt => {
         evt.stopPropagation();
-        tableData.push({ name: '', status: '' });
+        tableData.push({ locationName: '', city: '', state: '' });
         //force table refresh
         this.setState({ tableRowCnt: tableData.length });
-    }
+    };
 
-    delRow(idx, evt) {
+    handleDeleteRow = (idx, evt) => {
         evt.stopPropagation();
         tableData.splice(idx, 1);
         //force table refresh
         this.setState({ tableRowCnt: tableData.length });
-    }
+    };
 
-    handleSaveTableRowColumnValue(rowIdx, propertyName, newValue) {
-        tableData[rowIdx][propertyName] = newValue;
-        //force table refresh
-        this.setState({ tableRowCnt: tableData.length });
-    }
+    handleClickTableCell = activeCell => {
+        this.setState(setStateActiveCell.bind(null, activeCell));
+    };
 
-    handleSaveTableRowColumnDate(rowIdx, propertyName, newValue) {
-        tableData[rowIdx][propertyName] = newValue;
-        //force table refresh
-        this.setState({ tableRowCnt: tableData.length });
-    }
+    handleUpdateData = (idx, property, payload) => {
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleUpdateDataLov = (idx, property, payload) => {
+        console.log('handleUpdateDataLov payload=', payload);
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleUpdateDataDate = (idx, property, payload) => {
+        shadowTableData = _cloneDeep(tableData);
+        shadowTableData[idx][property] = payload.value;
+    };
+
+    handleRequestClose = action => {
+        console.log('handleRequestClose action=', action);
+        if (action === 'SAVE') {
+            tableData = shadowTableData;
+        }
+        this.setState(setStateActiveCell.bind(null, ''));
+    };
 
     render() {
-        const { addRow, delRow, handleSaveTableRowColumnValue, handleSaveTableRowColumnDate } = this;
+        const { handleUpdateData, handleUpdateDataLov, handleUpdateDataDate, handleClickTableCell, handleRequestClose, handleAddRow, handleDeleteRow } = this;
+        const { activeCell } = this.state;
         return (
-            <LocationInfoGridRender
-                tableData={tableData}
-                addRow={addRow}
-                delRow={delRow}
-                handleSaveTableRowColumnValue={handleSaveTableRowColumnValue}
-                handleSaveTableRowColumnDate={handleSaveTableRowColumnDate}
-                subcategoryLovValues={subcategoryLovValues}
-            />
+            <div>
+                <LocationInfoGridRender
+                    columnData={columnData}
+                    tableData={tableData}
+                    activeCell={activeCell}
+                    handleAddRow={handleAddRow}
+                    handleDeleteRow={handleDeleteRow}
+                    handleClickTableCell={handleClickTableCell}
+                    handleUpdateData={handleUpdateData}
+                    handleUpdateDataLov={handleUpdateDataLov}
+                    handleUpdateDataDate={handleUpdateDataDate}
+                    handleRequestClose={handleRequestClose}
+                    subcategoryLovValues={subcategoryLovValues}
+                />
+            </div>
         );
     }
 }
-
 export default LocationInfoGrid;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { materialIconsXref } from 'globalJs/materialIconsXref';
 
 const TomisFontIcon = styled.i`
   font-family: 'Material Icons';
@@ -17,7 +18,7 @@ const TomisFontIcon = styled.i`
   color: ${({ color }) => color || 'inherit'};
   pointer-events: ${({ disabledClone, disabled }) => (disabledClone || disabled ? 'none' : 'auto')};
   ::before {
-    content: '${({ name }) => name}';
+        content: '${props => materialIconsXref[props.name]}';
   }
 `;
 

@@ -120,7 +120,7 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
     expandableBody = null;
 
     state = {
-        expanded: true
+        expanded: false
     };
 
     handleClickExpand = evt => {

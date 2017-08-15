@@ -5,7 +5,8 @@ import React from 'react';
 // export AutoCompleteTableRowColumn from '../helpers/AutoCompleteTableRowColumn';
 // export TextFieldTableRowColumn from '../helpers/TextFieldTableRowColumn';
 // export DatePickerTableRowColumn from '../helpers/DatePickerTableRowColumn';
-export TableCellEdit from './TableCellEdit';
+// export TomisTableCellEdit from './TomisTableCellEdit';
+// export TomisTableHeader from './TomisTableHeader';
 
 // export class Table extends TableMui {
 //   static defaultProps = {

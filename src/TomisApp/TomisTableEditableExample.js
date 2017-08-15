@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Table, { TableBody, TableHead, TableCell, TableRow, TableSortLabel } from 'material-ui/Table';
-import { TableCellEdit } from './Table';
+import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
+import { TomisTableHeader, TomisTableCellEdit } from './TomisTable';
 import TomisPaper from 'TomisApp/TomisPaper';
 import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
 
@@ -29,7 +29,7 @@ const createData = (name, calories, fat, carbs, protein) => {
     };
 };
 
-const columnHeaderData = [
+const columnData = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)', cell: null },
     { id: 'calories', numeric: true, disablePadding: false, label: 'Calories', cell: null },
     { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)', cell: null },
@@ -68,17 +68,10 @@ class TomisTableEditableExample extends Component {
         this.setState({ data });
     };
 
-    handleRequestSort = (property, evt) => {
+    handleRequestSort = (property, order) => {
         const orderBy = property;
-        let order = 'desc';
-
-        if (this.state.orderBy === property && this.state.order === 'desc') {
-            order = 'asc';
-        }
-
         const data = this.state.data.sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
-
-        this.setState({ data, order, orderBy });
+        this.setState({ data });
     };
 
     handleClickTableCell = activeCell => {
@@ -96,19 +89,7 @@ class TomisTableEditableExample extends Component {
         return (
             <TomisPaper className={classes.paper}>
                 <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columnHeaderData.map(column => {
-                                return (
-                                    <TableCell key={column.id} numeric={column.numeric} disablePadding={column.disablePadding}>
-                                        <TableSortLabel active={orderBy === column.id} direction={order} onClick={handleRequestSort.bind(null, column.id)}>
-                                            {column.label}
-                                        </TableSortLabel>
-                                    </TableCell>
-                                );
-                            })}
-                        </TableRow>
-                    </TableHead>
+                    <TomisTableHeader columnData={columnData} />
                     <TableBody>
                         {data.map((n, idx) => {
                             const {
@@ -121,7 +102,7 @@ class TomisTableEditableExample extends Component {
                             } = n;
                             return (
                                 <TableRow key={id}>
-                                    <TableCellEdit
+                                    <TomisTableCellEdit
                                         onRequestOpen={handleClickTableCell.bind(null, getCellRowColm(idx, 'name'))}
                                         isOpen={activeCell === getCellRowColm(idx, 'name')}
                                         onRequestClose={handleRequestClose}
@@ -135,7 +116,7 @@ class TomisTableEditableExample extends Component {
                                             onChange={updateData.bind(null, idx, 'name')}
                                             margin="dense"
                                         />
-                                    </TableCellEdit>
+                                    </TomisTableCellEdit>
                                     <TableCell numeric>
                                         {valueCalories}
                                     </TableCell>

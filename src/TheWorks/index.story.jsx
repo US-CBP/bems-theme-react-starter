@@ -3,13 +3,19 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import createMuiTheme from 'material-ui/styles/theme';
+import createPalette from 'TomisApp/helpers/palette';
 import tomisTheme from '../app/themes/tomisLightTheme.js';
 import InputField from './InputField';
-import Test2 from './Test2';
-import TomisContainerEmpty from 'TomisApp/layouts/TomisContainerEmpty';
+import SelectField from './SelectField';
+import TextArea from './TextArea';
+import DatePicker from './DatePicker';
+import FileAttachment from './FileAttachment';
+import Panel from './Panel';
+import Table from './Table';
+import '../css/index.css';
 
-const theme = getMuiTheme(tomisTheme);
+const theme = createMuiTheme({ palette: createPalette(tomisTheme) });
 
 storiesOf('The Works', module)
     .addDecorator(story => {
@@ -17,20 +23,31 @@ storiesOf('The Works', module)
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: '100%', minWidth: 600, padding: '30px' }}>
-                    <MuiThemeProvider muiTheme={theme}>
+                    <MuiThemeProvider theme={theme}>
                         {storyKind}
                     </MuiThemeProvider>
                 </div>
             </div>
         );
     })
-    .add('Input Field', () => {
-        return (
-            <TomisContainerEmpty>
-                <InputField />
-            </TomisContainerEmpty>
-        );
+    .add('Panel', () => {
+        return <Panel />;
     })
-    .add('Test2', () => {
-        return <Test2 />;
+    .add('Input Field', () => {
+        return <InputField />;
+    })
+    .add('Select Field', () => {
+        return <SelectField />;
+    })
+    .add('Date Picker', () => {
+        return <DatePicker />;
+    })
+    .add('Text Area', () => {
+        return <TextArea />;
+    })
+    .add('Table', () => {
+        return <Table />;
+    })
+    .add('File Attachment', () => {
+        return <FileAttachment />;
     });

@@ -7,9 +7,11 @@ import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import Popover from 'material-ui/internal/Popover';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import TomisButtonFlat from 'TomisApp/TomisButtonFlat';
+import Paper from 'material-ui/Paper';
+import { getDisplayValue } from 'globalJs/functions';
 
-export const styleSheet = createStyleSheet('BemsMuiTableCellEdit', theme => ({
+export const styleSheet = createStyleSheet('TomisTableCellEdit', theme => ({
     root: {
         borderBottom: `1px solid ${theme.palette.text.lightDivider}`,
         whiteSpace: 'nowrap',
@@ -37,6 +39,16 @@ export const styleSheet = createStyleSheet('BemsMuiTableCellEdit', theme => ({
         paddingLeft: 12,
         paddingRight: 12
     },
+    popover: {
+        padding: '12px',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        marginLeft: '-16px',
+        marginTop: '-16px'
+    },
+    popoverContent: {
+        padding: '24px'
+    },
     footer: {}
 }));
 
@@ -44,10 +56,13 @@ const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
 
 let openCell = null;
+let lovOptions = [];
+const minHeightPopover = 180;
+const heightLovOption = 48;
+
 const handleClick = (onRequestOpen, onRequestClose, isOpen, evt) => {
     evt.stopPropagation();
     openCell = evt.currentTarget;
-    console.log('Handle click openCell, isOpen=', openCell, isOpen);
     if (isOpen) {
         onRequestClose();
     } else {
@@ -55,10 +70,15 @@ const handleClick = (onRequestOpen, onRequestClose, isOpen, evt) => {
     }
 };
 
-function TableCellEdit(props, context) {
+const preventClickFromGoingToPopover = evt => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    return false;
+};
+
+function TomisTableCellEdit(props, context) {
     const { classes, className: classNameProp, children, compact, checkbox, numeric, disablePadding, isOpen, onRequestOpen, onRequestClose, ...other } = props;
     const { table } = context;
-    console.log('isOpen=', isOpen);
     const className = classNames(
         classes.root,
         {
@@ -71,38 +91,46 @@ function TableCellEdit(props, context) {
         },
         classNameProp
     );
-
-    // render() {
     return (
-        <td className={className} onClick={handleClick.bind(null, onRequestOpen, onRequestClose, isOpen)} {...other} style={{ maxWidth: '256px' }}>
-            {React.Children.map(children, (child, idx) => {
-                // Obtain properties from first child to display as read-only text
-                if (idx > 1) return;
-                const { props: { placeholder, value } } = child;
-                return (
-                    <Typography noWrap={true}>
-                        {value || placeholder}
-                    </Typography>
-                );
-            })}
+        <td className={className} {...other} style={{ maxWidth: '256px' }}>
+            <div onClick={handleClick.bind(null, onRequestOpen, onRequestClose, isOpen)}>
+                {React.Children.map(children, (child, idx) => {
+                    // Obtain properties from first child to display as read-only text
+                    if (idx > 1) return;
+                    const { props: { placeholder, value, options } } = child;
+                    lovOptions = options || [];
+                    return (
+                        <Typography noWrap={true}>
+                            {getDisplayValue(value) || placeholder}
+                        </Typography>
+                    );
+                })}
+            </div>
             {isOpen &&
-                <Popover style={{ padding: '24px' }} open={true} anchorEl={openCell} anchorOrigin={anchorOrigin} transformOrigin={targetOrigin} onRequestClose={onRequestClose}>
-                    {children}
-                    <div>
-                        <Button onClick={onRequestClose.bind(null, 'CANCEL')} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={onRequestClose.bind(null, 'SAVE')} color="primary">
-                            Save
-                        </Button>
-                    </div>
+                <Popover
+                    className={classNames(classes.popover)}
+                    style={{ height: `${Math.max(minHeightPopover, heightLovOption * Math.min(lovOptions.length, 6))}px` }}
+                    open={true}
+                    anchorEl={openCell}
+                    anchorOrigin={anchorOrigin}
+                    transformOrigin={targetOrigin}
+                    onRequestClose={onRequestClose}
+                    onClick={onRequestClose}
+                >
+                    <Paper elevation={8} className={classNames(classes.popoverContent)} onClick={preventClickFromGoingToPopover}>
+                        {children}
+                        <div>
+                            <TomisButtonFlat label="Cancel" onClick={onRequestClose.bind(null, 'CANCEL')} color="primary" />
+                            <TomisButtonFlat label="Save" onClick={onRequestClose.bind(null, 'SAVE')} color="primary" />
+                        </div>
+                    </Paper>
                 </Popover>}
         </td>
     );
     // }  ;
 }
 
-TableCellEdit.propTypes = {
+TomisTableCellEdit.propTypes = {
     /**
    * If `true`, the cell padding will be adjusted to accommodate a checkbox.
    */
@@ -133,15 +161,15 @@ TableCellEdit.propTypes = {
     numeric: PropTypes.bool
 };
 
-TableCellEdit.defaultProps = {
+TomisTableCellEdit.defaultProps = {
     checkbox: false,
     compact: false,
     numeric: false,
     disablePadding: false
 };
 
-TableCellEdit.contextTypes = {
+TomisTableCellEdit.contextTypes = {
     table: PropTypes.object
 };
 
-export default withStyles(styleSheet)(TableCellEdit);
+export default withStyles(styleSheet)(TomisTableCellEdit);
