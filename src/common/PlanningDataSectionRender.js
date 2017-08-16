@@ -12,6 +12,7 @@ class PlanningDataSectionRender extends Component {
         super(props);
     }
     render() {
+        console.log('PlanningDataSectionRender this.props=', this.props);
         const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
         return (
             <div>
@@ -34,7 +35,7 @@ class PlanningDataSectionRender extends Component {
                     <div className="flex-1" />
                 </div>
                 <br />
-                <CowAndActionableIntelligenceSection isCloneable={isCloneable} />
+                <CowAndActionableIntelligenceSection yesNoValue={yesNoValue} handleChangeYesNo={handleChangeYesNo} isCloneable={isCloneable} />
                 <br />
                 <br />
                 <CaseInfoGrid />

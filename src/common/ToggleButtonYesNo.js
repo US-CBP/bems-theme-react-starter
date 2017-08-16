@@ -2,26 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ToggleButtonYesNoRender from 'common/ToggleButtonYesNoRender';
 
-const yesNoToggleOptions = [{ label: 'Yes', value: 'YES' }, { label: 'No', value: 'NO' }];
-
 const defaultProps = {
-  labelText: 'Yes/No'
+    label: 'Yes/No'
 };
 
 const propTypes = {
-  handleChangeYesNo: PropTypes.func.isRequired,
-  yesNoValue: PropTypes.string.isRequired,
-  labelText: PropTypes.string.isRequired
+    handleChangeYesNo: PropTypes.func.isRequired,
+    yesNoValue: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
 };
 
 class ToggleButtonYesNo extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { yesNoValue, handleChangeYesNo, labelText, isCloneable, disabledClone } = this.props;
-    return <ToggleButtonYesNoRender toggleOptions={yesNoToggleOptions} {...this.props} />;
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        console.log('ToggleButtonYesNo this.props=', this.props);
+        // const { yesNoValue, handleChangeYesNo, labelText, isCloneable, disabledClone } = this.props;
+        return <ToggleButtonYesNoRender {...this.props} />;
+    }
 }
 
 ToggleButtonYesNo.defaultProps = defaultProps;

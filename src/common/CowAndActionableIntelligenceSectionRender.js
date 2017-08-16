@@ -10,6 +10,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
         super(props);
     }
     render() {
+        console.log('CowAndActionableIntelligenceSectionRender this.props=', this.props);
         const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
         return (
             <div>
@@ -19,7 +20,13 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                 <br />
                 <div className="flex-row">
                     <div className="flex-1">
-                        <ToggleButtonYesNo label="Mission Initiated by AMO?*" isCloneable={isCloneable} disabledClone={true} />
+                        <ToggleButtonYesNo
+                            label="Mission Initiated by AMO?*"
+                            yesNoValue={yesNoValue}
+                            handleChange={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                            disabledClone={true}
+                        />
                     </div>
                     <div className="flex-1">
                         <ToggleButtonYesNo label="Mission Initiated by USBP?*" isCloneable={isCloneable} disabledClone={true} />

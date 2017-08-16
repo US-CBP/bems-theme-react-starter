@@ -39,7 +39,6 @@ export const styleSheet = createStyleSheet('TomisTableCellEdit', theme => ({
         paddingLeft: 12,
         paddingRight: 12
     },
-<<<<<<< HEAD:src/TomisApp/Table/TomisTableCellEdit.js
     popover: {
         padding: '12px',
         backgroundColor: 'transparent',
@@ -48,9 +47,6 @@ export const styleSheet = createStyleSheet('TomisTableCellEdit', theme => ({
         marginTop: '-16px'
     },
     popoverContent: {
-=======
-    popoverPadding: {
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750:src/TomisApp/Table/TableCellEdit.js
         padding: '24px'
     },
     footer: {}
@@ -112,18 +108,13 @@ function TomisTableCellEdit(props, context) {
             </div>
             {isOpen &&
                 <Popover
-<<<<<<< HEAD:src/TomisApp/Table/TomisTableCellEdit.js
                     className={classNames(classes.popover)}
                     style={{ height: `${Math.max(minHeightPopover, heightLovOption * Math.min(lovOptions.length, 6))}px` }}
-=======
-                    className={classNames(classes.popoverPadding)}
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750:src/TomisApp/Table/TableCellEdit.js
                     open={true}
                     anchorEl={openCell}
                     anchorOrigin={anchorOrigin}
                     transformOrigin={targetOrigin}
                     onRequestClose={onRequestClose}
-<<<<<<< HEAD:src/TomisApp/Table/TomisTableCellEdit.js
                     onClick={onRequestClose}
                 >
                     <Paper elevation={8} className={classNames(classes.popoverContent)} onClick={preventClickFromGoingToPopover}>
@@ -133,18 +124,6 @@ function TomisTableCellEdit(props, context) {
                             <TomisButtonFlat label="Save" onClick={onRequestClose.bind(null, 'SAVE')} color="primary" />
                         </div>
                     </Paper>
-=======
-                >
-                    {children}
-                    <div>
-                        <Button onClick={onRequestClose.bind(null, 'CANCEL')} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={onRequestClose.bind(null, 'SAVE')} color="primary">
-                            Save
-                        </Button>
-                    </div>
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750:src/TomisApp/Table/TableCellEdit.js
                 </Popover>}
         </td>
     );

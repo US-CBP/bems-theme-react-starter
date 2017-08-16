@@ -55,10 +55,10 @@ class PlanningMissionSectionRender extends Component {
                         <div className="flex-row flex-1">
                             <TomisTextFieldMultiLine floatingLabelText="Mission Description" isCloneable={isCloneable} />
                         </div>
-                        <PlanningDataSection isCloneable={isCloneable} />
+                        <PlanningDataSection yesNoValue={yesNoValue} handleChangeYesNo={handleChangeYesNo} isCloneable={isCloneable} />
                         <br />
                         <div className="flex-row flex-1">
-                            <ToggleButtonYesNo labelText="Are there any scheduled passengers?" isCloneable={isCloneable} />
+                            <ToggleButtonYesNo label="Are there any scheduled passengers?" isCloneable={isCloneable} />
                         </div>
                         <br />
                         <div className="flex-row">

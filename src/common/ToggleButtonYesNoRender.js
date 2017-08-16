@@ -7,7 +7,7 @@ const defaultProps = {
 };
 
 const propTypes = {
-    handleChangeYesNo: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
     yesNoValue: PropTypes.string.isRequired,
     labelText: PropTypes.string.isRequired
 };
@@ -17,7 +17,8 @@ class ToggleButtonYesNoRender extends Component {
         super(props);
     }
     render() {
-        const { yesNoValue, handleChangeYesNo, label, isCloneable, disabledClone, disabled } = this.props;
+        console.log('ToggleButtonYesNoRender this.props=', this.props);
+        const { yesNoValue, handleChange, label, isCloneable, disabledClone, disabled } = this.props;
         return (
             <ToggleButtonGroup
                 aria-label="yes-no"
@@ -27,9 +28,9 @@ class ToggleButtonYesNoRender extends Component {
                 disabledClone={disabledClone}
                 disabled={disabled}
                 selectedValue={yesNoValue}
-                onChange={handleChangeYesNo}
+                onChange={handleChange}
             >
-                <ToggleButton label="Yes" value="Y" checked={yesNoValue === 'Y'} />
+                <ToggleButton label="Yes" value="Y" checked={true} />
                 <ToggleButton label="No" value="N" checked={yesNoValue === 'N'} />
             </ToggleButtonGroup>
         );

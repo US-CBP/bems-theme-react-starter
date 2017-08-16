@@ -13,20 +13,16 @@ import Paper from 'material-ui/Paper';
 
 export const styleSheet = createStyleSheet('TomisPanel', theme => ({
     root: {
-<<<<<<< HEAD
         padding: '8px',
         width: '100%'
     },
     appBar: {
-=======
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
         boxShadow: 'none'
     },
     colorPrimary: {
         backgroundColor: theme.palette.primary[100],
         color: theme.palette.getContrastText(theme.palette.primary[100])
     },
-<<<<<<< HEAD
     colorPrimaryTable: {
         backgroundColor: theme.palette.grey['300'],
         color: theme.palette.getContrastText(theme.palette.grey['300'])
@@ -36,8 +32,6 @@ export const styleSheet = createStyleSheet('TomisPanel', theme => ({
         fontWeight: 'normal',
         marginTop: '4px'
     },
-=======
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
     flex: {
         flex: 1
     },
@@ -49,13 +43,10 @@ export const styleSheet = createStyleSheet('TomisPanel', theme => ({
     },
     expandOpen: {
         transform: 'rotate(0deg)'
-<<<<<<< HEAD
     },
     toolBar: {
         minHeight: '56px',
         paddingRight: '4px'
-=======
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
     }
 }));
 
@@ -69,16 +60,12 @@ const propTypes = {
     /**
      * Text that appears in header on left-hand side.
      */
-<<<<<<< HEAD
     label: PropTypes.string.isRequired,
 
     /**
      * If true, display using panel table background color.
     */
     isTable: PropTypes.bool
-=======
-    title: PropTypes.string.isRequired
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 };
 
 class TomisPanel extends Component {
@@ -93,11 +80,7 @@ class TomisPanel extends Component {
     render() {
         const { handleClickExpand } = this;
         const { expanded } = this.state;
-<<<<<<< HEAD
         const { label, children: childrenProp, classes, className: classNameProp, disableGutters, isTable = false, ...other } = this.props;
-=======
-        const { title, children: childrenProp, classes, className: classNameProp, disableGutters, ...other } = this.props;
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
         const children = React.Children.toArray(childrenProp);
         //All children except for final child are considered to be "actions" placed in header.
         //Final child is the only component that is expanded/collapsed - considered the panel body
@@ -106,19 +89,11 @@ class TomisPanel extends Component {
             panelBody = children.pop();
         }
         return (
-<<<<<<< HEAD
             <Paper className={classNames(classes.root)}>
                 <AppBar position="static" className={classNames(classes.appBar, { [classes.colorPrimary]: !isTable }, { [classes.colorPrimaryTable]: isTable })}>
                     <Toolbar className={classNames(classes.toolBar)}>
                         <Typography type="title" color="inherit" className={classNames(classes.flex, classes.title)}>
                             {label}
-=======
-            <Paper>
-                <AppBar position="static" className={classNames(classes.root, classes.colorPrimary)}>
-                    <Toolbar>
-                        <Typography type="title" color="inherit" className={classes.flex}>
-                            {title}
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
                         </Typography>
                         {children}
                         <TomisButtonIcon

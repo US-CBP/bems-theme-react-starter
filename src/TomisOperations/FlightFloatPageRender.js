@@ -22,6 +22,8 @@ const initState = {};
 const propTypes = {
     localZuluValue: PropTypes.string.isRequired,
     handleChangeLocalZulu: PropTypes.func.isRequired,
+    yesNoValue: PropTypes.string.isRequired,
+    handleChangeYesNo: PropTypes.func.isRequired,
     isCloneable: PropTypes.bool,
     dimensions: PropTypes.object.isRequired
 };
@@ -32,7 +34,7 @@ class FlightFloatPageRender extends Component {
         this.state = initState;
     }
     render() {
-        const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = this.props;
+        const { localZuluValue, handleChangeLocalZulu, yesNoValue, handleChangeYesNo, isCloneable, dimensions } = this.props;
         return (
             <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                 {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -108,7 +110,13 @@ class FlightFloatPageRender extends Component {
                 <br />
                 <TomisPanel label="Planning">
                     <TomisPanelBody>
-                        <PlanningMissionSection isCloneable={isCloneable} />
+                        <PlanningMissionSection
+                            localZuluValue={localZuluValue}
+                            handleChangeLocalZulu={handleChangeLocalZulu}
+                            yesNoValue={yesNoValue}
+                            handleChangeYesNo={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                        />
                     </TomisPanelBody>
                 </TomisPanel>
                 <br />

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TomisCustomIcon = styled.i`
+const TomisCustomIcon = styled.i.attrs({ 'data-sc': 'TomisCustomIcon' })`
   font-family: 'nasadings';
   font-weight: normal;
   font-style: normal;

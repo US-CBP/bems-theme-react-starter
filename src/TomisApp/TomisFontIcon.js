@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { materialIconsXref } from 'globalJs/materialIconsXref';
 
-const TomisFontIcon = styled.i`
+const TomisFontIcon = styled.i.attrs({ 'data-sc': 'TomisFontIcon' })`
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;

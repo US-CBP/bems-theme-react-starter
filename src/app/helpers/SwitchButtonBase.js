@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
-// import IconButton from '../IconButton';
 import Button from 'material-ui/Button';
 import CheckBoxOutlineBlankIcon from 'material-ui/svg-icons/check-box-outline-blank';
 import CheckBoxIcon from 'material-ui/svg-icons/check-box';
@@ -96,6 +95,7 @@ export default function createSwitchButton({ inputType = 'checkbox', styleSheet:
             } = this.props;
 
             const checked = this.isControlled ? checkedProp : this.state.checked;
+            console.log('SwitchButtonBase, checked=', checked);
             const className = classNames(classes.root, {
                 [classNames(classes.default, classNameProp)]: !checked,
                 [classNames(classes.checked, checkedClassName)]: checked,

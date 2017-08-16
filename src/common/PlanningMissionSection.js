@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import PlanningMissionSectionRender from 'common/PlanningMissionSectionRender';
 
 class PlanningMissionSection extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
-    return <PlanningMissionSectionRender {...this.props} />;
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return <PlanningMissionSectionRender {...this.props} />;
+    }
 }
 
 export default PlanningMissionSection;

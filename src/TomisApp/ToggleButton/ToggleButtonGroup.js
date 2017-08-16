@@ -2,17 +2,15 @@
 
 import React, { Component, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
 import cx from 'classnames';
-=======
-import classNames from 'classnames';
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
 import { toggleButtonGroupStyleSheet } from 'app/helpers/tomisMuiStylesheets';
 import withStyles from 'material-ui/styles/withStyles';
 import FormGroup from 'material-ui/Form/FormGroup';
 import FormLabel from 'material-ui/Form/FormLabel';
 import Typography from 'material-ui/Typography';
 import Checkbox from 'material-ui/Checkbox';
+import ToggleButtons from './ToggleButtons';
+import FlexRow from 'app/helpers/FlexRow';
 
 let toggleButtons = undefined;
 
@@ -22,9 +20,7 @@ const initState = props => {
         payload: {
             value: props.value || '',
             isCloneChecked: true
-        },
-        currentCharCount: 0,
-        isFocused: false
+        }
     };
 };
 
@@ -34,20 +30,14 @@ class ToggleButtonGroup extends Component {
         this.state = initState(props);
     }
 
-    handleToggleButtonClick = event => {
-        if (this.props.onChange) {
-            this.props.onChange(event, event.target.value);
-        }
-    };
-
     handleCloneCheckboxChange = (evt, isCloneChecked) => {
+        evt.stopPropagation();
         this.state.payload.isCloneChecked = isCloneChecked;
         this.setState(this.state);
     };
 
     render() {
-<<<<<<< HEAD
-        const { handleToggleButtonClick, doNothing, handleCloneCheckboxChange } = this;
+        const { handleCloneCheckboxChange } = this;
         const { payload: { value, isCloneChecked } } = this.state;
         const {
             children,
@@ -60,17 +50,28 @@ class ToggleButtonGroup extends Component {
             onChange,
             label,
             disabled,
-            classes: { checkbox: clsCheckbox, checkboxDisabled: clsCheckboxDisabled, inputLabel: clsInputLabel, inputLabelCloneable: clsInputLabelCloneable, root: clsRoot },
+            classes: {
+                buttons: clsButtons,
+                buttonsCloneable: clsButtonsCloneable,
+                checkbox: clsCheckbox,
+                checkboxDisabled: clsCheckboxDisabled,
+                inputLabel: clsInputLabel,
+                inputLabelCloneable: clsInputLabelCloneable,
+                root: clsRoot
+            },
             ...other
         } = this.props;
         toggleButtons = [];
 
         return (
             <div>
-                <FormLabel className={cx({ [clsInputLabel]: !isCloneable, [clsInputLabelCloneable]: isCloneable })} disabled={disabled}>
-                    {label}
-                </FormLabel>
-                <FormGroup className={cx(clsRoot, classNameProp)} data-mui-test="TomisToggleButtonGroup" role="radiogroup" {...other}>
+                <FlexRow>
+                    {isCloneable && <FormLabel>&nbsp;</FormLabel>}
+                    <FormLabel className={cx({ [clsInputLabel]: !isCloneable, [clsInputLabelCloneable]: isCloneable })} disabled={disabled}>
+                        {label}
+                    </FormLabel>
+                </FlexRow>
+                <FlexRow>
                     {isCloneable &&
                         <Checkbox
                             className={cx(clsCheckbox, { [clsCheckboxDisabled]: disabled || disabledClone })}
@@ -79,44 +80,15 @@ class ToggleButtonGroup extends Component {
                             tabIndex="-1"
                             checked={isCloneChecked || disabledClone}
                         />}
-
-                    {Children.map(children, (child, index) => {
-                        const selected = selectedValue === child.props.value;
-                        return cloneElement(child, {
-                            key: index,
-                            name,
-                            inputRef: node => {
-                                toggleButtons.push(node);
-                            },
-                            checked: selected,
-                            onClick: handleToggleButtonClick,
-                            disabled: disabled || child.props.disabled
-                        });
-                    })}
-                </FormGroup>
+                    <ToggleButtons
+                        onChange={onChange}
+                        className={cx({ [clsButtons]: !isCloneable, [clsButtonsCloneable]: isCloneable })}
+                        classes={classes}
+                        children={children}
+                        disabled={disabled}
+                    />
+                </FlexRow>
             </div>
-=======
-        const { handleToggleButtonClick, doNothing } = this;
-        const { children, classes, className: classNameProp, name, selectedValue, onChange, disabled, ...other } = this.props;
-        toggleButtons = [];
-
-        return (
-            <FormGroup className={classNames(classes.root, classNameProp)} data-mui-test="TomisToggleButtonGroup" role="radiogroup" {...other}>
-                {Children.map(children, (child, index) => {
-                    const selected = selectedValue === child.props.value;
-                    return cloneElement(child, {
-                        key: index,
-                        name,
-                        inputRef: node => {
-                            toggleButtons.push(node);
-                        },
-                        checked: selected,
-                        onClick: handleToggleButtonClick,
-                        disabled: disabled || child.props.disabled
-                    });
-                })}
-            </FormGroup>
->>>>>>> b7008f2517e2aaccbd2442a02b2221c0e8392750
         );
     }
 }
