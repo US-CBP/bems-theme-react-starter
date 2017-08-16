@@ -17,7 +17,6 @@ class ToggleButtonLocalZuluRender extends Component {
     }
     render() {
         const { value, label, property, handleChange, isCloneable, disabledClone, disabled } = this.props;
-        console.log('ToggleButtonLocalZuluRender value=', value);
         return (
             <ToggleButtonGroup
                 property={property}
