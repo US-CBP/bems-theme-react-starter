@@ -5,18 +5,17 @@ import ToggleButtonLocalZuluRender from 'common/ToggleButtonLocalZuluRender';
 const localZuluToggleOptions = [{ label: 'Local', value: 'LOCAL' }, { label: 'Zulu', value: 'ZULU' }];
 
 const propTypes = {
-  handleChangeLocalZulu: PropTypes.func.isRequired,
-  localZuluValue: PropTypes.string.isRequired
+    handleChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
 };
 
 class ToggleButtonLocalZulu extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { localZuluValue, handleChangeLocalZulu, isCloneable, disabledClone } = this.props;
-    return <ToggleButtonLocalZuluRender toggleOptions={localZuluToggleOptions} {...this.props} />;
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return <ToggleButtonLocalZuluRender {...this.props} />;
+    }
 }
 
 ToggleButtonLocalZulu.propTypes = propTypes;

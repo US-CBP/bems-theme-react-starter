@@ -23,7 +23,6 @@ const propTypes = {
     localZuluValue: PropTypes.string.isRequired,
     handleChangeLocalZulu: PropTypes.func.isRequired,
     yesNoValue: PropTypes.string.isRequired,
-    // handleChangeYesNo: PropTypes.func.isRequired,
     isCloneable: PropTypes.bool,
     dimensions: PropTypes.object.isRequired
 };
@@ -90,7 +89,7 @@ class FlightFloatPageRender extends Component {
                     <TomisPanelBody>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <ToggleButtonLocalZulu valueSelected={localZuluValue} handleChange={handleChangeLocalZulu} />
+                                <ToggleButtonLocalZulu label="me-me" property="localZuluValue" value={localZuluValue} handleChange={handleChangeLocalZulu} />
                             </div>
                             <div className="flex-1">
                                 <TomisAutocomplete floatingLabelText="Time Zone*" />

@@ -23,7 +23,6 @@ class FlightFloatPage extends Component {
     }
 
     handleChangeLocalZulu = (property, evt, value) => {
-        console.log('changed local/zulu, value=', value);
         this.setState(setStateLocalZuluValue.bind(this, property, value));
     };
     handleChangeYesNo = (property, evt, value) => {
@@ -33,16 +32,7 @@ class FlightFloatPage extends Component {
         const { handleChangeLocalZulu, handleChangeYesNo } = this;
         const { localZuluValue, yesNoValue } = this.state;
         //Note, dimensions are passed as prop from Container Pane Component.
-        return (
-            <FlightFloatPageRender
-                isCloneable={true}
-                handleChangeLocalZulu={handleChangeLocalZulu}
-                localZuluValue={localZuluValue}
-                handleChangeYesNo={handleChangeYesNo}
-                {...this.state}
-                {...this.props}
-            />
-        );
+        return <FlightFloatPageRender isCloneable={true} handleChangeLocalZulu={handleChangeLocalZulu} handleChangeYesNo={handleChangeYesNo} {...this.state} {...this.props} />;
     }
 }
 

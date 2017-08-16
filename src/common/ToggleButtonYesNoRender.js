@@ -9,7 +9,7 @@ const defaultProps = {
 const propTypes = {
     handleChange: PropTypes.func.isRequired,
     yesNoValue: PropTypes.string.isRequired,
-    labelText: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired
 };
 
 class ToggleButtonYesNoRender extends Component {
