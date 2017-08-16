@@ -17,7 +17,6 @@ class ToggleButtonYesNo extends Component {
         super(props);
     }
     render() {
-        console.log('ToggleButtonYesNo this.props=', this.props);
         return <ToggleButtonYesNoRender {...this.props} />;
     }
 }

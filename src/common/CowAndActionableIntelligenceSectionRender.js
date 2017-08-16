@@ -10,7 +10,6 @@ class CowAndActionableIntelligenceSectionRender extends Component {
         super(props);
     }
     render() {
-        console.log('CowAndActionableIntelligenceSectionRender this.props=', this.props);
         const { yesNoValue, handleChangeYesNo, isCloneable, isInitAmo } = this.props;
         return (
             <div>

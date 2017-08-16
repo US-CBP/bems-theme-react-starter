@@ -63,7 +63,6 @@ class ToggleButtonGroup extends Component {
             ...other
         } = this.props;
         toggleButtons = [];
-        console.log('ToggleButtonGroup handleChange=', handleChange);
 
         return (
             <div>

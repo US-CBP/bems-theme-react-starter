@@ -17,7 +17,6 @@ class ToggleButtonYesNoRender extends Component {
         super(props);
     }
     render() {
-        console.log('ToggleButtonYesNoRender this.props=', this.props);
         const { yesNoValue, handleChange, property, label, isCloneable, disabledClone, disabled } = this.props;
         return (
             <ToggleButtonGroup

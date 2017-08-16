@@ -11,7 +11,6 @@ class PlanningDataSectionRender extends Component {
         super(props);
     }
     render() {
-        console.log('PlanningDataSectionRender this.props=', this.props);
         const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
         return (
             <div>

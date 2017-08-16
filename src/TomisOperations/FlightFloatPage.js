@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlightFloatPageRender from './FlightFloatPageRender';
 
-const setStateLocalZuluValue = (localZuluValue, state, props) => {
-    return { localZuluValue };
+const setStateLocalZuluValue = (property, localZuluValue, state, props) => {
+    return { [property]: localZuluValue };
 };
 
 const setStateYesNo = (property, yesNoValue, state, props) => {
@@ -11,7 +11,7 @@ const setStateYesNo = (property, yesNoValue, state, props) => {
 };
 
 const initState = {
-    localZuluValue: 'LOCAL',
+    localZuluValue: '',
     yesNoValue: '',
     isInitAmo: ''
 };
@@ -22,12 +22,11 @@ class FlightFloatPage extends Component {
         this.state = initState;
     }
 
-    handleChangeLocalZulu = value => {
+    handleChangeLocalZulu = (property, evt, value) => {
         console.log('changed local/zulu, value=', value);
-        this.setState(setStateLocalZuluValue.bind(this, value));
+        this.setState(setStateLocalZuluValue.bind(this, property, value));
     };
     handleChangeYesNo = (property, evt, value) => {
-        console.log('changed yes/no evt, property, value=', evt, property, value);
         this.setState(setStateYesNo.bind(this, property, value));
     };
     render() {

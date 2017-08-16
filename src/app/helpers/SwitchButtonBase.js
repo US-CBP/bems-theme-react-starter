@@ -95,7 +95,6 @@ export default function createSwitchButton({ inputType = 'checkbox', styleSheet:
             } = this.props;
 
             const checked = this.isControlled ? checkedProp : this.state.checked;
-            console.log('SwitchButtonBase, this.isControlled, checked, checkedProp, value=', this.isControlled, checked, checkedProp, value);
             const className = classNames(classes.root, {
                 [classNames(classes.default, classNameProp)]: !checked,
                 [classNames(classes.checked, checkedClassName)]: checked,
