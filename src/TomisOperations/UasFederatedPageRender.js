@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import StatusBar from 'common/StatusBar';
 import PageNavLinks from 'common/PageNavLinks';
@@ -32,76 +32,71 @@ const propTypes = {
     dimensions: PropTypes.object.isRequired
 };
 
-class UasFederatedPageRender extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = this.props;
-        return (
-            <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
-                {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
-                {isCloneable && <CloningStepBarPosition stepNbr={1} dimensions={dimensions} />}
-                <TomisPanel label="Flight Information (NASO Federated)">
-                    <TomisPanelBody>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisCheckbox label="Stand By" />
-                            </div>
-                            <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
-                            </div>
-                            <div className="flex-1">
-                                <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
-                            </div>
+const UasFederatedPageRender = props => {
+    const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = props;
+    return (
+        <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
+            {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
+            {isCloneable && <CloningStepBarPosition stepNbr={1} dimensions={dimensions} />}
+            <TomisPanel label="Flight Information (NASO Federated)">
+                <TomisPanelBody>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisCheckbox label="Stand By" />
                         </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
-                            <div className="flex-1">
-                                <TomisAutocomplete floatingLabelText="POC" hintText="Type POC" isCloneable={isCloneable} />
-                            </div>
-                            <div className="flex-1">
-                                <ToggleButtonYesNo labelText="Vader Capable?*" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
+                        <div className="flex-1">
+                            <TomisTextFieldSingleLine floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
                         </div>
-                        <div className="flex-row">
-                            <KuFrequencyInfo />
-                            <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="KU On Time (Zulu)" hintText="Type KU On Time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
-                            </div>
-                            <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="KU Off Time (Zulu)" hintText="Type KU Off time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
-                            </div>
+                        <div className="flex-1">
+                            <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
                         </div>
-                    </TomisPanelBody>
-                </TomisPanel>
-                <br />
-                <TomisPanel label="Mission Date(s) and Time(s)">
-                    <TomisButtonRaised style={{ marginRight: '12px' }} label="Add New" />
-                    <TomisButtonRaised style={{ marginRight: '12px' }} label="Apply" />
-                    <TomisButtonRaised label="Cancel Changes" />
-                    <TomisPanelBody>
-                        <MissionDatesTimesUasFedGrid isCloneable={isCloneable} />
-                        <br />
-                        <div className="flex-row right">Scheduled Handovers - 3 | Total Flight Hours - 0.00 Hrs (00+00)</div>
-                    </TomisPanelBody>
-                </TomisPanel>
-                <br />
-                <TomisPanel label="Planning">
-                    <TomisPanelBody>
-                        <UasLre1Section isCloneable={isCloneable} />
-                        <br />
-                        <UasMceSection isCloneable={isCloneable} />
-                        <br />
-                        <UasLre2Section isCloneable={isCloneable} />
-                    </TomisPanelBody>
-                </TomisPanel>
-                <br />
-            </div>
-        );
-    }
-}
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisTextFieldSingleLine floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
+                        </div>
+                        <div className="flex-1">
+                            <TomisAutocomplete floatingLabelText="POC" hintText="Type POC" isCloneable={isCloneable} />
+                        </div>
+                        <div className="flex-1">
+                            <ToggleButtonYesNo labelText="Vader Capable?*" isCloneable={isCloneable} disabledClone={true} />
+                        </div>
+                    </div>
+                    <div className="flex-row">
+                        <KuFrequencyInfo />
+                        <div className="flex-1">
+                            <TomisTimeSpinner floatingLabelText="KU On Time (Zulu)" hintText="Type KU On Time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
+                        </div>
+                        <div className="flex-1">
+                            <TomisTimeSpinner floatingLabelText="KU Off Time (Zulu)" hintText="Type KU Off time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
+                        </div>
+                    </div>
+                </TomisPanelBody>
+            </TomisPanel>
+            <br />
+            <TomisPanel label="Mission Date(s) and Time(s)">
+                <TomisButtonRaised style={{ marginRight: '12px' }} label="Add New" />
+                <TomisButtonRaised style={{ marginRight: '12px' }} label="Apply" />
+                <TomisButtonRaised label="Cancel Changes" />
+                <TomisPanelBody>
+                    <MissionDatesTimesUasFedGrid isCloneable={isCloneable} />
+                    <br />
+                    <div className="flex-row right">Scheduled Handovers - 3 | Total Flight Hours - 0.00 Hrs (00+00)</div>
+                </TomisPanelBody>
+            </TomisPanel>
+            <br />
+            <TomisPanel label="Planning">
+                <TomisPanelBody>
+                    <UasLre1Section isCloneable={isCloneable} />
+                    <br />
+                    <UasMceSection isCloneable={isCloneable} />
+                    <br />
+                    <UasLre2Section isCloneable={isCloneable} />
+                </TomisPanelBody>
+            </TomisPanel>
+            <br />
+        </div>
+    );
+};
 
 export default UasFederatedPageRender;

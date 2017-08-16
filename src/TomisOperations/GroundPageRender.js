@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import StatusBar from 'common/StatusBar';
 import PageNavLinksGround from 'common/PageNavLinksGround';
@@ -30,103 +30,98 @@ const propTypes = {
     dimensions: PropTypes.object.isRequired
 };
 
-class GroundPageRender extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = this.props;
-        return (
-            <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
-                {!isCloneable && <PageNavLinksGround pageTitle="Ground Information" />}
-                {isCloneable && <CloningStepBarPosition stepNbr={1} dimensions={dimensions} />}
-                <TomisPanel label="Ground Operation Information">
-                    <TomisPanelBody>
-                        <div className="flex-row">
-                            <div className="flex-2">
-                                <TomisTextFieldReadOnly floatingLabelText="Branch/Unit" value="Buffalo Air Branch" />
-                            </div>
-                            <div className="flex-1">
-                                <TomisCheckbox label="Stand By" />
-                            </div>
+const GroundPageRender = props => {
+    const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = props;
+    return (
+        <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
+            {!isCloneable && <PageNavLinksGround pageTitle="Ground Information" />}
+            {isCloneable && <CloningStepBarPosition stepNbr={1} dimensions={dimensions} />}
+            <TomisPanel label="Ground Operation Information">
+                <TomisPanelBody>
+                    <div className="flex-row">
+                        <div className="flex-2">
+                            <TomisTextFieldReadOnly floatingLabelText="Branch/Unit" value="Buffalo Air Branch" />
                         </div>
-                        <div className="flex-row flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
+                        <div className="flex-1">
+                            <TomisCheckbox label="Stand By" />
                         </div>
-                        <div className="flex-row flex-1">
-                            <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} />
+                    </div>
+                    <div className="flex-row flex-1">
+                        <TomisTextFieldSingleLine floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
+                    </div>
+                    <div className="flex-row flex-1">
+                        <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} />
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisAutocomplete floatingLabelText="Team Lead" isCloneable={isCloneable} />
                         </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisAutocomplete floatingLabelText="Team Lead" isCloneable={isCloneable} />
-                            </div>
-                            <div className="flex-1" />
-                            <div className="flex-1" />
+                        <div className="flex-1" />
+                        <div className="flex-1" />
+                    </div>
+                    <br />
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <AgentInfoGrid />
                         </div>
-                        <br />
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <AgentInfoGrid />
-                            </div>
+                    </div>
+                    <br />
+                    <div className="flex-row" style={{ marginBottom: '36px' }}>
+                        <TomisHeading label="Capabilities" />
+                    </div>
+                    <div className="flex-row">
+                        <TomisCheckbox style={{ width: '100px' }} label="EMT" />
+                    </div>
+                </TomisPanelBody>
+            </TomisPanel>
+            <br />
+            <TomisPanel label="Planning">
+                <TomisPanelBody>
+                    <div className="flex-row">
+                        <TomisHeading label="Initiation Details" />
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisAutocomplete floatingLabelText="Time Zone*" isCloneable={isCloneable} disabledClone={true} />
                         </div>
-                        <br />
-                        <div className="flex-row" style={{ marginBottom: '36px' }}>
-                            <TomisHeading label="Capabilities" />
+                        <div className="flex-1">
+                            <TomisDatePicker floatingLabelText="Date (Local)*" isCloneable={isCloneable} disabledClone={true} />
                         </div>
-                        <div className="flex-row">
-                            <TomisCheckbox style={{ width: '100px' }} label="EMT" />
+                        <div className="flex-1">
+                            <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
                         </div>
-                    </TomisPanelBody>
-                </TomisPanel>
-                <br />
-                <TomisPanel label="Planning">
-                    <TomisPanelBody>
-                        <div className="flex-row">
-                            <TomisHeading label="Initiation Details" />
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisDuration isCloneable={isCloneable} disabledClone={true} />
                         </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisAutocomplete floatingLabelText="Time Zone*" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
-                            <div className="flex-1">
-                                <TomisDatePicker floatingLabelText="Date (Local)*" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
-                            <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
-                            </div>
+                    </div>
+                    <br />
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <LocationInfoGrid />
                         </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisDuration isCloneable={isCloneable} disabledClone={true} />
-                            </div>
+                    </div>
+                    <br />
+                    <PlanningDataSection isCloneable={isCloneable} />
+                    <div className="flex-row">
+                        <TomisHeading label="Conclusion Details" />
+                    </div>
+                    <div className="flex-row">
+                        <div className="flex-1">
+                            <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="07/31/2017" />
                         </div>
-                        <br />
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <LocationInfoGrid />
-                            </div>
+                        <div className="flex-1">
+                            <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
                         </div>
-                        <br />
-                        <PlanningDataSection isCloneable={isCloneable} />
-                        <div className="flex-row">
-                            <TomisHeading label="Conclusion Details" />
-                        </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="07/31/2017" />
-                            </div>
-                            <div className="flex-1">
-                                <TomisTimeSpinner floatingLabelText="Time (Local)*" isCloneable={isCloneable} disabledClone={true} isDisplayArrowIcons={true} />
-                            </div>
-                            <div className="flex-1" />
-                            <div className="flex-1" />
-                        </div>
-                    </TomisPanelBody>
-                </TomisPanel>
-                <br />
-            </div>
-        );
-    }
-}
+                        <div className="flex-1" />
+                        <div className="flex-1" />
+                    </div>
+                </TomisPanelBody>
+            </TomisPanel>
+            <br />
+        </div>
+    );
+};
 
 export default GroundPageRender;
