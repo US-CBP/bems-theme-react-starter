@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisHeading from 'TomisApp/TomisHeading';
-import ToggleButtonYesNo from 'common/ToggleButtonYesNo';
 import CowAndActionableIntelligenceSection from 'common/CowAndActionableIntelligenceSection';
 import CaseInfoGrid from 'common/grids/CaseInfoGrid';
 
@@ -35,7 +34,7 @@ class PlanningDataSectionRender extends Component {
                     <div className="flex-1" />
                 </div>
                 <br />
-                <CowAndActionableIntelligenceSection yesNoValue={yesNoValue} handleChangeYesNo={handleChangeYesNo} isCloneable={isCloneable} />
+                <CowAndActionableIntelligenceSection {...this.props} />
                 <br />
                 <br />
                 <CaseInfoGrid />

@@ -6,29 +6,29 @@ const setStateLocalZuluValue = (localZuluValue, state, props) => {
     return { localZuluValue };
 };
 
-const setStateYesNo = (yesNoValue, state, props) => {
-    return { yesNoValue };
+const setStateYesNo = (property, yesNoValue, state, props) => {
+    return { [property]: yesNoValue };
 };
 
 const initState = {
     localZuluValue: 'LOCAL',
-    yesNoValue: ''
+    yesNoValue: '',
+    isInitAmo: ''
 };
 
 class FlightFloatPage extends Component {
     constructor(props) {
         super(props);
         this.state = initState;
-        this.handleChangeLocalZulu = this.handleChangeLocalZulu.bind(this);
     }
 
     handleChangeLocalZulu = value => {
         console.log('changed local/zulu, value=', value);
         this.setState(setStateLocalZuluValue.bind(this, value));
     };
-    handleChangeYesNo = (evt, value) => {
-        console.log('changed yes/no value=', value);
-        this.setState(setStateYesNo.bind(this, value));
+    handleChangeYesNo = (property, evt, value) => {
+        console.log('changed yes/no evt, property, value=', evt, property, value);
+        this.setState(setStateYesNo.bind(this, property, value));
     };
     render() {
         const { handleChangeLocalZulu, handleChangeYesNo } = this;
@@ -40,7 +40,7 @@ class FlightFloatPage extends Component {
                 handleChangeLocalZulu={handleChangeLocalZulu}
                 localZuluValue={localZuluValue}
                 handleChangeYesNo={handleChangeYesNo}
-                yesNoValue={yesNoValue}
+                {...this.state}
                 {...this.props}
             />
         );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
 const propTypes = {
-    handleChangeLocalZulu: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
     localZuluValue: PropTypes.string.isRequired
 };
 
@@ -12,7 +12,8 @@ class ToggleButtonLocalZuluRender extends Component {
         super(props);
     }
     render() {
-        const { localZuluValue, handleChangeLocalZulu, isCloneable, disabledClone, disabled } = this.props;
+        console.log('ToggleButtonLocalZuluRender this.props=', this.props);
+        const { localZuluValue, handleChange, isCloneable, disabledClone, disabled } = this.props;
         return (
             <ToggleButtonGroup
                 aria-label="local-zulu"
@@ -22,7 +23,7 @@ class ToggleButtonLocalZuluRender extends Component {
                 disabledClone={disabledClone}
                 disabled={disabled}
                 selectedValue={localZuluValue}
-                onChange={handleChangeLocalZulu}
+                handleChange={handleChange}
             >
                 <ToggleButton label="Local" value="LOCAL" checked={localZuluValue === 'LOCAL'} />
                 <ToggleButton label="Zulu" value="ZULU" checked={localZuluValue === 'ZULU'} />

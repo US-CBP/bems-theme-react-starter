@@ -47,7 +47,8 @@ class ToggleButtonGroup extends Component {
             selectedValue,
             isCloneable = false,
             disabledClone,
-            onChange,
+            handleChange,
+            property,
             label,
             disabled,
             classes: {
@@ -62,6 +63,7 @@ class ToggleButtonGroup extends Component {
             ...other
         } = this.props;
         toggleButtons = [];
+        console.log('ToggleButtonGroup handleChange=', handleChange);
 
         return (
             <div>
@@ -81,11 +83,12 @@ class ToggleButtonGroup extends Component {
                             checked={isCloneChecked || disabledClone}
                         />}
                     <ToggleButtons
-                        onChange={onChange}
+                        onChange={handleChange.bind(null, property)}
                         className={cx({ [clsButtons]: !isCloneable, [clsButtonsCloneable]: isCloneable })}
                         classes={classes}
                         children={children}
                         disabled={disabled}
+                        selectedValue={selectedValue}
                     />
                 </FlexRow>
             </div>

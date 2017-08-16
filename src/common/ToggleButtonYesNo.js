@@ -7,9 +7,9 @@ const defaultProps = {
 };
 
 const propTypes = {
-    handleChangeYesNo: PropTypes.func.isRequired,
-    yesNoValue: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    handleChange: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
+    property: PropTypes.string.isRequired
 };
 
 class ToggleButtonYesNo extends Component {
@@ -18,7 +18,6 @@ class ToggleButtonYesNo extends Component {
     }
     render() {
         console.log('ToggleButtonYesNo this.props=', this.props);
-        // const { yesNoValue, handleChangeYesNo, labelText, isCloneable, disabledClone } = this.props;
         return <ToggleButtonYesNoRender {...this.props} />;
     }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
 const defaultProps = {
-    labelText: 'Yes/No'
+    label: 'Yes/No'
 };
 
 const propTypes = {
@@ -18,20 +18,19 @@ class ToggleButtonYesNoRender extends Component {
     }
     render() {
         console.log('ToggleButtonYesNoRender this.props=', this.props);
-        const { yesNoValue, handleChange, label, isCloneable, disabledClone, disabled } = this.props;
+        const { yesNoValue, handleChange, property, label, isCloneable, disabledClone, disabled } = this.props;
         return (
             <ToggleButtonGroup
-                aria-label="yes-no"
-                name="yes-no"
+                property={property}
                 label={label}
                 isCloneable={isCloneable}
                 disabledClone={disabledClone}
                 disabled={disabled}
                 selectedValue={yesNoValue}
-                onChange={handleChange}
+                handleChange={handleChange}
             >
-                <ToggleButton label="Yes" value="Y" checked={true} />
-                <ToggleButton label="No" value="N" checked={yesNoValue === 'N'} />
+                <ToggleButton label="Yes" value="Y" />
+                <ToggleButton label="No" value="N" />
             </ToggleButtonGroup>
         );
     }

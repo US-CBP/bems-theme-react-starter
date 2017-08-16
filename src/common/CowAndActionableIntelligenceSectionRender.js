@@ -11,7 +11,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
     }
     render() {
         console.log('CowAndActionableIntelligenceSectionRender this.props=', this.props);
-        const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
+        const { yesNoValue, handleChangeYesNo, isCloneable, isInitAmo } = this.props;
         return (
             <div>
                 <div className="flex-row">
@@ -22,6 +22,17 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                     <div className="flex-1">
                         <ToggleButtonYesNo
                             label="Mission Initiated by AMO?*"
+                            property="isInitAmo"
+                            yesNoValue={isInitAmo}
+                            handleChange={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                            disabledClone={true}
+                        />
+                    </div>
+                    <div className="flex-1">
+                        <ToggleButtonYesNo
+                            label="Mission Initiated by USBP?*"
+                            property="yesNoValue"
                             yesNoValue={yesNoValue}
                             handleChange={handleChangeYesNo}
                             isCloneable={isCloneable}
@@ -29,10 +40,14 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                         />
                     </div>
                     <div className="flex-1">
-                        <ToggleButtonYesNo label="Mission Initiated by USBP?*" isCloneable={isCloneable} disabledClone={true} />
-                    </div>
-                    <div className="flex-1">
-                        <ToggleButtonYesNo label="Coordinated with Other Agency?*" isCloneable={isCloneable} disabledClone={true} />
+                        <ToggleButtonYesNo
+                            label="Coordinated with Other Agency?*"
+                            property="yesNoValue"
+                            yesNoValue={yesNoValue}
+                            handleChange={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                            disabledClone={true}
+                        />
                     </div>
                 </div>
                 <div className="flex-row">
@@ -60,7 +75,14 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                 <br />
                 <div className="flex-row">
                     <div className="flex-1">
-                        <ToggleButtonYesNo label="Is this mission based on Actionable Intelligence?*" isCloneable={isCloneable} disabledClone={true} />
+                        <ToggleButtonYesNo
+                            label="Is this mission based on Actionable Intelligence?*"
+                            property="yesNoValue"
+                            yesNoValue={yesNoValue}
+                            handleChange={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                            disabledClone={true}
+                        />
                     </div>
                     <div className="flex-1" />
                     <div className="flex-1" />
@@ -85,7 +107,14 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                 <br />
                 <div className="flex-row">
                     <div className="flex-1">
-                        <ToggleButtonYesNo label="Is this an Investigative Mission?*" isCloneable={isCloneable} disabledClone={true} />
+                        <ToggleButtonYesNo
+                            label="Is this an Investigative Mission?*"
+                            property="yesNoValue"
+                            yesNoValue={yesNoValue}
+                            handleChange={handleChangeYesNo}
+                            isCloneable={isCloneable}
+                            disabledClone={true}
+                        />
                     </div>
                     <div className="flex-1" />
                     <div className="flex-1" />

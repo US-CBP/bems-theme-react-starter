@@ -57,7 +57,7 @@ class ToggleButtons extends Component {
             ...other
         } = this.props;
         toggleButtons = [];
-
+        console.log('ToggleButtons selectedValue=', selectedValue);
         return (
             <FormGroup className={cx(clsRoot, classNameProp)} data-mui-test="TomisToggleButtons" role="radiogroup" {...other}>
                 {Children.map(children, (child, index) => {

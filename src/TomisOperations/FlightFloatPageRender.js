@@ -23,7 +23,7 @@ const propTypes = {
     localZuluValue: PropTypes.string.isRequired,
     handleChangeLocalZulu: PropTypes.func.isRequired,
     yesNoValue: PropTypes.string.isRequired,
-    handleChangeYesNo: PropTypes.func.isRequired,
+    // handleChangeYesNo: PropTypes.func.isRequired,
     isCloneable: PropTypes.bool,
     dimensions: PropTypes.object.isRequired
 };
@@ -34,7 +34,7 @@ class FlightFloatPageRender extends Component {
         this.state = initState;
     }
     render() {
-        const { localZuluValue, handleChangeLocalZulu, yesNoValue, handleChangeYesNo, isCloneable, dimensions } = this.props;
+        const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = this.props;
         return (
             <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                 {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -90,7 +90,7 @@ class FlightFloatPageRender extends Component {
                     <TomisPanelBody>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <ToggleButtonLocalZulu valueSelected={localZuluValue} onChange={handleChangeLocalZulu} />
+                                <ToggleButtonLocalZulu valueSelected={localZuluValue} handleChange={handleChangeLocalZulu} />
                             </div>
                             <div className="flex-1">
                                 <TomisAutocomplete floatingLabelText="Time Zone*" />
@@ -110,13 +110,7 @@ class FlightFloatPageRender extends Component {
                 <br />
                 <TomisPanel label="Planning">
                     <TomisPanelBody>
-                        <PlanningMissionSection
-                            localZuluValue={localZuluValue}
-                            handleChangeLocalZulu={handleChangeLocalZulu}
-                            yesNoValue={yesNoValue}
-                            handleChangeYesNo={handleChangeYesNo}
-                            isCloneable={isCloneable}
-                        />
+                        <PlanningMissionSection {...this.props} />
                     </TomisPanelBody>
                 </TomisPanel>
                 <br />
