@@ -107,7 +107,7 @@ type Props = DefaultProps & {
 const isAnimate = true;
 const expansionDuration = 100;
 
-class ListItemExpandable extends Component<DefaultProps, Props, void> {
+class TomisListItemExpandable extends Component<DefaultProps, Props, void> {
     props: Props;
     static defaultProps: DefaultProps = {
         component: 'li',
@@ -187,12 +187,12 @@ class ListItemExpandable extends Component<DefaultProps, Props, void> {
     }
 }
 
-ListItemExpandable.contextTypes = {
+TomisListItemExpandable.contextTypes = {
     dense: PropTypes.bool
 };
 
-ListItemExpandable.childContextTypes = {
+TomisListItemExpandable.childContextTypes = {
     dense: PropTypes.bool
 };
 
-export default withStyles(styles, { name: 'TomisListItemExpandable' })(ListItemExpandable);
+export default withStyles(styles, { name: 'TomisListItemExpandable' })(TomisListItemExpandable);

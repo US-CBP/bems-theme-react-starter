@@ -6,7 +6,7 @@ import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import ListItemExpandable from 'TomisApp/List/ListItemExpandable';
+import TomisListItemExpandable from 'TomisApp/List/TomisListItemExpandable';
 import Drawer from 'material-ui/Drawer';
 import { headerNavActionStyles } from '../app/helpers/styles';
 import withStyles from 'material-ui/styles/withStyles';
@@ -42,7 +42,7 @@ class TomisDrawerNavigation extends Component {
                         </TomisIconButton>
                         <TomisSearch {...this.props} />
                     </ListItem>
-                    {/*<ListItemExpandable>
+                    {/*<TomisListItemExpandable>
                         <ListItemText key="SEARCH" primary="Search" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
@@ -55,11 +55,11 @@ class TomisDrawerNavigation extends Component {
                                 <ListItemText key="SEARCH_3" primary="Search 3" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>*/}
+                    </TomisListItemExpandable>*/}
                     <ListItem button={true} divider={true}>
                         <ListItemText key="HOME" primary="Home" />
                     </ListItem>
-                    <ListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="OPS" primary="Ops" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
@@ -69,16 +69,16 @@ class TomisDrawerNavigation extends Component {
                                 <ListItemText key="ADD_ITEM_2" primary="Add Item 2" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
-                    <ListItemExpandable>
+                    </TomisListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="EVENTS" primary="Events" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
                                 <ListItemText key="ADD_ITEM_3" primary="Add Item 3" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
-                    <ListItemExpandable>
+                    </TomisListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="REPORTS" primary="Reports" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
@@ -88,8 +88,8 @@ class TomisDrawerNavigation extends Component {
                                 <ListItemText key="RETRIEVE_2" primary="Retrieve 2" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
-                    <ListItemExpandable>
+                    </TomisListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="MAINTENANCE" primary="Maintenance" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
@@ -99,23 +99,23 @@ class TomisDrawerNavigation extends Component {
                                 <ListItemText key="MTC_2" primary="COA" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
-                    <ListItemExpandable>
+                    </TomisListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="APPROVALS" primary="Approvals" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
                                 <ListItemText key="APPROVALS_1" primary="Approvals 1" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
-                    <ListItemExpandable>
+                    </TomisListItemExpandable>
+                    <TomisListItemExpandable>
                         <ListItemText key="OPTIONS" primary="Option" />
                         <List>
                             <ListItem button={true} divider={true} onClick={onRequestClose}>
                                 <ListItemText key="OPTION_1" primary="Reports Status Page" />
                             </ListItem>
                         </List>
-                    </ListItemExpandable>
+                    </TomisListItemExpandable>
                 </List>
             </Drawer>
         );

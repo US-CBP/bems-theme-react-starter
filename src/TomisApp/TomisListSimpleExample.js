@@ -1,6 +1,5 @@
 import React from 'react';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import ListItemExpandable from './List/ListItemExpandable';
 import TomisFontIcon from './TomisFontIcon';
 
 const TomisListSimpleExample = props =>

@@ -1,6 +1,6 @@
 import React from 'react';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import ListItemExpandable from './List/ListItemExpandable';
+import TomisListItemExpandable from './List/TomisListItemExpandable';
 import TomisFontIcon from './TomisFontIcon';
 
 const TomisListNestedExample = props =>
@@ -17,7 +17,7 @@ const TomisListNestedExample = props =>
             </ListItemIcon>
             <ListItemText primary="Drafts" />
         </ListItem>
-        <ListItemExpandable>
+        <TomisListItemExpandable>
             <ListItemIcon>
                 <TomisFontIcon name="person" />
             </ListItemIcon>
@@ -35,7 +35,7 @@ const TomisListNestedExample = props =>
                     </ListItemIcon>
                     <ListItemText primary="Note" />
                 </ListItem>
-                <ListItemExpandable>
+                <TomisListItemExpandable>
                     <ListItemText primary="Level 2 Menu" />
                     <List>
                         <ListItem button={true} divider={true}>
@@ -51,9 +51,9 @@ const TomisListNestedExample = props =>
                             <ListItemText primary="Search" />
                         </ListItem>
                     </List>
-                </ListItemExpandable>
+                </TomisListItemExpandable>
             </List>
-        </ListItemExpandable>
+        </TomisListItemExpandable>
     </List>;
 
 export default TomisListNestedExample;
