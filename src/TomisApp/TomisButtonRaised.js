@@ -2,11 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import classNames from 'classnames';
 import Button from 'material-ui/Button';
 
-const styleSheet = createStyleSheet(theme => ({
+export const styles = theme => ({
     raisedPrimary: {
         color: theme.palette.getContrastText(theme.palette.primary[900]),
         backgroundColor: theme.palette.primary[900],
@@ -18,7 +18,7 @@ const styleSheet = createStyleSheet(theme => ({
         marginRight: '-8px',
         marginLeft: '16px'
     }
-}));
+});
 
 const defaultProps = {
     label: 'Button Label'
@@ -41,4 +41,4 @@ const TomisButtonRaised = ({ children, classes, className, label, ...other }) =>
 
 TomisButtonRaised.defaultProps = defaultProps;
 TomisButtonRaised.propTypes = propTypes;
-export default withStyles(styleSheet)(TomisButtonRaised);
+export default withStyles(styles, { name: 'TomisButtonRaised' })(TomisButtonRaised);

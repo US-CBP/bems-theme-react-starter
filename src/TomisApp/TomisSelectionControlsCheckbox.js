@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import classNames from 'classnames';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
@@ -10,7 +10,7 @@ import TouchRipple from 'material-ui/internal/TouchRipple';
 const cbWidth = 36;
 const cbHeight = cbWidth;
 
-const styleSheet = createStyleSheet(theme => ({
+export const styles = theme => ({
     root: {
         position: 'relative'
     },
@@ -31,7 +31,7 @@ const styleSheet = createStyleSheet(theme => ({
         left: '-14px',
         top: 0
     }
-}));
+});
 
 const defaultProps = {
     label: 'My Checkbox Label'
@@ -92,4 +92,4 @@ TomisSelectionControlsCheckbox.propTypes = {
     onChange: PropTypes.func
 };
 
-export default withStyles(styleSheet)(TomisSelectionControlsCheckbox);
+export default withStyles(styles, { name: 'TomisSelectionControlsCheckbox' })(TomisSelectionControlsCheckbox);

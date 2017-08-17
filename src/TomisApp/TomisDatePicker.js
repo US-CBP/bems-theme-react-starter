@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, datePickerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import withStyles from 'material-ui/styles/withStyles';
+import { getDisplayVals, datePickerStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
@@ -197,4 +197,4 @@ class TomisDatePicker extends Component {
 }
 TomisDatePicker.defaultProps = defaultProps;
 TomisDatePicker.propTypes = propTypes;
-export default withStyles(datePickerStyleSheet)(TomisDatePicker);
+export default withStyles(datePickerStyles, { name: 'TomisDatePicker' })(TomisDatePicker);

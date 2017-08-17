@@ -8,7 +8,7 @@ import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
 import Toolbar from 'material-ui/Toolbar';
 import TomisLogged from 'common/TomisLogged';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
-import { headerNavActionStyleSheet } from '../app/helpers/styles';
+import { headerNavActionStyles } from '../app/helpers/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import cx from 'classnames';
 
@@ -82,4 +82,4 @@ class ToolbarCbpHeader extends Component {
         );
     }
 }
-export default withStyles(headerNavActionStyleSheet)(ToolbarCbpHeader);
+export default withStyles(headerNavActionStyles, { name: 'HeaderNavAction' })(ToolbarCbpHeader);

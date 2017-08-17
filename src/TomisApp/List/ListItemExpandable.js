@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import type { Element } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import Collapse from 'material-ui/transitions/Collapse';
 import TomisFontIcon from '../TomisFontIcon';
@@ -12,7 +11,7 @@ import TomisButtonIcon from '../TomisButtonIcon';
 import Divider from 'material-ui/Divider';
 import { ListItemSecondaryAction } from 'material-ui/List';
 
-export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme => ({
+export const styles = theme => ({
     root: {
         display: 'block',
         alignItems: 'center',
@@ -58,7 +57,7 @@ export const styleSheet = createStyleSheet('BemsMuiListItemExpandable', theme =>
         top: 0,
         marginTop: 0
     }
-}));
+});
 
 type DefaultProps = {
     button: boolean,
@@ -196,4 +195,4 @@ ListItemExpandable.childContextTypes = {
     dense: PropTypes.bool
 };
 
-export default withStyles(styleSheet)(ListItemExpandable);
+export default withStyles(styles, { name: 'TomisListItemExpandable' })(ListItemExpandable);

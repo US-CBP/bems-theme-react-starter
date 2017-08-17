@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -11,7 +10,7 @@ import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import Paper from 'material-ui/Paper';
 
-export const styleSheet = createStyleSheet('TomisPanel', theme => ({
+export const styles = theme => ({
     root: {
         padding: '8px',
         width: '100%'
@@ -48,7 +47,7 @@ export const styleSheet = createStyleSheet('TomisPanel', theme => ({
         minHeight: '56px',
         paddingRight: '4px'
     }
-}));
+});
 
 const defaultProps = {};
 
@@ -117,4 +116,4 @@ class TomisPanel extends Component {
 
 TomisPanel.defaultProps = defaultProps;
 TomisPanel.propTypes = propTypes;
-export default withStyles(styleSheet)(TomisPanel);
+export default withStyles(styles, { name: 'TomisPanel' })(TomisPanel);

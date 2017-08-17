@@ -2,11 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import classNames from 'classnames';
 import Button from 'material-ui/Button';
 
-const styleSheet = createStyleSheet(theme => ({
+export const styles = theme => ({
     flatPrimary: {
         color: theme.palette.primary[900]
     },
@@ -14,7 +14,7 @@ const styleSheet = createStyleSheet(theme => ({
         marginRight: '-8px',
         marginLeft: '16px'
     }
-}));
+});
 
 const defaultProps = {
     label: 'Button Label'
@@ -37,4 +37,4 @@ const TomisButtonFlat = ({ children, classes, className, label, ...other }) => {
 
 TomisButtonFlat.defaultProps = defaultProps;
 TomisButtonFlat.propTypes = propTypes;
-export default withStyles(styleSheet)(TomisButtonFlat);
+export default withStyles(styles, { name: 'TomisButtonFlat' })(TomisButtonFlat);

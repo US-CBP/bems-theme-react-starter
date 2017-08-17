@@ -1,15 +1,9 @@
-import { createStyleSheet } from 'material-ui/styles';
-// import createMuiTheme from 'material-ui/styles/theme';
-// import createPalette from 'material-ui/styles/palette';
-// import tomisTheme from 'app/themes/tomisLightTheme.js';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/share';
 import _get from 'lodash/get';
 import { RIPPLE_TIME_MS } from 'globalJs/constants';
-
-// const theme = createMuiTheme(createPalette(tomisTheme));
 
 const checkboxSize = 24;
 const checkboxW = 36;
@@ -112,9 +106,9 @@ const getAutoCompleteStyles = theme => {
         }
     };
 };
-export const autoCompleteStyleSheet = createStyleSheet('TomisAutoComplete', theme => {
+export const autoCompleteStyles = theme => {
     return getAutoCompleteStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 //  NOTE, however, material-ui applies the class names in the order specified by the keys listed in styles.
@@ -196,9 +190,9 @@ const getCloneableStyles = theme => {
         }
     };
 };
-export const cloneableStyleSheet = createStyleSheet('TomisCloneable', theme => {
+export const cloneableStyles = theme => {
     return getCloneableStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 const getDatePickerStyles = theme => {
@@ -268,9 +262,9 @@ const getDatePickerStyles = theme => {
         }
     };
 };
-export const datePickerStyleSheet = createStyleSheet('TomisDatePicker', theme => {
+export const datePickerStyles = theme => {
     return getDatePickerStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 const getTimeSpinnerStyles = theme => {
@@ -350,9 +344,9 @@ const getTimeSpinnerStyles = theme => {
         }
     };
 };
-export const timeSpinnerStyleSheet = createStyleSheet('TomisTimeSpinner', theme => {
+export const timeSpinnerStyles = theme => {
     return getTimeSpinnerStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 const getToggleButtonGroupStyles = theme => {
@@ -395,9 +389,9 @@ const getToggleButtonGroupStyles = theme => {
         }
     };
 };
-export const toggleButtonGroupStyleSheet = createStyleSheet('TomisToggleButtonGroup', theme => {
+export const toggleButtonGroupStyles = theme => {
     return getToggleButtonGroupStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 const getToggleButtonStyles = theme => {
@@ -429,9 +423,9 @@ const getToggleButtonStyles = theme => {
         }
     };
 };
-export const toggleButtonStyleSheet = createStyleSheet('TomisToggleButton', theme => {
+export const toggleButtonStyles = theme => {
     return getToggleButtonStyles(theme);
-});
+};
 
 //Keep class names in alphabetical order to maintain our sanity
 const getTomisDurationStyles = theme => {
@@ -486,6 +480,6 @@ const getTomisDurationStyles = theme => {
         }
     };
 };
-export const tomisDurationStyleSheet = createStyleSheet('TomisDuration', theme => {
+export const tomisDurationStyles = theme => {
     return getTomisDurationStyles(theme);
-});
+};

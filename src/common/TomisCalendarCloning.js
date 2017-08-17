@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DayPicker, { DateUtils } from 'react-day-picker';
-import Paper from 'BemsMui/Paper';
 import 'react-day-picker/lib/style.css';
 import 'css/tomis-calendar.css';
 import CloningStepBar from 'common/CloningStepBar';

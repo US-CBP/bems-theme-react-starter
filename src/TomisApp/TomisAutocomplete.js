@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
-import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, autoCompleteStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import withStyles from 'material-ui/styles/withStyles';
+import { getDisplayVals, autoCompleteStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import InputLabel from 'material-ui/Input/InputLabel';
 import Input from 'material-ui/Input';
@@ -163,7 +163,7 @@ class TomisAutocomplete extends Component {
 
 TomisAutocomplete.defaultProps = defaultProps;
 TomisAutocomplete.propTypes = propTypes;
-export default withStyles(autoCompleteStyleSheet)(TomisAutocomplete);
+export default withStyles(autoCompleteStyles, { name: 'TomisAutocomplete' })(TomisAutocomplete);
 
 const arrowRenderer = (clsSelectArrow, isDisabled, { onMouseDown, isOpen }) => {
     return (

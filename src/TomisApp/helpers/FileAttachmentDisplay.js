@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '../../BemsMui/Table';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import { getPreviewImage } from './fileAttachmentUtils';
 import Dropzone from 'react-dropzone';

@@ -1,4 +1,3 @@
-import { createStyleSheet } from 'material-ui/styles';
 import tomisTheme from 'app/themes/tomisLightTheme.js';
 
 export const getStatusBarStyle = props => {
@@ -166,6 +165,7 @@ const getHeaderNavActionStyles = theme => {
         }
     };
 };
-export const headerNavActionStyleSheet = createStyleSheet('TomisHeaderNavAction', theme => {
+
+export const headerNavActionStyles = theme => {
     return getHeaderNavActionStyles(theme);
-});
+};

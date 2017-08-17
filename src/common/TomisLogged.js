@@ -4,7 +4,7 @@ import Popover from 'material-ui/internal/Popover';
 import TomisButtonFlat from 'TomisApp/TomisButtonFlat';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
-import { headerNavActionStyleSheet } from '../app/helpers/styles';
+import { headerNavActionStyles } from '../app/helpers/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import cx from 'classnames';
 
@@ -63,4 +63,4 @@ class TomisLogged extends Component {
     }
 }
 
-export default withStyles(headerNavActionStyleSheet)(TomisLogged);
+export default withStyles(headerNavActionStyles, { name: 'HeaderNavAction' })(TomisLogged);

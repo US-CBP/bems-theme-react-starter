@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, timeSpinnerStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import withStyles from 'material-ui/styles/withStyles';
+import { getDisplayVals, timeSpinnerStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
@@ -163,4 +163,4 @@ class TomisTimeSpinner extends Component {
 }
 TomisTimeSpinner.defaultProps = defaultProps;
 TomisTimeSpinner.propTypes = propTypes;
-export default withStyles(timeSpinnerStyleSheet)(TomisTimeSpinner);
+export default withStyles(timeSpinnerStyles, { name: 'TomisTimeSpinner' })(TomisTimeSpinner);

@@ -11,7 +11,7 @@ import TomisLogged from 'common/TomisLogged';
 import { getActionBarIconColor } from '../app/helpers/styles';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisCustomIcon from 'TomisApp/TomisCustomIcon';
-import { headerNavActionStyleSheet } from '../app/helpers/styles';
+import { headerNavActionStyles } from '../app/helpers/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import cx from 'classnames';
 
@@ -159,4 +159,4 @@ class TomisToolbarActionBar extends Component {
 TomisToolbarActionBar.defaultProps = defaultProps;
 TomisToolbarActionBar.propTypes = propTypes;
 
-export default withStyles(headerNavActionStyleSheet)(TomisToolbarActionBar);
+export default withStyles(headerNavActionStyles, { name: 'HeaderNavAction' })(TomisToolbarActionBar);

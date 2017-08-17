@@ -2,19 +2,19 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import { TomisTableHeader, TomisTableCellEdit } from './TomisTable';
 import TomisPaper from 'TomisApp/TomisPaper';
 import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
 
-const styleSheet = createStyleSheet(theme => ({
+export const styles = theme => ({
     paper: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
         overflowX: 'auto'
     }
-}));
+});
 
 let counter = 0;
 const createData = (name, calories, fat, carbs, protein) => {
@@ -143,4 +143,4 @@ TomisTableEditableExample.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styleSheet)(TomisTableEditableExample);
+export default withStyles(styles, { name: 'TomisTableEditableExample' })(TomisTableEditableExample);

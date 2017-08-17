@@ -2,13 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toggleButtonStyleSheet } from 'app/helpers/tomisMuiStylesheets';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
+import { toggleButtonStyles } from 'app/helpers/tomisMuiStylesheets';
 import createButtonSwitch from 'app/helpers/SwitchButtonBase';
 import Button from 'material-ui/Button';
 
 const ToggleButton = createButtonSwitch({
-    styleSheet: toggleButtonStyleSheet,
+    styleSheet: toggleButtonStyles,
     inputType: 'radio'
 });
 

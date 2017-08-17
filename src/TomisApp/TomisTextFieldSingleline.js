@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, cloneableStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import withStyles from 'material-ui/styles/withStyles';
+import { getDisplayVals, cloneableStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
@@ -165,4 +165,4 @@ class TomisTextFieldSingleLine extends Component {
 }
 TomisTextFieldSingleLine.defaultProps = defaultProps;
 TomisTextFieldSingleLine.propTypes = propTypes;
-export default withStyles(cloneableStyleSheet)(TomisTextFieldSingleLine);
+export default withStyles(cloneableStyles, { name: 'TomisCloneable' })(TomisTextFieldSingleLine);

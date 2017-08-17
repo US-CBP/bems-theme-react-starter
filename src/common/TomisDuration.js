@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { getDisplayVals, tomisDurationStyleSheet } from 'app/helpers/tomisMuiStylesheets';
+import withStyles from 'material-ui/styles/withStyles';
+import { getDisplayVals, tomisDurationStyles } from 'app/helpers/tomisMuiStylesheets';
 import FormControl from 'material-ui/Form/FormControl';
 import FormLabel from 'material-ui/Form/FormLabel';
 import Checkbox from 'material-ui/Checkbox';
@@ -134,4 +134,4 @@ class TomisDuration extends Component {
 
 TomisDuration.defaultProps = defaultProps;
 TomisDuration.propTypes = propTypes;
-export default withStyles(tomisDurationStyleSheet)(TomisDuration);
+export default withStyles(tomisDurationStyles, { name: 'TomisDuration' })(TomisDuration);

@@ -2,17 +2,17 @@
 
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
-const styleSheet = createStyleSheet('RaisedButtons', theme => ({
+export const styles = theme => ({
     button: {
         margin: 0
     },
     input: {
         display: 'none'
     }
-}));
+});
 
 const defaultProps = {
     options: [{ label: 'Btn 1 Value 1', value: 'V1' }, { label: 'Btn2', value: 'V2' }, { label: 'Btn4', value: 'V3' }],
@@ -55,4 +55,4 @@ class TomisToggleButtonsExample extends Component {
 TomisToggleButtonsExample.defaultProps = defaultProps;
 TomisToggleButtonsExample.propTypes = propTypes;
 
-export default withStyles(styleSheet)(TomisToggleButtonsExample);
+export default withStyles(styles, { name: 'TomisToggleButtonsExample' })(TomisToggleButtonsExample);

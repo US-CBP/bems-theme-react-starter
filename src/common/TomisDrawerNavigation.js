@@ -8,7 +8,7 @@ import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ListItemExpandable from 'TomisApp/List/ListItemExpandable';
 import Drawer from 'material-ui/Drawer';
-import { headerNavActionStyleSheet } from '../app/helpers/styles';
+import { headerNavActionStyles } from '../app/helpers/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import cx from 'classnames';
 
@@ -122,4 +122,4 @@ class TomisDrawerNavigation extends Component {
     }
 }
 
-export default withStyles(headerNavActionStyleSheet)(TomisDrawerNavigation);
+export default withStyles(headerNavActionStyles, { name: 'HeaderNavAction' })(TomisDrawerNavigation);

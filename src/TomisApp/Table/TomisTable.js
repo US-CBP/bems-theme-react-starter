@@ -3,15 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import Table from 'material-ui/Table';
 
-export const styleSheet = createStyleSheet('TomisTable', theme => ({
+export const styles = theme => ({
     root: {
         borderCollapse: 'inherit'
     }
-}));
+});
 
 const TomisTable = ({ classes, children, ...other }) => {
     const { root: clsRoot } = classes;
@@ -22,4 +21,4 @@ const TomisTable = ({ classes, children, ...other }) => {
     );
 };
 
-export default withStyles(styleSheet)(TomisTable);
+export default withStyles(styles, { name: 'TomisTable' })(TomisTable);

@@ -3,13 +3,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import Button from 'material-ui/Button';
 import CheckBoxOutlineBlankIcon from 'material-ui/svg-icons/check-box-outline-blank';
 import CheckBoxIcon from 'material-ui/svg-icons/check-box';
 
-export const styleSheet = createStyleSheet('MuiSwitchButtonBase', {
+export const styles = theme => ({
     root: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -190,5 +189,5 @@ export default function createSwitchButton({ inputType = 'checkbox', styleSheet:
         value: PropTypes.string
     };
 
-    return withStyles([switchButtonStyleSheet, styleSheet])(SwitchButtonBase);
+    return withStyles(styles, { name: 'SwitchButtonBase' })(SwitchButtonBase);
 }

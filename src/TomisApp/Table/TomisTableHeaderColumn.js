@@ -2,20 +2,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import classNames from 'classnames';
 import { TableCell, TableSortLabel } from 'material-ui/Table';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
-export const styleSheet = createStyleSheet('TomisTableHeader', theme => ({
+export const styles = theme => ({
     sortLabelRoot: {
         color: theme.palette.common.lightBlack,
         '&:hover': {
             color: theme.palette.common.lightBlack
         }
     }
-}));
+});
 
 const defaultProps = {
     label: 'Button Label'
@@ -55,4 +55,4 @@ const TomisTableHeaderColumn = ({ column, handleRequestSort, orderBy, order, cur
 
 TomisTableHeaderColumn.defaultProps = defaultProps;
 TomisTableHeaderColumn.propTypes = propTypes;
-export default withStyles(styleSheet)(TomisTableHeaderColumn);
+export default withStyles(styles, { name: 'TomisTableHeaderColumn' })(TomisTableHeaderColumn);

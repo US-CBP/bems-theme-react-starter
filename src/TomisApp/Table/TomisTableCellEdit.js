@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStyleSheet from 'material-ui/styles/createStyleSheet';
 import withStyles from 'material-ui/styles/withStyles';
 import Popover from 'material-ui/internal/Popover';
 import Typography from 'material-ui/Typography';
@@ -11,7 +10,7 @@ import TomisButtonFlat from 'TomisApp/TomisButtonFlat';
 import Paper from 'material-ui/Paper';
 import { getDisplayValue } from 'globalJs/functions';
 
-export const styleSheet = createStyleSheet('TomisTableCellEdit', theme => ({
+export const styles = theme => ({
     root: {
         borderBottom: `1px solid ${theme.palette.text.lightDivider}`,
         whiteSpace: 'nowrap',
@@ -50,7 +49,7 @@ export const styleSheet = createStyleSheet('TomisTableCellEdit', theme => ({
         padding: '24px'
     },
     footer: {}
-}));
+});
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -172,4 +171,4 @@ TomisTableCellEdit.contextTypes = {
     table: PropTypes.object
 };
 
-export default withStyles(styleSheet)(TomisTableCellEdit);
+export default withStyles(styles, { name: 'TomisTableCellEdit' })(TomisTableCellEdit);
