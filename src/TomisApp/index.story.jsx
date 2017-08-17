@@ -25,7 +25,7 @@ import TomisCheckbox from './TomisCheckbox';
 import TomisTableEditableExample from './TomisTableEditableExample';
 import TomisTableReadOnlyExample from './TomisTableReadOnlyExample';
 import TomisTextFieldReadOnly from './TomisTextFieldReadOnly';
-import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
+import TomisTextField from './TomisTextField';
 import TomisTextFieldMultiLine from './TomisTextFieldMultiLine';
 import TomisToggleButtonsExample from './TomisToggleButtonsExample';
 import TomisDuration from 'common/TomisDuration';
@@ -134,7 +134,7 @@ storiesOf('TOMIS App', module)
         return <TomisTextFieldReadOnly label="Read Only Label" placeholder="My Placeholder" required={true} value="My read-only val" />;
     })
     .add('Text Field Single-Line - Pending', () => {
-        return <TomisTextFieldSingleLine label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
+        return <TomisTextField label="My Singleline Label" placeholder="Singleline Placeholder" required={true} maxLength={10} isCloneable={true} />;
     })
     .add('Text Field Multi-Line - Pending', () => {
         return <TomisTextFieldMultiLine label="My Multiline Label" placeholder="Multiline Placeholder" rowsMax={10} isCloneable={true} />;

@@ -1,9 +1,9 @@
 import React from 'react';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 
 const TomisTextFieldReadOnly = props => {
-  const { value = ' ', ...other } = props;
-  return <TomisTextFieldSingleLine value={value} {...other} isReadOnly={true} />;
+    const { value = ' ', ...other } = props;
+    return <TomisTextField value={value} {...other} isReadOnly={true} />;
 };
 
 export default TomisTextFieldReadOnly;

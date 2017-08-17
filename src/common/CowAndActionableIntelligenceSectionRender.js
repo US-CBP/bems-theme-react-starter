@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisHeading from 'TomisApp/TomisHeading';
 import ToggleButtonYesNo from 'common/ToggleButtonYesNo';
@@ -88,11 +88,11 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                 </div>
                 <div className="flex-row">
                     <div className="flex-1">
-                        {/* TODO: hide other TomisTextFieldSingleLine when "other" selected */}
+                        {/* TODO: hide other TomisTextField when "other" selected */}
                         <TomisAutocomplete floatingLabelText="Intelligence Source*" isCloneable={isCloneable} disabledClone={true} />
                     </div>
                     <div className="flex-2">
-                        <TomisTextFieldSingleLine floatingLabelText="Other*" isCloneable={isCloneable} disabledClone={true} />
+                        <TomisTextField floatingLabelText="Other*" isCloneable={isCloneable} disabledClone={true} />
                     </div>
                 </div>
                 <div className="flex-row">
@@ -100,7 +100,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
                         <TomisAutocomplete floatingLabelText="Intel Type*" isCloneable={isCloneable} disabledClone={true} />
                     </div>
                     <div className="flex-2">
-                        <TomisTextFieldSingleLine floatingLabelText="Other*" isCloneable={isCloneable} disabledClone={true} />
+                        <TomisTextField floatingLabelText="Other*" isCloneable={isCloneable} disabledClone={true} />
                     </div>
                 </div>
                 <br />

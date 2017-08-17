@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisHeading from 'TomisApp/TomisHeading';
 import CowAndActionableIntelligenceSection from 'common/CowAndActionableIntelligenceSection';

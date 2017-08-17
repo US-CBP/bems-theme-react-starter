@@ -5,7 +5,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import TomisHeading from 'TomisApp/TomisHeading';
@@ -70,7 +70,7 @@ class UasLre2SectionRender extends Component {
                                 <TomisAutocomplete floatingLabelText="Land Location*" hintText="Land Location" isCloneable={isCloneable} />
                             </div>
                             <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisTextField floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
                             </div>
                             <div className="flex-1" />
                         </div>

@@ -6,7 +6,7 @@ import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisDuration from 'common/TomisDuration';
@@ -40,14 +40,14 @@ const CaseInfoGridRender = props => {
                                     isOpen={activeCell === getCellRowColmId(idx, 'caseNbr')}
                                     onRequestClose={handleRequestClose}
                                 >
-                                    <TomisTextFieldSingleLine placeholder="Type Case #" value={row['caseNbr']} reportToHoc={handleUpdateData.bind(null, idx, 'caseNbr')} />
+                                    <TomisTextField placeholder="Type Case #" value={row['caseNbr']} reportToHoc={handleUpdateData.bind(null, idx, 'caseNbr')} />
                                 </TomisTableCellEdit>
                                 <TomisTableCellEdit
                                     onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'agentFullName'))}
                                     isOpen={activeCell === getCellRowColmId(idx, 'agentFullName')}
                                     onRequestClose={handleRequestClose}
                                 >
-                                    <TomisTextFieldSingleLine
+                                    <TomisTextField
                                         placeholder="Type Agent Full Name"
                                         value={row['agentFullName']}
                                         reportToHoc={handleUpdateData.bind(null, idx, 'agentFullName')}
@@ -59,22 +59,14 @@ const CaseInfoGridRender = props => {
                                     isOpen={activeCell === getCellRowColmId(idx, 'agentPhoneNbr')}
                                     onRequestClose={handleRequestClose}
                                 >
-                                    <TomisTextFieldSingleLine
-                                        placeholder="Type Agent Phone #"
-                                        value={row['agentPhoneNbr']}
-                                        reportToHoc={handleUpdateData.bind(null, idx, 'agentPhoneNbr')}
-                                    />
+                                    <TomisTextField placeholder="Type Agent Phone #" value={row['agentPhoneNbr']} reportToHoc={handleUpdateData.bind(null, idx, 'agentPhoneNbr')} />
                                 </TomisTableCellEdit>
                                 <TomisTableCellEdit
                                     onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'description'))}
                                     isOpen={activeCell === getCellRowColmId(idx, 'description')}
                                     onRequestClose={handleRequestClose}
                                 >
-                                    <TomisTextFieldSingleLine
-                                        placeholder="Type Case Description"
-                                        value={row['description']}
-                                        reportToHoc={handleUpdateData.bind(null, idx, 'description')}
-                                    />
+                                    <TomisTextField placeholder="Type Case Description" value={row['description']} reportToHoc={handleUpdateData.bind(null, idx, 'description')} />
                                 </TomisTableCellEdit>
                                 <TomisTableCell>
                                     <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>

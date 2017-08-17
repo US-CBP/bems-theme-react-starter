@@ -6,7 +6,7 @@ import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
@@ -42,7 +42,7 @@ const MissionDatesTimesGridRender = props => {
                                 isOpen={activeCell === getCellRowColmId(idx, 'msnDesc')}
                                 onRequestClose={handleRequestClose}
                             >
-                                <TomisTextFieldSingleLine placeholder="Type Mission Description" value={row['msnDesc']} reportToHoc={handleUpdateData.bind(null, idx, 'msnDesc')} />
+                                <TomisTextField placeholder="Type Mission Description" value={row['msnDesc']} reportToHoc={handleUpdateData.bind(null, idx, 'msnDesc')} />
                             </TomisTableCellEdit>
                             <TomisTableCellEdit
                                 onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'startDate'))}

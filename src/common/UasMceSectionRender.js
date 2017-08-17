@@ -5,7 +5,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import TomisHeading from 'TomisApp/TomisHeading';

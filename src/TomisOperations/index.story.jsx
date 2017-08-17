@@ -12,7 +12,7 @@ import GroundPage from './GroundPage';
 import UasConsolidatedPage from './UasConsolidatedPage';
 import UasFederatedPage from './UasFederatedPage';
 import CloningPaneSection from 'common/CloningPaneSection';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import '../css/index.css';
 
 const theme = createMuiTheme({ palette: createPalette(tomisTheme) });

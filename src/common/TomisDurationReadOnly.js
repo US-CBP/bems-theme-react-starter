@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 
 const floatingLabelStyle = {

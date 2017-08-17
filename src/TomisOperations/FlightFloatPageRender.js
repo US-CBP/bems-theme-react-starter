@@ -5,7 +5,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import CrewInfoGrid from 'common/grids/CrewInfoGrid';
@@ -42,7 +42,7 @@ const FlightFloatPageRender = props => {
                         </div>
                     </div>
                     <div className="flex-row flex-1">
-                        <TomisTextFieldSingleLine isCloneable={isCloneable} floatingLabelText="Flight Title" hintText="Type Flight Title" isCloneable={isCloneable} />
+                        <TomisTextField isCloneable={isCloneable} floatingLabelText="Flight Title" hintText="Type Flight Title" isCloneable={isCloneable} />
                     </div>
                     <div className="flex-row flex-1">
                         <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} />

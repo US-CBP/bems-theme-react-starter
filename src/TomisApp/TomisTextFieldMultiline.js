@@ -1,8 +1,8 @@
 import React from 'react';
-import TomisTextFieldSingleLine from './TomisTextFieldSingleLine';
+import TomisTextField from './TomisTextField';
 
 const TomisTextFieldMultiLine = props => {
-    return <TomisTextFieldSingleLine {...props} multiline={true} />;
+    return <TomisTextField {...props} multiline={true} />;
 };
 
 export default TomisTextFieldMultiLine;

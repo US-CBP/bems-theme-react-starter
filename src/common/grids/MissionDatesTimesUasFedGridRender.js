@@ -6,7 +6,7 @@ import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
@@ -44,7 +44,7 @@ const MissionDatesTimesUasFedGridRender = props => {
                                     isOpen={activeCell === getCellRowColmId(idx, 'siteType')}
                                     onRequestClose={handleRequestClose}
                                 >
-                                    <TomisTextFieldSingleLine placeholder="Site Type" value={row['siteType']} reportToHoc={handleUpdateData.bind(null, idx, 'siteType')} />
+                                    <TomisTextField placeholder="Site Type" value={row['siteType']} reportToHoc={handleUpdateData.bind(null, idx, 'siteType')} />
                                 </TomisTableCellEdit>
                                 <TomisTableCellEdit
                                     onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'siteName'))}

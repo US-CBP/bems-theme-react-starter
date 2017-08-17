@@ -6,7 +6,7 @@ import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisDuration from 'common/TomisDuration';

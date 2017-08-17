@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 
 class FormWithAllComponents extends Component {
@@ -26,7 +26,7 @@ class FormWithAllComponents extends Component {
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="My Text Label" />
+                                <TomisTextField floatingLabelText="My Text Label" />
                             </div>
                         </div>
                         <div className="flex-row">

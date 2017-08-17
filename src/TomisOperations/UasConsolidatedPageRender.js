@@ -4,7 +4,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import CrewInfoGrid from 'common/grids/CrewInfoGrid';
 import TomisHeading from 'TomisApp/TomisHeading';
@@ -42,7 +42,7 @@ const UasConsolidatedPageRender = props => {
                     </div>
                     <div className="flex-row">
                         <div className="flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
+                            <TomisTextField floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
                         </div>
                         <div className="flex-1">
                             <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
@@ -85,7 +85,7 @@ const UasConsolidatedPageRender = props => {
                             <TomisAutocomplete floatingLabelText="Takeoff Location*" hintText="Type Takeoff Location" isCloneable={isCloneable} disabledClone={true} />
                         </div>
                         <div className="flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
+                            <TomisTextField floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
                         </div>
                         <div className="flex-1" />
                     </div>
@@ -112,7 +112,7 @@ const UasConsolidatedPageRender = props => {
                             <TomisAutocomplete floatingLabelText="Land Location" hintText="Type Land Location" isCloneable={isCloneable} />
                         </div>
                         <div className="flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
+                            <TomisTextField floatingLabelText="Other*" hintText="Type Other" isCloneable={isCloneable} disabledClone={true} />
                         </div>
                         <div className="flex-1">
                             <div className="flex-row">

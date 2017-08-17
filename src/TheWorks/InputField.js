@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TomisHeading from 'TomisApp/TomisHeading';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 
 class InputField extends Component {
     constructor(props) {
@@ -28,11 +28,11 @@ class InputField extends Component {
                 </div>
                 <br />
                 <h4>Examples</h4>
-                <TomisTextFieldSingleLine floatingLabelText="Active Input Field With Default Value" hintText="Type Active Input Field With Default Value" value="Default Value" />
-                <TomisTextFieldSingleLine floatingLabelText="Active Input Field" hintText="Type Active Input Field" />
-                <TomisTextFieldSingleLine floatingLabelText="Active Input Field With Help Message" hintText="Type Active Input Field With Message" helperText="My Help Message" />
-                <TomisTextFieldSingleLine floatingLabelText="Disabled Input Field" hintText="Type Disabled Input Field" value="Cannot Modify" disabled={true} />
-                <TomisTextFieldSingleLine
+                <TomisTextField floatingLabelText="Active Input Field With Default Value" hintText="Type Active Input Field With Default Value" value="Default Value" />
+                <TomisTextField floatingLabelText="Active Input Field" hintText="Type Active Input Field" />
+                <TomisTextField floatingLabelText="Active Input Field With Help Message" hintText="Type Active Input Field With Message" helperText="My Help Message" />
+                <TomisTextField floatingLabelText="Disabled Input Field" hintText="Type Disabled Input Field" value="Cannot Modify" disabled={true} />
+                <TomisTextField
                     floatingLabelText="Active Input Field With Error Message"
                     hintText="Type Active Input Field With Error Message"
                     error={true}

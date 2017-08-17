@@ -5,7 +5,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import CrewInfoGrid from 'common/grids/CrewInfoGrid';
@@ -33,7 +33,7 @@ class PlanningMissionSectionRender extends Component {
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="City/Airport Code" hintText="Type City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisTextField floatingLabelText="City/Airport Code" hintText="Type City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
                             </div>
                             <div className="flex-1">
                                 <div className="flex-row">
@@ -72,7 +72,7 @@ class PlanningMissionSectionRender extends Component {
                         </div>
                         <div className="flex-row">
                             <div className="flex-1">
-                                <TomisTextFieldSingleLine floatingLabelText="City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
+                                <TomisTextField floatingLabelText="City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
                             </div>
                             <div className="flex-1">
                                 <div className="flex-row">

@@ -5,7 +5,7 @@ import PageNavLinks from 'common/PageNavLinks';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
 import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import CrewInfoGrid from 'common/grids/CrewInfoGrid';
@@ -45,7 +45,7 @@ const UasFederatedPageRender = props => {
                             <TomisCheckbox label="Stand By" />
                         </div>
                         <div className="flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
+                            <TomisTextField floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
                         </div>
                         <div className="flex-1">
                             <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
@@ -53,7 +53,7 @@ const UasFederatedPageRender = props => {
                     </div>
                     <div className="flex-row">
                         <div className="flex-1">
-                            <TomisTextFieldSingleLine floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
+                            <TomisTextField floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
                         </div>
                         <div className="flex-1">
                             <TomisAutocomplete floatingLabelText="POC" hintText="Type POC" isCloneable={isCloneable} />

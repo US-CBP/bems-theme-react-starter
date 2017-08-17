@@ -36,7 +36,7 @@ const propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-class TomisTextFieldSingleLine extends Component {
+class TomisTextField extends Component {
     constructor(props) {
         super(props);
         this.state = initState(props);
@@ -163,6 +163,6 @@ class TomisTextFieldSingleLine extends Component {
         );
     }
 }
-TomisTextFieldSingleLine.defaultProps = defaultProps;
-TomisTextFieldSingleLine.propTypes = propTypes;
-export default withStyles(cloneableStyles, { name: 'TomisCloneable' })(TomisTextFieldSingleLine);
+TomisTextField.defaultProps = defaultProps;
+TomisTextField.propTypes = propTypes;
+export default withStyles(cloneableStyles, { name: 'TomisCloneable' })(TomisTextField);

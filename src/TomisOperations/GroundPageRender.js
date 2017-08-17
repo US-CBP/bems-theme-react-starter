@@ -5,7 +5,7 @@ import PageNavLinksGround from 'common/PageNavLinksGround';
 import { TomisPanel, TomisPanelBody } from 'TomisApp/TomisPanel';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
-import TomisTextFieldSingleLine from 'TomisApp/TomisTextFieldSingleLine';
+import TomisTextField from 'TomisApp/TomisTextField';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisTextFieldMultiLine from 'TomisApp/TomisTextFieldMultiLine';
@@ -47,7 +47,7 @@ const GroundPageRender = props => {
                         </div>
                     </div>
                     <div className="flex-row flex-1">
-                        <TomisTextFieldSingleLine floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
+                        <TomisTextField floatingLabelText="Operation Title" hintText="Type Operation Title" isCloneable={isCloneable} />
                     </div>
                     <div className="flex-row flex-1">
                         <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} />
