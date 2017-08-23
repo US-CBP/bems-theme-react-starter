@@ -421,11 +421,6 @@ const getToggleButtonStyles = theme => {
     disabled: {
       color: theme.palette.action.disabled
     },
-    root: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      transition: 'none'
-    },
     input: {
       cursor: 'inherit',
       position: 'absolute',
@@ -436,6 +431,11 @@ const getToggleButtonStyles = theme => {
       left: 0,
       margin: 0,
       padding: 0
+    },
+    root: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      transition: 'none'
     }
   };
 };
