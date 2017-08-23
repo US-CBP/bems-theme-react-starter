@@ -1,19 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ToggleButtonLocalZuluRender from 'common/ToggleButtonLocalZuluRender';
+import React from 'react';
+import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
-const propTypes = {
-  onModify: PropTypes.func.isRequired
-};
+const ToggleButtonLocalZulu = props =>
+  <ToggleButtonGroup {...props}>
+    <ToggleButton label="Local" value="LOCAL" />
+    <ToggleButton label="Zulu" value="ZULU" />
+  </ToggleButtonGroup>;
 
-class ToggleButtonLocalZulu extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return <ToggleButtonLocalZuluRender {...this.props} />;
-  }
-}
-
-ToggleButtonLocalZulu.propTypes = propTypes;
 export default ToggleButtonLocalZulu;

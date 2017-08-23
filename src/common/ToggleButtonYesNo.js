@@ -1,25 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ToggleButtonYesNoRender from 'common/ToggleButtonYesNoRender';
+import React from 'react';
+import { ToggleButtonGroup, ToggleButton } from 'TomisApp/ToggleButton';
 
-const defaultProps = {
-  label: 'Yes/No'
-};
-
-const propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired
-};
-
-class ToggleButtonYesNo extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return <ToggleButtonYesNoRender {...this.props} />;
-  }
-}
-
-ToggleButtonYesNo.defaultProps = defaultProps;
-ToggleButtonYesNo.propTypes = propTypes;
+const ToggleButtonYesNo = props =>
+  <ToggleButtonGroup {...props}>
+    <ToggleButton label="Yes" value="Y" />
+    <ToggleButton label="No" value="N" />
+  </ToggleButtonGroup>;
 export default ToggleButtonYesNo;
