@@ -15,122 +15,122 @@ import FlexRow from 'app/helpers/FlexRow';
 let toggleButtons = undefined;
 
 const initState = props => {
-    const { value } = props;
-    return {
-        payload: {
-            value: props.value || '',
-            isCloneChecked: true
-        }
-    };
+  const { value } = props;
+  return {
+    payload: {
+      value: props.value || '',
+      isCloneChecked: true
+    }
+  };
 };
 
 class ToggleButtonGroup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState(props);
-    }
+  constructor(props) {
+    super(props);
+    this.state = initState(props);
+  }
 
-    handleCloneCheckboxChange = (evt, isCloneChecked) => {
-        evt.stopPropagation();
-        this.state.payload.isCloneChecked = isCloneChecked;
-        this.setState(this.state);
-    };
+  handleCloneCheckboxChange = (evt, isCloneChecked) => {
+    evt.stopPropagation();
+    this.state.payload.isCloneChecked = isCloneChecked;
+    this.setState(this.state);
+  };
 
-    render() {
-        const { handleCloneCheckboxChange } = this;
-        const { payload: { value, isCloneChecked } } = this.state;
-        const {
-            children,
-            classes,
-            className: classNameProp,
-            name,
-            selectedValue,
-            isCloneable = false,
-            disabledClone,
-            handleChange,
-            property,
-            label,
-            disabled,
-            classes: {
-                buttons: clsButtons,
-                buttonsCloneable: clsButtonsCloneable,
-                checkbox: clsCheckbox,
-                checkboxDisabled: clsCheckboxDisabled,
-                inputLabel: clsInputLabel,
-                inputLabelCloneable: clsInputLabelCloneable,
-                root: clsRoot
-            },
-            ...other
-        } = this.props;
-        toggleButtons = [];
+  render() {
+    const { handleCloneCheckboxChange } = this;
+    const { payload: { value, isCloneChecked } } = this.state;
+    const {
+      children,
+      classes,
+      className: classNameProp,
+      name,
+      selectedValue,
+      isCloneable = false,
+      disabledClone,
+      handleChange,
+      property,
+      label,
+      disabled,
+      classes: {
+        buttons: clsButtons,
+        buttonsCloneable: clsButtonsCloneable,
+        checkbox: clsCheckbox,
+        checkboxDisabled: clsCheckboxDisabled,
+        inputLabel: clsInputLabel,
+        inputLabelCloneable: clsInputLabelCloneable,
+        root: clsRoot
+      },
+      ...other
+    } = this.props;
+    toggleButtons = [];
 
-        return (
-            <div>
-                <FlexRow>
-                    {isCloneable && <FormLabel>&nbsp;</FormLabel>}
-                    <FormLabel className={cx({ [clsInputLabel]: !isCloneable, [clsInputLabelCloneable]: isCloneable })} disabled={disabled}>
-                        {label}
-                    </FormLabel>
-                </FlexRow>
-                <FlexRow>
-                    {isCloneable &&
-                        <Checkbox
-                            className={cx(clsCheckbox, { [clsCheckboxDisabled]: disabled || disabledClone })}
-                            onChange={handleCloneCheckboxChange}
-                            disabled={disabled || disabledClone}
-                            tabIndex="-1"
-                            checked={isCloneChecked || disabledClone}
-                        />}
-                    <ToggleButtons
-                        onChange={handleChange.bind(null, property)}
-                        className={cx({ [clsButtons]: !isCloneable, [clsButtonsCloneable]: isCloneable })}
-                        classes={classes}
-                        children={children}
-                        disabled={disabled}
-                        selectedValue={selectedValue}
-                    />
-                </FlexRow>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <FlexRow>
+          {isCloneable && <FormLabel>&nbsp;</FormLabel>}
+          <FormLabel className={cx({ [clsInputLabel]: !isCloneable, [clsInputLabelCloneable]: isCloneable })} disabled={disabled}>
+            {label}
+          </FormLabel>
+        </FlexRow>
+        <FlexRow>
+          {isCloneable &&
+            <Checkbox
+              className={cx(clsCheckbox, { [clsCheckboxDisabled]: disabled || disabledClone })}
+              onChange={handleCloneCheckboxChange}
+              disabled={disabled || disabledClone}
+              tabIndex="-1"
+              checked={isCloneChecked || disabledClone}
+            />}
+          <ToggleButtons
+            onChange={handleChange}
+            className={cx({ [clsButtons]: !isCloneable, [clsButtonsCloneable]: isCloneable })}
+            classes={classes}
+            children={children}
+            disabled={disabled}
+            selectedValue={selectedValue}
+          />
+        </FlexRow>
+      </div>
+    );
+  }
 }
 
 ToggleButtonGroup.propTypes = {
-    /**
+  /**
    * The content of the component.
    */
-    children: PropTypes.node,
-    /**
+  children: PropTypes.node,
+  /**
    * Useful to extend the style applied to components.
    */
-    classes: PropTypes.object.isRequired,
-    /**
+  classes: PropTypes.object.isRequired,
+  /**
    * @ignore
    */
-    className: PropTypes.string,
-    /**
+  className: PropTypes.string,
+  /**
    * The name used to reference the value of the control.
    */
-    name: PropTypes.string,
-    /**
+  name: PropTypes.string,
+  /**
    * @ignore
    */
-    onBlur: PropTypes.func,
-    /**
+  onBlur: PropTypes.func,
+  /**
    * Callback fired when a radio button is selected.
    *
    * @param {object} event The event source of the callback
    * @param {boolean} checked The `checked` value of the switch
    */
-    onChange: PropTypes.func,
-    /**
+  onChange: PropTypes.func,
+  /**
    * @ignore
    */
-    onKeyDown: PropTypes.func,
-    /**
+  onKeyDown: PropTypes.func,
+  /**
    * Value of the selected radio button
    */
-    selectedValue: PropTypes.string
+  selectedValue: PropTypes.string
 };
 
 export default withStyles(toggleButtonGroupStyles, { name: 'ToggleButtonGroup' })(ToggleButtonGroup);
