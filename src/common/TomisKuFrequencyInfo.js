@@ -21,12 +21,12 @@ class TomisKuFrequencyInfo extends Component {
           <div className="active" title="YELLOW" style={{ background: 'rgb(255, 255, 0)' }} />
           <div className="none" title="None">
             <svg>
-              <line x1="0" y1="0" x2="19" y2="19" stroke-width="1" stroke="red" />
-              <line x1="0" y1="19" x2="19" y2="0" stroke-width="1" stroke="red" />
-              <line x1="0" y1="1" x2="19" y2="1" stroke-width="2" stroke="red" />
-              <line x1="19" y1="1" x2="19" y2="19" stroke-width="2" stroke="red" />
-              <line x1="19" y1="19" x2="0" y2="19" stroke-width="2" stroke="red" />
-              <line x1="0" y1="19" x2="0" y2="0" stroke-width="2" stroke="red" />
+              <line x1="0" y1="0" x2="19" y2="19" strokeWidth="1" stroke="red" />
+              <line x1="0" y1="19" x2="19" y2="0" strokeWidth="1" stroke="red" />
+              <line x1="0" y1="1" x2="19" y2="1" strokeWidth="2" stroke="red" />
+              <line x1="19" y1="1" x2="19" y2="19" strokeWidth="2" stroke="red" />
+              <line x1="19" y1="19" x2="0" y2="19" strokeWidth="2" stroke="red" />
+              <line x1="0" y1="19" x2="0" y2="0" strokeWidth="2" stroke="red" />
             </svg>
           </div>
         </div>

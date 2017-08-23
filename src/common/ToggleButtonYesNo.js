@@ -3,22 +3,21 @@ import PropTypes from 'prop-types';
 import ToggleButtonYesNoRender from 'common/ToggleButtonYesNoRender';
 
 const defaultProps = {
-    label: 'Yes/No'
+  label: 'Yes/No'
 };
 
 const propTypes = {
-    handleChange: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired,
-    property: PropTypes.string.isRequired
+  handleChange: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 class ToggleButtonYesNo extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return <ToggleButtonYesNoRender {...this.props} />;
-    }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <ToggleButtonYesNoRender {...this.props} />;
+  }
 }
 
 ToggleButtonYesNo.defaultProps = defaultProps;

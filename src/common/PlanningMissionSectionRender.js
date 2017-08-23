@@ -19,81 +19,81 @@ import CowAndActionableIntelligenceSection from 'common/CowAndActionableIntellig
 import PlanningDataSection from 'common/PlanningDataSection';
 
 class PlanningMissionSectionRender extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const { isCloneable, yesNoValue, handleChangeYesNo } = this.props;
-        return (
-            <div>
-                <TomisPanel label="M1 (Mission 1 Fly)">
-                    <TomisPanelBody>
-                        <div className="flex-row">
-                            <TomisHeading label="M1 Initiation Details" />
-                        </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisTextField floatingLabelText="City/Airport Code" hintText="Type City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex-row">
-                                    <TomisTextFieldReadOnly floatingLabelText="Time Zone" value="EDT (-4)" />
-                                    <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="06/12/2017" />
-                                </div>
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex-row">
-                                    <div className="flex-1">
-                                        <TomisTextFieldReadOnly floatingLabelText="Time (Local)" value="0000" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <TomisDurationReadOnly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex-row flex-1">
-                            <TomisTextFieldMultiLine floatingLabelText="Mission Description" isCloneable={isCloneable} />
-                        </div>
-                        <PlanningDataSection {...this.props} />
-                        <br />
-                        <div className="flex-row flex-1">
-                            <ToggleButtonYesNo
-                                label="Are there any scheduled passengers?"
-                                property="yesNoValue"
-                                yesNoValue={yesNoValue}
-                                handleChange={handleChangeYesNo}
-                                isCloneable={isCloneable}
-                            />
-                        </div>
-                        <br />
-                        <div className="flex-row">
-                            <TomisHeading label="M1 Conclusion Details" />
-                        </div>
-                        <div className="flex-row">
-                            <div className="flex-1">
-                                <TomisTextField floatingLabelText="City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex-row">
-                                    <TomisTextFieldReadOnly floatingLabelText="Time Zone" value="EDT (-4)" />
-                                    <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="06/12/2017" />
-                                </div>
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex-row">
-                                    <div className="flex-1">
-                                        <TomisTextFieldReadOnly floatingLabelText="Time (Local)" value="0000" />
-                                    </div>
-                                    <div className="flex-1" />
-                                </div>
-                            </div>
-                        </div>
-                    </TomisPanelBody>
-                </TomisPanel>
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { isCloneable, yesNoValue, handleChangeYesNo } = this.props;
+    return (
+      <div>
+        <TomisPanel label="M1 (Mission 1 Fly)">
+          <TomisPanelBody>
+            <div className="flex-row">
+              <TomisHeading label="M1 Initiation Details" />
             </div>
-        );
-    }
+            <div className="flex-row">
+              <div className="flex-1">
+                <TomisTextField floatingLabelText="City/Airport Code" hintText="Type City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
+              </div>
+              <div className="flex-1">
+                <div className="flex-row">
+                  <TomisTextFieldReadOnly floatingLabelText="Time Zone" value="EDT (-4)" />
+                  <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="06/12/2017" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex-row">
+                  <div className="flex-1">
+                    <TomisTextFieldReadOnly floatingLabelText="Time (Local)" value="0000" />
+                  </div>
+                  <div className="flex-1">
+                    <TomisDurationReadOnly />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-row flex-1">
+              <TomisTextFieldMultiLine floatingLabelText="Mission Description" isCloneable={isCloneable} />
+            </div>
+            <PlanningDataSection {...this.props} />
+            <br />
+            <div className="flex-row flex-1">
+              <ToggleButtonYesNo
+                label="Are there any scheduled passengers?"
+                property="yesNoValue"
+                value={yesNoValue}
+                handleChange={handleChangeYesNo}
+                isCloneable={isCloneable}
+              />
+            </div>
+            <br />
+            <div className="flex-row">
+              <TomisHeading label="M1 Conclusion Details" />
+            </div>
+            <div className="flex-row">
+              <div className="flex-1">
+                <TomisTextField floatingLabelText="City/Airport Code" isCloneable={isCloneable} disabledClone={true} />
+              </div>
+              <div className="flex-1">
+                <div className="flex-row">
+                  <TomisTextFieldReadOnly floatingLabelText="Time Zone" value="EDT (-4)" />
+                  <TomisTextFieldReadOnly floatingLabelText="Date (Local)" value="06/12/2017" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex-row">
+                  <div className="flex-1">
+                    <TomisTextFieldReadOnly floatingLabelText="Time (Local)" value="0000" />
+                  </div>
+                  <div className="flex-1" />
+                </div>
+              </div>
+            </div>
+          </TomisPanelBody>
+        </TomisPanel>
+      </div>
+    );
+  }
 }
 
 export default PlanningMissionSectionRender;

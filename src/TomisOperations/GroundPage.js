@@ -1,32 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import GroundPageRender from './GroundPageRender';
+import { compose, defaultProps as setDefaultProps, setPropTypes, withStateHandlers } from 'recompose';
+import { stateHandlers } from 'app/storybookMock/stateHandlers';
+import { propTypes, defaultProps, props } from 'app/storybookMock/props';
 
-const setStateLocalZuluValue = (localZuluValue, state, props) => {
-  return { localZuluValue };
-};
-
-const initState = {
-  localZuluValue: 'LOCAL'
-};
-
-class GroundPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initState;
-    this.handleChangeLocalZulu = this.handleChangeLocalZulu.bind(this);
-  }
-
-  handleChangeLocalZulu(value) {
-    console.log('changed local/zulu');
-    this.setState(setStateLocalZuluValue.bind(this, value));
-  }
-  render() {
-    const { handleChangeLocalZulu } = this;
-    const { localZuluValue } = this.state;
-    //Note, dimensions are passed as prop from Container Pane Component.
-    return <GroundPageRender isCloneable={true} handleChangeLocalZulu={handleChangeLocalZulu} localZuluValue={localZuluValue} {...this.props} />;
-  }
-}
-
+//Note, compose executes functions from right-to-left.  This is important to understand to avoid propTypes warnings.
+const GroundPage = compose(withStateHandlers(props, stateHandlers), setDefaultProps(defaultProps), setPropTypes(propTypes))(GroundPageRender);
 export default GroundPage;

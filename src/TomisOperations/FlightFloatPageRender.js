@@ -18,7 +18,6 @@ import CloningStepBarPosition from 'common/CloningStepBarPosition';
 
 const FlightFloatPageRender = props => {
   const { localZuluValue, handleChangeLocalZulu, isCloneable, dimensions } = props;
-  console.log('FlightFloatPageRender props', props);
   return (
     <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
       {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -74,7 +73,7 @@ const FlightFloatPageRender = props => {
         <TomisPanelBody>
           <div className="flex-row">
             <div className="flex-1">
-              <ToggleButtonLocalZulu label="Local/Zulu" property="localZuluValue" value={localZuluValue} handleChange={handleChangeLocalZulu} />
+              <ToggleButtonLocalZulu label="Local/Zulu" value={localZuluValue} handleChange={handleChangeLocalZulu} />
             </div>
             <div className="flex-1">
               <TomisAutocomplete floatingLabelText="Time Zone*" />
