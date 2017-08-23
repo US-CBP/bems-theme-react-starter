@@ -22,6 +22,16 @@ const defns = {
       isCloneChecked: true
     }
   },
+  remarks: {
+    payload: {
+      value: ''
+    }
+  },
+  title: {
+    payload: {
+      value: ''
+    }
+  },
   standbyCb: {
     payload: {
       value: false

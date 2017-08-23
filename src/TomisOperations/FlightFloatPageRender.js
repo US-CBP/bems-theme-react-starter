@@ -34,7 +34,14 @@ const FlightFloatPageRender = props => {
             </div>
           </div>
           <div className="flex-row flex-1">
-            <TomisTextField isCloneable={isCloneable} label="Flight Title" placeholder="Type Flight Title" isCloneable={isCloneable} />
+            <TomisTextField
+              isCloneable={isCloneable}
+              label="Flight Title"
+              placeholder="Type Flight Title"
+              isCloneable={isCloneable}
+              {...defns.title}
+              onModify={props.handleModifyTitle}
+            />
           </div>
           <div className="flex-row flex-1">
             <TomisTextFieldMultiLine label="Remarks" isCloneable={isCloneable} {...defns.remarks} onModify={props.handleModifyRemarks} />

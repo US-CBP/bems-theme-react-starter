@@ -30,7 +30,7 @@ const propTypes = {
 };
 
 const UasFederatedPageRender = props => {
-  const { yesNoValue, handleModifyYesNoToggle, isCloneable, dimensions } = props;
+  const { defns, isCloneable, dimensions } = props;
   return (
     <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
       {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -39,39 +39,70 @@ const UasFederatedPageRender = props => {
         <TomisPanelBody>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisCheckbox label="Stand By" />
+              <TomisCheckbox label="Stand By" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
             </div>
             <div className="flex-1">
-              <TomisTextField floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} />
+              <TomisTextField floatingLabelText="Title" hintText="Type Title" isCloneable={isCloneable} {...defns.title} onModify={props.handleModifyTitle} />
             </div>
             <div className="flex-1">
-              <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
+              <TomisAutocomplete
+                floatingLabelText="Named Operation"
+                hintText="Type Named Operation"
+                isCloneable={isCloneable}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
+              />
             </div>
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisTextField floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
+              <TomisTextField
+                floatingLabelText="Tail #*"
+                hintText="Type Tail #"
+                isCloneable={isCloneable}
+                disabledClone={true}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
+              />
             </div>
             <div className="flex-1">
-              <TomisAutocomplete floatingLabelText="POC" hintText="Type POC" isCloneable={isCloneable} />
+              <TomisAutocomplete
+                floatingLabelText="POC"
+                hintText="Type POC"
+                isCloneable={isCloneable}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
+              />
             </div>
             <div className="flex-1">
               <ToggleButtonYesNo
                 label="Vader Capable?*"
                 isCloneable={isCloneable}
                 disabledClone={true}
-                value={yesNoValue}
-                handleChange={handleModifyYesNoToggle}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
               />
             </div>
           </div>
           <div className="flex-row">
             <KuFrequencyInfo />
             <div className="flex-1">
-              <TomisTimeSpinner floatingLabelText="KU On Time (Zulu)" hintText="Type KU On Time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
+              <TomisTimeSpinner
+                floatingLabelText="KU On Time (Zulu)"
+                hintText="Type KU On Time"
+                isCloneable={isCloneable}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
+              />
             </div>
             <div className="flex-1">
-              <TomisTimeSpinner floatingLabelText="KU Off Time (Zulu)" hintText="Type KU Off time" isCloneable={isCloneable} isDisplayArrowIcons={true} />
+              <TomisTimeSpinner
+                floatingLabelText="KU Off Time (Zulu)"
+                hintText="Type KU Off time"
+                isCloneable={isCloneable}
+                {...defns.aircraftTypeLov}
+                onModify={props.handleModifyAircraftTypeLov}
+              />
             </div>
           </div>
         </TomisPanelBody>
@@ -82,7 +113,7 @@ const UasFederatedPageRender = props => {
         <TomisButtonRaised style={{ marginRight: '12px' }} label="Apply" />
         <TomisButtonRaised label="Cancel Changes" />
         <TomisPanelBody>
-          <MissionDatesTimesUasFedGrid isCloneable={isCloneable} />
+          <MissionDatesTimesUasFedGrid isCloneable={isCloneable} {...props} />
           <br />
           <div className="flex-row right">Scheduled Handovers - 3 | Total Flight Hours - 0.00 Hrs (00+00)</div>
         </TomisPanelBody>
@@ -90,11 +121,11 @@ const UasFederatedPageRender = props => {
       <br />
       <TomisPanel label="Planning">
         <TomisPanelBody>
-          <UasLre1Section isCloneable={isCloneable} />
+          <UasLre1Section isCloneable={isCloneable} {...props} />
           <br />
-          <UasMceSection isCloneable={isCloneable} />
+          <UasMceSection isCloneable={isCloneable} {...props} />
           <br />
-          <UasLre2Section isCloneable={isCloneable} />
+          <UasLre2Section isCloneable={isCloneable} {...props} />
         </TomisPanelBody>
       </TomisPanel>
       <br />
