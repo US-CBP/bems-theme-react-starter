@@ -14,41 +14,48 @@ import FlexRow from 'app/helpers/FlexRow';
 
 let toggleButtons = undefined;
 
-const initState = props => {
-  const { value } = props;
-  return {
-    payload: {
-      value: props.value || '',
-      isCloneChecked: true
-    }
-  };
+const defaultProps = {
+  payload: { value: 'SHOULD_NOT_BE_USING_DEFAULT_VALUE' }
 };
 
 class ToggleButtonGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initState(props);
-  }
+  state = {
+    isCloneChecked: true
+  };
+
+  reportToHoc = newPayload => {
+    const { onModify, payload } = this.props;
+    if (onModify) {
+      onModify(newPayload);
+    }
+  };
+
+  handleValueChange = value => {
+    const { payload } = this.props;
+    const newPayload = Object.assign({}, payload, { value });
+    this.reportToHoc(newPayload);
+  };
 
   handleCloneCheckboxChange = (evt, isCloneChecked) => {
     evt.stopPropagation();
-    this.state.payload.isCloneChecked = isCloneChecked;
-    this.setState(this.state);
+    this.state.isCloneChecked = isCloneChecked;
+    this.setState(this.state, () => {
+      const { payload } = this.props;
+      const newPayload = Object.assign({}, payload, { isCloneChecked });
+      this.reportToHoc(newPayload);
+    });
   };
 
   render() {
-    const { handleCloneCheckboxChange } = this;
-    const { payload: { value, isCloneChecked } } = this.state;
+    const { handleValueChange, handleCloneCheckboxChange } = this;
+    const { isCloneChecked } = this.state;
     const {
       children,
       classes,
       className: classNameProp,
       name,
-      selectedValue,
       isCloneable = false,
       disabledClone,
-      handleChange,
-      property,
       label,
       disabled,
       classes: {
@@ -60,6 +67,7 @@ class ToggleButtonGroup extends Component {
         inputLabelCloneable: clsInputLabelCloneable,
         root: clsRoot
       },
+      payload: { value: selectedValue },
       ...other
     } = this.props;
     toggleButtons = [];
@@ -82,7 +90,7 @@ class ToggleButtonGroup extends Component {
               checked={isCloneChecked || disabledClone}
             />}
           <ToggleButtons
-            onChange={handleChange}
+            onChange={handleValueChange}
             className={cx({ [clsButtons]: !isCloneable, [clsButtonsCloneable]: isCloneable })}
             classes={classes}
             children={children}
@@ -133,4 +141,5 @@ ToggleButtonGroup.propTypes = {
   selectedValue: PropTypes.string
 };
 
+ToggleButtonGroup.defaultProps = defaultProps;
 export default withStyles(toggleButtonGroupStyles, { name: 'ToggleButtonGroup' })(ToggleButtonGroup);
