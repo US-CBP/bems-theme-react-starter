@@ -1,11 +1,12 @@
 export const stateHandlers = {
   handleChangeLocalZulu: ({ defns }) => payload => {
-    console.log('handleChangeLocalZulu defns=', defns);
     const { localZulu } = defns;
-    const newDefns = Object.assign({}, defns, { localZulu: { ...localZulu, payload } });
+    const newDefns = Object.assign({}, { localZulu: { ...localZulu, payload } });
     return { defns: newDefns };
   },
-  handleChangeYesNo: ({ yesNoValue }) => yesNoValue => ({
-    yesNoValue
-  })
+  handleChangeYesNo: ({ defns }) => payload => {
+    const { yesNo } = defns;
+    const newDefns = Object.assign({}, { yesNo: { ...yesNo, payload } });
+    return { defns: newDefns };
+  }
 };

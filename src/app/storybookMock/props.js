@@ -9,8 +9,7 @@ const defns = {
     payload: {
       value: '',
       isCloneChecked: true
-    },
-    testProp: 'TEST_PROP'
+    }
   },
   yesNo: {
     payload: {

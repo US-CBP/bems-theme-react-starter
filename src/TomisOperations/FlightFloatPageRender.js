@@ -74,7 +74,7 @@ const FlightFloatPageRender = props => {
         <TomisPanelBody>
           <div className="flex-row">
             <div className="flex-1">
-              <ToggleButtonLocalZulu label="Local/Zulu" {...defns.localZulu} onModify={handleChangeLocalZulu} />
+              <ToggleButtonLocalZulu {...defns.localZulu} onModify={handleChangeLocalZulu} />
             </div>
             <div className="flex-1">
               <TomisAutocomplete floatingLabelText="Time Zone*" />
