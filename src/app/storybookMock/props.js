@@ -1,27 +1,35 @@
 import PropTypes from 'prop-types';
 
 export const propTypes = {};
-
 export const defaultProps = {};
 
 const defns = {
-  localZulu: {
+  localZuluToggle: {
     payload: {
       value: '',
       isCloneChecked: true
     }
   },
-  yesNo: {
+  yesNoToggle: {
     payload: {
       value: '',
       isCloneChecked: true
+    }
+  },
+  branchUnitLov: {
+    payload: {
+      value: 'Buffalo Air Branch',
+      isCloneChecked: true
+    }
+  },
+  standbyCb: {
+    payload: {
+      value: false
     }
   }
 };
 
 export const props = {
-  localZuluValue: '',
-  yesNoValue: '',
   isInitAmo: '',
   isCloneable: true,
   defns

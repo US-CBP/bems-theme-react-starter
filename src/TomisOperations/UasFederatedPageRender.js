@@ -30,7 +30,7 @@ const propTypes = {
 };
 
 const UasFederatedPageRender = props => {
-  const { yesNoValue, handleChangeYesNo, isCloneable, dimensions } = props;
+  const { yesNoValue, handleModifyYesNoToggle, isCloneable, dimensions } = props;
   return (
     <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
       {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -56,7 +56,13 @@ const UasFederatedPageRender = props => {
               <TomisAutocomplete floatingLabelText="POC" hintText="Type POC" isCloneable={isCloneable} />
             </div>
             <div className="flex-1">
-              <ToggleButtonYesNo label="Vader Capable?*" isCloneable={isCloneable} disabledClone={true} value={yesNoValue} handleChange={handleChangeYesNo} />
+              <ToggleButtonYesNo
+                label="Vader Capable?*"
+                isCloneable={isCloneable}
+                disabledClone={true}
+                value={yesNoValue}
+                handleChange={handleModifyYesNoToggle}
+              />
             </div>
           </div>
           <div className="flex-row">

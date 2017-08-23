@@ -11,7 +11,7 @@ class UasLre1Section extends Component {
     super(props);
   }
   render() {
-    const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
+    const { yesNoValue, handleModifyYesNoToggle, isCloneable } = this.props;
     return <UasLre1SectionRender {...this.props} />;
   }
 }

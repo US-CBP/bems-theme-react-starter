@@ -17,7 +17,7 @@ import KuFrequencyInfo from 'common/TomisKuFrequencyInfo';
 import CloningStepBarPosition from 'common/CloningStepBarPosition';
 
 const UasConsolidatedPageRender = props => {
-  const { defns, handleChangeYesNo, isCloneable, dimensions } = props;
+  const { defns, handleModifyYesNoToggle, isCloneable, dimensions } = props;
   return (
     <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
       {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}
@@ -51,7 +51,7 @@ const UasConsolidatedPageRender = props => {
               <TomisAutocomplete floatingLabelText="Tail #*" hintText="Type Tail #" isCloneable={isCloneable} disabledClone={true} />
             </div>
             <div className="flex-1">
-              <ToggleButtonYesNo label="Vader Capable?*" isCloneable={isCloneable} disabledClone={true} {...defns.yesNo} onModify={handleChangeYesNo} />
+              <ToggleButtonYesNo label="Vader Capable?*" isCloneable={isCloneable} disabledClone={true} {...defns.yesNo} onModify={handleModifyYesNoToggle} />
             </div>
           </div>
           <div className="flex-row">

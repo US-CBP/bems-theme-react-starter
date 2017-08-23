@@ -10,7 +10,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
     super(props);
   }
   render() {
-    const { yesNoValue, handleChangeYesNo, isCloneable, isInitAmo } = this.props;
+    const { yesNoValue, handleModifyYesNoToggle, isCloneable, isInitAmo } = this.props;
     return (
       <div>
         <div className="flex-row">
@@ -23,7 +23,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
               label="Mission Initiated by AMO?*"
               property="isInitAmo"
               value={isInitAmo}
-              handleChange={handleChangeYesNo}
+              handleChange={handleModifyYesNoToggle}
               isCloneable={isCloneable}
               disabledClone={true}
             />
@@ -33,7 +33,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
               label="Mission Initiated by USBP?*"
               property="yesNoValue"
               value={yesNoValue}
-              handleChange={handleChangeYesNo}
+              handleChange={handleModifyYesNoToggle}
               isCloneable={isCloneable}
               disabledClone={true}
             />
@@ -43,7 +43,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
               label="Coordinated with Other Agency?*"
               property="yesNoValue"
               value={yesNoValue}
-              handleChange={handleChangeYesNo}
+              handleChange={handleModifyYesNoToggle}
               isCloneable={isCloneable}
               disabledClone={true}
             />
@@ -78,7 +78,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
               label="Is this mission based on Actionable Intelligence?*"
               property="yesNoValue"
               value={yesNoValue}
-              handleChange={handleChangeYesNo}
+              handleChange={handleModifyYesNoToggle}
               isCloneable={isCloneable}
               disabledClone={true}
             />
@@ -110,7 +110,7 @@ class CowAndActionableIntelligenceSectionRender extends Component {
               label="Is this an Investigative Mission?*"
               property="yesNoValue"
               value={yesNoValue}
-              handleChange={handleChangeYesNo}
+              handleChange={handleModifyYesNoToggle}
               isCloneable={isCloneable}
               disabledClone={true}
             />

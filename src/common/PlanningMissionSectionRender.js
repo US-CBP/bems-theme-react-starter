@@ -23,7 +23,7 @@ class PlanningMissionSectionRender extends Component {
     super(props);
   }
   render() {
-    const { isCloneable, yesNoValue, handleChangeYesNo } = this.props;
+    const { isCloneable, yesNoValue, handleModifyYesNoToggle } = this.props;
     return (
       <div>
         <TomisPanel label="M1 (Mission 1 Fly)">
@@ -62,7 +62,7 @@ class PlanningMissionSectionRender extends Component {
                 label="Are there any scheduled passengers?"
                 property="yesNoValue"
                 value={yesNoValue}
-                handleChange={handleChangeYesNo}
+                handleChange={handleModifyYesNoToggle}
                 isCloneable={isCloneable}
               />
             </div>

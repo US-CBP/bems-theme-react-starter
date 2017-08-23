@@ -21,7 +21,7 @@ class UasLre1SectionRender extends Component {
     super(props);
   }
   render() {
-    const { yesNoValue, handleChangeYesNo, isCloneable } = this.props;
+    const { yesNoValue, handleModifyYesNoToggle, isCloneable } = this.props;
     return (
       <div>
         <TomisPanel label="LRE (CRP-CRPGCS3)">
