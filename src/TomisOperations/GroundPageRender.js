@@ -29,27 +29,21 @@ const GroundPageRender = props => {
         <TomisPanelBody>
           <div className="flex-row">
             <div className="flex-2">
-              <TomisTextFieldReadOnly floatingLabelText="Branch/Unit" {...defns.branchUnitLov} />
+              <TomisTextFieldReadOnly label="Branch/Unit" {...defns.branchUnitLov} />
             </div>
             <div className="flex-1">
               <TomisCheckbox label="Stand By" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
             </div>
           </div>
           <div className="flex-row flex-1">
-            <TomisTextField
-              floatingLabelText="Operation Title"
-              hintText="Type Operation Title"
-              isCloneable={isCloneable}
-              {...defns.title}
-              onModify={props.handleModifyTitle}
-            />
+            <TomisTextField label="Operation Title" hintText="Type Operation Title" {...defns.title} onModify={props.handleModifyTitle} />
           </div>
           <div className="flex-row flex-1">
-            <TomisTextFieldMultiLine floatingLabelText="Remarks" isCloneable={isCloneable} {...defns.remarks} onModify={props.handleModifyRemarks} />
+            <TomisTextFieldMultiLine label="Remarks" {...defns.remarks} onModify={props.handleModifyRemarks} />
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisAutocomplete floatingLabelText="Team Lead" isCloneable={isCloneable} {...defns.picLov} onModify={props.handleModifyPicLov} />
+              <TomisAutocomplete label="Team Lead" {...defns.genericCloneableLov} onModify={props.handleModifyGenericCloneableLov} />
             </div>
             <div className="flex-1" />
             <div className="flex-1" />
@@ -65,7 +59,7 @@ const GroundPageRender = props => {
             <TomisHeading label="Capabilities" />
           </div>
           <div className="flex-row">
-            <TomisCheckbox style={{ width: '100px' }} label="EMT" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="EMT" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
           </div>
         </TomisPanelBody>
       </TomisPanel>
@@ -77,37 +71,22 @@ const GroundPageRender = props => {
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisAutocomplete
-                floatingLabelText="Time Zone*"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.tailNumberLov}
-                onModify={props.handleModifyTailNumberLov}
-              />
+              <TomisAutocomplete label="Time Zone*" {...defns.genericCloneableLovDisabled} onModify={props.handleModifyGenericCloneableLovDisabled} />
             </div>
             <div className="flex-1">
-              <TomisDatePicker
-                floatingLabelText="Date (Local)*"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.tailNumberLov}
-                onModify={props.handleModifyTailNumberLov}
-              />
+              <TomisDatePicker label="Date (Local)*" {...defns.genericCloneableLovDisabled} onModify={props.handleModifyGenericCloneableLovDisabled} />
             </div>
             <div className="flex-1">
               <TomisTimeSpinner
-                floatingLabelText="Time (Local)*"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                isDisplayArrowIcons={true}
-                {...defns.tailNumberLov}
-                onModify={props.handleModifyTailNumberLov}
+                label="Time (Local)*"
+                {...defns.genericCloneableTimeSpinnerDisabled}
+                onModify={props.handleModifyGenericCloneableTimeSpinnerDisabled}
               />
             </div>
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisDuration isCloneable={isCloneable} disabledClone={true} {...defns.tailNumberLov} onModify={props.handleModifyTailNumberLov} />
+              <TomisDuration {...defns.genericCloneableDurationDisabled} onModify={props.handleModifyGgenericCloneableDurationDisabled} />
             </div>
           </div>
           <br />
@@ -123,15 +102,13 @@ const GroundPageRender = props => {
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisTextFieldReadOnly floatingLabelText="Date (Local)" {...defns.tailNumberLov} />
+              <TomisTextFieldReadOnly label="Date (Local)" {...defns.genericText} />
             </div>
             <div className="flex-1">
               <TomisTimeSpinner
-                floatingLabelText="Time (Local)*"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.tailNumberLov}
-                onModify={props.handleModifyTailNumberLov}
+                label="Time (Local)*"
+                {...defns.genericCloneableTimeSpinnerDisabled}
+                onModify={props.handleModifyGenericCloneableTimeSpinnerDisabled}
               />
             </div>
             <div className="flex-1" />

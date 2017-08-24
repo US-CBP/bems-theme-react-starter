@@ -34,47 +34,25 @@ const FlightFloatPageRender = props => {
             </div>
           </div>
           <div className="flex-row flex-1">
-            <TomisTextField
-              isCloneable={isCloneable}
-              label="Flight Title"
-              placeholder="Type Flight Title"
-              isCloneable={isCloneable}
-              {...defns.title}
-              onModify={props.handleModifyTitle}
-            />
+            <TomisTextField label="Flight Title" placeholder="Type Flight Title" {...defns.title} onModify={props.handleModifyTitle} />
           </div>
           <div className="flex-row flex-1">
-            <TomisTextFieldMultiLine label="Remarks" isCloneable={isCloneable} {...defns.remarks} onModify={props.handleModifyRemarks} />
+            <TomisTextFieldMultiLine label="Remarks" {...defns.remarks} onModify={props.handleModifyRemarks} />
           </div>
           <div className="flex-row">
             <div className="flex-1">
               <TomisAutocomplete
                 label="Aircraft Type*"
                 placeholder="Type Aircraft Type"
-                isCloneable={isCloneable}
-                disabledClone={true}
                 {...defns.aircraftTypeLov}
                 onModify={props.handleModifyAircraftTypeLov}
               />
             </div>
             <div className="flex-1">
-              <TomisAutocomplete
-                label="Tail #*"
-                placeholder="Type Tail #"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.tailNumberLov}
-                onModify={props.handleModifyTailNumberLov}
-              />
+              <TomisAutocomplete label="Tail #*" placeholder="Type Tail #" {...defns.tailNumberLov} onModify={props.handleModifyTailNumberLov} />
             </div>
             <div className="flex-1">
-              <TomisAutocomplete
-                label="PIC (Risk Assessment)*"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.picLov}
-                onModify={props.handleModifyPicLov}
-              />
+              <TomisAutocomplete label="PIC (Risk Assessment)*" {...defns.picLov} onModify={props.handleModifyPicLov} />
             </div>
           </div>
           <br />
@@ -84,12 +62,12 @@ const FlightFloatPageRender = props => {
             <TomisHeading label="Capabilities" />
           </div>
           <div className="flex-row">
-            <TomisCheckbox style={{ width: '100px' }} label="EMT" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
-            <TomisCheckbox style={{ width: '100px' }} label="HRST" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
-            <TomisCheckbox style={{ width: '100px' }} label="HOIST" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
-            <TomisCheckbox style={{ width: '100px' }} label="HSL" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
-            <TomisCheckbox style={{ width: '100px' }} label="ACR" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
-            <TomisCheckbox style={{ width: '100px' }} label="ADF" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="EMT" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="HRST" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="HOIST" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="HSL" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="ACR" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
+            <TomisCheckbox style={{ width: '100px' }} label="ADF" {...defns.genericCb} onModify={props.handleModifyGenericCb} />
           </div>
         </TomisPanelBody>
       </TomisPanel>
@@ -104,7 +82,7 @@ const FlightFloatPageRender = props => {
               <ToggleButtonLocalZulu {...defns.localZuluToggle} onModify={props.handleModifyLocalZuluToggle} />
             </div>
             <div className="flex-1">
-              <TomisAutocomplete label="Time Zone*" {...defns.tailNumberLov} onModify={props.handleModifyTailNumberLov} />
+              <TomisAutocomplete label="Time Zone*" {...defns.genericLov} onModify={props.handleModifyGenericLov} />
             </div>
             <div className="flex-1" />
           </div>
