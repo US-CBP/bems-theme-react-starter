@@ -35,7 +35,7 @@ const UasFederatedPageRender = props => {
               <TomisCheckbox label="Stand By" {...defns.standbyCb} onModify={props.handleModifyStandByCb} />
             </div>
             <div className="flex-1">
-              <TomisTextField label="Title" placeholder="Type Title" isCloneable={isCloneable} {...defns.title} onModify={props.handleModifyTitle} />
+              <TomisTextField label="Title" placeholder="Type Title" {...defns.title} onModify={props.handleModifyTitle} />
             </div>
             <div className="flex-1">
               placeholder="Type Named Operation"

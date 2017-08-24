@@ -40,7 +40,6 @@ const UasConsolidatedPageRender = props => {
               <TomisAutocomplete
                 label="Named Operation"
                 placeholder="Type Named Operation"
-                isCloneable={isCloneable}
                 {...defns.genericCloneableLov}
                 onModify={props.handleModifyGenericCloneableLov}
               />
@@ -49,8 +48,6 @@ const UasConsolidatedPageRender = props => {
               <TomisAutocomplete
                 label="Number of Missions*"
                 placeholder="Type Number of Missions"
-                isCloneable={isCloneable}
-                disabledClone={true}
                 {...defns.genericCloneableLovDisabled}
                 onModify={props.handleModifyGenericCloneableLovDisabled}
               />
@@ -58,13 +55,7 @@ const UasConsolidatedPageRender = props => {
           </div>
           <div className="flex-row">
             <div className="flex-1">
-              <TomisAutocomplete
-                label="GCS Code"
-                placeholder="Type GCS Code"
-                isCloneable={isCloneable}
-                {...defns.genericCloneableLovDisabled}
-                onModify={props.handleModifyGenericCloneableLovDisabled}
-              />
+              <TomisAutocomplete label="GCS Code" placeholder="Type GCS Code" {...defns.genericCloneableLov} onModify={props.handleModifyGenericCloneableLov} />
             </div>
             <div className="flex-1">
               <TomisAutocomplete
@@ -84,7 +75,6 @@ const UasConsolidatedPageRender = props => {
             </div>
             <div className="flex-1">
               <TomisTimeSpinner
-                isCloneable={true}
                 label="Takeoff Time (Zulu)*"
                 placeholder="Type Takeoff time"
                 {...defns.genericCloneableTimeSpinnerDisabled}
@@ -148,20 +138,12 @@ const UasConsolidatedPageRender = props => {
               <TomisAutocomplete
                 label="Land Location"
                 placeholder="Type Land Location"
-                isCloneable={isCloneable}
                 {...defns.aircraftTypeLov}
                 onModify={props.handleModifyAircraftTypeLov}
               />
             </div>
             <div className="flex-1">
-              <TomisTextField
-                label="Other*"
-                placeholder="Type Other"
-                isCloneable={isCloneable}
-                disabledClone={true}
-                {...defns.genericCloneableLov}
-                onModify={props.handleModifyGenericCloneableLov}
-              />
+              <TomisTextField label="Other*" placeholder="Type Other" {...defns.genericCloneableLov} onModify={props.handleModifyGenericCloneableLov} />
             </div>
             <div className="flex-1">
               <div className="flex-row">
