@@ -18,7 +18,6 @@ import CloningStepBarPosition from 'common/CloningStepBarPosition';
 
 const FlightFloatPageRender = props => {
   const { defns, isCloneable, dimensions } = props;
-  console.log('FlightFloatPageRender, props=', props);
   return (
     <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
       {!isCloneable && <PageNavLinks pageTitle="Flight Information" />}

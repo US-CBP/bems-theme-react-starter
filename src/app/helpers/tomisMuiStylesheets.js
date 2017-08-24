@@ -54,13 +54,14 @@ const getAutoCompleteStyles = theme => {
     input: {
       color: 'transparent',
       paddingLeft: 0,
+      width: '100%',
       '&::-webkit-input-placeholder': theme.palette.input.placeholder,
       '&::-moz-placeholder': theme.palette.input.placeholder, // Firefox 19+
       '&:-ms-input-placeholder': theme.palette.input.placeholder, // IE 11
       '&::-ms-input-placeholder': theme.palette.input.placeholder // Edge
     },
     inputCloneable: {
-      paddingLeft: `${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px`,
+      width: `calc( 100% - ${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px)`,
       '&::-webkit-input-placeholder': theme.palette.input.placeholder,
       '&::-moz-placeholder': theme.palette.input.placeholder, // Firefox 19+
       '&:-ms-input-placeholder': theme.palette.input.placeholder, // IE 11
@@ -89,7 +90,7 @@ const getAutoCompleteStyles = theme => {
     },
     lovCloneable: {
       marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
-      width: '100%'
+      width: `calc( 100% - ${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px)`
     },
     selectArrow: {
       color: theme.palette.text.primary,

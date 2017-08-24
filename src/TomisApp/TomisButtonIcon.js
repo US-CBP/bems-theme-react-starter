@@ -6,19 +6,19 @@ import IconButton from 'material-ui/IconButton';
 import TomisFontIcon from './TomisFontIcon';
 
 const defaultProps = {
-    icon: <TomisFontIcon name="delete" />
+  icon: <TomisFontIcon name="delete" />
 };
 
 const propTypes = {
-    icon: PropTypes.node.isRequired
+  icon: PropTypes.node.isRequired
 };
 
 const TomisButtonIcon = ({ icon, onClick, className = '' }) => {
-    return (
-        <IconButton onClick={onClick} className={className}>
-            {icon}
-        </IconButton>
-    );
+  return (
+    <IconButton tabIndex="-1" onClick={onClick} className={className}>
+      {icon}
+    </IconButton>
+  );
 };
 
 TomisButtonIcon.defaultProps = defaultProps;
