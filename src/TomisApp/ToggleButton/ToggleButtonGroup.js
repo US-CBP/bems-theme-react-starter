@@ -63,6 +63,7 @@ class ToggleButtonGroup extends Component {
         buttonsCloneable: clsButtonsCloneable,
         checkbox: clsCheckbox,
         checkboxDisabled: clsCheckboxDisabled,
+        container: clsContainer,
         inputLabel: clsInputLabel,
         inputLabelCloneable: clsInputLabelCloneable,
         root: clsRoot
@@ -73,7 +74,7 @@ class ToggleButtonGroup extends Component {
     toggleButtons = [];
 
     return (
-      <div>
+      <div className={cx(clsContainer)}>
         <FlexRow>
           {isCloneable && <FormLabel>&nbsp;</FormLabel>}
           <FormLabel className={cx({ [clsInputLabel]: !isCloneable, [clsInputLabelCloneable]: isCloneable })} disabled={disabled}>

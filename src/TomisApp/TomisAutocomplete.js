@@ -143,6 +143,9 @@ class TomisAutocomplete extends Component {
           onChange={() => {}}
           value={shadowVal}
           error={error}
+          inputProps={{
+            style: { height: '36px', paddingBottom: 0 }
+          }}
         />
         <Select
           className={cx(clsInputLov, { [clsLovCloneable]: isDisplayCloneable, [clsLov]: !isDisplayCloneable })}
@@ -158,7 +161,7 @@ class TomisAutocomplete extends Component {
           menuRenderer={autocompleteMenuRenderer}
         />
         <FormHelperText className={clsFormHelperText}>
-          {helperText}TEST TEST TEST
+          {helperText}
         </FormHelperText>
       </FormControl>
     );

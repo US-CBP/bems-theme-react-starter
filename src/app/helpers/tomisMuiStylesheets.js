@@ -33,6 +33,7 @@ export const handleCloneCheckboxClick = (onCloneCheckboxChange, evt, val) => {
 };
 
 //Keep class names in alphabetical order to maintain our sanity
+const autoCompleteMarginTop = '10px';
 const getAutoCompleteStyles = theme => {
   return {
     checkbox: {
@@ -42,7 +43,7 @@ const getAutoCompleteStyles = theme => {
       position: 'absolute',
       zIndex: 1,
       left: `${Number(-1 * (checkboxW - checkboxSize) * 0.5).toFixed(0)}px`,
-      top: '10px'
+      bottom: '18px'
     },
     checkboxDisabled: {
       color: theme.palette.text.disabled
@@ -73,10 +74,12 @@ const getAutoCompleteStyles = theme => {
     },
     inputLabel: {
       marginLeft: 0,
+      marginTop: autoCompleteMarginTop,
       zIndex: 0
     },
     inputLabelCloneable: {
       marginLeft: `${Number(checkboxSize * checkboxMRFactor + 1).toFixed(0)}px`,
+      marginTop: autoCompleteMarginTop,
       zIndex: 0
     },
     inputLov: {
@@ -84,12 +87,18 @@ const getAutoCompleteStyles = theme => {
       top: '16px',
       backgroundColor: 'transparent'
     },
+    inputSingleLine: {
+      height: '36px',
+      paddingBottom: 0
+    },
     lov: {
       marginLeft: 0,
+      marginTop: autoCompleteMarginTop,
       width: '100%'
     },
     lovCloneable: {
       marginLeft: `${Number(checkboxSize * checkboxMRFactor).toFixed(0)}px`,
+      marginTop: autoCompleteMarginTop,
       width: `calc( 100% - ${Number(1 * checkboxSize * checkboxMRFactor).toFixed(0)}px)`
     },
     selectArrow: {
@@ -370,6 +379,9 @@ const getToggleButtonGroupStyles = theme => {
     checkboxDisabled: {
       color: theme.palette.text.disabled
     },
+    container: {
+      marginLeft: '-4px'
+    },
     inputLabel: {
       fontSize: '12px',
       marginTop: '8px',
@@ -383,7 +395,7 @@ const getToggleButtonGroupStyles = theme => {
       marginLeft: `${Number(checkboxSize * toggleButtonsMRFactor).toFixed(0)}px`
     },
     root: {
-      display: 'flex',
+      marginLeft: 'flex',
       flexDirection: 'row',
       flex: '1 1 auto',
       padding: 0
