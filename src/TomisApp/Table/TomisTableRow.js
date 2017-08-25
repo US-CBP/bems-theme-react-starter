@@ -114,7 +114,7 @@ function TomisTableRow(props, context) {
             </TomisTableCell>
 
             {isOpen &&
-                <Dialog ignoreBackdropClick ignoreEscapeKeyUp maxWidth="xs" open={isOpen}>
+                <Dialog ignoreBackdropClick ignoreEscapeKeyUp maxWidth="xs" disableBackdrop open={isOpen}>
                     <DialogTitle>Edit Row</DialogTitle>
                     <DialogContent>
                         {React.Children.map(children, (child, idx) => {
@@ -132,9 +132,7 @@ function TomisTableRow(props, context) {
                     </DialogActions>
                 </Dialog>}
 
-            {isOpen &&
-                false &&
-                <Popover
+            {/*{isOpen && <Popover
                     className={classNames(classes.popover)}
                     open={true}
                     anchorEl={openCell}
@@ -157,7 +155,7 @@ function TomisTableRow(props, context) {
                             <TomisButtonFlat label="Save" onClick={onRequestClose.bind(null, 'SAVE')} color="primary" />
                         </div>
                     </Paper>
-                </Popover>}
+                </Popover>}*/}
         </TableRow>
     );
     // }  ;

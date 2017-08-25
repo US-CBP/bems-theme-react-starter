@@ -3,7 +3,7 @@ export const subcategoryLovValues = [
     { code: 'SubcategoryBeta', description: 'SubcategoryBeta' },
     { code: 'SubcategoryGamma', description: 'SubcategoryGamma' },
     { code: 'SubcategoryDelta', description: 'SubcategoryDelta' },
-    { code: 'SubcategoryEpsilon', description: 'SubcategoryEpsilon' },
+    { code: 'SubcategoryEpsilon', description: 'SubcategoryEpsilon wide wide wide wide wide' },
     { code: 'SubcategoryZeta', description: 'SubcategoryZeta' },
     { code: 'SubcategoryEta', description: 'SubcategoryEta' },
     { code: 'SubcategoryTheta', description: 'SubcategoryTheta' },
