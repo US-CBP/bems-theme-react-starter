@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import Ratio from 'TomisApp/helpers/Ratio';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -13,48 +14,55 @@ function menuRenderer(
     const anchorElPosition = TomisAutoComplete.anchorEl.getBoundingClientRect();
     const extraW = 30;
     return (
-        <Paper
-            elevation={8}
-            style={{
-                position: 'fixed',
-                top: `${anchorElPosition.bottom}px`,
-                left: `${anchorElPosition.left}px`,
-                maxHeight: '200px',
-                minWidth: `${anchorElPosition.width + extraW}px`,
-                overflowY: 'auto'
-            }}
-        >
-            {options.map((option, i) => {
-                let isSelected = valueArray && valueArray.indexOf(option) > -1;
-                let isFocused = option === focusedOption;
-                let optionClass = classNames(optionClassName, {
-                    'Select-option': true,
-                    'is-selected': isSelected,
-                    'is-focused': isFocused,
-                    'is-disabled': option.disabled
-                });
-
+        <Ratio>
+            {(width, height, hasComputed) => {
+                console.log('width, height, hasComputed=', width, height, hasComputed);
                 return (
-                    <Option
-                        className={optionClass}
-                        instancePrefix={instancePrefix}
-                        isDisabled={option.disabled}
-                        isFocused={isFocused}
-                        isSelected={isSelected}
-                        key={`option-${i}-${option[valueKey]}`}
-                        onFocus={onFocus}
-                        onSelect={onSelect}
-                        option={option}
-                        optionIndex={i}
-                        ref={ref => {
-                            onOptionRef(ref, isFocused);
+                    <Paper
+                        elevation={8}
+                        style={{
+                            position: 'fixed',
+                            top: `${anchorElPosition.bottom}px`,
+                            left: `${anchorElPosition.left}px`,
+                            maxHeight: '200px',
+                            minWidth: `${anchorElPosition.width + extraW}px`,
+                            overflowY: 'auto'
                         }}
                     >
-                        {optionRenderer(option, i)}
-                    </Option>
+                        {options.map((option, i) => {
+                            let isSelected = valueArray && valueArray.indexOf(option) > -1;
+                            let isFocused = option === focusedOption;
+                            let optionClass = classNames(optionClassName, {
+                                'Select-option': true,
+                                'is-selected': isSelected,
+                                'is-focused': isFocused,
+                                'is-disabled': option.disabled
+                            });
+
+                            return (
+                                <Option
+                                    className={optionClass}
+                                    instancePrefix={instancePrefix}
+                                    isDisabled={option.disabled}
+                                    isFocused={isFocused}
+                                    isSelected={isSelected}
+                                    key={`option-${i}-${option[valueKey]}`}
+                                    onFocus={onFocus}
+                                    onSelect={onSelect}
+                                    option={option}
+                                    optionIndex={i}
+                                    ref={ref => {
+                                        onOptionRef(ref, isFocused);
+                                    }}
+                                >
+                                    {optionRenderer(option, i)}
+                                </Option>
+                            );
+                        })}
+                    </Paper>
                 );
-            })}
-        </Paper>
+            }}
+        </Ratio>
     );
 }
 
