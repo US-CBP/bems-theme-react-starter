@@ -8,7 +8,7 @@ import Popover from 'material-ui/internal/Popover';
 import Typography from 'material-ui/Typography';
 import TomisButtonFlat from 'TomisApp/TomisButtonFlat';
 import Paper from 'material-ui/Paper';
-import { getDisplayValue } from 'globalJs/functions';
+import { getDisplayTableRowValue } from 'globalJs/functions';
 import { TomisTableCell } from 'TomisApp/TomisTable';
 import { TableRow } from 'material-ui/Table';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
@@ -81,7 +81,7 @@ const preventClickFromGoingToPopover = evt => {
 };
 
 function TomisTableRow(props, context) {
-    const { classes, className: classNameProp, children, compact, checkbox, numeric, disablePadding, isOpen, onRequestOpen, onRequestClose, rowId, ...other } = props;
+    const { classes, className: classNameProp, children, compact, checkbox, numeric, disablePadding, isOpen, onRequestOpen, onRequestClose, rowId, row, rowIdx, ...other } = props;
     const className = classNames(
         classes.root,
         {
@@ -95,14 +95,14 @@ function TomisTableRow(props, context) {
     return (
         <TableRow hover={true} className={className} {...other}>
             {React.Children.map(children, (child, idx) => {
-                const { props: { placeholder, value, options, isRenderInTableRow } } = child;
+                const { props: { placeholder, name, value, options, isRenderInTableRow } } = child;
                 lovOptions = options || [];
                 return (
                     <TomisTableCell>
                         {isRenderInTableRow
                             ? child
                             : <Typography noWrap={true}>
-                                  {getDisplayValue(value) || placeholder}
+                                  {getDisplayTableRowValue(row, name) || placeholder}
                               </Typography>}
                     </TomisTableCell>
                 );

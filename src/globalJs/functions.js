@@ -6,6 +6,15 @@ export const getDisplayValue = originalValue => {
     }
 };
 
+export const getDisplayTableRowValue = (row, name) => {
+    const originalValue = row[name];
+    if (originalValue) {
+        return originalValue.toString();
+    } else {
+        return '';
+    }
+};
+
 export const getCellRowColmId = (idx, property) => {
     return `C${idx}-${property}`;
 };

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import Popover from 'material-ui/internal/Popover';
+import Paper from 'material-ui/Paper';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -10,11 +10,20 @@ function menuRenderer(
     { focusedOption, instancePrefix, labelKey, onFocus, onSelect, optionClassName, optionComponent, optionRenderer, options, valueArray, valueKey, onOptionRef }
 ) {
     let Option = optionComponent;
-    console.log('menuRenderer TomisAutoComplete.anchorEl.getBoundingClientRect()=', TomisAutoComplete.anchorEl.getBoundingClientRect());
-    const anchorElBcr = TomisAutoComplete.anchorEl.getBoundingClientRect();
-
+    const anchorElPosition = TomisAutoComplete.anchorEl.getBoundingClientRect();
+    const extraW = 30;
     return (
-        <div style={{ position: 'fixed', backgroundColor: '#ffffff', maxHeight: '240px', top: `${anchorElBcr.bottom}px`, left: `${anchorElBcr.left}px`, overflowY: 'auto' }}>
+        <Paper
+            elevation={8}
+            style={{
+                position: 'fixed',
+                top: `${anchorElPosition.bottom}px`,
+                left: `${anchorElPosition.left}px`,
+                maxHeight: '200px',
+                minWidth: `${anchorElPosition.width + extraW}px`,
+                overflowY: 'auto'
+            }}
+        >
             {options.map((option, i) => {
                 let isSelected = valueArray && valueArray.indexOf(option) > -1;
                 let isFocused = option === focusedOption;
@@ -45,7 +54,7 @@ function menuRenderer(
                     </Option>
                 );
             })}
-        </div>
+        </Paper>
     );
 }
 
