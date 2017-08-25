@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withStyles from 'material-ui/styles/withStyles';
 import Table from 'material-ui/Table';
+import { TomisTableHeader, TomisTableBody } from 'TomisApp/TomisTable';
 
 export const styles = theme => ({
     root: {
@@ -12,11 +13,14 @@ export const styles = theme => ({
     }
 });
 
-const TomisTable = ({ classes, children, ...other }) => {
+const TomisTable = ({ classes, children, columnData, ...other }) => {
     const { root: clsRoot } = classes;
     return (
         <Table className={classNames(clsRoot)} {...other}>
-            {children}
+            <TomisTableHeader columnData={columnData} />
+            <TomisTableBody>
+                {children}
+            </TomisTableBody>
         </Table>
     );
 };

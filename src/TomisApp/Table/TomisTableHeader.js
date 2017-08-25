@@ -11,6 +11,8 @@ const createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
 };
 
+const editColumn = { id: 'edit', numeric: false, disablePadding: false, label: '&nbsp;', cell: null };
+
 const defaultProps = {};
 const propTypes = {};
 
@@ -47,6 +49,7 @@ class TomisTableHeader extends Component {
                     {columnData.map(column => {
                         return <TomisTableHeaderColumn key={column.id} column={column} handleRequestSort={handleSortTableHeader} orderBy={orderBy} order={order} cursor={cursor} />;
                     })}
+                    <TomisTableHeaderColumn key={editColumn.id} column={editColumn} />
                 </TableRow>
             </TableBody>
         );

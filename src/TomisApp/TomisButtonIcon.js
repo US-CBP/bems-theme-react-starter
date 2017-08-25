@@ -5,20 +5,23 @@ import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import TomisFontIcon from './TomisFontIcon';
 
+//See TomisTableRow for use of isRenderInTableRow.  Allows component to be rendered in a table row instead of displaying read-only value.
 const defaultProps = {
-  icon: <TomisFontIcon name="delete" />
+    // icon: <TomisFontIcon name="delete" />,
+    isRenderInTableRow: true
 };
 
 const propTypes = {
-  icon: PropTypes.node.isRequired
+    // icon: PropTypes.node.isRequired,
+    isRenderInTableRow: PropTypes.bool.isRequired
 };
 
-const TomisButtonIcon = ({ icon, onClick, className = '' }) => {
-  return (
-    <IconButton tabIndex="-1" onClick={onClick} className={className}>
-      {icon}
-    </IconButton>
-  );
+const TomisButtonIcon = ({ children, onClick, className = '' }) => {
+    return (
+        <IconButton tabIndex="-1" onClick={onClick} className={className}>
+            {children}
+        </IconButton>
+    );
 };
 
 TomisButtonIcon.defaultProps = defaultProps;

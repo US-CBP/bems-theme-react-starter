@@ -19,72 +19,42 @@ const TableExampleBody = props => {
         activeCell,
         handleAddRow,
         handleDeleteRow,
-        handleClickTableCell,
+        handleClickTableCell: onRequestOpen,
         handleUpdateData,
         handleUpdateDataLov,
         handleUpdateDataDate,
-        handleRequestClose,
+        handleRequestClose: onRequestClose,
         subcategoryLovValues
     } = props;
     return (
         <div className="flex-row row-spacer-24">
-            <TomisPanel label="My Table Panel Title">
+            <TomisPanel label="My Table Panel Example">
                 <TomisButtonRaised label="Add Row" onClick={handleAddRow} />
-                <TomisTable>
-                    <TomisTableHeader columnData={columnData} />
-                    <TomisTableBody>
-                        {tableData.map((row, idx) =>
-                            <TomisTableRow key={idx}>
-                                <TomisTableCell>
-                                    <TomisCheckbox />
-                                </TomisTableCell>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'departureDt'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'departureDt')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisDatePicker
-                                        placeholder="Select Date"
-                                        required={true}
-                                        label="Date"
-                                        value={row['departureDt']}
-                                        reportToHoc={handleUpdateDataDate.bind(null, idx, 'departureDt')}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'name'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'name')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisAutocomplete
-                                        placeholder="Select Name"
-                                        required={true}
-                                        label="Name"
-                                        value={row['name']}
-                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'name')}
-                                        options={subcategoryLovValues}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'status'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'status')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisDuration
-                                        placeholder="Sample Justification"
-                                        required={true}
-                                        value={row['status']}
-                                        reportToHoc={handleUpdateData.bind(null, idx, 'status')}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCell>
-                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
-                                        <TomisFontIcon name="delete" />
-                                    </TomisButtonIcon>
-                                </TomisTableCell>
-                            </TomisTableRow>
-                        )}
-                    </TomisTableBody>
+                <TomisTable columnData={columnData}>
+                    {tableData.map((row, idx) =>
+                        <TomisTableRow key={`row-${idx}`} rowId={`row-${idx}`} onRequestOpen={onRequestOpen} isOpen={activeCell === `row-${idx}`} onRequestClose={onRequestClose}>
+                            <TomisCheckbox />
+                            <TomisDatePicker
+                                placeholder="Select Date"
+                                required={true}
+                                label="Date"
+                                value={row['departureDt']}
+                                reportToHoc={handleUpdateDataDate.bind(null, idx, 'departureDt')}
+                            />
+                            <TomisAutocomplete
+                                placeholder="Select Name"
+                                required={true}
+                                label="Name"
+                                value={row['name']}
+                                reportToHoc={handleUpdateDataLov.bind(this, idx, 'name')}
+                                options={subcategoryLovValues}
+                            />
+                            <TomisDuration placeholder="Sample Justification" required={true} value={row['status']} reportToHoc={handleUpdateData.bind(null, idx, 'status')} />
+                            <TomisButtonIcon onClick={handleDeleteRow.bind(null, idx)}>
+                                <TomisFontIcon name="delete" />
+                            </TomisButtonIcon>
+                        </TomisTableRow>
+                    )}
                 </TomisTable>
             </TomisPanel>
         </div>

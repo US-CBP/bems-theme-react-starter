@@ -25,7 +25,7 @@ const propTypes = {
     label: PropTypes.string.isRequired
 };
 
-const TomisTableHeaderColumn = ({ column, handleRequestSort, orderBy, order, cursor, classes }) => {
+const TomisTableHeaderColumn = ({ column, handleRequestSort = () => {}, orderBy, order, cursor, classes }) => {
     const { sortLabelRoot: clsSortLabelRoot } = classes;
     return (
         <TableCell numeric={column.numeric} disablePadding={column.disablePadding}>

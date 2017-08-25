@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'material-ui/styles/withStyles';
+import setDefaultProps from 'recompose/defaultProps';
 import classNames from 'classnames';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
@@ -33,8 +34,17 @@ export const styles = theme => ({
     }
 });
 
+//See TomisTableRow for use of isRenderInTableRow.  Allows component to be rendered in a table row instead of displaying read-only value.
 const defaultProps = {
-    label: ' '
+    label: ' ',
+    isRenderInTableRow: true
+};
+
+const propTypes = {
+    classes: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    isRenderInTableRow: PropTypes.bool.isRequired
 };
 
 class TomisCheckbox extends Component {
@@ -85,11 +95,6 @@ class TomisCheckbox extends Component {
     }
 }
 
-TomisCheckbox.defaultProps = defaultProps;
-TomisCheckbox.propTypes = {
-    classes: PropTypes.object.isRequired,
-    label: PropTypes.string.isRequired,
-    onChange: PropTypes.func
-};
-
-export default withStyles(styles, { name: 'TomisCheckbox' })(TomisCheckbox);
+TomisCheckbox.propTypes = propTypes;
+//when using withStyles, defaultProps is ignored so need to set defaultProps using some other mechanism
+export default setDefaultProps(defaultProps)(withStyles(styles, { name: 'TomisCheckbox' })(TomisCheckbox));

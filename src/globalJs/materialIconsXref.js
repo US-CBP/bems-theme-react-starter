@@ -29,5 +29,6 @@ export const materialIconsXref = {
     keyboard_arrow_up: '\ue316',
     android: '\ue859',
     check: '\ue5ca',
-    search: '\ue8b6'
+    search: '\ue8b6',
+    mode_edit: '\ue254'
 };
