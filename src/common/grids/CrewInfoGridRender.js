@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TomisPanelTable } from 'TomisApp/TomisPanel';
-import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import { TomisTable } from 'TomisApp/TomisTable';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
 import TomisTextField from 'TomisApp/TomisTextField';
+import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
 import TomisDuration from 'common/TomisDuration';
@@ -31,64 +32,41 @@ const CrewInfoGridRender = props => {
         <div className="flex-row row-spacer-24">
             <TomisPanelTable label="Crew Information">
                 <TomisButtonRaised label="Add Crew" onClick={handleAddRow} />
-                <TomisTable>
-                    <TomisTableHeader columnData={columnData} />
-                    <TomisTableBody>
-                        {tableData.map((row, idx) =>
-                            <TomisTableRow key={idx}>
-                                {!idx &&
-                                    <TomisTableCell>
+                <TomisTable columnData={columnData} tableData={tableData}>
+                    {(row, idx, isView, isEdit) => {
+                        return [
+                            idx === 0
+                                ? isView
+                                  ? <TomisButtonIcon>
                                         <TomisFontIcon name="check" />
-                                    </TomisTableCell>}
-                                {!!idx &&
-                                    <TomisTableCellEdit
-                                        onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'pic'))}
-                                        isOpen={activeCell === getCellRowColmId(idx, 'pic')}
-                                        onRequestClose={handleRequestClose}
-                                    >
-                                        <TomisAutocomplete
-                                            placeholder="Select Role"
-                                            required={true}
-                                            label="Role"
-                                            value={row['pic']}
-                                            reportToHoc={handleUpdateDataLov.bind(this, idx, 'pic')}
-                                            options={subcategoryLovValues}
-                                        />
-                                    </TomisTableCellEdit>}
-                                {!idx &&
-                                    <TomisTableCell>
-                                        {crewNameLov[0]}
-                                    </TomisTableCell>}
-                                {!!idx &&
-                                    <TomisTableCellEdit
-                                        onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'name'))}
-                                        isOpen={activeCell === getCellRowColmId(idx, 'name')}
-                                        onRequestClose={handleRequestClose}
-                                    >
-                                        <TomisAutocomplete
-                                            placeholder="Select Name"
-                                            required={true}
-                                            label="Name"
-                                            value={row['name']}
-                                            reportToHoc={handleUpdateDataLov.bind(this, idx, 'name')}
-                                            options={subcategoryLovValues}
-                                        />
-                                    </TomisTableCellEdit>}
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'role'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'role')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisTextField placeholder="Type role" required={true} value={row['role']} reportToHoc={handleUpdateData.bind(null, idx, 'role')} />
-                                </TomisTableCellEdit>
-                                <TomisTableCell>
-                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
-                                        <TomisFontIcon name="delete" />
                                     </TomisButtonIcon>
-                                </TomisTableCell>
-                            </TomisTableRow>
-                        )}
-                    </TomisTableBody>
+                                  : false
+                                : <TomisAutocomplete
+                                      placeholder="Select Role"
+                                      required={true}
+                                      label="Role"
+                                      name="pic"
+                                      reportToHoc={handleUpdateDataLov.bind(this, idx, 'pic')}
+                                      options={subcategoryLovValues}
+                                  />,
+                            idx === 0
+                                ? isView ? <TomisTextFieldReadOnly name="name" /> : false
+                                : <TomisAutocomplete
+                                      placeholder="Select Name"
+                                      required={true}
+                                      label="Name"
+                                      name="name"
+                                      reportToHoc={handleUpdateDataLov.bind(this, idx, 'name')}
+                                      options={subcategoryLovValues}
+                                  />,
+                            <TomisTextField placeholder="Type role" required={true} name="role" reportToHoc={handleUpdateData.bind(null, idx, 'role')} />,
+                            isEdit
+                                ? false
+                                : <TomisButtonIcon onClick={handleDeleteRow.bind(null, idx)}>
+                                      <TomisFontIcon name="delete" />
+                                  </TomisButtonIcon>
+                        ];
+                    }}
                 </TomisTable>
             </TomisPanelTable>
         </div>

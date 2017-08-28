@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import Ratio from 'TomisApp/helpers/Ratio';
+import ContainerDimensions from 'TomisApp/helpers/ContainerDimensions';
 
 const anchorOrigin = { horizontal: 'left', vertical: 'top' };
 const targetOrigin = { horizontal: 'left', vertical: 'top' };
@@ -14,9 +14,9 @@ function menuRenderer(
     const anchorElPosition = TomisAutoComplete.anchorEl.getBoundingClientRect();
     const extraW = 30;
     return (
-        <Ratio>
-            {(width, height, hasComputed) => {
-                console.log('width, height, hasComputed=', width, height, hasComputed);
+        <ContainerDimensions>
+            {(width, height, top, left, hasComputed) => {
+                console.log('autocompleteMenuRenderer width, height, top, left, hasComputed=', width, height, top, left, hasComputed);
                 return (
                     <Paper
                         elevation={8}
@@ -62,7 +62,7 @@ function menuRenderer(
                     </Paper>
                 );
             }}
-        </Ratio>
+        </ContainerDimensions>
     );
 }
 

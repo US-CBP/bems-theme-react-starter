@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
-import { getPreviewImage } from './fileAttachmentUtils';
-import Dropzone from 'react-dropzone';
-import TomisFontIcon from 'TomisApp/TomisFontIcon';
 
-class Ratio extends Component {
-    constructor() {
-        super(...arguments);
-        this.handleResize = this.handleResize.bind(this);
-        this.state = {
-            hasComputed: false,
-            width: 0,
-            height: 0
-        };
-    }
-    getComputedDimensions({ x, y }) {
-        const { width } = this.container.getBoundingClientRect();
-        return {
-            width,
-            height: width * (y / x)
-        };
-    }
+class ContainerDimensions extends Component {
+    container = null;
+
+    state = {
+        hasComputed: false,
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0
+    };
+
     componentWillReceiveProps(next) {
         this.setState(this.getComputedDimensions(next));
     }
+
     componentDidMount() {
         this.setState({
             ...this.getComputedDimensions(this.props),
@@ -32,10 +23,22 @@ class Ratio extends Component {
         });
         window.addEventListener('resize', this.handleResize, false);
     }
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize, false);
     }
-    handleResize() {
+
+    getComputedDimensions = () => {
+        //Note, height is always 0 for elements with position: fixed and position: absolute
+        const { top, left, width, height } = this.container.getBoundingClientRect();
+        return {
+            width,
+            height,
+            top,
+            left
+        };
+    };
+    handleResize = () => {
         this.setState(
             {
                 hasComputed: false
@@ -47,23 +50,19 @@ class Ratio extends Component {
                 });
             }
         );
-    }
+    };
     render() {
+        const { width, height, top, left, hasComputed } = this.state;
+        const { children } = this.props;
         return (
             <div ref={ref => (this.container = ref)}>
-                {this.props.children(this.state.width, this.state.height, this.state.hasComputed)}
+                {children(width, height, top, left, hasComputed)}
             </div>
         );
     }
 }
-Ratio.propTypes = {
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+ContainerDimensions.propTypes = {
     children: PropTypes.func.isRequired
 };
-Ratio.defaultProps = {
-    x: 3,
-    y: 4
-};
 
-export default Ratio;
+export default ContainerDimensions;

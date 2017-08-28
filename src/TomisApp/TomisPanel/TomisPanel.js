@@ -13,7 +13,8 @@ import Paper from 'material-ui/Paper';
 export const styles = theme => ({
     root: {
         padding: '8px',
-        width: '100%'
+        width: '100%',
+        boxSizing: 'border-box'
     },
     appBar: {
         boxShadow: 'none'

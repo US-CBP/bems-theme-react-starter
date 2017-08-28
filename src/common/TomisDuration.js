@@ -65,7 +65,7 @@ class TomisDuration extends Component {
                 textFieldRoot: clsTextFieldRoot
             },
             isCloneable,
-            isReadOnly,
+            readOnly,
             disabledClone,
             required
         } = this.props;
@@ -73,11 +73,11 @@ class TomisDuration extends Component {
             disabled,
             isCloneable,
             disabledClone,
-            readOnly: isReadOnly,
+            readOnly,
             placeholder
         });
         return (
-            <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!isReadOnly })} margin="dense">
+            <FormControl className={cx(clsFormControl, { [clsReadOnly]: !!readOnly })} margin="dense">
                 <FormLabel disabled={isDisabled}>
                     <Typography className={cx({ [clsHeader]: !isDisplayCloneable, [clsHeaderCloneable]: isDisplayCloneable })} align="center">
                         Duration{required && <span>*</span>}
@@ -104,7 +104,7 @@ class TomisDuration extends Component {
                             [clsInputBase]: true,
                             [clsInputDisabled]: isDisabled
                         })}
-                        InputProps={{ disableUnderline: !!isReadOnly }}
+                        InputProps={{ disableUnderline: !!readOnly }}
                     />
                     <div className={cx(clsPlusSign)}>+</div>
                     <TextField
@@ -119,7 +119,7 @@ class TomisDuration extends Component {
                             [clsInputBase]: true,
                             [clsInputDisabled]: isDisabled
                         })}
-                        InputProps={{ disableUnderline: !!isReadOnly }}
+                        InputProps={{ disableUnderline: !!readOnly }}
                     />
                 </FlexRow>
                 <FormHelperText className={cx({ [clsFormHelperTextCloneable]: isDisplayCloneable })}>

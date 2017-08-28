@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TomisPanel } from 'TomisApp/TomisPanel';
-import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import { TomisTable } from 'TomisApp/TomisTable';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
 import TomisTextField from 'TomisApp/TomisTextField';
+import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
@@ -29,72 +30,41 @@ const MissionDatesTimesUasFedGridRender = props => {
     } = props;
     return (
         <div className="flex-row row-spacer-24">
-            <TomisPanel label="Crew Information">
-                <TomisButtonRaised label="Add Crew" onClick={handleAddRow} />
-                <TomisTable>
-                    <TomisTableHeader columnData={columnData} />
-                    <TomisTableBody>
-                        {tableData.map((row, idx) =>
-                            <TomisTableRow key={idx}>
-                                <TomisTableCell>
-                                    {row.draggable && <TomisFontIcon name="drag_handle" />}
-                                </TomisTableCell>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'siteType'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'siteType')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisTextField placeholder="Site Type" value={row['siteType']} reportToHoc={handleUpdateData.bind(null, idx, 'siteType')} />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'siteName'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'siteName')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisAutocomplete
-                                        placeholder="Site Name"
-                                        required={true}
-                                        label="Site Name"
-                                        value={row['siteName']}
-                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'siteName')}
-                                        options={subcategoryLovValues}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'date'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'date')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisDatePicker
-                                        placeholder="Date (Zulu)"
-                                        required={true}
-                                        label="Date (Zulu)"
-                                        value={row['date']}
-                                        reportToHoc={handleUpdateDataDate.bind(null, idx, 'date')}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'time'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'time')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisTimeSpinner placeholder="Time (Zulu)" required={true} value={row['time']} reportToHoc={handleUpdateData.bind(null, idx, 'time')} />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'status'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'status')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisDuration placeholder="HH + MM" required={true} value={row['duration']} reportToHoc={handleUpdateData.bind(null, idx, 'duration')} />
-                                </TomisTableCellEdit>
-                                <TomisTableCell>
-                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
-                                        <TomisFontIcon name="delete" />
-                                    </TomisButtonIcon>
-                                </TomisTableCell>
-                            </TomisTableRow>
-                        )}
-                    </TomisTableBody>
+            <TomisPanel label="Mission Dates and Times">
+                <TomisButtonRaised label="Add Mission" onClick={handleAddRow} />
+                <TomisTable columnData={columnData} tableData={tableData}>
+                    {(row, idx, isView, isEdit) => {
+                        return [
+                            row.draggable
+                                ? <TomisButtonIcon>
+                                      <TomisFontIcon name="drag_handle" />
+                                  </TomisButtonIcon>
+                                : <TomisTextFieldReadOnly name="blank" />,
+                            <TomisTextField placeholder="Site Type" name="siteType" reportToHoc={handleUpdateData.bind(null, idx, 'siteType')} />,
+                            <TomisAutocomplete
+                                placeholder="Site Name"
+                                required={true}
+                                label="Site Name"
+                                name="siteName"
+                                reportToHoc={handleUpdateDataLov.bind(this, idx, 'siteName')}
+                                options={subcategoryLovValues}
+                            />,
+                            <TomisDatePicker
+                                placeholder="Date (Zulu)"
+                                required={true}
+                                label="Date (Zulu)"
+                                name="date"
+                                reportToHoc={handleUpdateDataDate.bind(null, idx, 'date')}
+                            />,
+                            <TomisTimeSpinner placeholder="Time (Zulu)" required={true} name="time" reportToHoc={handleUpdateData.bind(null, idx, 'time')} />,
+                            <TomisDuration placeholder="HH + MM" required={true} name="duration" reportToHoc={handleUpdateData.bind(null, idx, 'duration')} />,
+                            isView && idx > 0
+                                ? <TomisButtonIcon onClick={handleDeleteRow.bind(null, idx)}>
+                                      <TomisFontIcon name="delete" />
+                                  </TomisButtonIcon>
+                                : <TomisTextFieldReadOnly name="blank" />
+                        ];
+                    }}
                 </TomisTable>
             </TomisPanel>
         </div>

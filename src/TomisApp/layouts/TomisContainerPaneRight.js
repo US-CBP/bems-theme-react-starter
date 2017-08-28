@@ -2,61 +2,57 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TomisPaper from 'TomisApp/TomisPaper';
 import TomisHeaderNavAction from 'common/TomisHeaderNavAction';
-import Measure from 'react-measure';
+import SplitPane from 'react-split-pane';
+import ContainerDimensions from 'TomisApp/helpers/ContainerDimensions';
+import { NAV_BAR_H } from 'globalJs/constants';
 
-const initState = {
-    mainDimensions: {
-        top: 0,
-        left: 0,
-        width: 0
-    }
+const rightPaneW = 320;
+
+const paneLeftStyle = {
+    overflowY: 'scroll'
+};
+const paneRightStyle = {
+    overflowY: 'auto'
 };
 
-const defaultProps = {
-    mainFlex: 3,
-    paneFlex: 1
-};
+const initState = {};
 
-const propTypes = {
-    mainFlex: PropTypes.number,
-    paneFlex: PropTypes.number
-};
+const defaultProps = {};
 
-class ContainerPaneRight extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initState;
-    }
+const propTypes = {};
+
+class TomisContainerPaneRight extends Component {
+    state = initState;
+
     render() {
-        const { mainDimensions: { top, left, width }, mainDimensions } = this.state;
-        const { title, mainFlex, paneFlex, children } = this.props;
+        const { title, children } = this.props;
         const childrenArr = React.Children.toArray(children);
         return (
             <TomisPaper elevation={0}>
-                <TomisHeaderNavAction actionBarPageTitle={title} />
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: mainFlex, height: `${window.innerHeight - top}px`, overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
-                        <Measure
-                            bounds={true}
-                            onResize={contentRect => {
-                                this.setState({ mainDimensions: contentRect.bounds });
+                <SplitPane allowResize={false} split="horizontal" defaultSize={NAV_BAR_H}>
+                    <TomisHeaderNavAction actionBarPageTitle={title} />
+                    <SplitPane pane1Style={paneLeftStyle} allowResize={false} pane2Style={paneRightStyle} split="vertical" defaultSize={rightPaneW} primary="second">
+                        <ContainerDimensions>
+                            {(width, height, top, left, hasComputed) => {
+                                return React.cloneElement(childrenArr[0], {
+                                    dimensions: { top, left, width, navBarH: NAV_BAR_H }
+                                });
                             }}
-                        >
-                            {({ measureRef }) => <div ref={measureRef} style={{ width: '100%', height: 0 }} />}
-                        </Measure>
-                        {React.cloneElement(childrenArr[0], {
-                            dimensions: mainDimensions
-                        })}
-                    </div>
-                    <div style={{ flex: paneFlex }}>
-                        {childrenArr[1] || false}
-                    </div>
-                </div>
+                        </ContainerDimensions>
+                        <ContainerDimensions>
+                            {(width, height, top, left, hasComputed) => {
+                                return React.cloneElement(childrenArr[1], {
+                                    dimensions: { top, left, width, navBarH: NAV_BAR_H }
+                                });
+                            }}
+                        </ContainerDimensions>
+                    </SplitPane>
+                </SplitPane>
             </TomisPaper>
         );
     }
 }
 
-ContainerPaneRight.defaultProps = defaultProps;
-ContainerPaneRight.propTypes = propTypes;
-export default ContainerPaneRight;
+TomisContainerPaneRight.defaultProps = defaultProps;
+TomisContainerPaneRight.propTypes = propTypes;
+export default TomisContainerPaneRight;

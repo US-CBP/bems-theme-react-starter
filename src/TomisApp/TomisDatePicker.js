@@ -6,7 +6,7 @@ import FormControl from 'material-ui/Form/FormControl';
 import TextField from 'material-ui/TextField';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import Checkbox from 'material-ui/Checkbox';
-import IconButton from 'material-ui/IconButton';
+import TomisIconButton from './TomisIconButton';
 import TomisFontIcon from './TomisFontIcon';
 import cx from 'classnames';
 import DayPicker from 'react-day-picker';
@@ -180,14 +180,14 @@ class TomisDatePicker extends Component {
                 >
                     <DayPicker onDayClick={handleDayClick} />
                 </Popover>
-                <IconButton
+                <TomisIconButton
                     className={cx(clsSelectCalendar, { [clsSelectCalendarDisabled]: isDisabled || disabledClone })}
                     disabled={isDisabled}
                     aria-label="Toggle select date display"
                     onClick={handleClickIcon}
                 >
                     <TomisFontIcon name="event_note" />
-                </IconButton>
+                </TomisIconButton>
                 <FormHelperText className={clsFormHelperText}>
                     {helperText}
                 </FormHelperText>

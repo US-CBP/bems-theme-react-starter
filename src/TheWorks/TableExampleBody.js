@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TomisPanel } from 'TomisApp/TomisPanel';
-import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import { TomisTable } from 'TomisApp/TomisTable';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
@@ -19,20 +19,32 @@ const TableExampleBody = props => {
             <TomisPanel label="My Table Panel Example">
                 <TomisButtonRaised label="Add Row" onClick={handleAddRow} />
                 <TomisTable columnData={columnData} tableData={tableData}>
-                    <TomisCheckbox name="primary" />
-                    <TomisDatePicker placeholder="Select Date" required={true} label="Date" name={'departureDt'} onModify={handleUpdateDataDate.bind(null, 0, 'departureDt')} />
-                    <TomisAutocomplete
-                        placeholder="Select Name"
-                        required={true}
-                        label="Name"
-                        name="name"
-                        onModify={handleUpdateDataLov.bind(null, 0, 'name')}
-                        options={subcategoryLovValues}
-                    />
-                    <TomisDuration placeholder="Sample Justification" required={true} name="status" onModify={handleUpdateData.bind(null, 0, 'status')} />
-                    <TomisButtonIcon onClick={handleDeleteRow.bind(null, 0)}>
-                        <TomisFontIcon name="delete" />
-                    </TomisButtonIcon>
+                    {(row, idx, isView, isEdit) => {
+                        return [
+                            isEdit ? false : <TomisCheckbox name="primary" />,
+                            <TomisDatePicker
+                                placeholder="Select Date"
+                                required={true}
+                                label="Date"
+                                name={'departureDt'}
+                                onModify={handleUpdateDataDate.bind(null, idx, 'departureDt')}
+                            />,
+                            <TomisAutocomplete
+                                placeholder="Select Name"
+                                required={true}
+                                label="Name"
+                                name="name"
+                                onModify={handleUpdateDataLov.bind(null, idx, 'name')}
+                                options={subcategoryLovValues}
+                            />,
+                            <TomisDuration placeholder="Sample Justification" required={true} name="status" onModify={handleUpdateData.bind(null, idx, 'status')} />,
+                            isEdit
+                                ? false
+                                : <TomisButtonIcon onClick={handleDeleteRow.bind(null, idx)}>
+                                      <TomisFontIcon name="delete" />
+                                  </TomisButtonIcon>
+                        ];
+                    }}
                 </TomisTable>
             </TomisPanel>
         </div>

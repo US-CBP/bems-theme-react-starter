@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DayPicker, { DateUtils } from 'react-day-picker';
+import CloningStepBar from 'common/CloningStepBar';
+import { CLONING_BUTTON_CONTAINER_H, SCROLLBAR_W } from 'globalJs/constants';
 import 'react-day-picker/lib/style.css';
 import 'css/tomis-calendar.css';
-import CloningStepBar from 'common/CloningStepBar';
 
 const setStateSelectedDays = (state, props) => {
     return { selectedDays: [] };
@@ -19,37 +20,15 @@ const initState = {
 };
 
 const defaultProps = {
-    numberOfMonths: 12,
-    style: { overflowX: 'hidden', overflowY: 'auto' }
+    numberOfMonths: 12
 };
 
 const propTypes = {
-    numberOfMonths: PropTypes.number,
-    style: PropTypes.object
+    numberOfMonths: PropTypes.number
 };
 
 class TomisCalendarCloning extends Component {
-    constructor(props) {
-        super(props);
-        this.state = Object.assign({}, initState, props, { selectedDays: [] });
-        this.pane = null;
-    }
-
-    componentDidMount() {
-        this.paneNode = ReactDOM.findDOMNode(this.pane);
-        const { top: topPane } = this.paneNode.getBoundingClientRect();
-        const cloningButtonH = 100;
-        this.paneNode.style.height = `${window.innerHeight - topPane - cloningButtonH}px`;
-    }
-
-    componentDidUpdate() {
-        const { top: topPane, left: leftPane, width: widthPane } = this.paneNode.getBoundingClientRect();
-        const cloningStepBarNode = ReactDOM.findDOMNode(this.cloningStepBar);
-        cloningStepBarNode.style.top = `${topPane}px`;
-        cloningStepBarNode.style.left = `${leftPane}px`;
-        cloningStepBarNode.style.width = `${this.paneNode.clientWidth}px`;
-        cloningStepBarNode.style.position = 'fixed';
-    }
+    state = Object.assign({}, initState, { selectedDays: [] });
 
     handleDayClick = (day, { selected }) => {
         const { selectedDays } = this.state;
@@ -65,10 +44,12 @@ class TomisCalendarCloning extends Component {
     render() {
         const { handleDayClick } = this;
         const { selectedDays } = this.state;
-        const { numberOfMonths, style, initVal, children } = this.props;
+        const { numberOfMonths, dimensions, dimensions: { navBarH } } = this.props;
+        const adjustDimensionsForScrollbar = Object.assign({}, dimensions, { width: dimensions.width - SCROLLBAR_W });
         return (
-            <div ref={ref => (this.pane = ref)} style={style}>
-                <CloningStepBar ref={ref => (this.cloningStepBar = ref)} stepNbr={2} />
+            <div style={{ marginBottom: `${CLONING_BUTTON_CONTAINER_H}px`, height: `${window.innerHeight - navBarH - CLONING_BUTTON_CONTAINER_H}px`, overflowY: 'auto' }}>
+                {/*<div style={{ marginBottom: `${CLONING_BUTTON_CONTAINER_H}px` }}>*/}
+                <CloningStepBar stepNbr={2} dimensions={adjustDimensionsForScrollbar} />
                 <DayPicker numberOfMonths={numberOfMonths} canChangeMonth={false} month={today} onDayClick={handleDayClick} selectedDays={selectedDays} />
             </div>
         );

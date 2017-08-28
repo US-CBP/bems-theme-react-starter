@@ -12,7 +12,7 @@ class TomisHeaderNavAction extends Component {
     render() {
         const { actionBarPageTitle, handleStoryBookClick } = this.props;
         return (
-            <div onClick={handleStoryBookClick}>
+            <div style={{ width: '100%' }} onClick={handleStoryBookClick}>
                 <TomisToolbarCbpHeader />
                 <TomisToolbarActionBar pageTitle={actionBarPageTitle} />
             </div>

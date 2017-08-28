@@ -3,7 +3,7 @@ import TomisTextField from 'TomisApp/TomisTextField';
 
 const TomisTextFieldReadOnly = props => {
     const { value = ' ', ...other } = props;
-    return <TomisTextField value={value} {...other} isReadOnly={true} />;
+    return <TomisTextField value={value} {...other} isReadOnly={true} isCloneable={false} />;
 };
 
 export default TomisTextFieldReadOnly;

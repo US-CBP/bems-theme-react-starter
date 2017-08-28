@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TomisPanelTable } from 'TomisApp/TomisPanel';
-import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import { TomisTable } from 'TomisApp/TomisTable';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
@@ -30,60 +30,38 @@ const LocationInfoGridRender = props => {
         <div className="flex-row row-spacer-24">
             <TomisPanelTable label="Location Information">
                 <TomisButtonRaised label="Add Location" onClick={handleAddRow} />
-                <TomisTable>
-                    <TomisTableHeader columnData={columnData} />
-                    <TomisTableBody>
-                        {tableData.map((row, idx) =>
-                            <TomisTableRow key={idx}>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'locationName'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'locationName')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisTextField
-                                        placeholder="Enter an Airport Code,..."
-                                        value={row['locationName']}
-                                        required={true}
-                                        reportToHoc={handleUpdateData.bind(null, idx, 'locationName')}
-                                    />
-                                </TomisTableCellEdit>
-
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'city'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'city')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisAutocomplete
-                                        placeholder="Select City"
-                                        required={true}
-                                        label="City"
-                                        value={row['city']}
-                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'city')}
-                                        options={subcategoryLovValues}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCellEdit
-                                    onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'state'))}
-                                    isOpen={activeCell === getCellRowColmId(idx, 'state')}
-                                    onRequestClose={handleRequestClose}
-                                >
-                                    <TomisAutocomplete
-                                        placeholder="Select State"
-                                        required={true}
-                                        label="State"
-                                        value={row['state']}
-                                        reportToHoc={handleUpdateDataLov.bind(this, idx, 'state')}
-                                        options={subcategoryLovValues}
-                                    />
-                                </TomisTableCellEdit>
-                                <TomisTableCell>
-                                    <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
-                                        <TomisFontIcon name="delete" />
-                                    </TomisButtonIcon>
-                                </TomisTableCell>
-                            </TomisTableRow>
-                        )}
-                    </TomisTableBody>
+                <TomisTable columnData={columnData} tableData={tableData}>
+                    {(row, idx, isView, isEdit) => {
+                        return [
+                            <TomisTextField
+                                placeholder="Enter an Airport Code,..."
+                                name="locationName"
+                                required={true}
+                                reportToHoc={handleUpdateData.bind(null, idx, 'locationName')}
+                            />,
+                            <TomisAutocomplete
+                                placeholder="Select City"
+                                required={true}
+                                label="City"
+                                name="city"
+                                reportToHoc={handleUpdateDataLov.bind(this, idx, 'city')}
+                                options={subcategoryLovValues}
+                            />,
+                            <TomisAutocomplete
+                                placeholder="Select State"
+                                required={true}
+                                label="State"
+                                name="state"
+                                reportToHoc={handleUpdateDataLov.bind(this, idx, 'state')}
+                                options={subcategoryLovValues}
+                            />,
+                            isEdit
+                                ? false
+                                : <TomisButtonIcon onClick={handleDeleteRow.bind(null, 0)}>
+                                      <TomisFontIcon name="delete" />
+                                  </TomisButtonIcon>
+                        ];
+                    }}
                 </TomisTable>
             </TomisPanelTable>
         </div>

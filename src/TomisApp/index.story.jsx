@@ -146,5 +146,8 @@ storiesOf('TOMIS App', module)
         return <TomisToggleButtonsExample />;
     })
     .add('Tomis Duration - TESTING', () => {
-        return <TomisDuration isCloneable={true} isReadOnly={true} />;
+        return <TomisDuration isCloneable={true} />;
+    })
+    .add('Tomis Duration Read-Only - TESTING', () => {
+        return <TomisDuration isCloneable={true} readOnly={true} />;
     });

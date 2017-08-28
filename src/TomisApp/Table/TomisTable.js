@@ -17,6 +17,10 @@ export const styles = theme => ({
     }
 });
 
+const propTypes = {
+    children: PropTypes.func.isRequired
+};
+
 class TomisTable extends Component {
     state = {
         activeCell: ''
@@ -62,4 +66,5 @@ class TomisTable extends Component {
     }
 }
 
+TomisTable.propTypes = propTypes;
 export default withStyles(styles, { name: 'TomisTable' })(TomisTable);

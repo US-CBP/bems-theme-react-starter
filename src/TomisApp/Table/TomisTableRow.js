@@ -80,6 +80,10 @@ const preventClickFromGoingToPopover = evt => {
     return false;
 };
 
+const propTypes = {
+    children: PropTypes.func.isRequired
+};
+
 function TomisTableRow(props, context) {
     const { classes, className: classNameProp, children, compact, checkbox, numeric, disablePadding, isOpen, onRequestOpen, onRequestClose, rowId, row, rowIdx, ...other } = props;
     const className = classNames(
@@ -94,18 +98,22 @@ function TomisTableRow(props, context) {
     );
     return (
         <TableRow hover={true} className={className} {...other}>
-            {React.Children.map(children, (child, idx) => {
-                const { props: { placeholder, name, value, options, isRenderInTableRow } } = child;
-                lovOptions = options || [];
-                return (
-                    <TomisTableCell>
-                        {isRenderInTableRow
-                            ? child
-                            : <Typography noWrap={true}>
-                                  {getDisplayTableRowValue(row, name) || placeholder}
-                              </Typography>}
-                    </TomisTableCell>
-                );
+            {children(row, rowIdx, true, false).map((child, idx) => {
+                if (child) {
+                    const { props: { placeholder, name, value, options, isRenderInTableRow } } = child;
+                    lovOptions = options || [];
+                    return (
+                        <TomisTableCell key={`view-${rowIdx}-${idx}`}>
+                            {isRenderInTableRow
+                                ? child
+                                : <Typography noWrap={true}>
+                                      {getDisplayTableRowValue(row, name) || placeholder}
+                                  </Typography>}
+                        </TomisTableCell>
+                    );
+                } else {
+                    return false;
+                }
             })}
             <TomisTableCell>
                 <TomisButtonIcon onClick={handleClick.bind(null, rowId, onRequestOpen, onRequestClose, isOpen)}>
@@ -117,11 +125,10 @@ function TomisTableRow(props, context) {
                 <Dialog ignoreBackdropClick ignoreEscapeKeyUp maxWidth="xs" disableBackdrop open={isOpen}>
                     <DialogTitle>Edit Row</DialogTitle>
                     <DialogContent>
-                        {React.Children.map(children, (child, idx) => {
-                            const { props: { isRenderInTableRow } } = child;
+                        {children(row, rowIdx, false, true).map((child, idx) => {
                             return (
-                                <div>
-                                    {isRenderInTableRow ? false : child}
+                                <div key={`edit-${rowIdx}-${idx}`}>
+                                    {child}
                                 </div>
                             );
                         })}
@@ -131,34 +138,10 @@ function TomisTableRow(props, context) {
                         <TomisButtonFlat label="Save" onClick={onRequestClose.bind(null, 'SAVE')} color="primary" />
                     </DialogActions>
                 </Dialog>}
-
-            {/*{isOpen && <Popover
-                    className={classNames(classes.popover)}
-                    open={true}
-                    anchorEl={openCell}
-                    anchorOrigin={anchorOrigin}
-                    transformOrigin={targetOrigin}
-                    onRequestClose={onRequestClose}
-                    onClick={onRequestClose}
-                >
-                    <Paper elevation={8} className={classNames(classes.popoverContent)} onClick={preventClickFromGoingToPopover}>
-                        {React.Children.map(children, (child, idx) => {
-                            const { props: { isRenderInTableRow } } = child;
-                            return (
-                                <div>
-                                    {isRenderInTableRow ? false : child}
-                                </div>
-                            );
-                        })}
-                        <div>
-                            <TomisButtonFlat label="Cancel" onClick={onRequestClose.bind(null, 'CANCEL')} color="primary" />
-                            <TomisButtonFlat label="Save" onClick={onRequestClose.bind(null, 'SAVE')} color="primary" />
-                        </div>
-                    </Paper>
-                </Popover>}*/}
         </TableRow>
     );
     // }  ;
 }
 
+TomisTableRow.propTypes = propTypes;
 export default withStyles(styles, { name: 'TomisTableRow' })(TomisTableRow);

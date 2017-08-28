@@ -7,40 +7,44 @@ import CowAndActionableIntelligenceSection from 'common/CowAndActionableIntellig
 import CaseInfoGrid from 'common/grids/CaseInfoGrid';
 
 class PlanningDataSectionRender extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { yesNoValue, handleModifyYesNoToggle, isCloneable } = this.props;
-    return (
-      <div>
-        <div className="flex-row">
-          <div className="flex-1">
-            <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
-          </div>
-          <div className="flex-1">
-            <TomisAutocomplete floatingLabelText="Category*" isCloneable={isCloneable} disabledClone={true} />
-          </div>
-          <div className="flex-1">
-            <TomisAutocomplete floatingLabelText="Type*" isCloneable={isCloneable} disabledClone={true} />
-          </div>
-        </div>
-        <div className="flex-row">
-          <div className="flex-1">
-            <TomisAutocomplete floatingLabelText="Sub type*" isCloneable={isCloneable} disabledClone={true} />
-          </div>
-          <div className="flex-1" />
-          <div className="flex-1" />
-        </div>
-        <br />
-        <CowAndActionableIntelligenceSection {...this.props} />
-        <br />
-        <br />
-        <CaseInfoGrid />
-        <br />
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const { yesNoValue, handleModifyYesNoToggle, isCloneable } = this.props;
+        return (
+            <div>
+                <div className="flex-row">
+                    <div className="flex-1">
+                        <TomisAutocomplete floatingLabelText="Named Operation" hintText="Type Named Operation" isCloneable={isCloneable} />
+                    </div>
+                    <div className="flex-1">
+                        <TomisAutocomplete floatingLabelText="Category*" isCloneable={isCloneable} disabledClone={true} />
+                    </div>
+                    <div className="flex-1">
+                        <TomisAutocomplete floatingLabelText="Type*" isCloneable={isCloneable} disabledClone={true} />
+                    </div>
+                </div>
+                <div className="flex-row">
+                    <div className="flex-1">
+                        <TomisAutocomplete floatingLabelText="Sub type*" isCloneable={isCloneable} disabledClone={true} />
+                    </div>
+                    <div className="flex-1" />
+                    <div className="flex-1" />
+                </div>
+                <br />
+                <CowAndActionableIntelligenceSection {...this.props} />
+                <br />
+                <br />
+                <div className="flex-row table">
+                    <div className="flex-1">
+                        <CaseInfoGrid />
+                    </div>
+                </div>
+                <br />
+            </div>
+        );
+    }
 }
 
 export default PlanningDataSectionRender;

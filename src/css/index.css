@@ -26,12 +26,30 @@ body {
     justify-content: flex-end;
 }
 
+.flex-row.table {
+    overflow-x: auto;
+}
+
 .flex-1 {
     flex: 1;
 }
 
+.flex-1.checkbox {
+    align-self: center;
+}
+
+.inline-checkbox {
+    width: 100px;
+}
+
 .flex-2 {
     flex: 2;
+}
+
+.page-root {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
 }
 
 /*rc-tooltip*/
@@ -145,7 +163,7 @@ h3 {
 }
 
 .ku-frequency-container {
-    margin-top: auto;
+    margin-top: 12px;
     margin-bottom: auto;
 }
 

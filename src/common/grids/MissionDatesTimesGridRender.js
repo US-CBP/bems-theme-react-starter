@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TomisPanel } from 'TomisApp/TomisPanel';
-import { TomisTable, TomisTableHeader, TomisTableBody, TomisTableRow, TomisTableCell, TomisTableCellEdit } from 'TomisApp/TomisTable';
+import { TomisTable } from 'TomisApp/TomisTable';
 import TomisCheckbox from 'TomisApp/TomisCheckbox';
 import TomisButtonIcon from 'TomisApp/TomisButtonIcon';
 import TomisFontIcon from 'TomisApp/TomisFontIcon';
 import TomisButtonRaised from 'TomisApp/TomisButtonRaised';
 import TomisTextField from 'TomisApp/TomisTextField';
+import TomisTextFieldReadOnly from 'TomisApp/TomisTextFieldReadOnly';
 import TomisTimeSpinner from 'TomisApp/TomisTimeSpinner';
 import TomisDatePicker from 'TomisApp/TomisDatePicker';
 import TomisAutocomplete from 'TomisApp/TomisAutocomplete';
@@ -29,69 +30,22 @@ const MissionDatesTimesGridRender = props => {
     } = props;
     return (
         <div className="flex-row row-spacer-24">
-            <TomisTable>
-                <TomisTableHeader columnData={columnData} />
-                <TomisTableBody>
-                    {tableData.map((row, idx) =>
-                        <TomisTableRow key={idx}>
-                            <TomisTableCell>
-                                {row.msnNbr}
-                            </TomisTableCell>
-                            <TomisTableCellEdit
-                                onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'msnDesc'))}
-                                isOpen={activeCell === getCellRowColmId(idx, 'msnDesc')}
-                                onRequestClose={handleRequestClose}
-                            >
-                                <TomisTextField placeholder="Type Mission Description" value={row['msnDesc']} reportToHoc={handleUpdateData.bind(null, idx, 'msnDesc')} />
-                            </TomisTableCellEdit>
-                            <TomisTableCellEdit
-                                onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'startDate'))}
-                                isOpen={activeCell === getCellRowColmId(idx, 'startDate')}
-                                onRequestClose={handleRequestClose}
-                            >
-                                <TomisDatePicker
-                                    placeholder="Select Date"
-                                    required={true}
-                                    label="Date"
-                                    value={row['startDate']}
-                                    reportToHoc={handleUpdateDataDate.bind(null, idx, 'startDate')}
-                                />
-                            </TomisTableCellEdit>
-
-                            <TomisTableCellEdit
-                                onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'startTime'))}
-                                isOpen={activeCell === getCellRowColmId(idx, 'startTime')}
-                                onRequestClose={handleRequestClose}
-                            >
-                                <TomisTimeSpinner
-                                    placeholder="Type Start Time"
-                                    required={true}
-                                    value={row['startTime']}
-                                    reportToHoc={handleUpdateData.bind(null, idx, 'startTime')}
-                                />
-                            </TomisTableCellEdit>
-                            <TomisTableCellEdit
-                                onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'duration'))}
-                                isOpen={activeCell === getCellRowColmId(idx, 'duration')}
-                                onRequestClose={handleRequestClose}
-                            >
-                                <TomisDuration placeholder="HH + MM" value={row['duration']} reportToHoc={handleUpdateData.bind(null, idx, 'duration')} />
-                            </TomisTableCellEdit>
-                            <TomisTableCellEdit
-                                onRequestOpen={handleClickTableCell.bind(null, getCellRowColmId(idx, 'endTime'))}
-                                isOpen={activeCell === getCellRowColmId(idx, 'endTime')}
-                                onRequestClose={handleRequestClose}
-                            >
-                                <TomisTimeSpinner placeholder="Type End Time" required={true} value={row['endTime']} reportToHoc={handleUpdateData.bind(null, idx, 'endTime')} />
-                            </TomisTableCellEdit>
-                            <TomisTableCell>
-                                <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
-                                    {(idx > 0 ? true : false) && <TomisFontIcon name="delete" />}
-                                </TomisButtonIcon>
-                            </TomisTableCell>
-                        </TomisTableRow>
-                    )}
-                </TomisTableBody>
+            <TomisTable columnData={columnData} tableData={tableData}>
+                {(row, idx, isView, isEdit) => {
+                    return [
+                        <TomisTextFieldReadOnly name="msnNbr" />,
+                        <TomisTextField placeholder="Type Mission Description" name="msnDesc" reportToHoc={handleUpdateData.bind(null, idx, 'msnDesc')} />,
+                        <TomisDatePicker placeholder="Select Date" required={true} label="Date" name="startDate" reportToHoc={handleUpdateDataDate.bind(null, idx, 'startDate')} />,
+                        <TomisTimeSpinner placeholder="Type Start Time" required={true} name="startTime" reportToHoc={handleUpdateData.bind(null, idx, 'startTime')} />,
+                        <TomisDuration placeholder="HH + MM" name="duration" reportToHoc={handleUpdateData.bind(null, idx, 'duration')} />,
+                        <TomisTimeSpinner placeholder="Type End Time" required={true} name="endTime" reportToHoc={handleUpdateData.bind(null, idx, 'endTime')} />,
+                        isView && idx > 0
+                            ? <TomisButtonIcon tooltip="Delete Row" onClick={handleDeleteRow.bind(null, idx)}>
+                                  <TomisFontIcon name="delete" />
+                              </TomisButtonIcon>
+                            : <TomisTextFieldReadOnly name="blank" />
+                    ];
+                }}
             </TomisTable>
         </div>
     );

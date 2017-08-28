@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import tomisTheme from 'app/themes/tomisLightTheme.js';
+import { STEP_BAR_H } from 'globalJs/constants';
 
 const { accent: { '400': accent2Color } } = tomisTheme;
 
+//Dimensions originates from TomisContainerPaneRight
 const getRenderStyle = props => {
-    const { style } = props;
+    const { style, dimensions: { top, left, width, navBarH } } = props;
     return Object.assign(
         {},
         {
+            position: 'fixed',
+            top: `${navBarH}px`,
+            left: `${left}px`,
+            width: `${width}px`,
             display: 'flex',
             alignItems: 'center',
             backgroundColor: accent2Color,
-            // width: '100%',
-            height: '36px',
-            // position: 'static',
-            // left: '20px',
+            height: `${STEP_BAR_H}px`,
             zIndex: 5,
             fontSize: '14px',
             minWidth: '180px'

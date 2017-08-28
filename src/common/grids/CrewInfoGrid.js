@@ -10,7 +10,7 @@ const crewNameLov = ['crew1Alpha', 'crew1Beta', 'crew1Delta'];
 let tableData = [
     {
         pic: '',
-        name: '',
+        name: 'John Sully',
         role: ''
     }
 ];
